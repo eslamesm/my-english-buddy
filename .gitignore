@@ -1,0 +1,6 @@
+.vercel
+.netlify
+.env*
+
+# temp / logs
+*.log
