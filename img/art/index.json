@@ -1,0 +1,2522 @@
+{
+  "a": {
+    "en": "A",
+    "ar": "تفاحة",
+    "emoji": "🍎",
+    "src": "img/art/a.svg"
+  },
+  "b": {
+    "en": "B",
+    "ar": "كرة",
+    "emoji": "⚽",
+    "src": "img/art/b.svg"
+  },
+  "c": {
+    "en": "C",
+    "ar": "قطة",
+    "emoji": "🐱",
+    "src": "img/art/c.svg"
+  },
+  "d": {
+    "en": "D",
+    "ar": "كلب",
+    "emoji": "🐶",
+    "src": "img/art/d.svg"
+  },
+  "e": {
+    "en": "E",
+    "ar": "بيضة",
+    "emoji": "🥚",
+    "src": "img/art/e.svg"
+  },
+  "f": {
+    "en": "F",
+    "ar": "سمكة",
+    "emoji": "🐟",
+    "src": "img/art/f.svg"
+  },
+  "g": {
+    "en": "G",
+    "ar": "عنزة",
+    "emoji": "🐐",
+    "src": "img/art/g.svg"
+  },
+  "h": {
+    "en": "H",
+    "ar": "قبعة",
+    "emoji": "🎩",
+    "src": "img/art/h.svg"
+  },
+  "i": {
+    "en": "I",
+    "ar": "ثلج",
+    "emoji": "🧊",
+    "src": "img/art/i.svg"
+  },
+  "j": {
+    "en": "J",
+    "ar": "عصير",
+    "emoji": "🧃",
+    "src": "img/art/j.svg"
+  },
+  "k": {
+    "en": "K",
+    "ar": "طائرة ورقية",
+    "emoji": "🪁",
+    "src": "img/art/k.svg"
+  },
+  "l": {
+    "en": "L",
+    "ar": "أسد",
+    "emoji": "🦁",
+    "src": "img/art/l.svg"
+  },
+  "m": {
+    "en": "M",
+    "ar": "قرد",
+    "emoji": "🐵",
+    "src": "img/art/m.svg"
+  },
+  "n": {
+    "en": "N",
+    "ar": "عش",
+    "emoji": "🪺",
+    "src": "img/art/n.svg"
+  },
+  "o": {
+    "en": "O",
+    "ar": "برتقالة",
+    "emoji": "🍊",
+    "src": "img/art/o.svg"
+  },
+  "p": {
+    "en": "P",
+    "ar": "خنزير",
+    "emoji": "🐷",
+    "src": "img/art/p.svg"
+  },
+  "q": {
+    "en": "Q",
+    "ar": "ملكة",
+    "emoji": "👑",
+    "src": "img/art/q.svg"
+  },
+  "r": {
+    "en": "R",
+    "ar": "أرنب",
+    "emoji": "🐰",
+    "src": "img/art/r.svg"
+  },
+  "s": {
+    "en": "S",
+    "ar": "شمس",
+    "emoji": "☀️",
+    "src": "img/art/s.svg"
+  },
+  "t": {
+    "en": "T",
+    "ar": "نمر",
+    "emoji": "🐯",
+    "src": "img/art/t.svg"
+  },
+  "u": {
+    "en": "U",
+    "ar": "مظلة",
+    "emoji": "☂️",
+    "src": "img/art/u.svg"
+  },
+  "v": {
+    "en": "V",
+    "ar": "شاحنة",
+    "emoji": "🚐",
+    "src": "img/art/v.svg"
+  },
+  "w": {
+    "en": "W",
+    "ar": "ماء",
+    "emoji": "💧",
+    "src": "img/art/w.svg"
+  },
+  "x": {
+    "en": "X",
+    "ar": "ثعلب",
+    "emoji": "🦊",
+    "src": "img/art/x.svg"
+  },
+  "y": {
+    "en": "Y",
+    "ar": "يويو",
+    "emoji": "🪀",
+    "src": "img/art/y.svg"
+  },
+  "z": {
+    "en": "Z",
+    "ar": "حمار وحشي",
+    "emoji": "🦓",
+    "src": "img/art/z.svg"
+  },
+  "cat": {
+    "en": "cat",
+    "ar": "قطة",
+    "emoji": "🐱",
+    "src": "img/art/cat.svg"
+  },
+  "bat": {
+    "en": "bat",
+    "ar": "خفاش",
+    "emoji": "⚾",
+    "src": "img/art/bat.svg"
+  },
+  "hat": {
+    "en": "hat",
+    "ar": "قبعة",
+    "emoji": "🎩",
+    "src": "img/art/hat.svg"
+  },
+  "mat": {
+    "en": "mat",
+    "ar": "حصيرة",
+    "emoji": "🧶",
+    "src": "img/art/mat.svg"
+  },
+  "rat": {
+    "en": "rat",
+    "ar": "جرذ",
+    "emoji": "🐀",
+    "src": "img/art/rat.svg"
+  },
+  "bag": {
+    "en": "bag",
+    "ar": "حقيبة",
+    "emoji": "👜",
+    "src": "img/art/bag.svg"
+  },
+  "bed": {
+    "en": "bed",
+    "ar": "سرير",
+    "emoji": "🛏️",
+    "src": "img/art/bed.svg"
+  },
+  "leg": {
+    "en": "leg",
+    "ar": "ساق",
+    "emoji": "🦵",
+    "src": "img/art/leg.svg"
+  },
+  "pig": {
+    "en": "pig",
+    "ar": "خنزير",
+    "emoji": "🐷",
+    "src": "img/art/pig.svg"
+  },
+  "dog": {
+    "en": "dog",
+    "ar": "كلب",
+    "emoji": "🐶",
+    "src": "img/art/dog.svg"
+  },
+  "log": {
+    "en": "log",
+    "ar": "حطب",
+    "emoji": "🪵",
+    "src": "img/art/log.svg"
+  },
+  "sun": {
+    "en": "sun",
+    "ar": "شمس",
+    "emoji": "☀️",
+    "src": "img/art/sun.svg"
+  },
+  "cup": {
+    "en": "cup",
+    "ar": "كوب",
+    "emoji": "☕",
+    "src": "img/art/cup.svg"
+  },
+  "nut": {
+    "en": "nut",
+    "ar": "جوز",
+    "emoji": "🥜",
+    "src": "img/art/nut.svg"
+  },
+  "net": {
+    "en": "net",
+    "ar": "شبكة",
+    "emoji": "🕸️",
+    "src": "img/art/net.svg"
+  },
+  "men": {
+    "en": "men",
+    "ar": "رجال",
+    "emoji": "👨‍👩‍👦",
+    "src": "img/art/men.svg"
+  },
+  "hit": {
+    "en": "hit",
+    "ar": "يضرب",
+    "emoji": "👊",
+    "src": "img/art/hit.svg"
+  },
+  "hop": {
+    "en": "hop",
+    "ar": "يقفز",
+    "emoji": "🐸",
+    "src": "img/art/hop.svg"
+  },
+  "hot": {
+    "en": "hot",
+    "ar": "حار",
+    "emoji": "🔥",
+    "src": "img/art/hot.svg"
+  },
+  "pot": {
+    "en": "pot",
+    "ar": "قدر",
+    "emoji": "🍲",
+    "src": "img/art/pot.svg"
+  },
+  "ball": {
+    "en": "ball",
+    "ar": "كرة",
+    "emoji": "⚽",
+    "src": "img/art/ball.svg"
+  },
+  "fish": {
+    "en": "fish",
+    "ar": "سمكة",
+    "emoji": "🐟",
+    "src": "img/art/fish.svg"
+  },
+  "star": {
+    "en": "star",
+    "ar": "نجمة",
+    "emoji": "⭐",
+    "src": "img/art/star.svg"
+  },
+  "tree": {
+    "en": "tree",
+    "ar": "شجرة",
+    "emoji": "🌳",
+    "src": "img/art/tree.svg"
+  },
+  "book": {
+    "en": "book",
+    "ar": "كتاب",
+    "emoji": "📕",
+    "src": "img/art/book.svg"
+  },
+  "milk": {
+    "en": "milk",
+    "ar": "حليب",
+    "emoji": "🥛",
+    "src": "img/art/milk.svg"
+  },
+  "cake": {
+    "en": "cake",
+    "ar": "كيكة",
+    "emoji": "🍰",
+    "src": "img/art/cake.svg"
+  },
+  "bird": {
+    "en": "bird",
+    "ar": "طائر",
+    "emoji": "🐦",
+    "src": "img/art/bird.svg"
+  },
+  "moon": {
+    "en": "moon",
+    "ar": "قمر",
+    "emoji": "🌙",
+    "src": "img/art/moon.svg"
+  },
+  "apple": {
+    "en": "apple",
+    "ar": "تفاحة",
+    "emoji": "🍎",
+    "src": "img/art/apple.svg"
+  },
+  "car": {
+    "en": "car",
+    "ar": "سيارة",
+    "emoji": "🚗",
+    "src": "img/art/car.svg"
+  },
+  "house": {
+    "en": "house",
+    "ar": "منزل",
+    "emoji": "🏠",
+    "src": "img/art/house.svg"
+  },
+  "flower": {
+    "en": "flower",
+    "ar": "زهرة",
+    "emoji": "🌸",
+    "src": "img/art/flower.svg"
+  },
+  "banana": {
+    "en": "banana",
+    "ar": "موز",
+    "emoji": "🍌",
+    "src": "img/art/banana.svg"
+  },
+  "rabbit": {
+    "en": "rabbit",
+    "ar": "أرنب",
+    "emoji": "🐰",
+    "src": "img/art/rabbit.svg"
+  },
+  "table": {
+    "en": "table",
+    "ar": "طاولة",
+    "emoji": "🪑",
+    "src": "img/art/table.svg"
+  },
+  "water": {
+    "en": "water",
+    "ar": "ماء",
+    "emoji": "💧",
+    "src": "img/art/water.svg"
+  },
+  "goodmorning": {
+    "en": "Good morning",
+    "ar": "صباح الخير",
+    "emoji": "🌅",
+    "src": "img/art/goodmorning.svg"
+  },
+  "goodnight": {
+    "en": "Good night",
+    "ar": "تصبح على خير",
+    "emoji": "🌙",
+    "src": "img/art/goodnight.svg"
+  },
+  "thankyou": {
+    "en": "Thank you",
+    "ar": "شكراً",
+    "emoji": "🙏",
+    "src": "img/art/thankyou.svg"
+  },
+  "youarewelcome": {
+    "en": "You are welcome",
+    "ar": "على الرحب والسعة",
+    "emoji": "🤝",
+    "src": "img/art/youarewelcome.svg"
+  },
+  "howareyou": {
+    "en": "How are you",
+    "ar": "كيف حالك",
+    "emoji": "🙂",
+    "src": "img/art/howareyou.svg"
+  },
+  "iamfine": {
+    "en": "I am fine",
+    "ar": "أنا بخير",
+    "emoji": "😊",
+    "src": "img/art/iamfine.svg"
+  },
+  "mynameis": {
+    "en": "My name is",
+    "ar": "اسمي هو",
+    "emoji": "📛",
+    "src": "img/art/mynameis.svg"
+  },
+  "iloveyou": {
+    "en": "I love you",
+    "ar": "أحبك",
+    "emoji": "❤️",
+    "src": "img/art/iloveyou.svg"
+  },
+  "excuseme": {
+    "en": "Excuse me",
+    "ar": "من فضلك",
+    "emoji": "🙋",
+    "src": "img/art/excuseme.svg"
+  },
+  "seeyoulater": {
+    "en": "See you later",
+    "ar": "أراك لاحقاً",
+    "emoji": "👋",
+    "src": "img/art/seeyoulater.svg"
+  },
+  "goodluck": {
+    "en": "Good luck",
+    "ar": "حظاً سعيداً",
+    "emoji": "🍀",
+    "src": "img/art/goodluck.svg"
+  },
+  "happybirthday": {
+    "en": "Happy birthday",
+    "ar": "عيد ميلاد سعيد",
+    "emoji": "🎂",
+    "src": "img/art/happybirthday.svg"
+  },
+  "iliketoplayfootball": {
+    "en": "I like to play football",
+    "ar": "أحب لعب كرة القدم",
+    "emoji": "⚽",
+    "src": "img/art/iliketoplayfootball.svg"
+  },
+  "myfavoritecolorisblue": {
+    "en": "My favorite color is blue",
+    "ar": "لوني المفضل أزرق",
+    "emoji": "🔵",
+    "src": "img/art/myfavoritecolorisblue.svg"
+  },
+  "thesunisverybrighttoday": {
+    "en": "The sun is very bright today",
+    "ar": "الشمس مشرقة جداً اليوم",
+    "emoji": "☀️",
+    "src": "img/art/thesunisverybrighttoday.svg"
+  },
+  "ihavealittlecatathome": {
+    "en": "I have a little cat at home",
+    "ar": "لدي قطة صغيرة في البيت",
+    "emoji": "🐈",
+    "src": "img/art/ihavealittlecatathome.svg"
+  },
+  "canihavesomewaterplease": {
+    "en": "Can I have some water please",
+    "ar": "هل يمكنني الحصول على ماء لو سمحت",
+    "emoji": "💧",
+    "src": "img/art/canihavesomewaterplease.svg"
+  },
+  "mymothermakesadeliciouscake": {
+    "en": "My mother makes a delicious cake",
+    "ar": "أمي تصنع كيكة لذيذة",
+    "emoji": "🍰",
+    "src": "img/art/mymothermakesadeliciouscake.svg"
+  },
+  "wegotoschooleverymorning": {
+    "en": "We go to school every morning",
+    "ar": "نذهب إلى المدرسة كل صباح",
+    "emoji": "🏫",
+    "src": "img/art/wegotoschooleverymorning.svg"
+  },
+  "thebirdsingsabeautifulsong": {
+    "en": "The bird sings a beautiful song",
+    "ar": "الطائر يغني أغنية جميلة",
+    "emoji": "🐦",
+    "src": "img/art/thebirdsingsabeautifulsong.svg"
+  },
+  "iwanttolearnenglishverywell": {
+    "en": "I want to learn English very well",
+    "ar": "أريد تعلم الإنجليزية جيداً",
+    "emoji": "📚",
+    "src": "img/art/iwanttolearnenglishverywell.svg"
+  },
+  "yesterdayiplayedwithmyfriends": {
+    "en": "Yesterday I played with my friends",
+    "ar": "أمس لعبت مع أصدقائي",
+    "emoji": "🧑‍🤝‍🧑",
+    "src": "img/art/yesterdayiplayedwithmyfriends.svg"
+  },
+  "hello": {
+    "en": "Hello",
+    "ar": "مرحباً",
+    "emoji": "👋",
+    "src": "img/art/hello.svg"
+  },
+  "goodbye": {
+    "en": "Goodbye",
+    "ar": "وداعاً",
+    "emoji": "🖐️",
+    "src": "img/art/goodbye.svg"
+  },
+  "boy": {
+    "en": "Boy",
+    "ar": "ولد",
+    "emoji": "👦",
+    "src": "img/art/boy.svg"
+  },
+  "girl": {
+    "en": "Girl",
+    "ar": "بنت",
+    "emoji": "👧",
+    "src": "img/art/girl.svg"
+  },
+  "friends": {
+    "en": "Friends",
+    "ar": "أصدقاء",
+    "emoji": "👫",
+    "src": "img/art/friends.svg"
+  },
+  "happy": {
+    "en": "Happy",
+    "ar": "سعيد",
+    "emoji": "😊",
+    "src": "img/art/happy.svg"
+  },
+  "sad": {
+    "en": "Sad",
+    "ar": "حزين",
+    "emoji": "😢",
+    "src": "img/art/sad.svg"
+  },
+  "classroom": {
+    "en": "Classroom",
+    "ar": "فصل دراسي",
+    "emoji": "🏫",
+    "src": "img/art/classroom.svg"
+  },
+  "teacher": {
+    "en": "Teacher",
+    "ar": "معلّم",
+    "emoji": "👩‍🏫",
+    "src": "img/art/teacher.svg"
+  },
+  "chair": {
+    "en": "Chair",
+    "ar": "كرسيّ",
+    "emoji": "🪑",
+    "src": "img/art/chair.svg"
+  },
+  "desk": {
+    "en": "Desk",
+    "ar": "مكتب",
+    "emoji": "🗄️",
+    "src": "img/art/desk.svg"
+  },
+  "pencil": {
+    "en": "Pencil",
+    "ar": "قلم رصاص",
+    "emoji": "✏️",
+    "src": "img/art/pencil.svg"
+  },
+  "eraser": {
+    "en": "Eraser",
+    "ar": "ممحاة",
+    "emoji": "🧽",
+    "src": "img/art/eraser.svg"
+  },
+  "crayon": {
+    "en": "Crayon",
+    "ar": "قلم تلوين",
+    "emoji": "🖍️",
+    "src": "img/art/crayon.svg"
+  },
+  "playground": {
+    "en": "Playground",
+    "ar": "ملعب",
+    "emoji": "🛝",
+    "src": "img/art/playground.svg"
+  },
+  "swing": {
+    "en": "Swing",
+    "ar": "أرجوحة",
+    "emoji": "🛝",
+    "src": "img/art/swing.svg"
+  },
+  "slide": {
+    "en": "Slide",
+    "ar": "زحليقة",
+    "emoji": "🛝",
+    "src": "img/art/slide.svg"
+  },
+  "hair": {
+    "en": "Hair",
+    "ar": "شعر",
+    "emoji": "💇",
+    "src": "img/art/hair.svg"
+  },
+  "face": {
+    "en": "Face",
+    "ar": "وجه",
+    "emoji": "😊",
+    "src": "img/art/face.svg"
+  },
+  "eyes": {
+    "en": "Eyes",
+    "ar": "عيون",
+    "emoji": "👀",
+    "src": "img/art/eyes.svg"
+  },
+  "ears": {
+    "en": "Ears",
+    "ar": "أذنان",
+    "emoji": "👂",
+    "src": "img/art/ears.svg"
+  },
+  "nose": {
+    "en": "Nose",
+    "ar": "أنف",
+    "emoji": "👃",
+    "src": "img/art/nose.svg"
+  },
+  "mouth": {
+    "en": "Mouth",
+    "ar": "فم",
+    "emoji": "👄",
+    "src": "img/art/mouth.svg"
+  },
+  "teeth": {
+    "en": "Teeth",
+    "ar": "أسنان",
+    "emoji": "🦷",
+    "src": "img/art/teeth.svg"
+  },
+  "arms": {
+    "en": "Arms",
+    "ar": "ذراعان",
+    "emoji": "💪",
+    "src": "img/art/arms.svg"
+  },
+  "hands": {
+    "en": "Hands",
+    "ar": "يدان",
+    "emoji": "✋",
+    "src": "img/art/hands.svg"
+  },
+  "legs": {
+    "en": "Legs",
+    "ar": "ساقان",
+    "emoji": "🦵",
+    "src": "img/art/legs.svg"
+  },
+  "feet": {
+    "en": "Feet",
+    "ar": "قدمان",
+    "emoji": "🦶",
+    "src": "img/art/feet.svg"
+  },
+  "grandfather": {
+    "en": "Grandfather",
+    "ar": "جدّ",
+    "emoji": "👴",
+    "src": "img/art/grandfather.svg"
+  },
+  "grandmother": {
+    "en": "Grandmother",
+    "ar": "جدّة",
+    "emoji": "👵",
+    "src": "img/art/grandmother.svg"
+  },
+  "mother": {
+    "en": "Mother",
+    "ar": "أم",
+    "emoji": "👩",
+    "src": "img/art/mother.svg"
+  },
+  "sister": {
+    "en": "Sister",
+    "ar": "أخت",
+    "emoji": "👧",
+    "src": "img/art/sister.svg"
+  },
+  "brother": {
+    "en": "Brother",
+    "ar": "أخ",
+    "emoji": "👦",
+    "src": "img/art/brother.svg"
+  },
+  "garden": {
+    "en": "Garden",
+    "ar": "حديقة",
+    "emoji": "🌷",
+    "src": "img/art/garden.svg"
+  },
+  "mower": {
+    "en": "Mower",
+    "ar": "جزّازة",
+    "emoji": "🚜",
+    "src": "img/art/mower.svg"
+  },
+  "grass": {
+    "en": "Grass",
+    "ar": "عشب",
+    "emoji": "🌿",
+    "src": "img/art/grass.svg"
+  },
+  "fruits": {
+    "en": "Fruits",
+    "ar": "فواكه",
+    "emoji": "🍎",
+    "src": "img/art/fruits.svg"
+  },
+  "chocolate": {
+    "en": "Chocolate",
+    "ar": "شوكولاتة",
+    "emoji": "🍫",
+    "src": "img/art/chocolate.svg"
+  },
+  "chips": {
+    "en": "Chips",
+    "ar": "رقائق",
+    "emoji": "🍟",
+    "src": "img/art/chips.svg"
+  },
+  "juice": {
+    "en": "Juice",
+    "ar": "عصير",
+    "emoji": "🧃",
+    "src": "img/art/juice.svg"
+  },
+  "sandwich": {
+    "en": "Sandwich",
+    "ar": "شطيرة",
+    "emoji": "🥪",
+    "src": "img/art/sandwich.svg"
+  },
+  "walk": {
+    "en": "Walk",
+    "ar": "يمشي",
+    "emoji": "🚶",
+    "src": "img/art/walk.svg"
+  },
+  "run": {
+    "en": "Run",
+    "ar": "يجري",
+    "emoji": "🏃",
+    "src": "img/art/run.svg"
+  },
+  "jump": {
+    "en": "Jump",
+    "ar": "يقفز",
+    "emoji": "🤸",
+    "src": "img/art/jump.svg"
+  },
+  "skip": {
+    "en": "Skip",
+    "ar": "يقفز بالحبل",
+    "emoji": "🤾",
+    "src": "img/art/skip.svg"
+  },
+  "kick": {
+    "en": "Kick",
+    "ar": "يرفس",
+    "emoji": "🦵",
+    "src": "img/art/kick.svg"
+  },
+  "play": {
+    "en": "Play",
+    "ar": "يلعب",
+    "emoji": "🧩",
+    "src": "img/art/play.svg"
+  },
+  "throw": {
+    "en": "Throw",
+    "ar": "يقذف",
+    "emoji": "🤾",
+    "src": "img/art/throw.svg"
+  },
+  "catch": {
+    "en": "Catch",
+    "ar": "يمسك",
+    "emoji": "🤲",
+    "src": "img/art/catch.svg"
+  },
+  "tshirt": {
+    "en": "T-Shirt",
+    "ar": "تي شيرت",
+    "emoji": "👕",
+    "src": "img/art/tshirt.svg"
+  },
+  "dress": {
+    "en": "Dress",
+    "ar": "فستان",
+    "emoji": "👗",
+    "src": "img/art/dress.svg"
+  },
+  "trousers": {
+    "en": "Trousers",
+    "ar": "بنطال",
+    "emoji": "👖",
+    "src": "img/art/trousers.svg"
+  },
+  "pants": {
+    "en": "Pants",
+    "ar": "سروال",
+    "emoji": "🩳",
+    "src": "img/art/pants.svg"
+  },
+  "skirt": {
+    "en": "Skirt",
+    "ar": "جيبة",
+    "emoji": "👚",
+    "src": "img/art/skirt.svg"
+  },
+  "shorts": {
+    "en": "Shorts",
+    "ar": "شورت",
+    "emoji": "🩳",
+    "src": "img/art/shorts.svg"
+  },
+  "cap": {
+    "en": "Cap",
+    "ar": "قبعة",
+    "emoji": "🧢",
+    "src": "img/art/cap.svg"
+  },
+  "shoes": {
+    "en": "Shoes",
+    "ar": "حذاء",
+    "emoji": "👟",
+    "src": "img/art/shoes.svg"
+  },
+  "socks": {
+    "en": "Socks",
+    "ar": "جوارب",
+    "emoji": "🧦",
+    "src": "img/art/socks.svg"
+  },
+  "sunday": {
+    "en": "Sunday",
+    "ar": "الأحد",
+    "emoji": "📅",
+    "src": "img/art/sunday.svg"
+  },
+  "monday": {
+    "en": "Monday",
+    "ar": "الاثنين",
+    "emoji": "📅",
+    "src": "img/art/monday.svg"
+  },
+  "tuesday": {
+    "en": "Tuesday",
+    "ar": "الثلاثاء",
+    "emoji": "📅",
+    "src": "img/art/tuesday.svg"
+  },
+  "wednesday": {
+    "en": "Wednesday",
+    "ar": "الأربعاء",
+    "emoji": "📅",
+    "src": "img/art/wednesday.svg"
+  },
+  "thursday": {
+    "en": "Thursday",
+    "ar": "الخميس",
+    "emoji": "📅",
+    "src": "img/art/thursday.svg"
+  },
+  "friday": {
+    "en": "Friday",
+    "ar": "الجمعة",
+    "emoji": "📅",
+    "src": "img/art/friday.svg"
+  },
+  "saturday": {
+    "en": "Saturday",
+    "ar": "السبت",
+    "emoji": "📅",
+    "src": "img/art/saturday.svg"
+  },
+  "today": {
+    "en": "Today",
+    "ar": "اليوم",
+    "emoji": "📆",
+    "src": "img/art/today.svg"
+  },
+  "tomorrow": {
+    "en": "Tomorrow",
+    "ar": "غداً",
+    "emoji": "⏭️",
+    "src": "img/art/tomorrow.svg"
+  },
+  "yesterday": {
+    "en": "Yesterday",
+    "ar": "أمس",
+    "emoji": "⏮️",
+    "src": "img/art/yesterday.svg"
+  },
+  "morning": {
+    "en": "Morning",
+    "ar": "صباح",
+    "emoji": "🌅",
+    "src": "img/art/morning.svg"
+  },
+  "noon": {
+    "en": "Noon",
+    "ar": "ظهر",
+    "emoji": "🌞",
+    "src": "img/art/noon.svg"
+  },
+  "night": {
+    "en": "Night",
+    "ar": "ليل",
+    "emoji": "🌙",
+    "src": "img/art/night.svg"
+  },
+  "breakfast": {
+    "en": "Breakfast",
+    "ar": "الفطور",
+    "emoji": "🍳",
+    "src": "img/art/breakfast.svg"
+  },
+  "lunch": {
+    "en": "Lunch",
+    "ar": "الغداء",
+    "emoji": "🍽️",
+    "src": "img/art/lunch.svg"
+  },
+  "dinner": {
+    "en": "Dinner",
+    "ar": "العشاء",
+    "emoji": "🍽️",
+    "src": "img/art/dinner.svg"
+  },
+  "getup": {
+    "en": "Get Up",
+    "ar": "أستيقظ",
+    "emoji": "🛏️",
+    "src": "img/art/getup.svg"
+  },
+  "gotobed": {
+    "en": "Go to Bed",
+    "ar": "أنام",
+    "emoji": "😴",
+    "src": "img/art/gotobed.svg"
+  },
+  "gotoschool": {
+    "en": "Go to School",
+    "ar": "أذهب إلى المدرسة",
+    "emoji": "🎒",
+    "src": "img/art/gotoschool.svg"
+  },
+  "shakehands": {
+    "en": "Shake Hands",
+    "ar": "مصافحة",
+    "emoji": "🤝",
+    "src": "img/art/shakehands.svg"
+  },
+  "board": {
+    "en": "Board",
+    "ar": "سبّورة",
+    "emoji": "🖼️",
+    "src": "img/art/board.svg"
+  },
+  "sky": {
+    "en": "Sky",
+    "ar": "سماء",
+    "emoji": "🌤️",
+    "src": "img/art/sky.svg"
+  },
+  "butterfly": {
+    "en": "Butterfly",
+    "ar": "فراشة",
+    "emoji": "🦋",
+    "src": "img/art/butterfly.svg"
+  },
+  "circle": {
+    "en": "Circle",
+    "ar": "دائرة",
+    "emoji": "⭕",
+    "src": "img/art/circle.svg"
+  },
+  "square": {
+    "en": "Square",
+    "ar": "مربّع",
+    "emoji": "🟦",
+    "src": "img/art/square.svg"
+  },
+  "triangle": {
+    "en": "Triangle",
+    "ar": "مثلّث",
+    "emoji": "🔺",
+    "src": "img/art/triangle.svg"
+  },
+  "rectangle": {
+    "en": "Rectangle",
+    "ar": "مستطيل",
+    "emoji": "🟥",
+    "src": "img/art/rectangle.svg"
+  },
+  "green": {
+    "en": "Green",
+    "ar": "أخضر",
+    "emoji": "🟢",
+    "src": "img/art/green.svg"
+  },
+  "blue": {
+    "en": "Blue",
+    "ar": "أزرق",
+    "emoji": "🔵",
+    "src": "img/art/blue.svg"
+  },
+  "red": {
+    "en": "Red",
+    "ar": "أحمر",
+    "emoji": "🔴",
+    "src": "img/art/red.svg"
+  },
+  "yellow": {
+    "en": "Yellow",
+    "ar": "أصفر",
+    "emoji": "🟡",
+    "src": "img/art/yellow.svg"
+  },
+  "parents": {
+    "en": "Parents",
+    "ar": "الوالدان",
+    "emoji": "👨‍👩‍👧",
+    "src": "img/art/parents.svg"
+  },
+  "father": {
+    "en": "Father",
+    "ar": "أب",
+    "emoji": "👨",
+    "src": "img/art/father.svg"
+  },
+  "one": {
+    "en": "One",
+    "ar": "واحد",
+    "emoji": "1️⃣",
+    "src": "img/art/one.svg"
+  },
+  "two": {
+    "en": "Two",
+    "ar": "اثنان",
+    "emoji": "2️⃣",
+    "src": "img/art/two.svg"
+  },
+  "three": {
+    "en": "Three",
+    "ar": "ثلاثة",
+    "emoji": "3️⃣",
+    "src": "img/art/three.svg"
+  },
+  "four": {
+    "en": "Four",
+    "ar": "أربعة",
+    "emoji": "4️⃣",
+    "src": "img/art/four.svg"
+  },
+  "five": {
+    "en": "Five",
+    "ar": "خمسة",
+    "emoji": "5️⃣",
+    "src": "img/art/five.svg"
+  },
+  "head": {
+    "en": "Head",
+    "ar": "رأس",
+    "emoji": "🧑",
+    "src": "img/art/head.svg"
+  },
+  "tongue": {
+    "en": "Tongue",
+    "ar": "لسان",
+    "emoji": "👅",
+    "src": "img/art/tongue.svg"
+  },
+  "arm": {
+    "en": "Arm",
+    "ar": "ذراع",
+    "emoji": "💪",
+    "src": "img/art/arm.svg"
+  },
+  "hand": {
+    "en": "Hand",
+    "ar": "يد",
+    "emoji": "✋",
+    "src": "img/art/hand.svg"
+  },
+  "foot": {
+    "en": "Foot",
+    "ar": "قدم",
+    "emoji": "🦶",
+    "src": "img/art/foot.svg"
+  },
+  "toe": {
+    "en": "Toe",
+    "ar": "إصبع قدم",
+    "emoji": "🦶",
+    "src": "img/art/toe.svg"
+  },
+  "see": {
+    "en": "See",
+    "ar": "يرى",
+    "emoji": "👁️",
+    "src": "img/art/see.svg"
+  },
+  "hear": {
+    "en": "Hear",
+    "ar": "يسمع",
+    "emoji": "👂",
+    "src": "img/art/hear.svg"
+  },
+  "smell": {
+    "en": "Smell",
+    "ar": "يشمّ",
+    "emoji": "👃",
+    "src": "img/art/smell.svg"
+  },
+  "taste": {
+    "en": "Taste",
+    "ar": "يتذوّق",
+    "emoji": "👅",
+    "src": "img/art/taste.svg"
+  },
+  "touch": {
+    "en": "Touch",
+    "ar": "يلمس",
+    "emoji": "✋",
+    "src": "img/art/touch.svg"
+  },
+  "farm": {
+    "en": "Farm",
+    "ar": "مزرعة",
+    "emoji": "🚜",
+    "src": "img/art/farm.svg"
+  },
+  "cow": {
+    "en": "Cow",
+    "ar": "بقرة",
+    "emoji": "🐄",
+    "src": "img/art/cow.svg"
+  },
+  "horse": {
+    "en": "Horse",
+    "ar": "حصان",
+    "emoji": "🐴",
+    "src": "img/art/horse.svg"
+  },
+  "duck": {
+    "en": "Duck",
+    "ar": "بطة",
+    "emoji": "🦆",
+    "src": "img/art/duck.svg"
+  },
+  "chicken": {
+    "en": "Chicken",
+    "ar": "دجاجة",
+    "emoji": "🐔",
+    "src": "img/art/chicken.svg"
+  },
+  "cheese": {
+    "en": "Cheese",
+    "ar": "جبن",
+    "emoji": "🧀",
+    "src": "img/art/cheese.svg"
+  },
+  "meat": {
+    "en": "Meat",
+    "ar": "لحم",
+    "emoji": "🍖",
+    "src": "img/art/meat.svg"
+  },
+  "eggs": {
+    "en": "Eggs",
+    "ar": "بيض",
+    "emoji": "🥚",
+    "src": "img/art/eggs.svg"
+  },
+  "big": {
+    "en": "Big",
+    "ar": "كبير",
+    "emoji": "⬆️",
+    "src": "img/art/big.svg"
+  },
+  "small": {
+    "en": "Small",
+    "ar": "صغير",
+    "emoji": "⬇️",
+    "src": "img/art/small.svg"
+  },
+  "six": {
+    "en": "Six",
+    "ar": "ستة",
+    "emoji": "6️⃣",
+    "src": "img/art/six.svg"
+  },
+  "seven": {
+    "en": "Seven",
+    "ar": "سبعة",
+    "emoji": "7️⃣",
+    "src": "img/art/seven.svg"
+  },
+  "eight": {
+    "en": "Eight",
+    "ar": "ثمانية",
+    "emoji": "8️⃣",
+    "src": "img/art/eight.svg"
+  },
+  "nine": {
+    "en": "Nine",
+    "ar": "تسعة",
+    "emoji": "9️⃣",
+    "src": "img/art/nine.svg"
+  },
+  "ten": {
+    "en": "Ten",
+    "ar": "عشرة",
+    "emoji": "🔟",
+    "src": "img/art/ten.svg"
+  },
+  "pets": {
+    "en": "Pets",
+    "ar": "حيوانات أليفة",
+    "emoji": "🐾",
+    "src": "img/art/pets.svg"
+  },
+  "turtle": {
+    "en": "Turtle",
+    "ar": "سلحفاة",
+    "emoji": "🐢",
+    "src": "img/art/turtle.svg"
+  },
+  "jungle": {
+    "en": "Jungle",
+    "ar": "غابة",
+    "emoji": "🌴",
+    "src": "img/art/jungle.svg"
+  },
+  "lion": {
+    "en": "Lion",
+    "ar": "أسد",
+    "emoji": "🦁",
+    "src": "img/art/lion.svg"
+  },
+  "tiger": {
+    "en": "Tiger",
+    "ar": "نمر",
+    "emoji": "🐯",
+    "src": "img/art/tiger.svg"
+  },
+  "elephant": {
+    "en": "Elephant",
+    "ar": "فيل",
+    "emoji": "🐘",
+    "src": "img/art/elephant.svg"
+  },
+  "monkey": {
+    "en": "Monkey",
+    "ar": "قرد",
+    "emoji": "🐵",
+    "src": "img/art/monkey.svg"
+  },
+  "giraffe": {
+    "en": "Giraffe",
+    "ar": "زرافة",
+    "emoji": "🦒",
+    "src": "img/art/giraffe.svg"
+  },
+  "snake": {
+    "en": "Snake",
+    "ar": "ثعبان",
+    "emoji": "🐍",
+    "src": "img/art/snake.svg"
+  },
+  "in": {
+    "en": "In",
+    "ar": "في",
+    "emoji": "📥",
+    "src": "img/art/in.svg"
+  },
+  "on": {
+    "en": "On",
+    "ar": "على",
+    "emoji": "🔛",
+    "src": "img/art/on.svg"
+  },
+  "under": {
+    "en": "Under",
+    "ar": "تحت",
+    "emoji": "🔽",
+    "src": "img/art/under.svg"
+  },
+  "week": {
+    "en": "Week",
+    "ar": "أسبوع",
+    "emoji": "📅",
+    "src": "img/art/week.svg"
+  },
+  "before": {
+    "en": "Before",
+    "ar": "قبل",
+    "emoji": "⬅️",
+    "src": "img/art/before.svg"
+  },
+  "after": {
+    "en": "After",
+    "ar": "بعد",
+    "emoji": "➡️",
+    "src": "img/art/after.svg"
+  },
+  "angry": {
+    "en": "Angry",
+    "ar": "غاضب",
+    "emoji": "😠",
+    "src": "img/art/angry.svg"
+  },
+  "tired": {
+    "en": "Tired",
+    "ar": "متعب",
+    "emoji": "😫",
+    "src": "img/art/tired.svg"
+  },
+  "surprised": {
+    "en": "Surprised",
+    "ar": "مندهش",
+    "emoji": "😲",
+    "src": "img/art/surprised.svg"
+  },
+  "scared": {
+    "en": "Scared",
+    "ar": "خائف",
+    "emoji": "😨",
+    "src": "img/art/scared.svg"
+  },
+  "spring": {
+    "en": "Spring",
+    "ar": "الربيع",
+    "emoji": "🌸",
+    "src": "img/art/spring.svg"
+  },
+  "summer": {
+    "en": "Summer",
+    "ar": "الصيف",
+    "emoji": "☀️",
+    "src": "img/art/summer.svg"
+  },
+  "fall": {
+    "en": "Fall",
+    "ar": "الخريف",
+    "emoji": "🍂",
+    "src": "img/art/fall.svg"
+  },
+  "winter": {
+    "en": "Winter",
+    "ar": "الشتاء",
+    "emoji": "❄️",
+    "src": "img/art/winter.svg"
+  },
+  "warm": {
+    "en": "Warm",
+    "ar": "دافئ",
+    "emoji": "🌤️",
+    "src": "img/art/warm.svg"
+  },
+  "cold": {
+    "en": "Cold",
+    "ar": "بارد",
+    "emoji": "🧊",
+    "src": "img/art/cold.svg"
+  },
+  "windy": {
+    "en": "Windy",
+    "ar": "عاصف",
+    "emoji": "🌬️",
+    "src": "img/art/windy.svg"
+  },
+  "rainy": {
+    "en": "Rainy",
+    "ar": "مُمطر",
+    "emoji": "🌧️",
+    "src": "img/art/rainy.svg"
+  },
+  "sunny": {
+    "en": "Sunny",
+    "ar": "مُشمس",
+    "emoji": "🌞",
+    "src": "img/art/sunny.svg"
+  },
+  "cloudy": {
+    "en": "Cloudy",
+    "ar": "غائم",
+    "emoji": "☁️",
+    "src": "img/art/cloudy.svg"
+  },
+  "january": {
+    "en": "January",
+    "ar": "يناير",
+    "emoji": "📅",
+    "src": "img/art/january.svg"
+  },
+  "february": {
+    "en": "February",
+    "ar": "فبراير",
+    "emoji": "📅",
+    "src": "img/art/february.svg"
+  },
+  "march": {
+    "en": "March",
+    "ar": "مارس",
+    "emoji": "📅",
+    "src": "img/art/march.svg"
+  },
+  "april": {
+    "en": "April",
+    "ar": "أبريل",
+    "emoji": "📅",
+    "src": "img/art/april.svg"
+  },
+  "may": {
+    "en": "May",
+    "ar": "مايو",
+    "emoji": "📅",
+    "src": "img/art/may.svg"
+  },
+  "june": {
+    "en": "June",
+    "ar": "يونيو",
+    "emoji": "📅",
+    "src": "img/art/june.svg"
+  },
+  "july": {
+    "en": "July",
+    "ar": "يوليو",
+    "emoji": "📅",
+    "src": "img/art/july.svg"
+  },
+  "august": {
+    "en": "August",
+    "ar": "أغسطس",
+    "emoji": "📅",
+    "src": "img/art/august.svg"
+  },
+  "september": {
+    "en": "September",
+    "ar": "سبتمبر",
+    "emoji": "📅",
+    "src": "img/art/september.svg"
+  },
+  "october": {
+    "en": "October",
+    "ar": "أكتوبر",
+    "emoji": "📅",
+    "src": "img/art/october.svg"
+  },
+  "november": {
+    "en": "November",
+    "ar": "نوفمبر",
+    "emoji": "📅",
+    "src": "img/art/november.svg"
+  },
+  "december": {
+    "en": "December",
+    "ar": "ديسمبر",
+    "emoji": "📅",
+    "src": "img/art/december.svg"
+  },
+  "home": {
+    "en": "Home",
+    "ar": "منزل",
+    "emoji": "🏠",
+    "src": "img/art/home.svg"
+  },
+  "bedroom": {
+    "en": "Bedroom",
+    "ar": "غرفة نوم",
+    "emoji": "🛏️",
+    "src": "img/art/bedroom.svg"
+  },
+  "livingroom": {
+    "en": "Living Room",
+    "ar": "غرفة جلوس",
+    "emoji": "🛋️",
+    "src": "img/art/livingroom.svg"
+  },
+  "kitchen": {
+    "en": "Kitchen",
+    "ar": "مطبخ",
+    "emoji": "🍳",
+    "src": "img/art/kitchen.svg"
+  },
+  "diningroom": {
+    "en": "Dining Room",
+    "ar": "غرفة طعام",
+    "emoji": "🍽️",
+    "src": "img/art/diningroom.svg"
+  },
+  "bathroom": {
+    "en": "Bathroom",
+    "ar": "حمّام",
+    "emoji": "🚿",
+    "src": "img/art/bathroom.svg"
+  },
+  "closet": {
+    "en": "Closet",
+    "ar": "خزانة",
+    "emoji": "🚪",
+    "src": "img/art/closet.svg"
+  },
+  "couch": {
+    "en": "Couch",
+    "ar": "أريكة",
+    "emoji": "🛋️",
+    "src": "img/art/couch.svg"
+  },
+  "chairs": {
+    "en": "Chairs",
+    "ar": "كراسي",
+    "emoji": "🪑",
+    "src": "img/art/chairs.svg"
+  },
+  "tv": {
+    "en": "TV",
+    "ar": "تلفاز",
+    "emoji": "📺",
+    "src": "img/art/tv.svg"
+  },
+  "fridge": {
+    "en": "Fridge",
+    "ar": "ثلاجة",
+    "emoji": "🧊",
+    "src": "img/art/fridge.svg"
+  },
+  "oven": {
+    "en": "Oven",
+    "ar": "فرن",
+    "emoji": "🔥",
+    "src": "img/art/oven.svg"
+  },
+  "sink": {
+    "en": "Sink",
+    "ar": "حوض",
+    "emoji": "🚰",
+    "src": "img/art/sink.svg"
+  },
+  "toilet": {
+    "en": "Toilet",
+    "ar": "مرحاض",
+    "emoji": "🚽",
+    "src": "img/art/toilet.svg"
+  },
+  "hospital": {
+    "en": "Hospital",
+    "ar": "مستشفى",
+    "emoji": "🏥",
+    "src": "img/art/hospital.svg"
+  },
+  "shop": {
+    "en": "Shop",
+    "ar": "متجر",
+    "emoji": "🏪",
+    "src": "img/art/shop.svg"
+  },
+  "street": {
+    "en": "Street",
+    "ar": "شارع",
+    "emoji": "🛣️",
+    "src": "img/art/street.svg"
+  },
+  "school": {
+    "en": "School",
+    "ar": "مدرسة",
+    "emoji": "🏫",
+    "src": "img/art/school.svg"
+  },
+  "building": {
+    "en": "Building",
+    "ar": "مبنى",
+    "emoji": "🏢",
+    "src": "img/art/building.svg"
+  },
+  "park": {
+    "en": "Park",
+    "ar": "حديقة",
+    "emoji": "🏞️",
+    "src": "img/art/park.svg"
+  },
+  "zoo": {
+    "en": "Zoo",
+    "ar": "حديقة حيوان",
+    "emoji": "🦓",
+    "src": "img/art/zoo.svg"
+  },
+  "beach": {
+    "en": "Beach",
+    "ar": "شاطئ",
+    "emoji": "🏖️",
+    "src": "img/art/beach.svg"
+  },
+  "truck": {
+    "en": "Truck",
+    "ar": "شاحنة",
+    "emoji": "🚚",
+    "src": "img/art/truck.svg"
+  },
+  "bus": {
+    "en": "Bus",
+    "ar": "أتوبيس",
+    "emoji": "🚌",
+    "src": "img/art/bus.svg"
+  },
+  "swim": {
+    "en": "Swim",
+    "ar": "يسبح",
+    "emoji": "🏊",
+    "src": "img/art/swim.svg"
+  },
+  "dig": {
+    "en": "Dig",
+    "ar": "يحفر",
+    "emoji": "⛏️",
+    "src": "img/art/dig.svg"
+  },
+  "animals": {
+    "en": "Animals",
+    "ar": "حيوانات",
+    "emoji": "🐾",
+    "src": "img/art/animals.svg"
+  },
+  "friend": {
+    "en": "Friend",
+    "ar": "صديق",
+    "emoji": "🧑‍🤝‍🧑",
+    "src": "img/art/friend.svg"
+  },
+  "share": {
+    "en": "Share",
+    "ar": "يشارك",
+    "emoji": "🤝",
+    "src": "img/art/share.svg"
+  },
+  "evening": {
+    "en": "Evening",
+    "ar": "مساء",
+    "emoji": "🌆",
+    "src": "img/art/evening.svg"
+  },
+  "weather": {
+    "en": "Weather",
+    "ar": "الطقس",
+    "emoji": "⛅",
+    "src": "img/art/weather.svg"
+  },
+  "rain": {
+    "en": "Rain",
+    "ar": "مطر",
+    "emoji": "🌧️",
+    "src": "img/art/rain.svg"
+  },
+  "wind": {
+    "en": "Wind",
+    "ar": "رياح",
+    "emoji": "💨",
+    "src": "img/art/wind.svg"
+  },
+  "bread": {
+    "en": "Bread",
+    "ar": "خبز",
+    "emoji": "🍞",
+    "src": "img/art/bread.svg"
+  },
+  "egg": {
+    "en": "Egg",
+    "ar": "بيضة",
+    "emoji": "🥚",
+    "src": "img/art/egg.svg"
+  },
+  "rice": {
+    "en": "Rice",
+    "ar": "أرز",
+    "emoji": "🍚",
+    "src": "img/art/rice.svg"
+  },
+  "orange": {
+    "en": "Orange",
+    "ar": "برتقال",
+    "emoji": "🍊",
+    "src": "img/art/orange.svg"
+  },
+  "grapes": {
+    "en": "Grapes",
+    "ar": "عنب",
+    "emoji": "🍇",
+    "src": "img/art/grapes.svg"
+  },
+  "watermelon": {
+    "en": "Watermelon",
+    "ar": "بطيخ",
+    "emoji": "🍉",
+    "src": "img/art/watermelon.svg"
+  },
+  "doctor": {
+    "en": "Doctor",
+    "ar": "طبيب",
+    "emoji": "🧑‍⚕️",
+    "src": "img/art/doctor.svg"
+  },
+  "farmer": {
+    "en": "Farmer",
+    "ar": "فلاح",
+    "emoji": "👨‍🌾",
+    "src": "img/art/farmer.svg"
+  },
+  "baker": {
+    "en": "Baker",
+    "ar": "خباز",
+    "emoji": "🥖",
+    "src": "img/art/baker.svg"
+  },
+  "policeman": {
+    "en": "Policeman",
+    "ar": "شرطي",
+    "emoji": "👮",
+    "src": "img/art/policeman.svg"
+  },
+  "nurse": {
+    "en": "Nurse",
+    "ar": "ممرضة",
+    "emoji": "💉",
+    "src": "img/art/nurse.svg"
+  },
+  "tomato": {
+    "en": "Tomato",
+    "ar": "طماطم",
+    "emoji": "🍅",
+    "src": "img/art/tomato.svg"
+  },
+  "potato": {
+    "en": "Potato",
+    "ar": "بطاطس",
+    "emoji": "🥔",
+    "src": "img/art/potato.svg"
+  },
+  "carrot": {
+    "en": "Carrot",
+    "ar": "جزر",
+    "emoji": "🥕",
+    "src": "img/art/carrot.svg"
+  },
+  "onion": {
+    "en": "Onion",
+    "ar": "بصل",
+    "emoji": "🧅",
+    "src": "img/art/onion.svg"
+  },
+  "cucumber": {
+    "en": "Cucumber",
+    "ar": "خيار",
+    "emoji": "🥒",
+    "src": "img/art/cucumber.svg"
+  },
+  "football": {
+    "en": "Football",
+    "ar": "كرة قدم",
+    "emoji": "⚽",
+    "src": "img/art/football.svg"
+  },
+  "tennis": {
+    "en": "Tennis",
+    "ar": "تنس",
+    "emoji": "🎾",
+    "src": "img/art/tennis.svg"
+  },
+  "swimming": {
+    "en": "Swimming",
+    "ar": "سباحة",
+    "emoji": "🏊",
+    "src": "img/art/swimming.svg"
+  },
+  "basketball": {
+    "en": "Basketball",
+    "ar": "سلة",
+    "emoji": "🏀",
+    "src": "img/art/basketball.svg"
+  },
+  "pizza": {
+    "en": "Pizza",
+    "ar": "بيتزا",
+    "emoji": "🍕",
+    "src": "img/art/pizza.svg"
+  },
+  "tea": {
+    "en": "Tea",
+    "ar": "شاي",
+    "emoji": "🍵",
+    "src": "img/art/tea.svg"
+  },
+  "cartoon": {
+    "en": "Cartoon",
+    "ar": "كرتون",
+    "emoji": "🎬",
+    "src": "img/art/cartoon.svg"
+  },
+  "read": {
+    "en": "Read",
+    "ar": "يقرأ",
+    "emoji": "📖",
+    "src": "img/art/read.svg"
+  },
+  "class": {
+    "en": "Class",
+    "ar": "فصل",
+    "emoji": "📚",
+    "src": "img/art/class.svg"
+  },
+  "subject": {
+    "en": "Subject",
+    "ar": "مادة",
+    "emoji": "📖",
+    "src": "img/art/subject.svg"
+  },
+  "english": {
+    "en": "English",
+    "ar": "إنجليزي",
+    "emoji": "🇬🇧",
+    "src": "img/art/english.svg"
+  },
+  "math": {
+    "en": "Math",
+    "ar": "حساب",
+    "emoji": "➗",
+    "src": "img/art/math.svg"
+  },
+  "science": {
+    "en": "Science",
+    "ar": "علوم",
+    "emoji": "🔬",
+    "src": "img/art/science.svg"
+  },
+  "art": {
+    "en": "Art",
+    "ar": "فن",
+    "emoji": "🎨",
+    "src": "img/art/art.svg"
+  },
+  "music": {
+    "en": "Music",
+    "ar": "موسيقى",
+    "emoji": "🎵",
+    "src": "img/art/music.svg"
+  },
+  "station": {
+    "en": "Station",
+    "ar": "قسم شرطة",
+    "emoji": "🚓",
+    "src": "img/art/station.svg"
+  },
+  "mosque": {
+    "en": "Mosque",
+    "ar": "مسجد",
+    "emoji": "🕌",
+    "src": "img/art/mosque.svg"
+  },
+  "church": {
+    "en": "Church",
+    "ar": "كنيسة",
+    "emoji": "⛪",
+    "src": "img/art/church.svg"
+  },
+  "brave": {
+    "en": "Brave",
+    "ar": "شجاع",
+    "emoji": "🦁",
+    "src": "img/art/brave.svg"
+  },
+  "helpful": {
+    "en": "Helpful",
+    "ar": "مساعد",
+    "emoji": "🤝",
+    "src": "img/art/helpful.svg"
+  },
+  "beautiful": {
+    "en": "Beautiful",
+    "ar": "جميل",
+    "emoji": "🌸",
+    "src": "img/art/beautiful.svg"
+  },
+  "trip": {
+    "en": "Trip",
+    "ar": "رحلة",
+    "emoji": "🧳",
+    "src": "img/art/trip.svg"
+  },
+  "sea": {
+    "en": "Sea",
+    "ar": "بحر",
+    "emoji": "🌊",
+    "src": "img/art/sea.svg"
+  },
+  "river": {
+    "en": "River",
+    "ar": "نهر",
+    "emoji": "🏞️",
+    "src": "img/art/river.svg"
+  },
+  "mountain": {
+    "en": "Mountain",
+    "ar": "جبل",
+    "emoji": "⛰️",
+    "src": "img/art/mountain.svg"
+  },
+  "desert": {
+    "en": "Desert",
+    "ar": "صحراء",
+    "emoji": "🏜️",
+    "src": "img/art/desert.svg"
+  },
+  "camel": {
+    "en": "Camel",
+    "ar": "جمل",
+    "emoji": "🐪",
+    "src": "img/art/camel.svg"
+  },
+  "pyramid": {
+    "en": "Pyramid",
+    "ar": "هرم",
+    "emoji": "🗿",
+    "src": "img/art/pyramid.svg"
+  },
+  "museum": {
+    "en": "Museum",
+    "ar": "متحف",
+    "emoji": "🏛️",
+    "src": "img/art/museum.svg"
+  },
+  "visit": {
+    "en": "Visit",
+    "ar": "يزور",
+    "emoji": "🗺️",
+    "src": "img/art/visit.svg"
+  },
+  "wonderful": {
+    "en": "Wonderful",
+    "ar": "رائع",
+    "emoji": "🎉",
+    "src": "img/art/wonderful.svg"
+  },
+  "delicious": {
+    "en": "Delicious",
+    "ar": "لذيذ",
+    "emoji": "😋",
+    "src": "img/art/delicious.svg"
+  },
+  "interesting": {
+    "en": "Interesting",
+    "ar": "ممتع",
+    "emoji": "🤔",
+    "src": "img/art/interesting.svg"
+  },
+  "holiday": {
+    "en": "Holiday",
+    "ar": "إجازة",
+    "emoji": "🎡",
+    "src": "img/art/holiday.svg"
+  },
+  "travel": {
+    "en": "Travel",
+    "ar": "يسافر",
+    "emoji": "✈️",
+    "src": "img/art/travel.svg"
+  },
+  "watch": {
+    "en": "Watch",
+    "ar": "يشاهد",
+    "emoji": "📺",
+    "src": "img/art/watch.svg"
+  },
+  "played": {
+    "en": "Played",
+    "ar": "لعب",
+    "emoji": "🎮",
+    "src": "img/art/played.svg"
+  },
+  "health": {
+    "en": "Health",
+    "ar": "صحة",
+    "emoji": "❤️",
+    "src": "img/art/health.svg"
+  },
+  "medicine": {
+    "en": "Medicine",
+    "ar": "دواء",
+    "emoji": "💊",
+    "src": "img/art/medicine.svg"
+  },
+  "tooth": {
+    "en": "Tooth",
+    "ar": "سن",
+    "emoji": "🦷",
+    "src": "img/art/tooth.svg"
+  },
+  "temperature": {
+    "en": "Temperature",
+    "ar": "حرارة",
+    "emoji": "🌡️",
+    "src": "img/art/temperature.svg"
+  },
+  "headache": {
+    "en": "Headache",
+    "ar": "صداع",
+    "emoji": "🤕",
+    "src": "img/art/headache.svg"
+  },
+  "future": {
+    "en": "Future",
+    "ar": "مستقبل",
+    "emoji": "🔮",
+    "src": "img/art/future.svg"
+  },
+  "plan": {
+    "en": "Plan",
+    "ar": "خطة",
+    "emoji": "📋",
+    "src": "img/art/plan.svg"
+  },
+  "homework": {
+    "en": "Homework",
+    "ar": "واجب",
+    "emoji": "📝",
+    "src": "img/art/homework.svg"
+  },
+  "project": {
+    "en": "Project",
+    "ar": "مشروع",
+    "emoji": "🏗️",
+    "src": "img/art/project.svg"
+  },
+  "group": {
+    "en": "Group",
+    "ar": "مجموعة",
+    "emoji": "👥",
+    "src": "img/art/group.svg"
+  },
+  "important": {
+    "en": "Important",
+    "ar": "مهم",
+    "emoji": "⭐",
+    "src": "img/art/important.svg"
+  },
+  "easy": {
+    "en": "Easy",
+    "ar": "سهل",
+    "emoji": "🐣",
+    "src": "img/art/easy.svg"
+  },
+  "difficult": {
+    "en": "Difficult",
+    "ar": "صعب",
+    "emoji": "🧗",
+    "src": "img/art/difficult.svg"
+  },
+  "famous": {
+    "en": "Famous",
+    "ar": "مشهور",
+    "emoji": "🌟",
+    "src": "img/art/famous.svg"
+  },
+  "inventor": {
+    "en": "Inventor",
+    "ar": "مخترع",
+    "emoji": "💡",
+    "src": "img/art/inventor.svg"
+  },
+  "computer": {
+    "en": "Computer",
+    "ar": "حاسوب",
+    "emoji": "💻",
+    "src": "img/art/computer.svg"
+  },
+  "internet": {
+    "en": "Internet",
+    "ar": "إنترنت",
+    "emoji": "🌐",
+    "src": "img/art/internet.svg"
+  },
+  "email": {
+    "en": "Email",
+    "ar": "بريد إلكتروني",
+    "emoji": "📧",
+    "src": "img/art/email.svg"
+  },
+  "message": {
+    "en": "Message",
+    "ar": "رسالة",
+    "emoji": "💬",
+    "src": "img/art/message.svg"
+  },
+  "camera": {
+    "en": "Camera",
+    "ar": "كاميرا",
+    "emoji": "📷",
+    "src": "img/art/camera.svg"
+  },
+  "engineer": {
+    "en": "Engineer",
+    "ar": "مهندس",
+    "emoji": "👷",
+    "src": "img/art/engineer.svg"
+  },
+  "pilot": {
+    "en": "Pilot",
+    "ar": "طيار",
+    "emoji": "👨‍✈️",
+    "src": "img/art/pilot.svg"
+  },
+  "achievement": {
+    "en": "Achievement",
+    "ar": "إنجاز",
+    "emoji": "🏆",
+    "src": "img/art/achievement.svg"
+  },
+  "challenge": {
+    "en": "Challenge",
+    "ar": "تحدٍّ",
+    "emoji": "🪜",
+    "src": "img/art/challenge.svg"
+  },
+  "success": {
+    "en": "Success",
+    "ar": "نجاح",
+    "emoji": "🥇",
+    "src": "img/art/success.svg"
+  },
+  "skill": {
+    "en": "Skill",
+    "ar": "مهارة",
+    "emoji": "🎯",
+    "src": "img/art/skill.svg"
+  },
+  "knowledge": {
+    "en": "Knowledge",
+    "ar": "معرفة",
+    "emoji": "🧠",
+    "src": "img/art/knowledge.svg"
+  },
+  "culture": {
+    "en": "Culture",
+    "ar": "ثقافة",
+    "emoji": "🎭",
+    "src": "img/art/culture.svg"
+  },
+  "tourist": {
+    "en": "Tourist",
+    "ar": "سائح",
+    "emoji": "🧳",
+    "src": "img/art/tourist.svg"
+  },
+  "guide": {
+    "en": "Guide",
+    "ar": "مرشد",
+    "emoji": "🧭",
+    "src": "img/art/guide.svg"
+  },
+  "explain": {
+    "en": "Explain",
+    "ar": "يشرح",
+    "emoji": "💬",
+    "src": "img/art/explain.svg"
+  },
+  "suggest": {
+    "en": "Suggest",
+    "ar": "يقترح",
+    "emoji": "💡",
+    "src": "img/art/suggest.svg"
+  },
+  "compare": {
+    "en": "Compare",
+    "ar": "يقارن",
+    "emoji": "⚖️",
+    "src": "img/art/compare.svg"
+  },
+  "decision": {
+    "en": "Decision",
+    "ar": "قرار",
+    "emoji": "📌",
+    "src": "img/art/decision.svg"
+  },
+  "journey": {
+    "en": "Journey",
+    "ar": "رحلة طويلة",
+    "emoji": "🛤️",
+    "src": "img/art/journey.svg"
+  },
+  "adventure": {
+    "en": "Adventure",
+    "ar": "مغامرة",
+    "emoji": "🌋",
+    "src": "img/art/adventure.svg"
+  },
+  "explore": {
+    "en": "Explore",
+    "ar": "يستكشف",
+    "emoji": "🔍",
+    "src": "img/art/explore.svg"
+  },
+  "experience": {
+    "en": "Experience",
+    "ar": "خبرة",
+    "emoji": "🎫",
+    "src": "img/art/experience.svg"
+  },
+  "improve": {
+    "en": "Improve",
+    "ar": "يحسّن",
+    "emoji": "📈",
+    "src": "img/art/improve.svg"
+  },
+  "practice": {
+    "en": "Practice",
+    "ar": "تمرين",
+    "emoji": "🔁",
+    "src": "img/art/practice.svg"
+  },
+  "performance": {
+    "en": "Performance",
+    "ar": "أداء",
+    "emoji": "🎤",
+    "src": "img/art/performance.svg"
+  },
+  "confidence": {
+    "en": "Confidence",
+    "ar": "ثقة",
+    "emoji": "💪",
+    "src": "img/art/confidence.svg"
+  },
+  "respect": {
+    "en": "Respect",
+    "ar": "احترام",
+    "emoji": "🙏",
+    "src": "img/art/respect.svg"
+  },
+  "friendly": {
+    "en": "Friendly",
+    "ar": "ودود",
+    "emoji": "😄",
+    "src": "img/art/friendly.svg"
+  },
+  "opinion": {
+    "en": "Opinion",
+    "ar": "رأي",
+    "emoji": "🗣️",
+    "src": "img/art/opinion.svg"
+  },
+  "argument": {
+    "en": "Argument",
+    "ar": "نقاش",
+    "emoji": "🥊",
+    "src": "img/art/argument.svg"
+  },
+  "reason": {
+    "en": "Reason",
+    "ar": "سبب",
+    "emoji": "🧐",
+    "src": "img/art/reason.svg"
+  },
+  "result": {
+    "en": "Result",
+    "ar": "نتيجة",
+    "emoji": "🏁",
+    "src": "img/art/result.svg"
+  },
+  "advice": {
+    "en": "Advice",
+    "ar": "نصيحة",
+    "emoji": "🤔",
+    "src": "img/art/advice.svg"
+  },
+  "responsibility": {
+    "en": "Responsibility",
+    "ar": "مسؤولية",
+    "emoji": "🤲",
+    "src": "img/art/responsibility.svg"
+  },
+  "environment": {
+    "en": "Environment",
+    "ar": "بيئة",
+    "emoji": "🌍",
+    "src": "img/art/environment.svg"
+  },
+  "pollution": {
+    "en": "Pollution",
+    "ar": "تلوث",
+    "emoji": "🏭",
+    "src": "img/art/pollution.svg"
+  },
+  "climate": {
+    "en": "Climate",
+    "ar": "مناخ",
+    "emoji": "🌦️",
+    "src": "img/art/climate.svg"
+  },
+  "technology": {
+    "en": "Technology",
+    "ar": "تكنولوجيا",
+    "emoji": "📱",
+    "src": "img/art/technology.svg"
+  },
+  "education": {
+    "en": "Education",
+    "ar": "تعليم",
+    "emoji": "🎓",
+    "src": "img/art/education.svg"
+  },
+  "opportunity": {
+    "en": "Opportunity",
+    "ar": "فرصة",
+    "emoji": "🚪",
+    "src": "img/art/opportunity.svg"
+  },
+  "effort": {
+    "en": "Effort",
+    "ar": "جهد",
+    "emoji": "💪",
+    "src": "img/art/effort.svg"
+  },
+  "encourage": {
+    "en": "Encourage",
+    "ar": "يشجع",
+    "emoji": "🎊",
+    "src": "img/art/encourage.svg"
+  },
+  "participate": {
+    "en": "Participate",
+    "ar": "يشارك",
+    "emoji": "🤝",
+    "src": "img/art/participate.svg"
+  },
+  "organize": {
+    "en": "Organize",
+    "ar": "ينظم",
+    "emoji": "🗂️",
+    "src": "img/art/organize.svg"
+  },
+  "present": {
+    "en": "Present",
+    "ar": "يعرض",
+    "emoji": "🎤",
+    "src": "img/art/present.svg"
+  },
+  "discuss": {
+    "en": "Discuss",
+    "ar": "يناقش",
+    "emoji": "💬",
+    "src": "img/art/discuss.svg"
+  },
+  "ambition": {
+    "en": "Ambition",
+    "ar": "طموح",
+    "emoji": "🚀",
+    "src": "img/art/ambition.svg"
+  },
+  "research": {
+    "en": "Research",
+    "ar": "بحث",
+    "emoji": "🔬",
+    "src": "img/art/research.svg"
+  },
+  "social": {
+    "en": "Social",
+    "ar": "اجتماعي",
+    "emoji": "👥",
+    "src": "img/art/social.svg"
+  },
+  "cooperation": {
+    "en": "Cooperation",
+    "ar": "تعاون",
+    "emoji": "🫶",
+    "src": "img/art/cooperation.svg"
+  },
+  "dad": {
+    "en": "Dad",
+    "ar": "أب",
+    "emoji": "👨",
+    "src": "img/art/dad.svg"
+  },
+  "mom": {
+    "en": "Mom",
+    "ar": "أم",
+    "emoji": "👩",
+    "src": "img/art/mom.svg"
+  },
+  "family": {
+    "en": "Family",
+    "ar": "عائلة",
+    "emoji": "👨‍👩‍👧",
+    "src": "img/art/family.svg"
+  },
+  "pen": {
+    "en": "Pen",
+    "ar": "قلم",
+    "emoji": "🖊️",
+    "src": "img/art/pen.svg"
+  },
+  "doll": {
+    "en": "Doll",
+    "ar": "دمية",
+    "emoji": "🪆",
+    "src": "img/art/doll.svg"
+  },
+  "song": {
+    "en": "Song",
+    "ar": "أغنية",
+    "emoji": "🎵",
+    "src": "img/art/song.svg"
+  },
+  "student": {
+    "en": "Student",
+    "ar": "طالب",
+    "emoji": "🧑‍🎓",
+    "src": "img/art/student.svg"
+  },
+  "door": {
+    "en": "Door",
+    "ar": "باب",
+    "emoji": "🚪",
+    "src": "img/art/door.svg"
+  },
+  "window": {
+    "en": "Window",
+    "ar": "نافذة",
+    "emoji": "🪟",
+    "src": "img/art/window.svg"
+  },
+  "eye": {
+    "en": "Eye",
+    "ar": "عين",
+    "emoji": "👁️",
+    "src": "img/art/eye.svg"
+  },
+  "goat": {
+    "en": "Goat",
+    "ar": "عنزة",
+    "emoji": "🐐",
+    "src": "img/art/goat.svg"
+  },
+  "ice": {
+    "en": "Ice",
+    "ar": "ثلج",
+    "emoji": "🧊",
+    "src": "img/art/ice.svg"
+  },
+  "kite": {
+    "en": "Kite",
+    "ar": "طائرة ورقية",
+    "emoji": "🪁",
+    "src": "img/art/kite.svg"
+  },
+  "nest": {
+    "en": "Nest",
+    "ar": "عش",
+    "emoji": "🪺",
+    "src": "img/art/nest.svg"
+  },
+  "queen": {
+    "en": "Queen",
+    "ar": "ملكة",
+    "emoji": "👑",
+    "src": "img/art/queen.svg"
+  },
+  "umbrella": {
+    "en": "Umbrella",
+    "ar": "مظلة",
+    "emoji": "☂️",
+    "src": "img/art/umbrella.svg"
+  },
+  "van": {
+    "en": "Van",
+    "ar": "شاحنة",
+    "emoji": "🚐",
+    "src": "img/art/van.svg"
+  },
+  "fox": {
+    "en": "Fox",
+    "ar": "ثعلب",
+    "emoji": "🦊",
+    "src": "img/art/fox.svg"
+  },
+  "yoyo": {
+    "en": "Yo-yo",
+    "ar": "يويو",
+    "emoji": "🪀",
+    "src": "img/art/yoyo.svg"
+  },
+  "zebra": {
+    "en": "Zebra",
+    "ar": "حمار وحشي",
+    "emoji": "🦓",
+    "src": "img/art/zebra.svg"
+  }
+}

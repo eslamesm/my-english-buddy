@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" preserveAspectRatio="xMidYMid meet">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="34%" r="80%">
+    <stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#6d28d9"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#fde68a"/><stop offset="55%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/>
+  </linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#fff7ed"/>
+  </linearGradient>
+  <pattern id="geo" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+    <path d="M32 6 L40 24 L58 32 L40 40 L32 58 L24 40 L6 32 L24 24 Z" fill="#ffffff" opacity="0.08"/>
+    <circle cx="32" cy="32" r="4" fill="#ffffff" opacity="0.06"/>
+  </pattern>
+  <clipPath id="archClip"><path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z"/></clipPath>
+</defs>
+<rect width="512" height="512" fill="url(#bg)"/>
+<rect width="512" height="512" fill="url(#geo)"/>
+
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="url(#panel)"/>
+<g clip-path="url(#archClip)"><rect x="120" y="360" width="272" height="84" fill="#e9d5ff"/><path d="M256.0,150.0 L294.8,246.6 L398.7,253.6 L318.8,320.4 L344.2,421.4 L256.0,366.0 L167.8,421.4 L193.2,320.4 L113.3,253.6 L217.2,246.6 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M256.0,204.0 L280.8,265.8 L347.3,270.3 L296.2,313.1 L312.4,377.7 L256.0,342.2 L199.6,377.7 L215.8,313.1 L164.7,270.3 L231.2,265.8 Z" fill="#fde68a" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M96.0,116.0 L104.8,137.9 L128.3,139.5 L110.2,154.6 L116.0,177.5 L96.0,165.0 L76.0,177.5 L81.8,154.6 L63.7,139.5 L87.2,137.9 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M410.0,144.0 L416.7,160.7 L434.7,162.0 L420.9,173.5 L425.3,191.0 L410.0,181.4 L394.7,191.0 L399.1,173.5 L385.3,162.0 L403.3,160.7 Z" fill="#fde68a" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M120.0,398.0 L125.7,412.2 L140.9,413.2 L129.2,423.0 L132.9,437.8 L120.0,429.7 L107.1,437.8 L110.8,423.0 L99.1,413.2 L114.3,412.2 Z" fill="#fde68a" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="256" cy="442" rx="96" ry="12" fill="#2b1b4d" opacity=".12"/></g>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="#2b1b4d" stroke-width="6" opacity="0.18"/>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="url(#gold)" stroke-width="9"/>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="#fde68a" stroke-width="3" opacity="0.9" transform="translate(0 0) scale(0.965) translate(9 9)"/>
+<g opacity="0.95"><polygon points="74.0,40.0 78.9,53.2 93.0,53.8 82.0,62.6 85.8,76.2 74.0,68.4 62.2,76.2 66.0,62.6 55.0,53.8 69.1,53.2" fill="#fbbf24"/><polygon points="438.0,40.0 442.9,53.2 457.0,53.8 446.0,62.6 449.8,76.2 438.0,68.4 426.2,76.2 430.0,62.6 419.0,53.8 433.1,53.2" fill="#fbbf24"/><polygon points="74.0,438.0 77.5,447.2 87.3,447.7 79.6,453.8 82.2,463.3 74.0,457.9 65.8,463.3 68.4,453.8 60.7,447.7 70.5,447.2" fill="#fbbf24"/><polygon points="438.0,438.0 441.5,447.2 451.3,447.7 443.6,453.8 446.2,463.3 438.0,457.9 429.8,463.3 432.4,453.8 424.7,447.7 434.5,447.2" fill="#fbbf24"/><path d="M150 34 v18" fill="none" stroke="#ffffff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M150 52 l16 10 v22 l-16 10 l-16 -10 v-22 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M412 34 v18" fill="none" stroke="#ffffff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M412 52 l16 10 v22 l-16 10 l-16 -10 v-22 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/></g>
+</svg>

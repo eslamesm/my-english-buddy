@@ -4,3 +4,13 @@
 
 # temp / logs
 *.log
+
+# local review / build artifacts
+art-sheet.png
+objects-sheet.png
+art-preview.png
+art-preview.html
+home-full.png
+home-hero.png
+__*.html
+

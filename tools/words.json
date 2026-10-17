@@ -1,0 +1,2402 @@
+[
+ {
+  "en": "A",
+  "ar": "تفاحة",
+  "emoji": "🍎",
+  "slug": "a"
+ },
+ {
+  "en": "B",
+  "ar": "كرة",
+  "emoji": "⚽",
+  "slug": "b"
+ },
+ {
+  "en": "C",
+  "ar": "قطة",
+  "emoji": "🐱",
+  "slug": "c"
+ },
+ {
+  "en": "D",
+  "ar": "كلب",
+  "emoji": "🐶",
+  "slug": "d"
+ },
+ {
+  "en": "E",
+  "ar": "بيضة",
+  "emoji": "🥚",
+  "slug": "e"
+ },
+ {
+  "en": "F",
+  "ar": "سمكة",
+  "emoji": "🐟",
+  "slug": "f"
+ },
+ {
+  "en": "G",
+  "ar": "عنزة",
+  "emoji": "🐐",
+  "slug": "g"
+ },
+ {
+  "en": "H",
+  "ar": "قبعة",
+  "emoji": "🎩",
+  "slug": "h"
+ },
+ {
+  "en": "I",
+  "ar": "ثلج",
+  "emoji": "🧊",
+  "slug": "i"
+ },
+ {
+  "en": "J",
+  "ar": "عصير",
+  "emoji": "🧃",
+  "slug": "j"
+ },
+ {
+  "en": "K",
+  "ar": "طائرة ورقية",
+  "emoji": "🪁",
+  "slug": "k"
+ },
+ {
+  "en": "L",
+  "ar": "أسد",
+  "emoji": "🦁",
+  "slug": "l"
+ },
+ {
+  "en": "M",
+  "ar": "قرد",
+  "emoji": "🐵",
+  "slug": "m"
+ },
+ {
+  "en": "N",
+  "ar": "عش",
+  "emoji": "🪺",
+  "slug": "n"
+ },
+ {
+  "en": "O",
+  "ar": "برتقالة",
+  "emoji": "🍊",
+  "slug": "o"
+ },
+ {
+  "en": "P",
+  "ar": "خنزير",
+  "emoji": "🐷",
+  "slug": "p"
+ },
+ {
+  "en": "Q",
+  "ar": "ملكة",
+  "emoji": "👑",
+  "slug": "q"
+ },
+ {
+  "en": "R",
+  "ar": "أرنب",
+  "emoji": "🐰",
+  "slug": "r"
+ },
+ {
+  "en": "S",
+  "ar": "شمس",
+  "emoji": "☀️",
+  "slug": "s"
+ },
+ {
+  "en": "T",
+  "ar": "نمر",
+  "emoji": "🐯",
+  "slug": "t"
+ },
+ {
+  "en": "U",
+  "ar": "مظلة",
+  "emoji": "☂️",
+  "slug": "u"
+ },
+ {
+  "en": "V",
+  "ar": "شاحنة",
+  "emoji": "🚐",
+  "slug": "v"
+ },
+ {
+  "en": "W",
+  "ar": "ماء",
+  "emoji": "💧",
+  "slug": "w"
+ },
+ {
+  "en": "X",
+  "ar": "ثعلب",
+  "emoji": "🦊",
+  "slug": "x"
+ },
+ {
+  "en": "Y",
+  "ar": "يويو",
+  "emoji": "🪀",
+  "slug": "y"
+ },
+ {
+  "en": "Z",
+  "ar": "حمار وحشي",
+  "emoji": "🦓",
+  "slug": "z"
+ },
+ {
+  "en": "cat",
+  "ar": "قطة",
+  "emoji": "🐱",
+  "slug": "cat"
+ },
+ {
+  "en": "bat",
+  "ar": "خفاش",
+  "emoji": "⚾",
+  "slug": "bat"
+ },
+ {
+  "en": "hat",
+  "ar": "قبعة",
+  "emoji": "🎩",
+  "slug": "hat"
+ },
+ {
+  "en": "mat",
+  "ar": "حصيرة",
+  "emoji": "🧶",
+  "slug": "mat"
+ },
+ {
+  "en": "rat",
+  "ar": "جرذ",
+  "emoji": "🐀",
+  "slug": "rat"
+ },
+ {
+  "en": "bag",
+  "ar": "حقيبة",
+  "emoji": "👜",
+  "slug": "bag"
+ },
+ {
+  "en": "bed",
+  "ar": "سرير",
+  "emoji": "🛏️",
+  "slug": "bed"
+ },
+ {
+  "en": "leg",
+  "ar": "ساق",
+  "emoji": "🦵",
+  "slug": "leg"
+ },
+ {
+  "en": "pig",
+  "ar": "خنزير",
+  "emoji": "🐷",
+  "slug": "pig"
+ },
+ {
+  "en": "dog",
+  "ar": "كلب",
+  "emoji": "🐶",
+  "slug": "dog"
+ },
+ {
+  "en": "log",
+  "ar": "حطب",
+  "emoji": "🪵",
+  "slug": "log"
+ },
+ {
+  "en": "sun",
+  "ar": "شمس",
+  "emoji": "☀️",
+  "slug": "sun"
+ },
+ {
+  "en": "cup",
+  "ar": "كوب",
+  "emoji": "☕",
+  "slug": "cup"
+ },
+ {
+  "en": "nut",
+  "ar": "جوز",
+  "emoji": "🥜",
+  "slug": "nut"
+ },
+ {
+  "en": "net",
+  "ar": "شبكة",
+  "emoji": "🕸️",
+  "slug": "net"
+ },
+ {
+  "en": "men",
+  "ar": "رجال",
+  "emoji": "👨‍👩‍👦",
+  "slug": "men"
+ },
+ {
+  "en": "hit",
+  "ar": "يضرب",
+  "emoji": "👊",
+  "slug": "hit"
+ },
+ {
+  "en": "hop",
+  "ar": "يقفز",
+  "emoji": "🐸",
+  "slug": "hop"
+ },
+ {
+  "en": "hot",
+  "ar": "حار",
+  "emoji": "🔥",
+  "slug": "hot"
+ },
+ {
+  "en": "pot",
+  "ar": "قدر",
+  "emoji": "🍲",
+  "slug": "pot"
+ },
+ {
+  "en": "ball",
+  "ar": "كرة",
+  "emoji": "⚽",
+  "slug": "ball"
+ },
+ {
+  "en": "fish",
+  "ar": "سمكة",
+  "emoji": "🐟",
+  "slug": "fish"
+ },
+ {
+  "en": "star",
+  "ar": "نجمة",
+  "emoji": "⭐",
+  "slug": "star"
+ },
+ {
+  "en": "tree",
+  "ar": "شجرة",
+  "emoji": "🌳",
+  "slug": "tree"
+ },
+ {
+  "en": "book",
+  "ar": "كتاب",
+  "emoji": "📕",
+  "slug": "book"
+ },
+ {
+  "en": "milk",
+  "ar": "حليب",
+  "emoji": "🥛",
+  "slug": "milk"
+ },
+ {
+  "en": "cake",
+  "ar": "كيكة",
+  "emoji": "🍰",
+  "slug": "cake"
+ },
+ {
+  "en": "bird",
+  "ar": "طائر",
+  "emoji": "🐦",
+  "slug": "bird"
+ },
+ {
+  "en": "moon",
+  "ar": "قمر",
+  "emoji": "🌙",
+  "slug": "moon"
+ },
+ {
+  "en": "apple",
+  "ar": "تفاحة",
+  "emoji": "🍎",
+  "slug": "apple"
+ },
+ {
+  "en": "car",
+  "ar": "سيارة",
+  "emoji": "🚗",
+  "slug": "car"
+ },
+ {
+  "en": "house",
+  "ar": "منزل",
+  "emoji": "🏠",
+  "slug": "house"
+ },
+ {
+  "en": "flower",
+  "ar": "زهرة",
+  "emoji": "🌸",
+  "slug": "flower"
+ },
+ {
+  "en": "banana",
+  "ar": "موز",
+  "emoji": "🍌",
+  "slug": "banana"
+ },
+ {
+  "en": "rabbit",
+  "ar": "أرنب",
+  "emoji": "🐰",
+  "slug": "rabbit"
+ },
+ {
+  "en": "table",
+  "ar": "طاولة",
+  "emoji": "🪑",
+  "slug": "table"
+ },
+ {
+  "en": "water",
+  "ar": "ماء",
+  "emoji": "💧",
+  "slug": "water"
+ },
+ {
+  "en": "Good morning",
+  "ar": "صباح الخير",
+  "emoji": "🌅",
+  "slug": "goodmorning"
+ },
+ {
+  "en": "Good night",
+  "ar": "تصبح على خير",
+  "emoji": "🌙",
+  "slug": "goodnight"
+ },
+ {
+  "en": "Thank you",
+  "ar": "شكراً",
+  "emoji": "🙏",
+  "slug": "thankyou"
+ },
+ {
+  "en": "You are welcome",
+  "ar": "على الرحب والسعة",
+  "emoji": "🤝",
+  "slug": "youarewelcome"
+ },
+ {
+  "en": "How are you",
+  "ar": "كيف حالك",
+  "emoji": "🙂",
+  "slug": "howareyou"
+ },
+ {
+  "en": "I am fine",
+  "ar": "أنا بخير",
+  "emoji": "😊",
+  "slug": "iamfine"
+ },
+ {
+  "en": "My name is",
+  "ar": "اسمي هو",
+  "emoji": "📛",
+  "slug": "mynameis"
+ },
+ {
+  "en": "I love you",
+  "ar": "أحبك",
+  "emoji": "❤️",
+  "slug": "iloveyou"
+ },
+ {
+  "en": "Excuse me",
+  "ar": "من فضلك",
+  "emoji": "🙋",
+  "slug": "excuseme"
+ },
+ {
+  "en": "See you later",
+  "ar": "أراك لاحقاً",
+  "emoji": "👋",
+  "slug": "seeyoulater"
+ },
+ {
+  "en": "Good luck",
+  "ar": "حظاً سعيداً",
+  "emoji": "🍀",
+  "slug": "goodluck"
+ },
+ {
+  "en": "Happy birthday",
+  "ar": "عيد ميلاد سعيد",
+  "emoji": "🎂",
+  "slug": "happybirthday"
+ },
+ {
+  "en": "I like to play football",
+  "ar": "أحب لعب كرة القدم",
+  "emoji": "⚽",
+  "slug": "iliketoplayfootball"
+ },
+ {
+  "en": "My favorite color is blue",
+  "ar": "لوني المفضل أزرق",
+  "emoji": "🔵",
+  "slug": "myfavoritecolorisblue"
+ },
+ {
+  "en": "The sun is very bright today",
+  "ar": "الشمس مشرقة جداً اليوم",
+  "emoji": "☀️",
+  "slug": "thesunisverybrighttoday"
+ },
+ {
+  "en": "I have a little cat at home",
+  "ar": "لدي قطة صغيرة في البيت",
+  "emoji": "🐈",
+  "slug": "ihavealittlecatathome"
+ },
+ {
+  "en": "Can I have some water please",
+  "ar": "هل يمكنني الحصول على ماء لو سمحت",
+  "emoji": "💧",
+  "slug": "canihavesomewaterplease"
+ },
+ {
+  "en": "My mother makes a delicious cake",
+  "ar": "أمي تصنع كيكة لذيذة",
+  "emoji": "🍰",
+  "slug": "mymothermakesadeliciouscake"
+ },
+ {
+  "en": "We go to school every morning",
+  "ar": "نذهب إلى المدرسة كل صباح",
+  "emoji": "🏫",
+  "slug": "wegotoschooleverymorning"
+ },
+ {
+  "en": "The bird sings a beautiful song",
+  "ar": "الطائر يغني أغنية جميلة",
+  "emoji": "🐦",
+  "slug": "thebirdsingsabeautifulsong"
+ },
+ {
+  "en": "I want to learn English very well",
+  "ar": "أريد تعلم الإنجليزية جيداً",
+  "emoji": "📚",
+  "slug": "iwanttolearnenglishverywell"
+ },
+ {
+  "en": "Yesterday I played with my friends",
+  "ar": "أمس لعبت مع أصدقائي",
+  "emoji": "🧑‍🤝‍🧑",
+  "slug": "yesterdayiplayedwithmyfriends"
+ },
+ {
+  "en": "Hello",
+  "ar": "مرحباً",
+  "emoji": "👋",
+  "slug": "hello"
+ },
+ {
+  "en": "Goodbye",
+  "ar": "وداعاً",
+  "emoji": "🖐️",
+  "slug": "goodbye"
+ },
+ {
+  "en": "Boy",
+  "ar": "ولد",
+  "emoji": "👦",
+  "slug": "boy"
+ },
+ {
+  "en": "Girl",
+  "ar": "بنت",
+  "emoji": "👧",
+  "slug": "girl"
+ },
+ {
+  "en": "Friends",
+  "ar": "أصدقاء",
+  "emoji": "👫",
+  "slug": "friends"
+ },
+ {
+  "en": "Happy",
+  "ar": "سعيد",
+  "emoji": "😊",
+  "slug": "happy"
+ },
+ {
+  "en": "Sad",
+  "ar": "حزين",
+  "emoji": "😢",
+  "slug": "sad"
+ },
+ {
+  "en": "Classroom",
+  "ar": "فصل دراسي",
+  "emoji": "🏫",
+  "slug": "classroom"
+ },
+ {
+  "en": "Teacher",
+  "ar": "معلّم",
+  "emoji": "👩‍🏫",
+  "slug": "teacher"
+ },
+ {
+  "en": "Chair",
+  "ar": "كرسيّ",
+  "emoji": "🪑",
+  "slug": "chair"
+ },
+ {
+  "en": "Desk",
+  "ar": "مكتب",
+  "emoji": "🗄️",
+  "slug": "desk"
+ },
+ {
+  "en": "Pencil",
+  "ar": "قلم رصاص",
+  "emoji": "✏️",
+  "slug": "pencil"
+ },
+ {
+  "en": "Eraser",
+  "ar": "ممحاة",
+  "emoji": "🧽",
+  "slug": "eraser"
+ },
+ {
+  "en": "Crayon",
+  "ar": "قلم تلوين",
+  "emoji": "🖍️",
+  "slug": "crayon"
+ },
+ {
+  "en": "Playground",
+  "ar": "ملعب",
+  "emoji": "🛝",
+  "slug": "playground"
+ },
+ {
+  "en": "Swing",
+  "ar": "أرجوحة",
+  "emoji": "🛝",
+  "slug": "swing"
+ },
+ {
+  "en": "Slide",
+  "ar": "زحليقة",
+  "emoji": "🛝",
+  "slug": "slide"
+ },
+ {
+  "en": "Hair",
+  "ar": "شعر",
+  "emoji": "💇",
+  "slug": "hair"
+ },
+ {
+  "en": "Face",
+  "ar": "وجه",
+  "emoji": "😊",
+  "slug": "face"
+ },
+ {
+  "en": "Eyes",
+  "ar": "عيون",
+  "emoji": "👀",
+  "slug": "eyes"
+ },
+ {
+  "en": "Ears",
+  "ar": "أذنان",
+  "emoji": "👂",
+  "slug": "ears"
+ },
+ {
+  "en": "Nose",
+  "ar": "أنف",
+  "emoji": "👃",
+  "slug": "nose"
+ },
+ {
+  "en": "Mouth",
+  "ar": "فم",
+  "emoji": "👄",
+  "slug": "mouth"
+ },
+ {
+  "en": "Teeth",
+  "ar": "أسنان",
+  "emoji": "🦷",
+  "slug": "teeth"
+ },
+ {
+  "en": "Arms",
+  "ar": "ذراعان",
+  "emoji": "💪",
+  "slug": "arms"
+ },
+ {
+  "en": "Hands",
+  "ar": "يدان",
+  "emoji": "✋",
+  "slug": "hands"
+ },
+ {
+  "en": "Legs",
+  "ar": "ساقان",
+  "emoji": "🦵",
+  "slug": "legs"
+ },
+ {
+  "en": "Feet",
+  "ar": "قدمان",
+  "emoji": "🦶",
+  "slug": "feet"
+ },
+ {
+  "en": "Grandfather",
+  "ar": "جدّ",
+  "emoji": "👴",
+  "slug": "grandfather"
+ },
+ {
+  "en": "Grandmother",
+  "ar": "جدّة",
+  "emoji": "👵",
+  "slug": "grandmother"
+ },
+ {
+  "en": "Mother",
+  "ar": "أم",
+  "emoji": "👩",
+  "slug": "mother"
+ },
+ {
+  "en": "Sister",
+  "ar": "أخت",
+  "emoji": "👧",
+  "slug": "sister"
+ },
+ {
+  "en": "Brother",
+  "ar": "أخ",
+  "emoji": "👦",
+  "slug": "brother"
+ },
+ {
+  "en": "Garden",
+  "ar": "حديقة",
+  "emoji": "🌷",
+  "slug": "garden"
+ },
+ {
+  "en": "Mower",
+  "ar": "جزّازة",
+  "emoji": "🚜",
+  "slug": "mower"
+ },
+ {
+  "en": "Grass",
+  "ar": "عشب",
+  "emoji": "🌿",
+  "slug": "grass"
+ },
+ {
+  "en": "Fruits",
+  "ar": "فواكه",
+  "emoji": "🍎",
+  "slug": "fruits"
+ },
+ {
+  "en": "Chocolate",
+  "ar": "شوكولاتة",
+  "emoji": "🍫",
+  "slug": "chocolate"
+ },
+ {
+  "en": "Chips",
+  "ar": "رقائق",
+  "emoji": "🍟",
+  "slug": "chips"
+ },
+ {
+  "en": "Juice",
+  "ar": "عصير",
+  "emoji": "🧃",
+  "slug": "juice"
+ },
+ {
+  "en": "Sandwich",
+  "ar": "شطيرة",
+  "emoji": "🥪",
+  "slug": "sandwich"
+ },
+ {
+  "en": "Walk",
+  "ar": "يمشي",
+  "emoji": "🚶",
+  "slug": "walk"
+ },
+ {
+  "en": "Run",
+  "ar": "يجري",
+  "emoji": "🏃",
+  "slug": "run"
+ },
+ {
+  "en": "Jump",
+  "ar": "يقفز",
+  "emoji": "🤸",
+  "slug": "jump"
+ },
+ {
+  "en": "Skip",
+  "ar": "يقفز بالحبل",
+  "emoji": "🤾",
+  "slug": "skip"
+ },
+ {
+  "en": "Kick",
+  "ar": "يرفس",
+  "emoji": "🦵",
+  "slug": "kick"
+ },
+ {
+  "en": "Play",
+  "ar": "يلعب",
+  "emoji": "🧩",
+  "slug": "play"
+ },
+ {
+  "en": "Throw",
+  "ar": "يقذف",
+  "emoji": "🤾",
+  "slug": "throw"
+ },
+ {
+  "en": "Catch",
+  "ar": "يمسك",
+  "emoji": "🤲",
+  "slug": "catch"
+ },
+ {
+  "en": "T-Shirt",
+  "ar": "تي شيرت",
+  "emoji": "👕",
+  "slug": "tshirt"
+ },
+ {
+  "en": "Dress",
+  "ar": "فستان",
+  "emoji": "👗",
+  "slug": "dress"
+ },
+ {
+  "en": "Trousers",
+  "ar": "بنطال",
+  "emoji": "👖",
+  "slug": "trousers"
+ },
+ {
+  "en": "Pants",
+  "ar": "سروال",
+  "emoji": "🩳",
+  "slug": "pants"
+ },
+ {
+  "en": "Skirt",
+  "ar": "جيبة",
+  "emoji": "👚",
+  "slug": "skirt"
+ },
+ {
+  "en": "Shorts",
+  "ar": "شورت",
+  "emoji": "🩳",
+  "slug": "shorts"
+ },
+ {
+  "en": "Cap",
+  "ar": "قبعة",
+  "emoji": "🧢",
+  "slug": "cap"
+ },
+ {
+  "en": "Shoes",
+  "ar": "حذاء",
+  "emoji": "👟",
+  "slug": "shoes"
+ },
+ {
+  "en": "Socks",
+  "ar": "جوارب",
+  "emoji": "🧦",
+  "slug": "socks"
+ },
+ {
+  "en": "Sunday",
+  "ar": "الأحد",
+  "emoji": "📅",
+  "slug": "sunday"
+ },
+ {
+  "en": "Monday",
+  "ar": "الاثنين",
+  "emoji": "📅",
+  "slug": "monday"
+ },
+ {
+  "en": "Tuesday",
+  "ar": "الثلاثاء",
+  "emoji": "📅",
+  "slug": "tuesday"
+ },
+ {
+  "en": "Wednesday",
+  "ar": "الأربعاء",
+  "emoji": "📅",
+  "slug": "wednesday"
+ },
+ {
+  "en": "Thursday",
+  "ar": "الخميس",
+  "emoji": "📅",
+  "slug": "thursday"
+ },
+ {
+  "en": "Friday",
+  "ar": "الجمعة",
+  "emoji": "📅",
+  "slug": "friday"
+ },
+ {
+  "en": "Saturday",
+  "ar": "السبت",
+  "emoji": "📅",
+  "slug": "saturday"
+ },
+ {
+  "en": "Today",
+  "ar": "اليوم",
+  "emoji": "📆",
+  "slug": "today"
+ },
+ {
+  "en": "Tomorrow",
+  "ar": "غداً",
+  "emoji": "⏭️",
+  "slug": "tomorrow"
+ },
+ {
+  "en": "Yesterday",
+  "ar": "أمس",
+  "emoji": "⏮️",
+  "slug": "yesterday"
+ },
+ {
+  "en": "Morning",
+  "ar": "صباح",
+  "emoji": "🌅",
+  "slug": "morning"
+ },
+ {
+  "en": "Noon",
+  "ar": "ظهر",
+  "emoji": "🌞",
+  "slug": "noon"
+ },
+ {
+  "en": "Night",
+  "ar": "ليل",
+  "emoji": "🌙",
+  "slug": "night"
+ },
+ {
+  "en": "Breakfast",
+  "ar": "الفطور",
+  "emoji": "🍳",
+  "slug": "breakfast"
+ },
+ {
+  "en": "Lunch",
+  "ar": "الغداء",
+  "emoji": "🍽️",
+  "slug": "lunch"
+ },
+ {
+  "en": "Dinner",
+  "ar": "العشاء",
+  "emoji": "🍽️",
+  "slug": "dinner"
+ },
+ {
+  "en": "Get Up",
+  "ar": "أستيقظ",
+  "emoji": "🛏️",
+  "slug": "getup"
+ },
+ {
+  "en": "Go to Bed",
+  "ar": "أنام",
+  "emoji": "😴",
+  "slug": "gotobed"
+ },
+ {
+  "en": "Go to School",
+  "ar": "أذهب إلى المدرسة",
+  "emoji": "🎒",
+  "slug": "gotoschool"
+ },
+ {
+  "en": "Shake Hands",
+  "ar": "مصافحة",
+  "emoji": "🤝",
+  "slug": "shakehands"
+ },
+ {
+  "en": "Board",
+  "ar": "سبّورة",
+  "emoji": "🖼️",
+  "slug": "board"
+ },
+ {
+  "en": "Sky",
+  "ar": "سماء",
+  "emoji": "🌤️",
+  "slug": "sky"
+ },
+ {
+  "en": "Butterfly",
+  "ar": "فراشة",
+  "emoji": "🦋",
+  "slug": "butterfly"
+ },
+ {
+  "en": "Circle",
+  "ar": "دائرة",
+  "emoji": "⭕",
+  "slug": "circle"
+ },
+ {
+  "en": "Square",
+  "ar": "مربّع",
+  "emoji": "🟦",
+  "slug": "square"
+ },
+ {
+  "en": "Triangle",
+  "ar": "مثلّث",
+  "emoji": "🔺",
+  "slug": "triangle"
+ },
+ {
+  "en": "Rectangle",
+  "ar": "مستطيل",
+  "emoji": "🟥",
+  "slug": "rectangle"
+ },
+ {
+  "en": "Green",
+  "ar": "أخضر",
+  "emoji": "🟢",
+  "slug": "green"
+ },
+ {
+  "en": "Blue",
+  "ar": "أزرق",
+  "emoji": "🔵",
+  "slug": "blue"
+ },
+ {
+  "en": "Red",
+  "ar": "أحمر",
+  "emoji": "🔴",
+  "slug": "red"
+ },
+ {
+  "en": "Yellow",
+  "ar": "أصفر",
+  "emoji": "🟡",
+  "slug": "yellow"
+ },
+ {
+  "en": "Parents",
+  "ar": "الوالدان",
+  "emoji": "👨‍👩‍👧",
+  "slug": "parents"
+ },
+ {
+  "en": "Father",
+  "ar": "أب",
+  "emoji": "👨",
+  "slug": "father"
+ },
+ {
+  "en": "One",
+  "ar": "واحد",
+  "emoji": "1️⃣",
+  "slug": "one"
+ },
+ {
+  "en": "Two",
+  "ar": "اثنان",
+  "emoji": "2️⃣",
+  "slug": "two"
+ },
+ {
+  "en": "Three",
+  "ar": "ثلاثة",
+  "emoji": "3️⃣",
+  "slug": "three"
+ },
+ {
+  "en": "Four",
+  "ar": "أربعة",
+  "emoji": "4️⃣",
+  "slug": "four"
+ },
+ {
+  "en": "Five",
+  "ar": "خمسة",
+  "emoji": "5️⃣",
+  "slug": "five"
+ },
+ {
+  "en": "Head",
+  "ar": "رأس",
+  "emoji": "🧑",
+  "slug": "head"
+ },
+ {
+  "en": "Tongue",
+  "ar": "لسان",
+  "emoji": "👅",
+  "slug": "tongue"
+ },
+ {
+  "en": "Arm",
+  "ar": "ذراع",
+  "emoji": "💪",
+  "slug": "arm"
+ },
+ {
+  "en": "Hand",
+  "ar": "يد",
+  "emoji": "✋",
+  "slug": "hand"
+ },
+ {
+  "en": "Foot",
+  "ar": "قدم",
+  "emoji": "🦶",
+  "slug": "foot"
+ },
+ {
+  "en": "Toe",
+  "ar": "إصبع قدم",
+  "emoji": "🦶",
+  "slug": "toe"
+ },
+ {
+  "en": "See",
+  "ar": "يرى",
+  "emoji": "👁️",
+  "slug": "see"
+ },
+ {
+  "en": "Hear",
+  "ar": "يسمع",
+  "emoji": "👂",
+  "slug": "hear"
+ },
+ {
+  "en": "Smell",
+  "ar": "يشمّ",
+  "emoji": "👃",
+  "slug": "smell"
+ },
+ {
+  "en": "Taste",
+  "ar": "يتذوّق",
+  "emoji": "👅",
+  "slug": "taste"
+ },
+ {
+  "en": "Touch",
+  "ar": "يلمس",
+  "emoji": "✋",
+  "slug": "touch"
+ },
+ {
+  "en": "Farm",
+  "ar": "مزرعة",
+  "emoji": "🚜",
+  "slug": "farm"
+ },
+ {
+  "en": "Cow",
+  "ar": "بقرة",
+  "emoji": "🐄",
+  "slug": "cow"
+ },
+ {
+  "en": "Horse",
+  "ar": "حصان",
+  "emoji": "🐴",
+  "slug": "horse"
+ },
+ {
+  "en": "Duck",
+  "ar": "بطة",
+  "emoji": "🦆",
+  "slug": "duck"
+ },
+ {
+  "en": "Chicken",
+  "ar": "دجاجة",
+  "emoji": "🐔",
+  "slug": "chicken"
+ },
+ {
+  "en": "Cheese",
+  "ar": "جبن",
+  "emoji": "🧀",
+  "slug": "cheese"
+ },
+ {
+  "en": "Meat",
+  "ar": "لحم",
+  "emoji": "🍖",
+  "slug": "meat"
+ },
+ {
+  "en": "Eggs",
+  "ar": "بيض",
+  "emoji": "🥚",
+  "slug": "eggs"
+ },
+ {
+  "en": "Big",
+  "ar": "كبير",
+  "emoji": "⬆️",
+  "slug": "big"
+ },
+ {
+  "en": "Small",
+  "ar": "صغير",
+  "emoji": "⬇️",
+  "slug": "small"
+ },
+ {
+  "en": "Six",
+  "ar": "ستة",
+  "emoji": "6️⃣",
+  "slug": "six"
+ },
+ {
+  "en": "Seven",
+  "ar": "سبعة",
+  "emoji": "7️⃣",
+  "slug": "seven"
+ },
+ {
+  "en": "Eight",
+  "ar": "ثمانية",
+  "emoji": "8️⃣",
+  "slug": "eight"
+ },
+ {
+  "en": "Nine",
+  "ar": "تسعة",
+  "emoji": "9️⃣",
+  "slug": "nine"
+ },
+ {
+  "en": "Ten",
+  "ar": "عشرة",
+  "emoji": "🔟",
+  "slug": "ten"
+ },
+ {
+  "en": "Pets",
+  "ar": "حيوانات أليفة",
+  "emoji": "🐾",
+  "slug": "pets"
+ },
+ {
+  "en": "Turtle",
+  "ar": "سلحفاة",
+  "emoji": "🐢",
+  "slug": "turtle"
+ },
+ {
+  "en": "Jungle",
+  "ar": "غابة",
+  "emoji": "🌴",
+  "slug": "jungle"
+ },
+ {
+  "en": "Lion",
+  "ar": "أسد",
+  "emoji": "🦁",
+  "slug": "lion"
+ },
+ {
+  "en": "Tiger",
+  "ar": "نمر",
+  "emoji": "🐯",
+  "slug": "tiger"
+ },
+ {
+  "en": "Elephant",
+  "ar": "فيل",
+  "emoji": "🐘",
+  "slug": "elephant"
+ },
+ {
+  "en": "Monkey",
+  "ar": "قرد",
+  "emoji": "🐵",
+  "slug": "monkey"
+ },
+ {
+  "en": "Giraffe",
+  "ar": "زرافة",
+  "emoji": "🦒",
+  "slug": "giraffe"
+ },
+ {
+  "en": "Snake",
+  "ar": "ثعبان",
+  "emoji": "🐍",
+  "slug": "snake"
+ },
+ {
+  "en": "In",
+  "ar": "في",
+  "emoji": "📥",
+  "slug": "in"
+ },
+ {
+  "en": "On",
+  "ar": "على",
+  "emoji": "🔛",
+  "slug": "on"
+ },
+ {
+  "en": "Under",
+  "ar": "تحت",
+  "emoji": "🔽",
+  "slug": "under"
+ },
+ {
+  "en": "Week",
+  "ar": "أسبوع",
+  "emoji": "📅",
+  "slug": "week"
+ },
+ {
+  "en": "Before",
+  "ar": "قبل",
+  "emoji": "⬅️",
+  "slug": "before"
+ },
+ {
+  "en": "After",
+  "ar": "بعد",
+  "emoji": "➡️",
+  "slug": "after"
+ },
+ {
+  "en": "Angry",
+  "ar": "غاضب",
+  "emoji": "😠",
+  "slug": "angry"
+ },
+ {
+  "en": "Tired",
+  "ar": "متعب",
+  "emoji": "😫",
+  "slug": "tired"
+ },
+ {
+  "en": "Surprised",
+  "ar": "مندهش",
+  "emoji": "😲",
+  "slug": "surprised"
+ },
+ {
+  "en": "Scared",
+  "ar": "خائف",
+  "emoji": "😨",
+  "slug": "scared"
+ },
+ {
+  "en": "Spring",
+  "ar": "الربيع",
+  "emoji": "🌸",
+  "slug": "spring"
+ },
+ {
+  "en": "Summer",
+  "ar": "الصيف",
+  "emoji": "☀️",
+  "slug": "summer"
+ },
+ {
+  "en": "Fall",
+  "ar": "الخريف",
+  "emoji": "🍂",
+  "slug": "fall"
+ },
+ {
+  "en": "Winter",
+  "ar": "الشتاء",
+  "emoji": "❄️",
+  "slug": "winter"
+ },
+ {
+  "en": "Warm",
+  "ar": "دافئ",
+  "emoji": "🌤️",
+  "slug": "warm"
+ },
+ {
+  "en": "Cold",
+  "ar": "بارد",
+  "emoji": "🧊",
+  "slug": "cold"
+ },
+ {
+  "en": "Windy",
+  "ar": "عاصف",
+  "emoji": "🌬️",
+  "slug": "windy"
+ },
+ {
+  "en": "Rainy",
+  "ar": "مُمطر",
+  "emoji": "🌧️",
+  "slug": "rainy"
+ },
+ {
+  "en": "Sunny",
+  "ar": "مُشمس",
+  "emoji": "🌞",
+  "slug": "sunny"
+ },
+ {
+  "en": "Cloudy",
+  "ar": "غائم",
+  "emoji": "☁️",
+  "slug": "cloudy"
+ },
+ {
+  "en": "January",
+  "ar": "يناير",
+  "emoji": "📅",
+  "slug": "january"
+ },
+ {
+  "en": "February",
+  "ar": "فبراير",
+  "emoji": "📅",
+  "slug": "february"
+ },
+ {
+  "en": "March",
+  "ar": "مارس",
+  "emoji": "📅",
+  "slug": "march"
+ },
+ {
+  "en": "April",
+  "ar": "أبريل",
+  "emoji": "📅",
+  "slug": "april"
+ },
+ {
+  "en": "May",
+  "ar": "مايو",
+  "emoji": "📅",
+  "slug": "may"
+ },
+ {
+  "en": "June",
+  "ar": "يونيو",
+  "emoji": "📅",
+  "slug": "june"
+ },
+ {
+  "en": "July",
+  "ar": "يوليو",
+  "emoji": "📅",
+  "slug": "july"
+ },
+ {
+  "en": "August",
+  "ar": "أغسطس",
+  "emoji": "📅",
+  "slug": "august"
+ },
+ {
+  "en": "September",
+  "ar": "سبتمبر",
+  "emoji": "📅",
+  "slug": "september"
+ },
+ {
+  "en": "October",
+  "ar": "أكتوبر",
+  "emoji": "📅",
+  "slug": "october"
+ },
+ {
+  "en": "November",
+  "ar": "نوفمبر",
+  "emoji": "📅",
+  "slug": "november"
+ },
+ {
+  "en": "December",
+  "ar": "ديسمبر",
+  "emoji": "📅",
+  "slug": "december"
+ },
+ {
+  "en": "Home",
+  "ar": "منزل",
+  "emoji": "🏠",
+  "slug": "home"
+ },
+ {
+  "en": "Bedroom",
+  "ar": "غرفة نوم",
+  "emoji": "🛏️",
+  "slug": "bedroom"
+ },
+ {
+  "en": "Living Room",
+  "ar": "غرفة جلوس",
+  "emoji": "🛋️",
+  "slug": "livingroom"
+ },
+ {
+  "en": "Kitchen",
+  "ar": "مطبخ",
+  "emoji": "🍳",
+  "slug": "kitchen"
+ },
+ {
+  "en": "Dining Room",
+  "ar": "غرفة طعام",
+  "emoji": "🍽️",
+  "slug": "diningroom"
+ },
+ {
+  "en": "Bathroom",
+  "ar": "حمّام",
+  "emoji": "🚿",
+  "slug": "bathroom"
+ },
+ {
+  "en": "Closet",
+  "ar": "خزانة",
+  "emoji": "🚪",
+  "slug": "closet"
+ },
+ {
+  "en": "Couch",
+  "ar": "أريكة",
+  "emoji": "🛋️",
+  "slug": "couch"
+ },
+ {
+  "en": "Chairs",
+  "ar": "كراسي",
+  "emoji": "🪑",
+  "slug": "chairs"
+ },
+ {
+  "en": "TV",
+  "ar": "تلفاز",
+  "emoji": "📺",
+  "slug": "tv"
+ },
+ {
+  "en": "Fridge",
+  "ar": "ثلاجة",
+  "emoji": "🧊",
+  "slug": "fridge"
+ },
+ {
+  "en": "Oven",
+  "ar": "فرن",
+  "emoji": "🔥",
+  "slug": "oven"
+ },
+ {
+  "en": "Sink",
+  "ar": "حوض",
+  "emoji": "🚰",
+  "slug": "sink"
+ },
+ {
+  "en": "Toilet",
+  "ar": "مرحاض",
+  "emoji": "🚽",
+  "slug": "toilet"
+ },
+ {
+  "en": "Hospital",
+  "ar": "مستشفى",
+  "emoji": "🏥",
+  "slug": "hospital"
+ },
+ {
+  "en": "Shop",
+  "ar": "متجر",
+  "emoji": "🏪",
+  "slug": "shop"
+ },
+ {
+  "en": "Street",
+  "ar": "شارع",
+  "emoji": "🛣️",
+  "slug": "street"
+ },
+ {
+  "en": "School",
+  "ar": "مدرسة",
+  "emoji": "🏫",
+  "slug": "school"
+ },
+ {
+  "en": "Building",
+  "ar": "مبنى",
+  "emoji": "🏢",
+  "slug": "building"
+ },
+ {
+  "en": "Park",
+  "ar": "حديقة",
+  "emoji": "🏞️",
+  "slug": "park"
+ },
+ {
+  "en": "Zoo",
+  "ar": "حديقة حيوان",
+  "emoji": "🦓",
+  "slug": "zoo"
+ },
+ {
+  "en": "Beach",
+  "ar": "شاطئ",
+  "emoji": "🏖️",
+  "slug": "beach"
+ },
+ {
+  "en": "Truck",
+  "ar": "شاحنة",
+  "emoji": "🚚",
+  "slug": "truck"
+ },
+ {
+  "en": "Bus",
+  "ar": "أتوبيس",
+  "emoji": "🚌",
+  "slug": "bus"
+ },
+ {
+  "en": "Swim",
+  "ar": "يسبح",
+  "emoji": "🏊",
+  "slug": "swim"
+ },
+ {
+  "en": "Dig",
+  "ar": "يحفر",
+  "emoji": "⛏️",
+  "slug": "dig"
+ },
+ {
+  "en": "Animals",
+  "ar": "حيوانات",
+  "emoji": "🐾",
+  "slug": "animals"
+ },
+ {
+  "en": "Friend",
+  "ar": "صديق",
+  "emoji": "🧑‍🤝‍🧑",
+  "slug": "friend"
+ },
+ {
+  "en": "Share",
+  "ar": "يشارك",
+  "emoji": "🤝",
+  "slug": "share"
+ },
+ {
+  "en": "Evening",
+  "ar": "مساء",
+  "emoji": "🌆",
+  "slug": "evening"
+ },
+ {
+  "en": "Weather",
+  "ar": "الطقس",
+  "emoji": "⛅",
+  "slug": "weather"
+ },
+ {
+  "en": "Rain",
+  "ar": "مطر",
+  "emoji": "🌧️",
+  "slug": "rain"
+ },
+ {
+  "en": "Wind",
+  "ar": "رياح",
+  "emoji": "💨",
+  "slug": "wind"
+ },
+ {
+  "en": "Bread",
+  "ar": "خبز",
+  "emoji": "🍞",
+  "slug": "bread"
+ },
+ {
+  "en": "Egg",
+  "ar": "بيضة",
+  "emoji": "🥚",
+  "slug": "egg"
+ },
+ {
+  "en": "Rice",
+  "ar": "أرز",
+  "emoji": "🍚",
+  "slug": "rice"
+ },
+ {
+  "en": "Orange",
+  "ar": "برتقال",
+  "emoji": "🍊",
+  "slug": "orange"
+ },
+ {
+  "en": "Grapes",
+  "ar": "عنب",
+  "emoji": "🍇",
+  "slug": "grapes"
+ },
+ {
+  "en": "Watermelon",
+  "ar": "بطيخ",
+  "emoji": "🍉",
+  "slug": "watermelon"
+ },
+ {
+  "en": "Doctor",
+  "ar": "طبيب",
+  "emoji": "🧑‍⚕️",
+  "slug": "doctor"
+ },
+ {
+  "en": "Farmer",
+  "ar": "فلاح",
+  "emoji": "👨‍🌾",
+  "slug": "farmer"
+ },
+ {
+  "en": "Baker",
+  "ar": "خباز",
+  "emoji": "🥖",
+  "slug": "baker"
+ },
+ {
+  "en": "Policeman",
+  "ar": "شرطي",
+  "emoji": "👮",
+  "slug": "policeman"
+ },
+ {
+  "en": "Nurse",
+  "ar": "ممرضة",
+  "emoji": "💉",
+  "slug": "nurse"
+ },
+ {
+  "en": "Tomato",
+  "ar": "طماطم",
+  "emoji": "🍅",
+  "slug": "tomato"
+ },
+ {
+  "en": "Potato",
+  "ar": "بطاطس",
+  "emoji": "🥔",
+  "slug": "potato"
+ },
+ {
+  "en": "Carrot",
+  "ar": "جزر",
+  "emoji": "🥕",
+  "slug": "carrot"
+ },
+ {
+  "en": "Onion",
+  "ar": "بصل",
+  "emoji": "🧅",
+  "slug": "onion"
+ },
+ {
+  "en": "Cucumber",
+  "ar": "خيار",
+  "emoji": "🥒",
+  "slug": "cucumber"
+ },
+ {
+  "en": "Football",
+  "ar": "كرة قدم",
+  "emoji": "⚽",
+  "slug": "football"
+ },
+ {
+  "en": "Tennis",
+  "ar": "تنس",
+  "emoji": "🎾",
+  "slug": "tennis"
+ },
+ {
+  "en": "Swimming",
+  "ar": "سباحة",
+  "emoji": "🏊",
+  "slug": "swimming"
+ },
+ {
+  "en": "Basketball",
+  "ar": "سلة",
+  "emoji": "🏀",
+  "slug": "basketball"
+ },
+ {
+  "en": "Pizza",
+  "ar": "بيتزا",
+  "emoji": "🍕",
+  "slug": "pizza"
+ },
+ {
+  "en": "Tea",
+  "ar": "شاي",
+  "emoji": "🍵",
+  "slug": "tea"
+ },
+ {
+  "en": "Cartoon",
+  "ar": "كرتون",
+  "emoji": "🎬",
+  "slug": "cartoon"
+ },
+ {
+  "en": "Read",
+  "ar": "يقرأ",
+  "emoji": "📖",
+  "slug": "read"
+ },
+ {
+  "en": "Class",
+  "ar": "فصل",
+  "emoji": "📚",
+  "slug": "class"
+ },
+ {
+  "en": "Subject",
+  "ar": "مادة",
+  "emoji": "📖",
+  "slug": "subject"
+ },
+ {
+  "en": "English",
+  "ar": "إنجليزي",
+  "emoji": "🇬🇧",
+  "slug": "english"
+ },
+ {
+  "en": "Math",
+  "ar": "حساب",
+  "emoji": "➗",
+  "slug": "math"
+ },
+ {
+  "en": "Science",
+  "ar": "علوم",
+  "emoji": "🔬",
+  "slug": "science"
+ },
+ {
+  "en": "Art",
+  "ar": "فن",
+  "emoji": "🎨",
+  "slug": "art"
+ },
+ {
+  "en": "Music",
+  "ar": "موسيقى",
+  "emoji": "🎵",
+  "slug": "music"
+ },
+ {
+  "en": "Station",
+  "ar": "قسم شرطة",
+  "emoji": "🚓",
+  "slug": "station"
+ },
+ {
+  "en": "Mosque",
+  "ar": "مسجد",
+  "emoji": "🕌",
+  "slug": "mosque"
+ },
+ {
+  "en": "Church",
+  "ar": "كنيسة",
+  "emoji": "⛪",
+  "slug": "church"
+ },
+ {
+  "en": "Brave",
+  "ar": "شجاع",
+  "emoji": "🦁",
+  "slug": "brave"
+ },
+ {
+  "en": "Helpful",
+  "ar": "مساعد",
+  "emoji": "🤝",
+  "slug": "helpful"
+ },
+ {
+  "en": "Beautiful",
+  "ar": "جميل",
+  "emoji": "🌸",
+  "slug": "beautiful"
+ },
+ {
+  "en": "Trip",
+  "ar": "رحلة",
+  "emoji": "🧳",
+  "slug": "trip"
+ },
+ {
+  "en": "Sea",
+  "ar": "بحر",
+  "emoji": "🌊",
+  "slug": "sea"
+ },
+ {
+  "en": "River",
+  "ar": "نهر",
+  "emoji": "🏞️",
+  "slug": "river"
+ },
+ {
+  "en": "Mountain",
+  "ar": "جبل",
+  "emoji": "⛰️",
+  "slug": "mountain"
+ },
+ {
+  "en": "Desert",
+  "ar": "صحراء",
+  "emoji": "🏜️",
+  "slug": "desert"
+ },
+ {
+  "en": "Camel",
+  "ar": "جمل",
+  "emoji": "🐪",
+  "slug": "camel"
+ },
+ {
+  "en": "Pyramid",
+  "ar": "هرم",
+  "emoji": "🗿",
+  "slug": "pyramid"
+ },
+ {
+  "en": "Museum",
+  "ar": "متحف",
+  "emoji": "🏛️",
+  "slug": "museum"
+ },
+ {
+  "en": "Visit",
+  "ar": "يزور",
+  "emoji": "🗺️",
+  "slug": "visit"
+ },
+ {
+  "en": "Wonderful",
+  "ar": "رائع",
+  "emoji": "🎉",
+  "slug": "wonderful"
+ },
+ {
+  "en": "Delicious",
+  "ar": "لذيذ",
+  "emoji": "😋",
+  "slug": "delicious"
+ },
+ {
+  "en": "Interesting",
+  "ar": "ممتع",
+  "emoji": "🤔",
+  "slug": "interesting"
+ },
+ {
+  "en": "Holiday",
+  "ar": "إجازة",
+  "emoji": "🎡",
+  "slug": "holiday"
+ },
+ {
+  "en": "Travel",
+  "ar": "يسافر",
+  "emoji": "✈️",
+  "slug": "travel"
+ },
+ {
+  "en": "Watch",
+  "ar": "يشاهد",
+  "emoji": "📺",
+  "slug": "watch"
+ },
+ {
+  "en": "Played",
+  "ar": "لعب",
+  "emoji": "🎮",
+  "slug": "played"
+ },
+ {
+  "en": "Health",
+  "ar": "صحة",
+  "emoji": "❤️",
+  "slug": "health"
+ },
+ {
+  "en": "Medicine",
+  "ar": "دواء",
+  "emoji": "💊",
+  "slug": "medicine"
+ },
+ {
+  "en": "Tooth",
+  "ar": "سن",
+  "emoji": "🦷",
+  "slug": "tooth"
+ },
+ {
+  "en": "Temperature",
+  "ar": "حرارة",
+  "emoji": "🌡️",
+  "slug": "temperature"
+ },
+ {
+  "en": "Headache",
+  "ar": "صداع",
+  "emoji": "🤕",
+  "slug": "headache"
+ },
+ {
+  "en": "Future",
+  "ar": "مستقبل",
+  "emoji": "🔮",
+  "slug": "future"
+ },
+ {
+  "en": "Plan",
+  "ar": "خطة",
+  "emoji": "📋",
+  "slug": "plan"
+ },
+ {
+  "en": "Homework",
+  "ar": "واجب",
+  "emoji": "📝",
+  "slug": "homework"
+ },
+ {
+  "en": "Project",
+  "ar": "مشروع",
+  "emoji": "🏗️",
+  "slug": "project"
+ },
+ {
+  "en": "Group",
+  "ar": "مجموعة",
+  "emoji": "👥",
+  "slug": "group"
+ },
+ {
+  "en": "Important",
+  "ar": "مهم",
+  "emoji": "⭐",
+  "slug": "important"
+ },
+ {
+  "en": "Easy",
+  "ar": "سهل",
+  "emoji": "🐣",
+  "slug": "easy"
+ },
+ {
+  "en": "Difficult",
+  "ar": "صعب",
+  "emoji": "🧗",
+  "slug": "difficult"
+ },
+ {
+  "en": "Famous",
+  "ar": "مشهور",
+  "emoji": "🌟",
+  "slug": "famous"
+ },
+ {
+  "en": "Inventor",
+  "ar": "مخترع",
+  "emoji": "💡",
+  "slug": "inventor"
+ },
+ {
+  "en": "Computer",
+  "ar": "حاسوب",
+  "emoji": "💻",
+  "slug": "computer"
+ },
+ {
+  "en": "Internet",
+  "ar": "إنترنت",
+  "emoji": "🌐",
+  "slug": "internet"
+ },
+ {
+  "en": "Email",
+  "ar": "بريد إلكتروني",
+  "emoji": "📧",
+  "slug": "email"
+ },
+ {
+  "en": "Message",
+  "ar": "رسالة",
+  "emoji": "💬",
+  "slug": "message"
+ },
+ {
+  "en": "Camera",
+  "ar": "كاميرا",
+  "emoji": "📷",
+  "slug": "camera"
+ },
+ {
+  "en": "Engineer",
+  "ar": "مهندس",
+  "emoji": "👷",
+  "slug": "engineer"
+ },
+ {
+  "en": "Pilot",
+  "ar": "طيار",
+  "emoji": "👨‍✈️",
+  "slug": "pilot"
+ },
+ {
+  "en": "Achievement",
+  "ar": "إنجاز",
+  "emoji": "🏆",
+  "slug": "achievement"
+ },
+ {
+  "en": "Challenge",
+  "ar": "تحدٍّ",
+  "emoji": "🪜",
+  "slug": "challenge"
+ },
+ {
+  "en": "Success",
+  "ar": "نجاح",
+  "emoji": "🥇",
+  "slug": "success"
+ },
+ {
+  "en": "Skill",
+  "ar": "مهارة",
+  "emoji": "🎯",
+  "slug": "skill"
+ },
+ {
+  "en": "Knowledge",
+  "ar": "معرفة",
+  "emoji": "🧠",
+  "slug": "knowledge"
+ },
+ {
+  "en": "Culture",
+  "ar": "ثقافة",
+  "emoji": "🎭",
+  "slug": "culture"
+ },
+ {
+  "en": "Tourist",
+  "ar": "سائح",
+  "emoji": "🧳",
+  "slug": "tourist"
+ },
+ {
+  "en": "Guide",
+  "ar": "مرشد",
+  "emoji": "🧭",
+  "slug": "guide"
+ },
+ {
+  "en": "Explain",
+  "ar": "يشرح",
+  "emoji": "💬",
+  "slug": "explain"
+ },
+ {
+  "en": "Suggest",
+  "ar": "يقترح",
+  "emoji": "💡",
+  "slug": "suggest"
+ },
+ {
+  "en": "Compare",
+  "ar": "يقارن",
+  "emoji": "⚖️",
+  "slug": "compare"
+ },
+ {
+  "en": "Decision",
+  "ar": "قرار",
+  "emoji": "📌",
+  "slug": "decision"
+ },
+ {
+  "en": "Journey",
+  "ar": "رحلة طويلة",
+  "emoji": "🛤️",
+  "slug": "journey"
+ },
+ {
+  "en": "Adventure",
+  "ar": "مغامرة",
+  "emoji": "🌋",
+  "slug": "adventure"
+ },
+ {
+  "en": "Explore",
+  "ar": "يستكشف",
+  "emoji": "🔍",
+  "slug": "explore"
+ },
+ {
+  "en": "Experience",
+  "ar": "خبرة",
+  "emoji": "🎫",
+  "slug": "experience"
+ },
+ {
+  "en": "Improve",
+  "ar": "يحسّن",
+  "emoji": "📈",
+  "slug": "improve"
+ },
+ {
+  "en": "Practice",
+  "ar": "تمرين",
+  "emoji": "🔁",
+  "slug": "practice"
+ },
+ {
+  "en": "Performance",
+  "ar": "أداء",
+  "emoji": "🎤",
+  "slug": "performance"
+ },
+ {
+  "en": "Confidence",
+  "ar": "ثقة",
+  "emoji": "💪",
+  "slug": "confidence"
+ },
+ {
+  "en": "Respect",
+  "ar": "احترام",
+  "emoji": "🙏",
+  "slug": "respect"
+ },
+ {
+  "en": "Friendly",
+  "ar": "ودود",
+  "emoji": "😄",
+  "slug": "friendly"
+ },
+ {
+  "en": "Opinion",
+  "ar": "رأي",
+  "emoji": "🗣️",
+  "slug": "opinion"
+ },
+ {
+  "en": "Argument",
+  "ar": "نقاش",
+  "emoji": "🥊",
+  "slug": "argument"
+ },
+ {
+  "en": "Reason",
+  "ar": "سبب",
+  "emoji": "🧐",
+  "slug": "reason"
+ },
+ {
+  "en": "Result",
+  "ar": "نتيجة",
+  "emoji": "🏁",
+  "slug": "result"
+ },
+ {
+  "en": "Advice",
+  "ar": "نصيحة",
+  "emoji": "🤔",
+  "slug": "advice"
+ },
+ {
+  "en": "Responsibility",
+  "ar": "مسؤولية",
+  "emoji": "🤲",
+  "slug": "responsibility"
+ },
+ {
+  "en": "Environment",
+  "ar": "بيئة",
+  "emoji": "🌍",
+  "slug": "environment"
+ },
+ {
+  "en": "Pollution",
+  "ar": "تلوث",
+  "emoji": "🏭",
+  "slug": "pollution"
+ },
+ {
+  "en": "Climate",
+  "ar": "مناخ",
+  "emoji": "🌦️",
+  "slug": "climate"
+ },
+ {
+  "en": "Technology",
+  "ar": "تكنولوجيا",
+  "emoji": "📱",
+  "slug": "technology"
+ },
+ {
+  "en": "Education",
+  "ar": "تعليم",
+  "emoji": "🎓",
+  "slug": "education"
+ },
+ {
+  "en": "Opportunity",
+  "ar": "فرصة",
+  "emoji": "🚪",
+  "slug": "opportunity"
+ },
+ {
+  "en": "Effort",
+  "ar": "جهد",
+  "emoji": "💪",
+  "slug": "effort"
+ },
+ {
+  "en": "Encourage",
+  "ar": "يشجع",
+  "emoji": "🎊",
+  "slug": "encourage"
+ },
+ {
+  "en": "Participate",
+  "ar": "يشارك",
+  "emoji": "🤝",
+  "slug": "participate"
+ },
+ {
+  "en": "Organize",
+  "ar": "ينظم",
+  "emoji": "🗂️",
+  "slug": "organize"
+ },
+ {
+  "en": "Present",
+  "ar": "يعرض",
+  "emoji": "🎤",
+  "slug": "present"
+ },
+ {
+  "en": "Discuss",
+  "ar": "يناقش",
+  "emoji": "💬",
+  "slug": "discuss"
+ },
+ {
+  "en": "Ambition",
+  "ar": "طموح",
+  "emoji": "🚀",
+  "slug": "ambition"
+ },
+ {
+  "en": "Research",
+  "ar": "بحث",
+  "emoji": "🔬",
+  "slug": "research"
+ },
+ {
+  "en": "Social",
+  "ar": "اجتماعي",
+  "emoji": "👥",
+  "slug": "social"
+ },
+ {
+  "en": "Cooperation",
+  "ar": "تعاون",
+  "emoji": "🫶",
+  "slug": "cooperation"
+ }
+]

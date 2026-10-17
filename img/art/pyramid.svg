@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" preserveAspectRatio="xMidYMid meet">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="34%" r="80%">
+    <stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#6d28d9"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#fde68a"/><stop offset="55%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/>
+  </linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#fff7ed"/>
+  </linearGradient>
+  <pattern id="geo" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+    <path d="M32 6 L40 24 L58 32 L40 40 L32 58 L24 40 L6 32 L24 24 Z" fill="#ffffff" opacity="0.08"/>
+    <circle cx="32" cy="32" r="4" fill="#ffffff" opacity="0.06"/>
+  </pattern>
+  <clipPath id="archClip"><path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z"/></clipPath>
+</defs>
+<rect width="512" height="512" fill="url(#bg)"/>
+<rect width="512" height="512" fill="url(#geo)"/>
+
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="url(#panel)"/>
+<g clip-path="url(#archClip)"><rect x="120" y="360" width="272" height="84" fill="#e9d5ff"/><path d="M216 430 l92 -186 l92 186 Z" fill="#fde68a" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M216 430 l92 -186 l-32 186 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M110 430 l52 -116 l52 116 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="352" cy="168" r="26" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M106 430 q150 -22 300 0" fill="none" stroke="#fde68a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="#2b1b4d" stroke-width="6" opacity="0.18"/>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="url(#gold)" stroke-width="9"/>
+<path d="M120 444 L120 224 C120 150 190 108 256 90 C322 108 392 150 392 224 L392 444 Z" fill="none" stroke="#fde68a" stroke-width="3" opacity="0.9" transform="translate(0 0) scale(0.965) translate(9 9)"/>
+<g opacity="0.95"><polygon points="74.0,40.0 78.9,53.2 93.0,53.8 82.0,62.6 85.8,76.2 74.0,68.4 62.2,76.2 66.0,62.6 55.0,53.8 69.1,53.2" fill="#fbbf24"/><polygon points="438.0,40.0 442.9,53.2 457.0,53.8 446.0,62.6 449.8,76.2 438.0,68.4 426.2,76.2 430.0,62.6 419.0,53.8 433.1,53.2" fill="#fbbf24"/><polygon points="74.0,438.0 77.5,447.2 87.3,447.7 79.6,453.8 82.2,463.3 74.0,457.9 65.8,463.3 68.4,453.8 60.7,447.7 70.5,447.2" fill="#fbbf24"/><polygon points="438.0,438.0 441.5,447.2 451.3,447.7 443.6,453.8 446.2,463.3 438.0,457.9 429.8,463.3 432.4,453.8 424.7,447.7 434.5,447.2" fill="#fbbf24"/><path d="M150 34 v18" fill="none" stroke="#ffffff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M150 52 l16 10 v22 l-16 10 l-16 -10 v-22 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M412 34 v18" fill="none" stroke="#ffffff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M412 52 l16 10 v22 l-16 10 l-16 -10 v-22 Z" fill="#fbbf24" stroke="#2b1b4d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/></g>
+</svg>
