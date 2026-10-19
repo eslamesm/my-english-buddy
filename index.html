@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.1" /><!-- English Kids v6.1 -->
+<meta name="app-version" content="My English Buddy v6.2" /><!-- English Kids v6.2 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -811,7 +811,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.1</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.2</div>
       </main>
     </div>
   </section>
@@ -1733,9 +1733,10 @@ function lsSet(k,v){
 function sanitizeProfile(p){
   if(!p||typeof p!=='object'||Array.isArray(p)) return null;
   if(typeof p.id!=='string'||!p.id) return null;
-  if(typeof p.name!=='string'||!p.name.trim()) return null;
   const o=Object.assign({},p);
-  o.name=o.name.slice(0,60);
+  /* keep a profile that has a valid id even if its name got corrupted,
+     so a damaged name never costs the child their progress */
+  o.name=(typeof o.name==='string'&&o.name.trim())?o.name.trim().slice(0,60):'طفل';
   o.age=Math.max(3,Math.min(14, parseInt(o.age,10)||6));
   o.avatar=(typeof o.avatar==='string'&&AVATAR_LIST.some(a=>a.e===o.avatar))?o.avatar:'🦁';
   o.levelKey=AGES.some(g=>g.key===o.levelKey)?o.levelKey:levelFromAge(o.age).key;
@@ -1973,8 +1974,12 @@ function speakTTS(text, rate){
     let chosen=null;
     if(settings.voice) chosen=(window.speechSynthesis.getVoices()||[]).find(x=>x.name===settings.voice)||null;
     u.voice = chosen || usVoice || null;
-    u.onend=()=>resolve(true); u.onerror=()=>resolve(true);
-    window.speechSynthesis.speak(u);
+    let done=false; const fin=(ok)=>{ if(done) return; done=true; clearTimeout(guard); resolve(ok); };
+    u.onend=()=>fin(true); u.onerror=()=>fin(false);
+    /* safety: some mobile engines never fire onend; don't hang the flow */
+    const guard=setTimeout(()=>fin(true), Math.min(9000, 2500+String(text).length*120));
+    try{ window.speechSynthesis.speak(u); }
+    catch(e){ try{ window.speechSynthesis.cancel(); }catch(_){} fin(false); }
   });
 }
 async function say(path, fallbackText, rate){
@@ -2350,7 +2355,7 @@ function voskOnce(grammar){
           micLevelShow(false); micHint('');
           try{ if(recorder&&recorder.state==='recording') recorder.stop(); }catch(e){}
           try{rec.retrieveFinalResult();}catch(e){}
-          setTimeout(()=>{ try{rec.remove();}catch(e){} try{stream.getTracks().forEach(t=>t.stop());}catch(e){} resolve(text); },550);
+          setTimeout(()=>{ try{rec.remove();}catch(e){} try{stream.getTracks().forEach(t=>t.stop());}catch(e){} resolve({alts:[text], confidence:null}); },550);
         }
       },120);
     })().catch(reject);
@@ -2361,7 +2366,7 @@ function webSpeechOnce(){
     if(!SR){ reject(new Error('no-web-speech')); return; }
     const r=new SR(); r.lang='en-US'; r.interimResults=true; r.continuous=true; r.maxAlternatives=6;
     const started=Date.now(), HARD=12000;
-    let finals=[], latest='', finished=false, finishing=false;
+    let finals=[], latest='', conf=null, finished=false, finishing=false;
     const hard=setTimeout(()=>finish(''), HARD);
     r.onstart=()=>{ micLevelShow(true); micHint('🎙️ أنا أسمعك... تحدّث الآن'); startPulseMeter(); };
     function finish(err){
@@ -2369,13 +2374,14 @@ function webSpeechOnce(){
       stopPulseMeter(); micHint('');
       try{ r.onend=null; r.onerror=null; r.onresult=null; r.stop(); }catch(e){}
       const text=(finals.join(' ')||latest||'').trim();
-      if(text) resolve(finals.length?finals:[text]); else reject(new Error(err||'no-speech'));
+      if(text) resolve({alts:(finals.length?finals:[text]), confidence:conf}); else reject(new Error(err||'no-speech'));
     }
     function scheduleFinish(){ if(finishing) return; finishing=true; setTimeout(()=>{ if(!finished) finish(''); }, 450); }
     r.onresult=(e)=>{
       for(let i=e.resultIndex;i<e.results.length;i++){
         const res=e.results[i]; const t=res[0]&&res[0].transcript?res[0].transcript:'';
-        if(res.isFinal){ if(t.trim()){ finals.push(t.trim()); } }
+        const c=(res[0]&&typeof res[0].confidence==='number'&&isFinite(res[0].confidence))?res[0].confidence:null;
+        if(res.isFinal){ if(t.trim()){ finals.push(t.trim()); if(c!=null) conf=(conf==null)?c:Math.max(conf,c); } }
         else { if(t.trim()) latest=t.trim(); }
       }
       if(finals.length) scheduleFinish();
@@ -2400,9 +2406,9 @@ function grammarFor(){ return GRAMMAR; }
 async function recognizeOnce(){
   const mode=settings.recMode;
   const offline=(mode==='offline')||(mode==='auto'&&(!navigator.onLine||isAndroid));
-  if(offline){ try{ const t=await voskOnce(grammarFor()); return {alts:[t],engine:'offline'}; }catch(e){ if(mode==='offline') throw e; } }
-  try{ if(!SR) throw new Error('no-web-speech'); return {alts:await webSpeechOnce(),engine:'online'}; }
-  catch(e){ try{ const t=await voskOnce(grammarFor()); return {alts:[t],engine:'offline'}; }catch(e2){ throw e; } }
+  if(offline){ try{ const v=await voskOnce(grammarFor()); return {alts:v.alts,engine:'offline',confidence:v.confidence}; }catch(e){ if(mode==='offline') throw e; } }
+  try{ if(!SR) throw new Error('no-web-speech'); const v=await webSpeechOnce(); return {alts:v.alts,engine:'online',confidence:v.confidence}; }
+  catch(e){ try{ const v=await voskOnce(grammarFor()); return {alts:v.alts,engine:'offline',confidence:v.confidence}; }catch(e2){ throw e; } }
 }
 
 /* ------------------ SCORING ------------------ */
@@ -2449,20 +2455,28 @@ function spellHint(target, heard){
   const focus = letters.length===1? `ركّز على حرف «${letters[0]}»` : 'ركّز على الحروف المحددة';
   return `<div class="spell"><div class="muted2">تصحيح الحروف — ${focus}:</div><div class="spec" dir="ltr">${html}</div></div>`;
 }
-function scoreAttempt(alts, engine){
+function scoreAttempt(alts, engine, confidence){
   const item=list[index];
   let best=0, heard=alts[0]||'';
   const targets=[item.spoken]; if(currentMode==='letters'||currentMode==='sounds'){ targets.push(item.word,item.t,item.sound); }
   alts.forEach(alt=>{ const s=bestSimilarity(alt,targets); if(s>best){ best=s; heard=alt; } });
-  showScore(item,best,heard,engine);
+  showScore(item,best,heard,engine,confidence);
 }
-function showScore(item,score,heard,engine){
+/* fairness: separate a speech-engine recognition failure from a real
+   pronunciation error, so we do not penalise the learner for the former.
+   `confidence` (0..1) comes from the ASR engine when available: a low
+   confidence result is never treated as a real mistake, and a missing
+   confidence (e.g. Vosk) falls back to the short-garbage heuristic. */
+function isUncertain(score, heard, confidence){
+  const h=normalize(heard||'');
+  if(!h) return true;
+  const lowConf=(typeof confidence==='number'&&isFinite(confidence))?(confidence<0.55):null;
+  return score<25 && (lowConf===true || h.length<=2);
+}
+function showScore(item,score,heard,engine,confidence){
   const fb=document.getElementById('feedback'); fb.dataset.scored='1';
   const rm=modeOfItem(item);
-  /* fairness: separate a speech-engine recognition failure from a real
-     pronunciation error, so we do not penalise the learner for the former. */
-  const heardNorm=normalize(heard||'');
-  const uncertain = !heardNorm || (score<25 && heardNorm.length<=2);
+  const uncertain = isUncertain(score, heard, confidence);
   let stars,color,msg;
   if(score>=80){ stars=3; color='#16a34a'; msg='ممتاز! نطق رائع 🎉'; }
   else if(score>=55){ stars=2; color='#0ea5e9'; msg='جيد جداً! قرّب أكثر 👍'; }
@@ -2513,14 +2527,23 @@ function smartRelisten(item){
   }, 700);
   relistenTimers.push(s1);
 }
+/* child-friendly, non-punitive messages: a recognition failure is NEVER
+   recorded as a wrong answer, so every branch says so explicitly. */
 function recogError(e){
-  const nm=(e&&e.name)||''; const m=(e&&e.message)||''; let txt='تعذّر سماعك، حاول مرة أخرى';
+  const nm=(e&&e.name)||''; const m=(e&&e.message)||'';
+  let txt='تعذّر سماعك، حاول مرة أخرى';
   if(nm==='NotAllowedError'||nm==='SecurityError'||m==='not-allowed'||m==='service-not-allowed'||/permission|denied|never allowed/i.test(m)) txt='يجب السماح باستخدام الميكروفون 🎤 من إعدادات المتصفح ثم إعادة المحاولة';
-  else if(m==='no-speech'||m==='timeout') txt='لم أسمع شيئاً، قرّب الهاتف وانطق بصوت أعلى 🙂';
-  else if(m==='vosk-unavailable'||m==='vosk-load'||m==='script') txt='الوضع الأوفلاين غير متاح هنا — جرّب الوضع التلقائي';
+  else if(m==='no-speech'||m==='timeout') txt='لم أسمع شيئاً 👂 قرّب الهاتف من فمك وانطق بصوت أعلى 🙂';
+  else if(m==='audio-capture') txt='لم أجد ميكروفوناً متصلاً 🎤 تأكد من توصيله أو من إعدادات الجهاز';
+  else if(m==='network') txt='تعذّر الاتصال بالتعرف على الصوت 📶 تحقق من الإنترنت أو جرّب الوضع الأوفلاين من الإعدادات';
+  else if(m==='language-not-supported') txt='لغة التعرف على النطق غير مدعومة في هذا المتصفح — جرّب Chrome أو Edge';
+  else if(m==='aborted') txt='توقّف التسجيل 🎤 اضغط الميكروفون وأعد المحاولة بهدوء';
+  else if(m==='vosk-unavailable'||m==='vosk-load'||m==='script') txt='الوضع الأوفلاين غير متاح هنا — جرّب الوضع التلقائي 🎯';
   else if(m==='no-audio-ctx') txt='تعذّر تشغيل الصوت — أعد فتح التطبيق';
-  else if(m==='no-web-speech') txt='متصفحك لا يدعم التعرف على الصوت (استخدم Chrome/Edge)';
-  document.getElementById('feedback').innerHTML='<div class="fb-text" style="color:#f59e0b">'+txt+'</div>';
+  else if(m==='no-web-speech') txt='متصفحك لا يدعم التعرف على الصوت 🎤 استخدم Chrome أو Edge';
+  let html='<div class="fb-text" style="color:#f59e0b">'+txt+'</div>';
+  html+='<div class="fb-text" style="color:#7c3aed;margin-top:6px;font-size:12px">ℹ️ لم تُحسَب هذه محاولة خاطئة — هذه مشكلة في التعرّف على الصوت لا في نطقك.</div>';
+  document.getElementById('feedback').innerHTML=html;
 }
 
 /* ------------------ SOUND FX / CONFETTI ------------------ */
@@ -3242,7 +3265,7 @@ document.getElementById('btnSlow').onclick=()=>{ cancelRelisten(); if(currentMod
 document.getElementById('btnMic').onclick=async ()=>{
   if(recognizing) return;
   ensureRecCtx();
-  recognizing=true; cancelRelisten(); stopTeacher();
+  recognizing=true; cancelRelisten(); stopTeacher(); stopAudio();
   const mic=document.getElementById('btnMic'); mic.classList.add('listening');
   const fb=document.getElementById('feedback'); fb.dataset.scored='';
   const wantVosk=(settings.recMode==='offline')||(settings.recMode==='auto'&&isAndroid);
@@ -3250,7 +3273,7 @@ document.getElementById('btnMic').onclick=async ()=>{
   try{
     if(!isAndroid) await ensureMicPermission();
     if(wantVosk && !voskModel){ fb.innerHTML='<div class="fb-text" style="color:#7c3aed">⏳ تجهيز التعرف على النطق (أول مرة فقط)...</div>'; try{ await ensureVosk(); }catch(e){} fb.innerHTML='<div class="fb-text" style="color:#ef4444">🎤 أنا أسمعك... انطق الآن</div>'; }
-    const {alts,engine}=await recognizeOnce(); if(!alts.some(t=>normalize(t))) throw new Error('no-speech'); scoreAttempt(alts,engine);
+    const {alts,engine,confidence}=await recognizeOnce(); if(!alts.some(t=>normalize(t))) throw new Error('no-speech'); scoreAttempt(alts,engine,confidence);
   }
   catch(e){ recogError(e); }
   finally{ recognizing=false; mic.classList.remove('listening'); }
@@ -4754,7 +4777,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.1';
+    const local='6.2';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
@@ -4873,6 +4896,13 @@ window.addEventListener('load', pickVoice);
 if(isFile){ const b=document.getElementById('fileBanner'); b.style.display='block';
   b.innerHTML='ℹ️ الأصوات والحروف تعمل أوفلاين في كل الحالات. تصحيح النطق بدون إنترنت يحتاج تشغيل التطبيق عبر سيرفر محلي (serve.ps1).'; }
 if('serviceWorker' in navigator && !isFile){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+/* diagnostics: confirm which version + cache is actually active (support/tests) */
+window.__appDiag=async function(){
+  let swCache=null; const controlled=!!(navigator.serviceWorker&&navigator.serviceWorker.controller);
+  try{ if(window.caches){ const keys=await caches.keys(); swCache=(keys.filter(k=>/^englishkids-v\d+/.test(k)).sort().pop())||null; } }catch(e){}
+  const ver=(document.querySelector('meta[name="app-version"]')||{}).content||'';
+  return {version:ver, swCache, controlled};
+};
 </script>
 </body>
 </html>
