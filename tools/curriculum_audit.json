@@ -1,0 +1,4686 @@
+{
+  "generatedFor": "v6.7",
+  "grades": [
+    {
+      "id": "kg1",
+      "grade": "حضانة (KG1)",
+      "ages": "4-5 سنوات",
+      "terms": [
+        "1"
+      ],
+      "units": [
+        {
+          "n": 1,
+          "title": "Meet and Greet!",
+          "ar": "التعرّف والتحية",
+          "count": 8,
+          "items": [
+            {
+              "unit": 1,
+              "text": "Hello",
+              "slug": "hello",
+              "emoji": "👋",
+              "ar": "مرحباً",
+              "art": "img/art/hello.svg",
+              "artMap": "img/art/hello.svg",
+              "audio": "audio/words/hello.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Good Morning",
+              "slug": "goodmorning",
+              "emoji": "🌅",
+              "ar": "صباح الخير",
+              "art": "img/art/goodmorning.svg",
+              "artMap": "img/art/goodmorning.svg",
+              "audio": "audio/words/good morning.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Goodbye",
+              "slug": "goodbye",
+              "emoji": "🖐️",
+              "ar": "وداعاً",
+              "art": "img/art/goodbye.svg",
+              "artMap": "img/art/goodbye.svg",
+              "audio": "audio/words/goodbye.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Boy",
+              "slug": "boy",
+              "emoji": "👦",
+              "ar": "ولد",
+              "art": "img/art/boy.svg",
+              "artMap": "img/art/boy.svg",
+              "audio": "audio/words/boy.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Girl",
+              "slug": "girl",
+              "emoji": "👧",
+              "ar": "بنت",
+              "art": "img/art/girl.svg",
+              "artMap": "img/art/girl.svg",
+              "audio": "audio/words/girl.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Friends",
+              "slug": "friends",
+              "emoji": "👫",
+              "ar": "أصدقاء",
+              "art": "img/art/friends.svg",
+              "artMap": "img/art/friends.svg",
+              "audio": "audio/words/friends.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Happy",
+              "slug": "happy",
+              "emoji": "😊",
+              "ar": "سعيد",
+              "art": "img/art/happy.svg",
+              "artMap": "img/art/happy.svg",
+              "audio": "audio/words/happy.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Sad",
+              "slug": "sad",
+              "emoji": "😢",
+              "ar": "حزين",
+              "art": "img/art/sad.svg",
+              "artMap": "img/art/sad.svg",
+              "audio": "audio/words/sad.wav"
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "title": "I Can Find It at School!",
+          "ar": "أجده في المدرسة",
+          "count": 11,
+          "items": [
+            {
+              "unit": 2,
+              "text": "Classroom",
+              "slug": "classroom",
+              "emoji": "🏫",
+              "ar": "فصل دراسي",
+              "art": "img/art/classroom.svg",
+              "artMap": "img/art/classroom.svg",
+              "audio": "audio/words/classroom.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Teacher",
+              "slug": "teacher",
+              "emoji": "👩‍🏫",
+              "ar": "معلّم",
+              "art": "img/art/teacher.svg",
+              "artMap": "img/art/teacher.svg",
+              "audio": "audio/words/teacher.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Chair",
+              "slug": "chair",
+              "emoji": "🪑",
+              "ar": "كرسيّ",
+              "art": "img/art/chair.svg",
+              "artMap": "img/art/chair.svg",
+              "audio": "audio/words/chair.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Desk",
+              "slug": "desk",
+              "emoji": "🗄️",
+              "ar": "مكتب",
+              "art": "img/art/desk.svg",
+              "artMap": "img/art/desk.svg",
+              "audio": "audio/words/desk.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Book",
+              "slug": "book",
+              "emoji": "📕",
+              "ar": "كتاب",
+              "art": "img/art/book.svg",
+              "artMap": "img/art/book.svg",
+              "audio": "audio/words/book.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Pencil",
+              "slug": "pencil",
+              "emoji": "✏️",
+              "ar": "قلم رصاص",
+              "art": "img/art/pencil.svg",
+              "artMap": "img/art/pencil.svg",
+              "audio": "audio/words/pencil.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Eraser",
+              "slug": "eraser",
+              "emoji": "🧽",
+              "ar": "ممحاة",
+              "art": "img/art/eraser.svg",
+              "artMap": "img/art/eraser.svg",
+              "audio": "audio/words/eraser.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Crayon",
+              "slug": "crayon",
+              "emoji": "🖍️",
+              "ar": "قلم تلوين",
+              "art": "img/art/crayon.svg",
+              "artMap": "img/art/crayon.svg",
+              "audio": "audio/words/crayon.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Playground",
+              "slug": "playground",
+              "emoji": "🛝",
+              "ar": "ملعب",
+              "art": "img/art/playground.svg",
+              "artMap": "img/art/playground.svg",
+              "audio": "audio/words/playground.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Swing",
+              "slug": "swing",
+              "emoji": "🛝",
+              "ar": "أرجوحة",
+              "art": "img/art/swing.svg",
+              "artMap": "img/art/swing.svg",
+              "audio": "audio/words/swing.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Slide",
+              "slug": "slide",
+              "emoji": "🛝",
+              "ar": "زحليقة",
+              "art": "img/art/slide.svg",
+              "artMap": "img/art/slide.svg",
+              "audio": "audio/words/slide.wav"
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "title": "My Body, My Care!",
+          "ar": "جسدي وعنايتي",
+          "count": 11,
+          "items": [
+            {
+              "unit": 3,
+              "text": "Hair",
+              "slug": "hair",
+              "emoji": "💇",
+              "ar": "شعر",
+              "art": "img/art/hair.svg",
+              "artMap": "img/art/hair.svg",
+              "audio": "audio/words/hair.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Face",
+              "slug": "face",
+              "emoji": "😊",
+              "ar": "وجه",
+              "art": "img/art/face.svg",
+              "artMap": "img/art/face.svg",
+              "audio": "audio/words/face.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Eyes",
+              "slug": "eyes",
+              "emoji": "👀",
+              "ar": "عيون",
+              "art": "img/art/eyes.svg",
+              "artMap": "img/art/eyes.svg",
+              "audio": "audio/words/eyes.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Ears",
+              "slug": "ears",
+              "emoji": "👂",
+              "ar": "أذنان",
+              "art": "img/art/ears.svg",
+              "artMap": "img/art/ears.svg",
+              "audio": "audio/words/ears.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Nose",
+              "slug": "nose",
+              "emoji": "👃",
+              "ar": "أنف",
+              "art": "img/art/nose.svg",
+              "artMap": "img/art/nose.svg",
+              "audio": "audio/words/nose.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Mouth",
+              "slug": "mouth",
+              "emoji": "👄",
+              "ar": "فم",
+              "art": "img/art/mouth.svg",
+              "artMap": "img/art/mouth.svg",
+              "audio": "audio/words/mouth.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Teeth",
+              "slug": "teeth",
+              "emoji": "🦷",
+              "ar": "أسنان",
+              "art": "img/art/teeth.svg",
+              "artMap": "img/art/teeth.svg",
+              "audio": "audio/words/teeth.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Arms",
+              "slug": "arms",
+              "emoji": "💪",
+              "ar": "ذراعان",
+              "art": "img/art/arms.svg",
+              "artMap": "img/art/arms.svg",
+              "audio": "audio/words/arms.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Hands",
+              "slug": "hands",
+              "emoji": "✋",
+              "ar": "يدان",
+              "art": "img/art/hands.svg",
+              "artMap": "img/art/hands.svg",
+              "audio": "audio/words/hands.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Legs",
+              "slug": "legs",
+              "emoji": "🦵",
+              "ar": "ساقان",
+              "art": "img/art/legs.svg",
+              "artMap": "img/art/legs.svg",
+              "audio": "audio/words/legs.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Feet",
+              "slug": "feet",
+              "emoji": "🦶",
+              "ar": "قدمان",
+              "art": "img/art/feet.svg",
+              "artMap": "img/art/feet.svg",
+              "audio": "audio/words/feet.wav"
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "title": "My Family Picnic!",
+          "ar": "نزهة عائلتي",
+          "count": 13,
+          "items": [
+            {
+              "unit": 4,
+              "text": "Grandfather",
+              "slug": "grandfather",
+              "emoji": "👴",
+              "ar": "جدّ",
+              "art": "img/art/grandfather.svg",
+              "artMap": "img/art/grandfather.svg",
+              "audio": "audio/words/grandfather.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Grandmother",
+              "slug": "grandmother",
+              "emoji": "👵",
+              "ar": "جدّة",
+              "art": "img/art/grandmother.svg",
+              "artMap": "img/art/grandmother.svg",
+              "audio": "audio/words/grandmother.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Mother",
+              "slug": "mother",
+              "emoji": "👩",
+              "ar": "أم",
+              "art": "img/art/mother.svg",
+              "artMap": "img/art/mother.svg",
+              "audio": "audio/words/mother.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Sister",
+              "slug": "sister",
+              "emoji": "👧",
+              "ar": "أخت",
+              "art": "img/art/sister.svg",
+              "artMap": "img/art/sister.svg",
+              "audio": "audio/words/sister.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Brother",
+              "slug": "brother",
+              "emoji": "👦",
+              "ar": "أخ",
+              "art": "img/art/brother.svg",
+              "artMap": "img/art/brother.svg",
+              "audio": "audio/words/brother.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Garden",
+              "slug": "garden",
+              "emoji": "🌷",
+              "ar": "حديقة",
+              "art": "img/art/garden.svg",
+              "artMap": "img/art/garden.svg",
+              "audio": "audio/words/garden.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Mower",
+              "slug": "mower",
+              "emoji": "🚜",
+              "ar": "جزّازة",
+              "art": "img/art/mower.svg",
+              "artMap": "img/art/mower.svg",
+              "audio": "audio/words/mower.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Grass",
+              "slug": "grass",
+              "emoji": "🌿",
+              "ar": "عشب",
+              "art": "img/art/grass.svg",
+              "artMap": "img/art/grass.svg",
+              "audio": "audio/words/grass.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Fruits",
+              "slug": "fruits",
+              "emoji": "🍎",
+              "ar": "فواكه",
+              "art": "img/art/fruits.svg",
+              "artMap": "img/art/fruits.svg",
+              "audio": "audio/words/fruits.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Chocolate",
+              "slug": "chocolate",
+              "emoji": "🍫",
+              "ar": "شوكولاتة",
+              "art": "img/art/chocolate.svg",
+              "artMap": "img/art/chocolate.svg",
+              "audio": "audio/words/chocolate.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Chips",
+              "slug": "chips",
+              "emoji": "🍟",
+              "ar": "رقائق",
+              "art": "img/art/chips.svg",
+              "artMap": "img/art/chips.svg",
+              "audio": "audio/words/chips.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Juice",
+              "slug": "juice",
+              "emoji": "🧃",
+              "ar": "عصير",
+              "art": "img/art/juice.svg",
+              "artMap": "img/art/juice.svg",
+              "audio": "audio/words/juice.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Sandwich",
+              "slug": "sandwich",
+              "emoji": "🥪",
+              "ar": "شطيرة",
+              "art": "img/art/sandwich.svg",
+              "artMap": "img/art/sandwich.svg",
+              "audio": "audio/words/sandwich.wav"
+            }
+          ]
+        }
+      ],
+      "status": "partially_verified",
+      "source": "English_language_kg1_t1.pdf (referenced in code comment; file NOT in repo)",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 43,
+      "totalItems": 43
+    },
+    {
+      "id": "kg2",
+      "grade": "تمهيدي (KG2)",
+      "ages": "5-6 سنوات",
+      "terms": [
+        "1"
+      ],
+      "units": [
+        {
+          "n": 1,
+          "title": "Little Bodies, Big Moves!",
+          "ar": "حركاتي الكبيرة",
+          "count": 8,
+          "items": [
+            {
+              "unit": 1,
+              "text": "Walk",
+              "slug": "walk",
+              "emoji": "🚶",
+              "ar": "يمشي",
+              "art": "img/art/walk.svg",
+              "artMap": "img/art/walk.svg",
+              "audio": "audio/words/walk.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Run",
+              "slug": "run",
+              "emoji": "🏃",
+              "ar": "يجري",
+              "art": "img/art/run.svg",
+              "artMap": "img/art/run.svg",
+              "audio": "audio/words/run.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Jump",
+              "slug": "jump",
+              "emoji": "🤸",
+              "ar": "يقفز",
+              "art": "img/art/jump.svg",
+              "artMap": "img/art/jump.svg",
+              "audio": "audio/words/jump.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Skip",
+              "slug": "skip",
+              "emoji": "🤾",
+              "ar": "يقفز بالحبل",
+              "art": "img/art/skip.svg",
+              "artMap": "img/art/skip.svg",
+              "audio": "audio/words/skip.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Kick",
+              "slug": "kick",
+              "emoji": "🦵",
+              "ar": "يرفس",
+              "art": "img/art/kick.svg",
+              "artMap": "img/art/kick.svg",
+              "audio": "audio/words/kick.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Play",
+              "slug": "play",
+              "emoji": "🧩",
+              "ar": "يلعب",
+              "art": "img/art/play.svg",
+              "artMap": "img/art/play.svg",
+              "audio": "audio/words/play.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Throw",
+              "slug": "throw",
+              "emoji": "🤾",
+              "ar": "يقذف",
+              "art": "img/art/throw.svg",
+              "artMap": "img/art/throw.svg",
+              "audio": "audio/words/throw.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Catch",
+              "slug": "catch",
+              "emoji": "🤲",
+              "ar": "يمسك",
+              "art": "img/art/catch.svg",
+              "artMap": "img/art/catch.svg",
+              "audio": "audio/words/catch.wav"
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "title": "Let's Get Dressed!",
+          "ar": "لنرتدي ملابسنا",
+          "count": 9,
+          "items": [
+            {
+              "unit": 2,
+              "text": "T-Shirt",
+              "slug": "tshirt",
+              "emoji": "👕",
+              "ar": "تي شيرت",
+              "art": "img/art/tshirt.svg",
+              "artMap": "img/art/tshirt.svg",
+              "audio": "audio/words/t-shirt.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Dress",
+              "slug": "dress",
+              "emoji": "👗",
+              "ar": "فستان",
+              "art": "img/art/dress.svg",
+              "artMap": "img/art/dress.svg",
+              "audio": "audio/words/dress.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Trousers",
+              "slug": "trousers",
+              "emoji": "👖",
+              "ar": "بنطال",
+              "art": "img/art/trousers.svg",
+              "artMap": "img/art/trousers.svg",
+              "audio": "audio/words/trousers.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Pants",
+              "slug": "pants",
+              "emoji": "🩳",
+              "ar": "سروال",
+              "art": "img/art/pants.svg",
+              "artMap": "img/art/pants.svg",
+              "audio": "audio/words/pants.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Skirt",
+              "slug": "skirt",
+              "emoji": "👚",
+              "ar": "جيبة",
+              "art": "img/art/skirt.svg",
+              "artMap": "img/art/skirt.svg",
+              "audio": "audio/words/skirt.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Shorts",
+              "slug": "shorts",
+              "emoji": "🩳",
+              "ar": "شورت",
+              "art": "img/art/shorts.svg",
+              "artMap": "img/art/shorts.svg",
+              "audio": "audio/words/shorts.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Cap",
+              "slug": "cap",
+              "emoji": "🧢",
+              "ar": "قبعة",
+              "art": "img/art/cap.svg",
+              "artMap": "img/art/cap.svg",
+              "audio": "audio/words/cap.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Shoes",
+              "slug": "shoes",
+              "emoji": "👟",
+              "ar": "حذاء",
+              "art": "img/art/shoes.svg",
+              "artMap": "img/art/shoes.svg",
+              "audio": "audio/words/shoes.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Socks",
+              "slug": "socks",
+              "emoji": "🧦",
+              "ar": "جوارب",
+              "art": "img/art/socks.svg",
+              "artMap": "img/art/socks.svg",
+              "audio": "audio/words/socks.wav"
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "title": "My Week!",
+          "ar": "أسبوعي",
+          "count": 10,
+          "items": [
+            {
+              "unit": 3,
+              "text": "Sunday",
+              "slug": "sunday",
+              "emoji": "📅",
+              "ar": "الأحد",
+              "art": "img/art/sunday.svg",
+              "artMap": "img/art/sunday.svg",
+              "audio": "audio/words/sunday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Monday",
+              "slug": "monday",
+              "emoji": "📅",
+              "ar": "الاثنين",
+              "art": "img/art/monday.svg",
+              "artMap": "img/art/monday.svg",
+              "audio": "audio/words/monday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Tuesday",
+              "slug": "tuesday",
+              "emoji": "📅",
+              "ar": "الثلاثاء",
+              "art": "img/art/tuesday.svg",
+              "artMap": "img/art/tuesday.svg",
+              "audio": "audio/words/tuesday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Wednesday",
+              "slug": "wednesday",
+              "emoji": "📅",
+              "ar": "الأربعاء",
+              "art": "img/art/wednesday.svg",
+              "artMap": "img/art/wednesday.svg",
+              "audio": "audio/words/wednesday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Thursday",
+              "slug": "thursday",
+              "emoji": "📅",
+              "ar": "الخميس",
+              "art": "img/art/thursday.svg",
+              "artMap": "img/art/thursday.svg",
+              "audio": "audio/words/thursday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Friday",
+              "slug": "friday",
+              "emoji": "📅",
+              "ar": "الجمعة",
+              "art": "img/art/friday.svg",
+              "artMap": "img/art/friday.svg",
+              "audio": "audio/words/friday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Saturday",
+              "slug": "saturday",
+              "emoji": "📅",
+              "ar": "السبت",
+              "art": "img/art/saturday.svg",
+              "artMap": "img/art/saturday.svg",
+              "audio": "audio/words/saturday.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Today",
+              "slug": "today",
+              "emoji": "📆",
+              "ar": "اليوم",
+              "art": "img/art/today.svg",
+              "artMap": "img/art/today.svg",
+              "audio": "audio/words/today.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Tomorrow",
+              "slug": "tomorrow",
+              "emoji": "⏭️",
+              "ar": "غداً",
+              "art": "img/art/tomorrow.svg",
+              "artMap": "img/art/tomorrow.svg",
+              "audio": "audio/words/tomorrow.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Yesterday",
+              "slug": "yesterday",
+              "emoji": "⏮️",
+              "ar": "أمس",
+              "art": "img/art/yesterday.svg",
+              "artMap": "img/art/yesterday.svg",
+              "audio": "audio/words/yesterday.wav"
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "title": "My Busy Day!",
+          "ar": "يومي المزدحم",
+          "count": 9,
+          "items": [
+            {
+              "unit": 4,
+              "text": "Morning",
+              "slug": "morning",
+              "emoji": "🌅",
+              "ar": "صباح",
+              "art": "img/art/morning.svg",
+              "artMap": "img/art/morning.svg",
+              "audio": "audio/words/morning.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Noon",
+              "slug": "noon",
+              "emoji": "🌞",
+              "ar": "ظهر",
+              "art": "img/art/noon.svg",
+              "artMap": "img/art/noon.svg",
+              "audio": "audio/words/noon.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Night",
+              "slug": "night",
+              "emoji": "🌙",
+              "ar": "ليل",
+              "art": "img/art/night.svg",
+              "artMap": "img/art/night.svg",
+              "audio": "audio/words/night.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Breakfast",
+              "slug": "breakfast",
+              "emoji": "🍳",
+              "ar": "الفطور",
+              "art": "img/art/breakfast.svg",
+              "artMap": "img/art/breakfast.svg",
+              "audio": "audio/words/breakfast.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Lunch",
+              "slug": "lunch",
+              "emoji": "🍽️",
+              "ar": "الغداء",
+              "art": "img/art/lunch.svg",
+              "artMap": "img/art/lunch.svg",
+              "audio": "audio/words/lunch.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Dinner",
+              "slug": "dinner",
+              "emoji": "🍽️",
+              "ar": "العشاء",
+              "art": "img/art/dinner.svg",
+              "artMap": "img/art/dinner.svg",
+              "audio": "audio/words/dinner.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Get Up",
+              "slug": "getup",
+              "emoji": "🛏️",
+              "ar": "أستيقظ",
+              "art": "img/art/getup.svg",
+              "artMap": "img/art/getup.svg",
+              "audio": "audio/words/get up.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Go to Bed",
+              "slug": "gotobed",
+              "emoji": "😴",
+              "ar": "أنام",
+              "art": "img/art/gotobed.svg",
+              "artMap": "img/art/gotobed.svg",
+              "audio": "audio/words/go to bed.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Go to School",
+              "slug": "gotoschool",
+              "emoji": "🎒",
+              "ar": "أذهب إلى المدرسة",
+              "art": "img/art/gotoschool.svg",
+              "artMap": "img/art/gotoschool.svg",
+              "audio": "audio/words/go to school.wav"
+            }
+          ]
+        }
+      ],
+      "status": "partially_verified",
+      "source": "English_language_kg2_t1.pdf (referenced in code comment; file NOT in repo)",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 36,
+      "totalItems": 36
+    },
+    {
+      "id": "p1",
+      "grade": "الصف الأول الابتدائي",
+      "ages": "6-7 سنوات",
+      "terms": [
+        "1"
+      ],
+      "units": [
+        {
+          "n": 1,
+          "title": "Welcome to My School",
+          "ar": "مرحبًا بمدرستي",
+          "count": 12,
+          "items": [
+            {
+              "unit": 1,
+              "text": "Hello",
+              "slug": "hello",
+              "emoji": "👋",
+              "ar": "مرحباً",
+              "art": "img/art/hello.svg",
+              "artMap": "img/art/hello.svg",
+              "audio": "audio/words/hello.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Goodbye",
+              "slug": "goodbye",
+              "emoji": "🖐️",
+              "ar": "وداعاً",
+              "art": "img/art/goodbye.svg",
+              "artMap": "img/art/goodbye.svg",
+              "audio": "audio/words/goodbye.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Play",
+              "slug": "play",
+              "emoji": "🧩",
+              "ar": "يلعب",
+              "art": "img/art/play.svg",
+              "artMap": "img/art/play.svg",
+              "audio": "audio/words/play.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Friends",
+              "slug": "friends",
+              "emoji": "👫",
+              "ar": "أصدقاء",
+              "art": "img/art/friends.svg",
+              "artMap": "img/art/friends.svg",
+              "audio": "audio/words/friends.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Bag",
+              "slug": "bag",
+              "emoji": "🎒",
+              "ar": "حقيبة",
+              "art": "img/art/bag.svg",
+              "artMap": "img/art/bag.svg",
+              "audio": "audio/words/bag.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Shake Hands",
+              "slug": "shakehands",
+              "emoji": "🤝",
+              "ar": "مصافحة",
+              "art": "img/art/shakehands.svg",
+              "artMap": "img/art/shakehands.svg",
+              "audio": "audio/words/shake hands.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Teacher",
+              "slug": "teacher",
+              "emoji": "👩‍🏫",
+              "ar": "معلّم",
+              "art": "img/art/teacher.svg",
+              "artMap": "img/art/teacher.svg",
+              "audio": "audio/words/teacher.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Board",
+              "slug": "board",
+              "emoji": "🖼️",
+              "ar": "سبّورة",
+              "art": "img/art/board.svg",
+              "artMap": "img/art/board.svg",
+              "audio": "audio/words/board.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Desk",
+              "slug": "desk",
+              "emoji": "🗄️",
+              "ar": "مكتب",
+              "art": "img/art/desk.svg",
+              "artMap": "img/art/desk.svg",
+              "audio": "audio/words/desk.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Chair",
+              "slug": "chair",
+              "emoji": "🪑",
+              "ar": "كرسيّ",
+              "art": "img/art/chair.svg",
+              "artMap": "img/art/chair.svg",
+              "audio": "audio/words/chair.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Book",
+              "slug": "book",
+              "emoji": "📕",
+              "ar": "كتاب",
+              "art": "img/art/book.svg",
+              "artMap": "img/art/book.svg",
+              "audio": "audio/words/book.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Pencil",
+              "slug": "pencil",
+              "emoji": "✏️",
+              "ar": "قلم رصاص",
+              "art": "img/art/pencil.svg",
+              "artMap": "img/art/pencil.svg",
+              "audio": "audio/words/pencil.wav"
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "title": "The Garden of Colors and Shapes",
+          "ar": "حديقة الألوان والأشكال",
+          "count": 14,
+          "items": [
+            {
+              "unit": 2,
+              "text": "Grass",
+              "slug": "grass",
+              "emoji": "🌿",
+              "ar": "عشب",
+              "art": "img/art/grass.svg",
+              "artMap": "img/art/grass.svg",
+              "audio": "audio/words/grass.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Flower",
+              "slug": "flower",
+              "emoji": "🌸",
+              "ar": "زهرة",
+              "art": "img/art/flower.svg",
+              "artMap": "img/art/flower.svg",
+              "audio": "audio/words/flower.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Tree",
+              "slug": "tree",
+              "emoji": "🌳",
+              "ar": "شجرة",
+              "art": "img/art/tree.svg",
+              "artMap": "img/art/tree.svg",
+              "audio": "audio/words/tree.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Sky",
+              "slug": "sky",
+              "emoji": "🌤️",
+              "ar": "سماء",
+              "art": "img/art/sky.svg",
+              "artMap": "img/art/sky.svg",
+              "audio": "audio/words/sky.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Bird",
+              "slug": "bird",
+              "emoji": "🐦",
+              "ar": "طائر",
+              "art": "img/art/bird.svg",
+              "artMap": "img/art/bird.svg",
+              "audio": "audio/words/bird.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Butterfly",
+              "slug": "butterfly",
+              "emoji": "🦋",
+              "ar": "فراشة",
+              "art": "img/art/butterfly.svg",
+              "artMap": "img/art/butterfly.svg",
+              "audio": "audio/words/butterfly.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Circle",
+              "slug": "circle",
+              "emoji": "⭕",
+              "ar": "دائرة",
+              "art": "img/art/circle.svg",
+              "artMap": "img/art/circle.svg",
+              "audio": "audio/words/circle.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Square",
+              "slug": "square",
+              "emoji": "🟦",
+              "ar": "مربّع",
+              "art": "img/art/square.svg",
+              "artMap": "img/art/square.svg",
+              "audio": "audio/words/square.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Triangle",
+              "slug": "triangle",
+              "emoji": "🔺",
+              "ar": "مثلّث",
+              "art": "img/art/triangle.svg",
+              "artMap": "img/art/triangle.svg",
+              "audio": "audio/words/triangle.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Rectangle",
+              "slug": "rectangle",
+              "emoji": "🟥",
+              "ar": "مستطيل",
+              "art": "img/art/rectangle.svg",
+              "artMap": "img/art/rectangle.svg",
+              "audio": "audio/words/rectangle.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Green",
+              "slug": "green",
+              "emoji": "🟢",
+              "ar": "أخضر",
+              "art": "img/art/green.svg",
+              "artMap": "img/art/green.svg",
+              "audio": "audio/words/green.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Blue",
+              "slug": "blue",
+              "emoji": "🔵",
+              "ar": "أزرق",
+              "art": "img/art/blue.svg",
+              "artMap": "img/art/blue.svg",
+              "audio": "audio/words/blue.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Red",
+              "slug": "red",
+              "emoji": "🔴",
+              "ar": "أحمر",
+              "art": "img/art/red.svg",
+              "artMap": "img/art/red.svg",
+              "audio": "audio/words/red.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Yellow",
+              "slug": "yellow",
+              "emoji": "🟡",
+              "ar": "أصفر",
+              "art": "img/art/yellow.svg",
+              "artMap": "img/art/yellow.svg",
+              "audio": "audio/words/yellow.wav"
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "title": "I Love My Family",
+          "ar": "أحب عائلتي",
+          "count": 12,
+          "items": [
+            {
+              "unit": 3,
+              "text": "Parents",
+              "slug": "parents",
+              "emoji": "👨‍👩‍👧",
+              "ar": "الوالدان",
+              "art": "img/art/parents.svg",
+              "artMap": "img/art/parents.svg",
+              "audio": "audio/words/parents.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Father",
+              "slug": "father",
+              "emoji": "👨",
+              "ar": "أب",
+              "art": "img/art/father.svg",
+              "artMap": "img/art/father.svg",
+              "audio": "audio/words/father.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Mother",
+              "slug": "mother",
+              "emoji": "👩",
+              "ar": "أم",
+              "art": "img/art/mother.svg",
+              "artMap": "img/art/mother.svg",
+              "audio": "audio/words/mother.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Sister",
+              "slug": "sister",
+              "emoji": "👧",
+              "ar": "أخت",
+              "art": "img/art/sister.svg",
+              "artMap": "img/art/sister.svg",
+              "audio": "audio/words/sister.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Brother",
+              "slug": "brother",
+              "emoji": "👦",
+              "ar": "أخ",
+              "art": "img/art/brother.svg",
+              "artMap": "img/art/brother.svg",
+              "audio": "audio/words/brother.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Grandmother",
+              "slug": "grandmother",
+              "emoji": "👵",
+              "ar": "جدّة",
+              "art": "img/art/grandmother.svg",
+              "artMap": "img/art/grandmother.svg",
+              "audio": "audio/words/grandmother.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Grandfather",
+              "slug": "grandfather",
+              "emoji": "👴",
+              "ar": "جدّ",
+              "art": "img/art/grandfather.svg",
+              "artMap": "img/art/grandfather.svg",
+              "audio": "audio/words/grandfather.wav"
+            },
+            {
+              "unit": 3,
+              "text": "One",
+              "slug": "one",
+              "emoji": "1️⃣",
+              "ar": "واحد",
+              "art": "img/art/one.svg",
+              "artMap": "img/art/one.svg",
+              "audio": "audio/words/one.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Two",
+              "slug": "two",
+              "emoji": "2️⃣",
+              "ar": "اثنان",
+              "art": "img/art/two.svg",
+              "artMap": "img/art/two.svg",
+              "audio": "audio/words/two.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Three",
+              "slug": "three",
+              "emoji": "3️⃣",
+              "ar": "ثلاثة",
+              "art": "img/art/three.svg",
+              "artMap": "img/art/three.svg",
+              "audio": "audio/words/three.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Four",
+              "slug": "four",
+              "emoji": "4️⃣",
+              "ar": "أربعة",
+              "art": "img/art/four.svg",
+              "artMap": "img/art/four.svg",
+              "audio": "audio/words/four.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Five",
+              "slug": "five",
+              "emoji": "5️⃣",
+              "ar": "خمسة",
+              "art": "img/art/five.svg",
+              "artMap": "img/art/five.svg",
+              "audio": "audio/words/five.wav"
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "title": "My Body and My Senses",
+          "ar": "جسدي وحواسّي",
+          "count": 16,
+          "items": [
+            {
+              "unit": 4,
+              "text": "Head",
+              "slug": "head",
+              "emoji": "🧑",
+              "ar": "رأس",
+              "art": "img/art/head.svg",
+              "artMap": "img/art/head.svg",
+              "audio": "audio/words/head.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Eyes",
+              "slug": "eyes",
+              "emoji": "👀",
+              "ar": "عيون",
+              "art": "img/art/eyes.svg",
+              "artMap": "img/art/eyes.svg",
+              "audio": "audio/words/eyes.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Ears",
+              "slug": "ears",
+              "emoji": "👂",
+              "ar": "أذنان",
+              "art": "img/art/ears.svg",
+              "artMap": "img/art/ears.svg",
+              "audio": "audio/words/ears.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Nose",
+              "slug": "nose",
+              "emoji": "👃",
+              "ar": "أنف",
+              "art": "img/art/nose.svg",
+              "artMap": "img/art/nose.svg",
+              "audio": "audio/words/nose.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Mouth",
+              "slug": "mouth",
+              "emoji": "👄",
+              "ar": "فم",
+              "art": "img/art/mouth.svg",
+              "artMap": "img/art/mouth.svg",
+              "audio": "audio/words/mouth.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Tongue",
+              "slug": "tongue",
+              "emoji": "👅",
+              "ar": "لسان",
+              "art": "img/art/tongue.svg",
+              "artMap": "img/art/tongue.svg",
+              "audio": "audio/words/tongue.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Arm",
+              "slug": "arm",
+              "emoji": "💪",
+              "ar": "ذراع",
+              "art": "img/art/arm.svg",
+              "artMap": "img/art/arm.svg",
+              "audio": "audio/words/arm.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Hand",
+              "slug": "hand",
+              "emoji": "✋",
+              "ar": "يد",
+              "art": "img/art/hand.svg",
+              "artMap": "img/art/hand.svg",
+              "audio": "audio/words/hand.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Leg",
+              "slug": "leg",
+              "emoji": "🦵",
+              "ar": "ساق",
+              "art": "img/art/leg.svg",
+              "artMap": "img/art/leg.svg",
+              "audio": "audio/words/leg.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Foot",
+              "slug": "foot",
+              "emoji": "🦶",
+              "ar": "قدم",
+              "art": "img/art/foot.svg",
+              "artMap": "img/art/foot.svg",
+              "audio": "audio/words/foot.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Toe",
+              "slug": "toe",
+              "emoji": "🦶",
+              "ar": "إصبع قدم",
+              "art": "img/art/toe.svg",
+              "artMap": "img/art/toe.svg",
+              "audio": "audio/words/toe.wav"
+            },
+            {
+              "unit": 4,
+              "text": "See",
+              "slug": "see",
+              "emoji": "👁️",
+              "ar": "يرى",
+              "art": "img/art/see.svg",
+              "artMap": "img/art/see.svg",
+              "audio": "audio/words/see.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Hear",
+              "slug": "hear",
+              "emoji": "👂",
+              "ar": "يسمع",
+              "art": "img/art/hear.svg",
+              "artMap": "img/art/hear.svg",
+              "audio": "audio/words/hear.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Smell",
+              "slug": "smell",
+              "emoji": "👃",
+              "ar": "يشمّ",
+              "art": "img/art/smell.svg",
+              "artMap": "img/art/smell.svg",
+              "audio": "audio/words/smell.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Taste",
+              "slug": "taste",
+              "emoji": "👅",
+              "ar": "يتذوّق",
+              "art": "img/art/taste.svg",
+              "artMap": "img/art/taste.svg",
+              "audio": "audio/words/taste.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Touch",
+              "slug": "touch",
+              "emoji": "✋",
+              "ar": "يلمس",
+              "art": "img/art/touch.svg",
+              "artMap": "img/art/touch.svg",
+              "audio": "audio/words/touch.wav"
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "title": "On the Farm",
+          "ar": "في المزرعة",
+          "count": 16,
+          "items": [
+            {
+              "unit": 5,
+              "text": "Farm",
+              "slug": "farm",
+              "emoji": "🚜",
+              "ar": "مزرعة",
+              "art": "img/art/farm.svg",
+              "artMap": "img/art/farm.svg",
+              "audio": "audio/words/farm.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Cow",
+              "slug": "cow",
+              "emoji": "🐄",
+              "ar": "بقرة",
+              "art": "img/art/cow.svg",
+              "artMap": "img/art/cow.svg",
+              "audio": "audio/words/cow.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Horse",
+              "slug": "horse",
+              "emoji": "🐴",
+              "ar": "حصان",
+              "art": "img/art/horse.svg",
+              "artMap": "img/art/horse.svg",
+              "audio": "audio/words/horse.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Duck",
+              "slug": "duck",
+              "emoji": "🦆",
+              "ar": "بطة",
+              "art": "img/art/duck.svg",
+              "artMap": "img/art/duck.svg",
+              "audio": "audio/words/duck.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Chicken",
+              "slug": "chicken",
+              "emoji": "🐔",
+              "ar": "دجاجة",
+              "art": "img/art/chicken.svg",
+              "artMap": "img/art/chicken.svg",
+              "audio": "audio/words/chicken.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Milk",
+              "slug": "milk",
+              "emoji": "🥛",
+              "ar": "لبن",
+              "art": "img/art/milk.svg",
+              "artMap": "img/art/milk.svg",
+              "audio": "audio/words/milk.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Cheese",
+              "slug": "cheese",
+              "emoji": "🧀",
+              "ar": "جبن",
+              "art": "img/art/cheese.svg",
+              "artMap": "img/art/cheese.svg",
+              "audio": "audio/words/cheese.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Meat",
+              "slug": "meat",
+              "emoji": "🍖",
+              "ar": "لحم",
+              "art": "img/art/meat.svg",
+              "artMap": "img/art/meat.svg",
+              "audio": "audio/words/meat.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Eggs",
+              "slug": "eggs",
+              "emoji": "🥚",
+              "ar": "بيض",
+              "art": "img/art/eggs.svg",
+              "artMap": "img/art/eggs.svg",
+              "audio": "audio/words/eggs.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Big",
+              "slug": "big",
+              "emoji": "⬆️",
+              "ar": "كبير",
+              "art": "img/art/big.svg",
+              "artMap": "img/art/big.svg",
+              "audio": "audio/words/big.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Small",
+              "slug": "small",
+              "emoji": "⬇️",
+              "ar": "صغير",
+              "art": "img/art/small.svg",
+              "artMap": "img/art/small.svg",
+              "audio": "audio/words/small.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Six",
+              "slug": "six",
+              "emoji": "6️⃣",
+              "ar": "ستة",
+              "art": "img/art/six.svg",
+              "artMap": "img/art/six.svg",
+              "audio": "audio/words/six.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Seven",
+              "slug": "seven",
+              "emoji": "7️⃣",
+              "ar": "سبعة",
+              "art": "img/art/seven.svg",
+              "artMap": "img/art/seven.svg",
+              "audio": "audio/words/seven.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Eight",
+              "slug": "eight",
+              "emoji": "8️⃣",
+              "ar": "ثمانية",
+              "art": "img/art/eight.svg",
+              "artMap": "img/art/eight.svg",
+              "audio": "audio/words/eight.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Nine",
+              "slug": "nine",
+              "emoji": "9️⃣",
+              "ar": "تسعة",
+              "art": "img/art/nine.svg",
+              "artMap": "img/art/nine.svg",
+              "audio": "audio/words/nine.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Ten",
+              "slug": "ten",
+              "emoji": "🔟",
+              "ar": "عشرة",
+              "art": "img/art/ten.svg",
+              "artMap": "img/art/ten.svg",
+              "audio": "audio/words/ten.wav"
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "title": "Animals Around Me",
+          "ar": "حيوانات حولي",
+          "count": 14,
+          "items": [
+            {
+              "unit": 6,
+              "text": "Pets",
+              "slug": "pets",
+              "emoji": "🐾",
+              "ar": "حيوانات أليفة",
+              "art": "img/art/pets.svg",
+              "artMap": "img/art/pets.svg",
+              "audio": "audio/words/pets.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Cat",
+              "slug": "cat",
+              "emoji": "🐱",
+              "ar": "قطة",
+              "art": "img/art/cat.svg",
+              "artMap": "img/art/cat.svg",
+              "audio": "audio/words/cat.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Dog",
+              "slug": "dog",
+              "emoji": "🐶",
+              "ar": "كلب",
+              "art": "img/art/dog.svg",
+              "artMap": "img/art/dog.svg",
+              "audio": "audio/words/dog.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Turtle",
+              "slug": "turtle",
+              "emoji": "🐢",
+              "ar": "سلحفاة",
+              "art": "img/art/turtle.svg",
+              "artMap": "img/art/turtle.svg",
+              "audio": "audio/words/turtle.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Jungle",
+              "slug": "jungle",
+              "emoji": "🌴",
+              "ar": "غابة",
+              "art": "img/art/jungle.svg",
+              "artMap": "img/art/jungle.svg",
+              "audio": "audio/words/jungle.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Lion",
+              "slug": "lion",
+              "emoji": "🦁",
+              "ar": "أسد",
+              "art": "img/art/lion.svg",
+              "artMap": "img/art/lion.svg",
+              "audio": "audio/words/lion.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Tiger",
+              "slug": "tiger",
+              "emoji": "🐯",
+              "ar": "نمر",
+              "art": "img/art/tiger.svg",
+              "artMap": "img/art/tiger.svg",
+              "audio": "audio/words/tiger.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Elephant",
+              "slug": "elephant",
+              "emoji": "🐘",
+              "ar": "فيل",
+              "art": "img/art/elephant.svg",
+              "artMap": "img/art/elephant.svg",
+              "audio": "audio/words/elephant.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Monkey",
+              "slug": "monkey",
+              "emoji": "🐵",
+              "ar": "قرد",
+              "art": "img/art/monkey.svg",
+              "artMap": "img/art/monkey.svg",
+              "audio": "audio/words/monkey.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Giraffe",
+              "slug": "giraffe",
+              "emoji": "🦒",
+              "ar": "زرافة",
+              "art": "img/art/giraffe.svg",
+              "artMap": "img/art/giraffe.svg",
+              "audio": "audio/words/giraffe.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Snake",
+              "slug": "snake",
+              "emoji": "🐍",
+              "ar": "ثعبان",
+              "art": "img/art/snake.svg",
+              "artMap": "img/art/snake.svg",
+              "audio": "audio/words/snake.wav"
+            },
+            {
+              "unit": 6,
+              "text": "In",
+              "slug": "in",
+              "emoji": "📥",
+              "ar": "في",
+              "art": "img/art/in.svg",
+              "artMap": "img/art/in.svg",
+              "audio": "audio/words/in.wav"
+            },
+            {
+              "unit": 6,
+              "text": "On",
+              "slug": "on",
+              "emoji": "🔛",
+              "ar": "على",
+              "art": "img/art/on.svg",
+              "artMap": "img/art/on.svg",
+              "audio": "audio/words/on.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Under",
+              "slug": "under",
+              "emoji": "🔽",
+              "ar": "تحت",
+              "art": "img/art/under.svg",
+              "artMap": "img/art/under.svg",
+              "audio": "audio/words/under.wav"
+            }
+          ]
+        }
+      ],
+      "status": "partially_verified",
+      "source": "Connect Primary 1 Term 1 book (2022/2023) — referenced in code comment; file NOT in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 84,
+      "totalItems": 84
+    },
+    {
+      "id": "p1t2",
+      "grade": "الصف الأول الابتدائي",
+      "ages": "6-7 سنوات",
+      "terms": [
+        "2"
+      ],
+      "units": [
+        {
+          "n": 1,
+          "title": "My Week",
+          "ar": "أسبوعي",
+          "count": 14,
+          "items": [
+            {
+              "unit": 1,
+              "text": "Saturday",
+              "slug": "saturday",
+              "emoji": "🗓️",
+              "ar": "السبت",
+              "art": "img/art/saturday.svg",
+              "artMap": "img/art/saturday.svg",
+              "audio": "audio/words/saturday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Sunday",
+              "slug": "sunday",
+              "emoji": "🗓️",
+              "ar": "الأحد",
+              "art": "img/art/sunday.svg",
+              "artMap": "img/art/sunday.svg",
+              "audio": "audio/words/sunday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Monday",
+              "slug": "monday",
+              "emoji": "🗓️",
+              "ar": "الاثنين",
+              "art": "img/art/monday.svg",
+              "artMap": "img/art/monday.svg",
+              "audio": "audio/words/monday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Tuesday",
+              "slug": "tuesday",
+              "emoji": "🗓️",
+              "ar": "الثلاثاء",
+              "art": "img/art/tuesday.svg",
+              "artMap": "img/art/tuesday.svg",
+              "audio": "audio/words/tuesday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Wednesday",
+              "slug": "wednesday",
+              "emoji": "🗓️",
+              "ar": "الأربعاء",
+              "art": "img/art/wednesday.svg",
+              "artMap": "img/art/wednesday.svg",
+              "audio": "audio/words/wednesday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Thursday",
+              "slug": "thursday",
+              "emoji": "🗓️",
+              "ar": "الخميس",
+              "art": "img/art/thursday.svg",
+              "artMap": "img/art/thursday.svg",
+              "audio": "audio/words/thursday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Friday",
+              "slug": "friday",
+              "emoji": "🗓️",
+              "ar": "الجمعة",
+              "art": "img/art/friday.svg",
+              "artMap": "img/art/friday.svg",
+              "audio": "audio/words/friday.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Week",
+              "slug": "week",
+              "emoji": "📅",
+              "ar": "أسبوع",
+              "art": "img/art/week.svg",
+              "artMap": "img/art/week.svg",
+              "audio": "audio/words/week.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Before",
+              "slug": "before",
+              "emoji": "⬅️",
+              "ar": "قبل",
+              "art": "img/art/before.svg",
+              "artMap": "img/art/before.svg",
+              "audio": "audio/words/before.wav"
+            },
+            {
+              "unit": 1,
+              "text": "After",
+              "slug": "after",
+              "emoji": "➡️",
+              "ar": "بعد",
+              "art": "img/art/after.svg",
+              "artMap": "img/art/after.svg",
+              "audio": "audio/words/after.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Today",
+              "slug": "today",
+              "emoji": "📆",
+              "ar": "اليوم",
+              "art": "img/art/today.svg",
+              "artMap": "img/art/today.svg",
+              "audio": "audio/words/today.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Breakfast",
+              "slug": "breakfast",
+              "emoji": "🍳",
+              "ar": "الفطور",
+              "art": "img/art/breakfast.svg",
+              "artMap": "img/art/breakfast.svg",
+              "audio": "audio/words/breakfast.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Lunch",
+              "slug": "lunch",
+              "emoji": "🥗",
+              "ar": "الغداء",
+              "art": "img/art/lunch.svg",
+              "artMap": "img/art/lunch.svg",
+              "audio": "audio/words/lunch.wav"
+            },
+            {
+              "unit": 1,
+              "text": "Dinner",
+              "slug": "dinner",
+              "emoji": "🍽️",
+              "ar": "العشاء",
+              "art": "img/art/dinner.svg",
+              "artMap": "img/art/dinner.svg",
+              "audio": "audio/words/dinner.wav"
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "title": "Feelings",
+          "ar": "المشاعر",
+          "count": 6,
+          "items": [
+            {
+              "unit": 2,
+              "text": "Happy",
+              "slug": "happy",
+              "emoji": "😀",
+              "ar": "سعيد",
+              "art": "img/art/happy.svg",
+              "artMap": "img/art/happy.svg",
+              "audio": "audio/words/happy.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Sad",
+              "slug": "sad",
+              "emoji": "😢",
+              "ar": "حزين",
+              "art": "img/art/sad.svg",
+              "artMap": "img/art/sad.svg",
+              "audio": "audio/words/sad.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Angry",
+              "slug": "angry",
+              "emoji": "😠",
+              "ar": "غاضب",
+              "art": "img/art/angry.svg",
+              "artMap": "img/art/angry.svg",
+              "audio": "audio/words/angry.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Tired",
+              "slug": "tired",
+              "emoji": "😫",
+              "ar": "متعب",
+              "art": "img/art/tired.svg",
+              "artMap": "img/art/tired.svg",
+              "audio": "audio/words/tired.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Surprised",
+              "slug": "surprised",
+              "emoji": "😲",
+              "ar": "مندهش",
+              "art": "img/art/surprised.svg",
+              "artMap": "img/art/surprised.svg",
+              "audio": "audio/words/surprised.wav"
+            },
+            {
+              "unit": 2,
+              "text": "Scared",
+              "slug": "scared",
+              "emoji": "😨",
+              "ar": "خائف",
+              "art": "img/art/scared.svg",
+              "artMap": "img/art/scared.svg",
+              "audio": "audio/words/scared.wav"
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "title": "Seasons",
+          "ar": "الفصول والأشهر",
+          "count": 23,
+          "items": [
+            {
+              "unit": 3,
+              "text": "Spring",
+              "slug": "spring",
+              "emoji": "🌸",
+              "ar": "الربيع",
+              "art": "img/art/spring.svg",
+              "artMap": "img/art/spring.svg",
+              "audio": "audio/words/spring.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Summer",
+              "slug": "summer",
+              "emoji": "☀️",
+              "ar": "الصيف",
+              "art": "img/art/summer.svg",
+              "artMap": "img/art/summer.svg",
+              "audio": "audio/words/summer.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Fall",
+              "slug": "fall",
+              "emoji": "🍂",
+              "ar": "الخريف",
+              "art": "img/art/fall.svg",
+              "artMap": "img/art/fall.svg",
+              "audio": "audio/words/fall.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Winter",
+              "slug": "winter",
+              "emoji": "❄️",
+              "ar": "الشتاء",
+              "art": "img/art/winter.svg",
+              "artMap": "img/art/winter.svg",
+              "audio": "audio/words/winter.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Warm",
+              "slug": "warm",
+              "emoji": "🌤️",
+              "ar": "دافئ",
+              "art": "img/art/warm.svg",
+              "artMap": "img/art/warm.svg",
+              "audio": "audio/words/warm.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Cold",
+              "slug": "cold",
+              "emoji": "🧊",
+              "ar": "بارد",
+              "art": "img/art/cold.svg",
+              "artMap": "img/art/cold.svg",
+              "audio": "audio/words/cold.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Hot",
+              "slug": "hot",
+              "emoji": "🔥",
+              "ar": "حار",
+              "art": "img/art/hot.svg",
+              "artMap": "img/art/hot.svg",
+              "audio": "audio/words/hot.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Windy",
+              "slug": "windy",
+              "emoji": "🌬️",
+              "ar": "عاصف",
+              "art": "img/art/windy.svg",
+              "artMap": "img/art/windy.svg",
+              "audio": "audio/words/windy.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Rainy",
+              "slug": "rainy",
+              "emoji": "🌧️",
+              "ar": "مُمطر",
+              "art": "img/art/rainy.svg",
+              "artMap": "img/art/rainy.svg",
+              "audio": "audio/words/rainy.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Sunny",
+              "slug": "sunny",
+              "emoji": "🌞",
+              "ar": "مُشمس",
+              "art": "img/art/sunny.svg",
+              "artMap": "img/art/sunny.svg",
+              "audio": "audio/words/sunny.wav"
+            },
+            {
+              "unit": 3,
+              "text": "Cloudy",
+              "slug": "cloudy",
+              "emoji": "☁️",
+              "ar": "غائم",
+              "art": "img/art/cloudy.svg",
+              "artMap": "img/art/cloudy.svg",
+              "audio": "audio/words/cloudy.wav"
+            },
+            {
+              "unit": 3,
+              "text": "January",
+              "slug": "january",
+              "emoji": "📅",
+              "ar": "يناير",
+              "art": "img/art/january.svg",
+              "artMap": "img/art/january.svg",
+              "audio": "audio/words/january.wav"
+            },
+            {
+              "unit": 3,
+              "text": "February",
+              "slug": "february",
+              "emoji": "📅",
+              "ar": "فبراير",
+              "art": "img/art/february.svg",
+              "artMap": "img/art/february.svg",
+              "audio": "audio/words/february.wav"
+            },
+            {
+              "unit": 3,
+              "text": "March",
+              "slug": "march",
+              "emoji": "📅",
+              "ar": "مارس",
+              "art": "img/art/march.svg",
+              "artMap": "img/art/march.svg",
+              "audio": "audio/words/march.wav"
+            },
+            {
+              "unit": 3,
+              "text": "April",
+              "slug": "april",
+              "emoji": "📅",
+              "ar": "أبريل",
+              "art": "img/art/april.svg",
+              "artMap": "img/art/april.svg",
+              "audio": "audio/words/april.wav"
+            },
+            {
+              "unit": 3,
+              "text": "May",
+              "slug": "may",
+              "emoji": "📅",
+              "ar": "مايو",
+              "art": "img/art/may.svg",
+              "artMap": "img/art/may.svg",
+              "audio": "audio/words/may.wav"
+            },
+            {
+              "unit": 3,
+              "text": "June",
+              "slug": "june",
+              "emoji": "📅",
+              "ar": "يونيو",
+              "art": "img/art/june.svg",
+              "artMap": "img/art/june.svg",
+              "audio": "audio/words/june.wav"
+            },
+            {
+              "unit": 3,
+              "text": "July",
+              "slug": "july",
+              "emoji": "📅",
+              "ar": "يوليو",
+              "art": "img/art/july.svg",
+              "artMap": "img/art/july.svg",
+              "audio": "audio/words/july.wav"
+            },
+            {
+              "unit": 3,
+              "text": "August",
+              "slug": "august",
+              "emoji": "📅",
+              "ar": "أغسطس",
+              "art": "img/art/august.svg",
+              "artMap": "img/art/august.svg",
+              "audio": "audio/words/august.wav"
+            },
+            {
+              "unit": 3,
+              "text": "September",
+              "slug": "september",
+              "emoji": "📅",
+              "ar": "سبتمبر",
+              "art": "img/art/september.svg",
+              "artMap": "img/art/september.svg",
+              "audio": "audio/words/september.wav"
+            },
+            {
+              "unit": 3,
+              "text": "October",
+              "slug": "october",
+              "emoji": "📅",
+              "ar": "أكتوبر",
+              "art": "img/art/october.svg",
+              "artMap": "img/art/october.svg",
+              "audio": "audio/words/october.wav"
+            },
+            {
+              "unit": 3,
+              "text": "November",
+              "slug": "november",
+              "emoji": "📅",
+              "ar": "نوفمبر",
+              "art": "img/art/november.svg",
+              "artMap": "img/art/november.svg",
+              "audio": "audio/words/november.wav"
+            },
+            {
+              "unit": 3,
+              "text": "December",
+              "slug": "december",
+              "emoji": "📅",
+              "ar": "ديسمبر",
+              "art": "img/art/december.svg",
+              "artMap": "img/art/december.svg",
+              "audio": "audio/words/december.wav"
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "title": "My House",
+          "ar": "منزلي",
+          "count": 16,
+          "items": [
+            {
+              "unit": 4,
+              "text": "Home",
+              "slug": "home",
+              "emoji": "🏠",
+              "ar": "منزل",
+              "art": "img/art/home.svg",
+              "artMap": "img/art/home.svg",
+              "audio": "audio/words/home.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Bedroom",
+              "slug": "bedroom",
+              "emoji": "🛏️",
+              "ar": "غرفة نوم",
+              "art": "img/art/bedroom.svg",
+              "artMap": "img/art/bedroom.svg",
+              "audio": "audio/words/bedroom.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Living Room",
+              "slug": "livingroom",
+              "emoji": "🛋️",
+              "ar": "غرفة جلوس",
+              "art": "img/art/livingroom.svg",
+              "artMap": "img/art/livingroom.svg",
+              "audio": "audio/words/living room.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Kitchen",
+              "slug": "kitchen",
+              "emoji": "🍳",
+              "ar": "مطبخ",
+              "art": "img/art/kitchen.svg",
+              "artMap": "img/art/kitchen.svg",
+              "audio": "audio/words/kitchen.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Dining Room",
+              "slug": "diningroom",
+              "emoji": "🍽️",
+              "ar": "غرفة طعام",
+              "art": "img/art/diningroom.svg",
+              "artMap": "img/art/diningroom.svg",
+              "audio": "audio/words/dining room.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Bathroom",
+              "slug": "bathroom",
+              "emoji": "🚿",
+              "ar": "حمّام",
+              "art": "img/art/bathroom.svg",
+              "artMap": "img/art/bathroom.svg",
+              "audio": "audio/words/bathroom.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Bed",
+              "slug": "bed",
+              "emoji": "🛏️",
+              "ar": "سرير",
+              "art": "img/art/bed.svg",
+              "artMap": "img/art/bed.svg",
+              "audio": "audio/words/bed.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Closet",
+              "slug": "closet",
+              "emoji": "🚪",
+              "ar": "خزانة",
+              "art": "img/art/closet.svg",
+              "artMap": "img/art/closet.svg",
+              "audio": "audio/words/closet.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Couch",
+              "slug": "couch",
+              "emoji": "🛋️",
+              "ar": "أريكة",
+              "art": "img/art/couch.svg",
+              "artMap": "img/art/couch.svg",
+              "audio": "audio/words/couch.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Table",
+              "slug": "table",
+              "emoji": "🪑",
+              "ar": "طاولة",
+              "art": "img/art/table.svg",
+              "artMap": "img/art/table.svg",
+              "audio": "audio/words/table.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Chairs",
+              "slug": "chairs",
+              "emoji": "🪑",
+              "ar": "كراسي",
+              "art": "img/art/chairs.svg",
+              "artMap": "img/art/chairs.svg",
+              "audio": "audio/words/chairs.wav"
+            },
+            {
+              "unit": 4,
+              "text": "TV",
+              "slug": "tv",
+              "emoji": "📺",
+              "ar": "تلفاز",
+              "art": "img/art/tv.svg",
+              "artMap": "img/art/tv.svg",
+              "audio": "audio/words/tv.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Fridge",
+              "slug": "fridge",
+              "emoji": "🧊",
+              "ar": "ثلاجة",
+              "art": "img/art/fridge.svg",
+              "artMap": "img/art/fridge.svg",
+              "audio": "audio/words/fridge.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Oven",
+              "slug": "oven",
+              "emoji": "🔥",
+              "ar": "فرن",
+              "art": "img/art/oven.svg",
+              "artMap": "img/art/oven.svg",
+              "audio": "audio/words/oven.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Sink",
+              "slug": "sink",
+              "emoji": "🚰",
+              "ar": "حوض",
+              "art": "img/art/sink.svg",
+              "artMap": "img/art/sink.svg",
+              "audio": "audio/words/sink.wav"
+            },
+            {
+              "unit": 4,
+              "text": "Toilet",
+              "slug": "toilet",
+              "emoji": "🚽",
+              "ar": "مرحاض",
+              "art": "img/art/toilet.svg",
+              "artMap": "img/art/toilet.svg",
+              "audio": "audio/words/toilet.wav"
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "title": "Neighborhood",
+          "ar": "حَيّنا",
+          "count": 18,
+          "items": [
+            {
+              "unit": 5,
+              "text": "Hospital",
+              "slug": "hospital",
+              "emoji": "🏥",
+              "ar": "مستشفى",
+              "art": "img/art/hospital.svg",
+              "artMap": "img/art/hospital.svg",
+              "audio": "audio/words/hospital.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Shop",
+              "slug": "shop",
+              "emoji": "🏪",
+              "ar": "متجر",
+              "art": "img/art/shop.svg",
+              "artMap": "img/art/shop.svg",
+              "audio": "audio/words/shop.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Street",
+              "slug": "street",
+              "emoji": "🛣️",
+              "ar": "شارع",
+              "art": "img/art/street.svg",
+              "artMap": "img/art/street.svg",
+              "audio": "audio/words/street.wav"
+            },
+            {
+              "unit": 5,
+              "text": "School",
+              "slug": "school",
+              "emoji": "🏫",
+              "ar": "مدرسة",
+              "art": "img/art/school.svg",
+              "artMap": "img/art/school.svg",
+              "audio": "audio/words/school.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Building",
+              "slug": "building",
+              "emoji": "🏢",
+              "ar": "مبنى",
+              "art": "img/art/building.svg",
+              "artMap": "img/art/building.svg",
+              "audio": "audio/words/building.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Park",
+              "slug": "park",
+              "emoji": "🏞️",
+              "ar": "حديقة",
+              "art": "img/art/park.svg",
+              "artMap": "img/art/park.svg",
+              "audio": "audio/words/park.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Zoo",
+              "slug": "zoo",
+              "emoji": "🦓",
+              "ar": "حديقة حيوان",
+              "art": "img/art/zoo.svg",
+              "artMap": "img/art/zoo.svg",
+              "audio": "audio/words/zoo.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Beach",
+              "slug": "beach",
+              "emoji": "🏖️",
+              "ar": "شاطئ",
+              "art": "img/art/beach.svg",
+              "artMap": "img/art/beach.svg",
+              "audio": "audio/words/beach.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Truck",
+              "slug": "truck",
+              "emoji": "🚚",
+              "ar": "شاحنة",
+              "art": "img/art/truck.svg",
+              "artMap": "img/art/truck.svg",
+              "audio": "audio/words/truck.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Car",
+              "slug": "car",
+              "emoji": "🚗",
+              "ar": "سيارة",
+              "art": "img/art/car.svg",
+              "artMap": "img/art/car.svg",
+              "audio": "audio/words/car.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Bus",
+              "slug": "bus",
+              "emoji": "🚌",
+              "ar": "أتوبيس",
+              "art": "img/art/bus.svg",
+              "artMap": "img/art/bus.svg",
+              "audio": "audio/words/bus.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Jump",
+              "slug": "jump",
+              "emoji": "🤸",
+              "ar": "يقفز",
+              "art": "img/art/jump.svg",
+              "artMap": "img/art/jump.svg",
+              "audio": "audio/words/jump.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Throw",
+              "slug": "throw",
+              "emoji": "🎯",
+              "ar": "يقذف",
+              "art": "img/art/throw.svg",
+              "artMap": "img/art/throw.svg",
+              "audio": "audio/words/throw.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Catch",
+              "slug": "catch",
+              "emoji": "🧤",
+              "ar": "يمسك",
+              "art": "img/art/catch.svg",
+              "artMap": "img/art/catch.svg",
+              "audio": "audio/words/catch.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Swim",
+              "slug": "swim",
+              "emoji": "🏊",
+              "ar": "يسبح",
+              "art": "img/art/swim.svg",
+              "artMap": "img/art/swim.svg",
+              "audio": "audio/words/swim.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Dig",
+              "slug": "dig",
+              "emoji": "⛏️",
+              "ar": "يحفر",
+              "art": "img/art/dig.svg",
+              "artMap": "img/art/dig.svg",
+              "audio": "audio/words/dig.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Run",
+              "slug": "run",
+              "emoji": "🏃",
+              "ar": "يجري",
+              "art": "img/art/run.svg",
+              "artMap": "img/art/run.svg",
+              "audio": "audio/words/run.wav"
+            },
+            {
+              "unit": 5,
+              "text": "Animals",
+              "slug": "animals",
+              "emoji": "🐾",
+              "ar": "حيوانات",
+              "art": "img/art/animals.svg",
+              "artMap": "img/art/animals.svg",
+              "audio": "audio/words/animals.wav"
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "title": "Two Friends and One Apple",
+          "ar": "صديقان وتفاحة",
+          "count": 6,
+          "items": [
+            {
+              "unit": 6,
+              "text": "Apple",
+              "slug": "apple",
+              "emoji": "🍎",
+              "ar": "تفاحة",
+              "art": "img/art/apple.svg",
+              "artMap": "img/art/apple.svg",
+              "audio": "audio/words/apple.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Friend",
+              "slug": "friend",
+              "emoji": "🧑‍🤝‍🧑",
+              "ar": "صديق",
+              "art": "img/art/friend.svg",
+              "artMap": "img/art/friend.svg",
+              "audio": "audio/words/friend.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Park",
+              "slug": "park",
+              "emoji": "🏞️",
+              "ar": "حديقة",
+              "art": "img/art/park.svg",
+              "artMap": "img/art/park.svg",
+              "audio": "audio/words/park.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Share",
+              "slug": "share",
+              "emoji": "🤝",
+              "ar": "يشارك",
+              "art": "img/art/share.svg",
+              "artMap": "img/art/share.svg",
+              "audio": "audio/words/share.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Happy",
+              "slug": "happy",
+              "emoji": "😀",
+              "ar": "سعيد",
+              "art": "img/art/happy.svg",
+              "artMap": "img/art/happy.svg",
+              "audio": "audio/words/happy.wav"
+            },
+            {
+              "unit": 6,
+              "text": "Sad",
+              "slug": "sad",
+              "emoji": "😢",
+              "ar": "حزين",
+              "art": "img/art/sad.svg",
+              "artMap": "img/art/sad.svg",
+              "audio": "audio/words/sad.wav"
+            }
+          ]
+        }
+      ],
+      "status": "partially_verified",
+      "source": "Connect Primary 1 Term 2 book (2025/2026) — referenced in code comment; file NOT in repo",
+      "duplicatesWithinGrade": [
+        {
+          "slug": "happy",
+          "count": 2
+        },
+        {
+          "slug": "sad",
+          "count": 2
+        },
+        {
+          "slug": "park",
+          "count": 2
+        }
+      ],
+      "uniqueWords": 80,
+      "totalItems": 83
+    },
+    {
+      "id": "p2",
+      "grade": "الصف الثاني الابتدائي",
+      "ages": "7-8 سنوات",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 24,
+          "items": [
+            {
+              "unit": null,
+              "text": "Morning",
+              "slug": "morning",
+              "emoji": "🌅",
+              "ar": "صباح",
+              "art": "img/art/morning.svg",
+              "artMap": "img/art/morning.svg",
+              "audio": "audio/words/morning.wav"
+            },
+            {
+              "unit": null,
+              "text": "Evening",
+              "slug": "evening",
+              "emoji": "🌆",
+              "ar": "مساء",
+              "art": "img/art/evening.svg",
+              "artMap": "img/art/evening.svg",
+              "audio": "audio/words/evening.wav"
+            },
+            {
+              "unit": null,
+              "text": "Today",
+              "slug": "today",
+              "emoji": "📅",
+              "ar": "اليوم",
+              "art": "img/art/today.svg",
+              "artMap": "img/art/today.svg",
+              "audio": "audio/words/today.wav"
+            },
+            {
+              "unit": null,
+              "text": "Weather",
+              "slug": "weather",
+              "emoji": "⛅",
+              "ar": "الطقس",
+              "art": "img/art/weather.svg",
+              "artMap": "img/art/weather.svg",
+              "audio": "audio/words/weather.wav"
+            },
+            {
+              "unit": null,
+              "text": "Rain",
+              "slug": "rain",
+              "emoji": "🌧️",
+              "ar": "مطر",
+              "art": "img/art/rain.svg",
+              "artMap": "img/art/rain.svg",
+              "audio": "audio/words/rain.wav"
+            },
+            {
+              "unit": null,
+              "text": "Cold",
+              "slug": "cold",
+              "emoji": "🧊",
+              "ar": "بارد",
+              "art": "img/art/cold.svg",
+              "artMap": "img/art/cold.svg",
+              "audio": "audio/words/cold.wav"
+            },
+            {
+              "unit": null,
+              "text": "Hot",
+              "slug": "hot",
+              "emoji": "🔥",
+              "ar": "حار",
+              "art": "img/art/hot.svg",
+              "artMap": "img/art/hot.svg",
+              "audio": "audio/words/hot.wav"
+            },
+            {
+              "unit": null,
+              "text": "Wind",
+              "slug": "wind",
+              "emoji": "💨",
+              "ar": "رياح",
+              "art": "img/art/wind.svg",
+              "artMap": "img/art/wind.svg",
+              "audio": "audio/words/wind.wav"
+            },
+            {
+              "unit": null,
+              "text": "House",
+              "slug": "house",
+              "emoji": "🏠",
+              "ar": "منزل",
+              "art": "img/art/house.svg",
+              "artMap": "img/art/house.svg",
+              "audio": "audio/words/house.wav"
+            },
+            {
+              "unit": null,
+              "text": "Kitchen",
+              "slug": "kitchen",
+              "emoji": "🍳",
+              "ar": "مطبخ",
+              "art": "img/art/kitchen.svg",
+              "artMap": "img/art/kitchen.svg",
+              "audio": "audio/words/kitchen.wav"
+            },
+            {
+              "unit": null,
+              "text": "Bedroom",
+              "slug": "bedroom",
+              "emoji": "🛏️",
+              "ar": "غرفة نوم",
+              "art": "img/art/bedroom.svg",
+              "artMap": "img/art/bedroom.svg",
+              "audio": "audio/words/bedroom.wav"
+            },
+            {
+              "unit": null,
+              "text": "Bathroom",
+              "slug": "bathroom",
+              "emoji": "🛁",
+              "ar": "حمام",
+              "art": "img/art/bathroom.svg",
+              "artMap": "img/art/bathroom.svg",
+              "audio": "audio/words/bathroom.wav"
+            },
+            {
+              "unit": null,
+              "text": "Garden",
+              "slug": "garden",
+              "emoji": "🌷",
+              "ar": "حديقة",
+              "art": "img/art/garden.svg",
+              "artMap": "img/art/garden.svg",
+              "audio": "audio/words/garden.wav"
+            },
+            {
+              "unit": null,
+              "text": "Bread",
+              "slug": "bread",
+              "emoji": "🍞",
+              "ar": "خبز",
+              "art": "img/art/bread.svg",
+              "artMap": "img/art/bread.svg",
+              "audio": "audio/words/bread.wav"
+            },
+            {
+              "unit": null,
+              "text": "Egg",
+              "slug": "egg",
+              "emoji": "🥚",
+              "ar": "بيضة",
+              "art": "img/art/egg.svg",
+              "artMap": "img/art/egg.svg",
+              "audio": "audio/words/egg.wav"
+            },
+            {
+              "unit": null,
+              "text": "Cheese",
+              "slug": "cheese",
+              "emoji": "🧀",
+              "ar": "جبن",
+              "art": "img/art/cheese.svg",
+              "artMap": "img/art/cheese.svg",
+              "audio": "audio/words/cheese.wav"
+            },
+            {
+              "unit": null,
+              "text": "Chicken",
+              "slug": "chicken",
+              "emoji": "🍗",
+              "ar": "دجاج",
+              "art": "img/art/chicken.svg",
+              "artMap": "img/art/chicken.svg",
+              "audio": "audio/words/chicken.wav"
+            },
+            {
+              "unit": null,
+              "text": "Rice",
+              "slug": "rice",
+              "emoji": "🍚",
+              "ar": "أرز",
+              "art": "img/art/rice.svg",
+              "artMap": "img/art/rice.svg",
+              "audio": "audio/words/rice.wav"
+            },
+            {
+              "unit": null,
+              "text": "Banana",
+              "slug": "banana",
+              "emoji": "🍌",
+              "ar": "موز",
+              "art": "img/art/banana.svg",
+              "artMap": "img/art/banana.svg",
+              "audio": "audio/words/banana.wav"
+            },
+            {
+              "unit": null,
+              "text": "Orange",
+              "slug": "orange",
+              "emoji": "🍊",
+              "ar": "برتقال",
+              "art": "img/art/orange.svg",
+              "artMap": "img/art/orange.svg",
+              "audio": "audio/words/orange.wav"
+            },
+            {
+              "unit": null,
+              "text": "Grapes",
+              "slug": "grapes",
+              "emoji": "🍇",
+              "ar": "عنب",
+              "art": "img/art/grapes.svg",
+              "artMap": "img/art/grapes.svg",
+              "audio": "audio/words/grapes.wav"
+            },
+            {
+              "unit": null,
+              "text": "Watermelon",
+              "slug": "watermelon",
+              "emoji": "🍉",
+              "ar": "بطيخ",
+              "art": "img/art/watermelon.svg",
+              "artMap": "img/art/watermelon.svg",
+              "audio": "audio/words/watermelon.wav"
+            },
+            {
+              "unit": null,
+              "text": "Under",
+              "slug": "under",
+              "emoji": "⬇️",
+              "ar": "تحت",
+              "art": "img/art/under.svg",
+              "artMap": "img/art/under.svg",
+              "audio": "audio/words/under.wav"
+            },
+            {
+              "unit": null,
+              "text": "On",
+              "slug": "on",
+              "emoji": "⭐",
+              "ar": "فوق",
+              "art": "img/art/on.svg",
+              "artMap": "img/art/on.svg",
+              "audio": "audio/words/on.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 24,
+      "totalItems": 24
+    },
+    {
+      "id": "p3",
+      "grade": "الصف الثالث الابتدائي",
+      "ages": "8-9 سنوات",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 22,
+          "items": [
+            {
+              "unit": null,
+              "text": "Doctor",
+              "slug": "doctor",
+              "emoji": "🧑‍⚕️",
+              "ar": "طبيب",
+              "art": "img/art/doctor.svg",
+              "artMap": "img/art/doctor.svg",
+              "audio": "audio/words/doctor.wav"
+            },
+            {
+              "unit": null,
+              "text": "Farmer",
+              "slug": "farmer",
+              "emoji": "👨‍🌾",
+              "ar": "فلاح",
+              "art": "img/art/farmer.svg",
+              "artMap": "img/art/farmer.svg",
+              "audio": "audio/words/farmer.wav"
+            },
+            {
+              "unit": null,
+              "text": "Baker",
+              "slug": "baker",
+              "emoji": "🥖",
+              "ar": "خباز",
+              "art": "img/art/baker.svg",
+              "artMap": "img/art/baker.svg",
+              "audio": "audio/words/baker.wav"
+            },
+            {
+              "unit": null,
+              "text": "Policeman",
+              "slug": "policeman",
+              "emoji": "👮",
+              "ar": "شرطي",
+              "art": "img/art/policeman.svg",
+              "artMap": "img/art/policeman.svg",
+              "audio": "audio/words/policeman.wav"
+            },
+            {
+              "unit": null,
+              "text": "Nurse",
+              "slug": "nurse",
+              "emoji": "💉",
+              "ar": "ممرضة",
+              "art": "img/art/nurse.svg",
+              "artMap": "img/art/nurse.svg",
+              "audio": "audio/words/nurse.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tomato",
+              "slug": "tomato",
+              "emoji": "🍅",
+              "ar": "طماطم",
+              "art": "img/art/tomato.svg",
+              "artMap": "img/art/tomato.svg",
+              "audio": "audio/words/tomato.wav"
+            },
+            {
+              "unit": null,
+              "text": "Potato",
+              "slug": "potato",
+              "emoji": "🥔",
+              "ar": "بطاطس",
+              "art": "img/art/potato.svg",
+              "artMap": "img/art/potato.svg",
+              "audio": "audio/words/potato.wav"
+            },
+            {
+              "unit": null,
+              "text": "Carrot",
+              "slug": "carrot",
+              "emoji": "🥕",
+              "ar": "جزر",
+              "art": "img/art/carrot.svg",
+              "artMap": "img/art/carrot.svg",
+              "audio": "audio/words/carrot.wav"
+            },
+            {
+              "unit": null,
+              "text": "Onion",
+              "slug": "onion",
+              "emoji": "🧅",
+              "ar": "بصل",
+              "art": "img/art/onion.svg",
+              "artMap": "img/art/onion.svg",
+              "audio": "audio/words/onion.wav"
+            },
+            {
+              "unit": null,
+              "text": "Cucumber",
+              "slug": "cucumber",
+              "emoji": "🥒",
+              "ar": "خيار",
+              "art": "img/art/cucumber.svg",
+              "artMap": "img/art/cucumber.svg",
+              "audio": "audio/words/cucumber.wav"
+            },
+            {
+              "unit": null,
+              "text": "Football",
+              "slug": "football",
+              "emoji": "⚽",
+              "ar": "كرة قدم",
+              "art": "img/art/football.svg",
+              "artMap": "img/art/football.svg",
+              "audio": "audio/words/football.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tennis",
+              "slug": "tennis",
+              "emoji": "🎾",
+              "ar": "تنس",
+              "art": "img/art/tennis.svg",
+              "artMap": "img/art/tennis.svg",
+              "audio": "audio/words/tennis.wav"
+            },
+            {
+              "unit": null,
+              "text": "Swimming",
+              "slug": "swimming",
+              "emoji": "🏊",
+              "ar": "سباحة",
+              "art": "img/art/swimming.svg",
+              "artMap": "img/art/swimming.svg",
+              "audio": "audio/words/swimming.wav"
+            },
+            {
+              "unit": null,
+              "text": "Basketball",
+              "slug": "basketball",
+              "emoji": "🏀",
+              "ar": "سلة",
+              "art": "img/art/basketball.svg",
+              "artMap": "img/art/basketball.svg",
+              "audio": "audio/words/basketball.wav"
+            },
+            {
+              "unit": null,
+              "text": "Pizza",
+              "slug": "pizza",
+              "emoji": "🍕",
+              "ar": "بيتزا",
+              "art": "img/art/pizza.svg",
+              "artMap": "img/art/pizza.svg",
+              "audio": "audio/words/pizza.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tea",
+              "slug": "tea",
+              "emoji": "🍵",
+              "ar": "شاي",
+              "art": "img/art/tea.svg",
+              "artMap": "img/art/tea.svg",
+              "audio": "audio/words/tea.wav"
+            },
+            {
+              "unit": null,
+              "text": "Meat",
+              "slug": "meat",
+              "emoji": "🥩",
+              "ar": "لحم",
+              "art": "img/art/meat.svg",
+              "artMap": "img/art/meat.svg",
+              "audio": "audio/words/meat.wav"
+            },
+            {
+              "unit": null,
+              "text": "Lunch",
+              "slug": "lunch",
+              "emoji": "🥪",
+              "ar": "غداء",
+              "art": "img/art/lunch.svg",
+              "artMap": "img/art/lunch.svg",
+              "audio": "audio/words/lunch.wav"
+            },
+            {
+              "unit": null,
+              "text": "Breakfast",
+              "slug": "breakfast",
+              "emoji": "🥞",
+              "ar": "فطور",
+              "art": "img/art/breakfast.svg",
+              "artMap": "img/art/breakfast.svg",
+              "audio": "audio/words/breakfast.wav"
+            },
+            {
+              "unit": null,
+              "text": "Cartoon",
+              "slug": "cartoon",
+              "emoji": "🎬",
+              "ar": "كرتون",
+              "art": "img/art/cartoon.svg",
+              "artMap": "img/art/cartoon.svg",
+              "audio": "audio/words/cartoon.wav"
+            },
+            {
+              "unit": null,
+              "text": "Play",
+              "slug": "play",
+              "emoji": "🫱🏼‍🫲🏽",
+              "ar": "يلعب",
+              "art": "img/art/play.svg",
+              "artMap": "img/art/play.svg",
+              "audio": "audio/words/play.wav"
+            },
+            {
+              "unit": null,
+              "text": "Read",
+              "slug": "read",
+              "emoji": "📖",
+              "ar": "يقرأ",
+              "art": "img/art/read.svg",
+              "artMap": "img/art/read.svg",
+              "audio": "audio/words/read.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 22,
+      "totalItems": 22
+    },
+    {
+      "id": "p4",
+      "grade": "الصف الرابع الابتدائي",
+      "ages": "9-10 سنوات",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 22,
+          "items": [
+            {
+              "unit": null,
+              "text": "School",
+              "slug": "school",
+              "emoji": "🏫",
+              "ar": "مدرسة",
+              "art": "img/art/school.svg",
+              "artMap": "img/art/school.svg",
+              "audio": "audio/words/school.wav"
+            },
+            {
+              "unit": null,
+              "text": "Class",
+              "slug": "class",
+              "emoji": "📚",
+              "ar": "فصل",
+              "art": "img/art/class.svg",
+              "artMap": "img/art/class.svg",
+              "audio": "audio/words/class.wav"
+            },
+            {
+              "unit": null,
+              "text": "Subject",
+              "slug": "subject",
+              "emoji": "📖",
+              "ar": "مادة",
+              "art": "img/art/subject.svg",
+              "artMap": "img/art/subject.svg",
+              "audio": "audio/words/subject.wav"
+            },
+            {
+              "unit": null,
+              "text": "English",
+              "slug": "english",
+              "emoji": "🇬🇧",
+              "ar": "إنجليزي",
+              "art": "img/art/english.svg",
+              "artMap": "img/art/english.svg",
+              "audio": "audio/words/english.wav"
+            },
+            {
+              "unit": null,
+              "text": "Math",
+              "slug": "math",
+              "emoji": "➗",
+              "ar": "حساب",
+              "art": "img/art/math.svg",
+              "artMap": "img/art/math.svg",
+              "audio": "audio/words/math.wav"
+            },
+            {
+              "unit": null,
+              "text": "Science",
+              "slug": "science",
+              "emoji": "🔬",
+              "ar": "علوم",
+              "art": "img/art/science.svg",
+              "artMap": "img/art/science.svg",
+              "audio": "audio/words/science.wav"
+            },
+            {
+              "unit": null,
+              "text": "Art",
+              "slug": "art",
+              "emoji": "🎨",
+              "ar": "فن",
+              "art": "img/art/art.svg",
+              "artMap": "img/art/art.svg",
+              "audio": "audio/words/art.wav"
+            },
+            {
+              "unit": null,
+              "text": "Music",
+              "slug": "music",
+              "emoji": "🎵",
+              "ar": "موسيقى",
+              "art": "img/art/music.svg",
+              "artMap": "img/art/music.svg",
+              "audio": "audio/words/music.wav"
+            },
+            {
+              "unit": null,
+              "text": "Shop",
+              "slug": "shop",
+              "emoji": "🏪",
+              "ar": "متجر",
+              "art": "img/art/shop.svg",
+              "artMap": "img/art/shop.svg",
+              "audio": "audio/words/shop.wav"
+            },
+            {
+              "unit": null,
+              "text": "Street",
+              "slug": "street",
+              "emoji": "🛣️",
+              "ar": "شارع",
+              "art": "img/art/street.svg",
+              "artMap": "img/art/street.svg",
+              "audio": "audio/words/street.wav"
+            },
+            {
+              "unit": null,
+              "text": "Hospital",
+              "slug": "hospital",
+              "emoji": "🏥",
+              "ar": "مستشفى",
+              "art": "img/art/hospital.svg",
+              "artMap": "img/art/hospital.svg",
+              "audio": "audio/words/hospital.wav"
+            },
+            {
+              "unit": null,
+              "text": "Station",
+              "slug": "station",
+              "emoji": "🚓",
+              "ar": "قسم شرطة",
+              "art": "img/art/station.svg",
+              "artMap": "img/art/station.svg",
+              "audio": "audio/words/station.wav"
+            },
+            {
+              "unit": null,
+              "text": "Mosque",
+              "slug": "mosque",
+              "emoji": "🕌",
+              "ar": "مسجد",
+              "art": "img/art/mosque.svg",
+              "artMap": "img/art/mosque.svg",
+              "audio": "audio/words/mosque.wav"
+            },
+            {
+              "unit": null,
+              "text": "Church",
+              "slug": "church",
+              "emoji": "⛪",
+              "ar": "كنيسة",
+              "art": "img/art/church.svg",
+              "artMap": "img/art/church.svg",
+              "audio": "audio/words/church.wav"
+            },
+            {
+              "unit": null,
+              "text": "Sad",
+              "slug": "sad",
+              "emoji": "😢",
+              "ar": "حزين",
+              "art": "img/art/sad.svg",
+              "artMap": "img/art/sad.svg",
+              "audio": "audio/words/sad.wav"
+            },
+            {
+              "unit": null,
+              "text": "Angry",
+              "slug": "angry",
+              "emoji": "😠",
+              "ar": "غاضب",
+              "art": "img/art/angry.svg",
+              "artMap": "img/art/angry.svg",
+              "audio": "audio/words/angry.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tired",
+              "slug": "tired",
+              "emoji": "😴",
+              "ar": "متعب",
+              "art": "img/art/tired.svg",
+              "artMap": "img/art/tired.svg",
+              "audio": "audio/words/tired.wav"
+            },
+            {
+              "unit": null,
+              "text": "Brave",
+              "slug": "brave",
+              "emoji": "🦁",
+              "ar": "شجاع",
+              "art": "img/art/brave.svg",
+              "artMap": "img/art/brave.svg",
+              "audio": "audio/words/brave.wav"
+            },
+            {
+              "unit": null,
+              "text": "Helpful",
+              "slug": "helpful",
+              "emoji": "🤝",
+              "ar": "مساعد",
+              "art": "img/art/helpful.svg",
+              "artMap": "img/art/helpful.svg",
+              "audio": "audio/words/helpful.wav"
+            },
+            {
+              "unit": null,
+              "text": "Beautiful",
+              "slug": "beautiful",
+              "emoji": "🌸",
+              "ar": "جميل",
+              "art": "img/art/beautiful.svg",
+              "artMap": "img/art/beautiful.svg",
+              "audio": "audio/words/beautiful.wav"
+            },
+            {
+              "unit": null,
+              "text": "Big",
+              "slug": "big",
+              "emoji": "🐘",
+              "ar": "كبير",
+              "art": "img/art/big.svg",
+              "artMap": "img/art/big.svg",
+              "audio": "audio/words/big.wav"
+            },
+            {
+              "unit": null,
+              "text": "Small",
+              "slug": "small",
+              "emoji": "🐜",
+              "ar": "صغير",
+              "art": "img/art/small.svg",
+              "artMap": "img/art/small.svg",
+              "audio": "audio/words/small.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 22,
+      "totalItems": 22
+    },
+    {
+      "id": "p5",
+      "grade": "الصف الخامس الابتدائي",
+      "ages": "10-11 سنة",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 20,
+          "items": [
+            {
+              "unit": null,
+              "text": "Trip",
+              "slug": "trip",
+              "emoji": "🧳",
+              "ar": "رحلة",
+              "art": "img/art/trip.svg",
+              "artMap": "img/art/trip.svg",
+              "audio": "audio/words/trip.wav"
+            },
+            {
+              "unit": null,
+              "text": "Sea",
+              "slug": "sea",
+              "emoji": "🌊",
+              "ar": "بحر",
+              "art": "img/art/sea.svg",
+              "artMap": "img/art/sea.svg",
+              "audio": "audio/words/sea.wav"
+            },
+            {
+              "unit": null,
+              "text": "River",
+              "slug": "river",
+              "emoji": "🏞️",
+              "ar": "نهر",
+              "art": "img/art/river.svg",
+              "artMap": "img/art/river.svg",
+              "audio": "audio/words/river.wav"
+            },
+            {
+              "unit": null,
+              "text": "Beach",
+              "slug": "beach",
+              "emoji": "🏖️",
+              "ar": "شاطئ",
+              "art": "img/art/beach.svg",
+              "artMap": "img/art/beach.svg",
+              "audio": "audio/words/beach.wav"
+            },
+            {
+              "unit": null,
+              "text": "Mountain",
+              "slug": "mountain",
+              "emoji": "⛰️",
+              "ar": "جبل",
+              "art": "img/art/mountain.svg",
+              "artMap": "img/art/mountain.svg",
+              "audio": "audio/words/mountain.wav"
+            },
+            {
+              "unit": null,
+              "text": "Desert",
+              "slug": "desert",
+              "emoji": "🏜️",
+              "ar": "صحراء",
+              "art": "img/art/desert.svg",
+              "artMap": "img/art/desert.svg",
+              "audio": "audio/words/desert.wav"
+            },
+            {
+              "unit": null,
+              "text": "Camel",
+              "slug": "camel",
+              "emoji": "🐪",
+              "ar": "جمل",
+              "art": "img/art/camel.svg",
+              "artMap": "img/art/camel.svg",
+              "audio": "audio/words/camel.wav"
+            },
+            {
+              "unit": null,
+              "text": "Pyramid",
+              "slug": "pyramid",
+              "emoji": "🗿",
+              "ar": "هرم",
+              "art": "img/art/pyramid.svg",
+              "artMap": "img/art/pyramid.svg",
+              "audio": "audio/words/pyramid.wav"
+            },
+            {
+              "unit": null,
+              "text": "Museum",
+              "slug": "museum",
+              "emoji": "🏛️",
+              "ar": "متحف",
+              "art": "img/art/museum.svg",
+              "artMap": "img/art/museum.svg",
+              "audio": "audio/words/museum.wav"
+            },
+            {
+              "unit": null,
+              "text": "Zoo",
+              "slug": "zoo",
+              "emoji": "🦓",
+              "ar": "حديقة حيوان",
+              "art": "img/art/zoo.svg",
+              "artMap": "img/art/zoo.svg",
+              "audio": "audio/words/zoo.wav"
+            },
+            {
+              "unit": null,
+              "text": "Yesterday",
+              "slug": "yesterday",
+              "emoji": "⏪",
+              "ar": "أمس",
+              "art": "img/art/yesterday.svg",
+              "artMap": "img/art/yesterday.svg",
+              "audio": "audio/words/yesterday.wav"
+            },
+            {
+              "unit": null,
+              "text": "Visit",
+              "slug": "visit",
+              "emoji": "🗺️",
+              "ar": "يزور",
+              "art": "img/art/visit.svg",
+              "artMap": "img/art/visit.svg",
+              "audio": "audio/words/visit.wav"
+            },
+            {
+              "unit": null,
+              "text": "Wonderful",
+              "slug": "wonderful",
+              "emoji": "🎉",
+              "ar": "رائع",
+              "art": "img/art/wonderful.svg",
+              "artMap": "img/art/wonderful.svg",
+              "audio": "audio/words/wonderful.wav"
+            },
+            {
+              "unit": null,
+              "text": "Delicious",
+              "slug": "delicious",
+              "emoji": "😋",
+              "ar": "لذيذ",
+              "art": "img/art/delicious.svg",
+              "artMap": "img/art/delicious.svg",
+              "audio": "audio/words/delicious.wav"
+            },
+            {
+              "unit": null,
+              "text": "Interesting",
+              "slug": "interesting",
+              "emoji": "🤔",
+              "ar": "ممتع",
+              "art": "img/art/interesting.svg",
+              "artMap": "img/art/interesting.svg",
+              "audio": "audio/words/interesting.wav"
+            },
+            {
+              "unit": null,
+              "text": "Holiday",
+              "slug": "holiday",
+              "emoji": "🎡",
+              "ar": "إجازة",
+              "art": "img/art/holiday.svg",
+              "artMap": "img/art/holiday.svg",
+              "audio": "audio/words/holiday.wav"
+            },
+            {
+              "unit": null,
+              "text": "Swim",
+              "slug": "swim",
+              "emoji": "🏊",
+              "ar": "يسبح",
+              "art": "img/art/swim.svg",
+              "artMap": "img/art/swim.svg",
+              "audio": "audio/words/swim.wav"
+            },
+            {
+              "unit": null,
+              "text": "Travel",
+              "slug": "travel",
+              "emoji": "✈️",
+              "ar": "يسافر",
+              "art": "img/art/travel.svg",
+              "artMap": "img/art/travel.svg",
+              "audio": "audio/words/travel.wav"
+            },
+            {
+              "unit": null,
+              "text": "Watch",
+              "slug": "watch",
+              "emoji": "📺",
+              "ar": "يشاهد",
+              "art": "img/art/watch.svg",
+              "artMap": "img/art/watch.svg",
+              "audio": "audio/words/watch.wav"
+            },
+            {
+              "unit": null,
+              "text": "Played",
+              "slug": "played",
+              "emoji": "🎮",
+              "ar": "لعب",
+              "art": "img/art/played.svg",
+              "artMap": "img/art/played.svg",
+              "audio": "audio/words/played.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 20,
+      "totalItems": 20
+    },
+    {
+      "id": "p6",
+      "grade": "الصف السادس الابتدائي",
+      "ages": "11-12 سنة",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 22,
+          "items": [
+            {
+              "unit": null,
+              "text": "Health",
+              "slug": "health",
+              "emoji": "❤️",
+              "ar": "صحة",
+              "art": "img/art/health.svg",
+              "artMap": "img/art/health.svg",
+              "audio": "audio/words/health.wav"
+            },
+            {
+              "unit": null,
+              "text": "Medicine",
+              "slug": "medicine",
+              "emoji": "💊",
+              "ar": "دواء",
+              "art": "img/art/medicine.svg",
+              "artMap": "img/art/medicine.svg",
+              "audio": "audio/words/medicine.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tooth",
+              "slug": "tooth",
+              "emoji": "🦷",
+              "ar": "سن",
+              "art": "img/art/tooth.svg",
+              "artMap": "img/art/tooth.svg",
+              "audio": "audio/words/tooth.wav"
+            },
+            {
+              "unit": null,
+              "text": "Temperature",
+              "slug": "temperature",
+              "emoji": "🌡️",
+              "ar": "حرارة",
+              "art": "img/art/temperature.svg",
+              "artMap": "img/art/temperature.svg",
+              "audio": "audio/words/temperature.wav"
+            },
+            {
+              "unit": null,
+              "text": "Headache",
+              "slug": "headache",
+              "emoji": "🤕",
+              "ar": "صداع",
+              "art": "img/art/headache.svg",
+              "artMap": "img/art/headache.svg",
+              "audio": "audio/words/headache.wav"
+            },
+            {
+              "unit": null,
+              "text": "Future",
+              "slug": "future",
+              "emoji": "🔮",
+              "ar": "مستقبل",
+              "art": "img/art/future.svg",
+              "artMap": "img/art/future.svg",
+              "audio": "audio/words/future.wav"
+            },
+            {
+              "unit": null,
+              "text": "Plan",
+              "slug": "plan",
+              "emoji": "📋",
+              "ar": "خطة",
+              "art": "img/art/plan.svg",
+              "artMap": "img/art/plan.svg",
+              "audio": "audio/words/plan.wav"
+            },
+            {
+              "unit": null,
+              "text": "Homework",
+              "slug": "homework",
+              "emoji": "📝",
+              "ar": "واجب",
+              "art": "img/art/homework.svg",
+              "artMap": "img/art/homework.svg",
+              "audio": "audio/words/homework.wav"
+            },
+            {
+              "unit": null,
+              "text": "Project",
+              "slug": "project",
+              "emoji": "🏗️",
+              "ar": "مشروع",
+              "art": "img/art/project.svg",
+              "artMap": "img/art/project.svg",
+              "audio": "audio/words/project.wav"
+            },
+            {
+              "unit": null,
+              "text": "Group",
+              "slug": "group",
+              "emoji": "👥",
+              "ar": "مجموعة",
+              "art": "img/art/group.svg",
+              "artMap": "img/art/group.svg",
+              "audio": "audio/words/group.wav"
+            },
+            {
+              "unit": null,
+              "text": "Important",
+              "slug": "important",
+              "emoji": "⭐",
+              "ar": "مهم",
+              "art": "img/art/important.svg",
+              "artMap": "img/art/important.svg",
+              "audio": "audio/words/important.wav"
+            },
+            {
+              "unit": null,
+              "text": "Easy",
+              "slug": "easy",
+              "emoji": "🐣",
+              "ar": "سهل",
+              "art": "img/art/easy.svg",
+              "artMap": "img/art/easy.svg",
+              "audio": "audio/words/easy.wav"
+            },
+            {
+              "unit": null,
+              "text": "Difficult",
+              "slug": "difficult",
+              "emoji": "🧗",
+              "ar": "صعب",
+              "art": "img/art/difficult.svg",
+              "artMap": "img/art/difficult.svg",
+              "audio": "audio/words/difficult.wav"
+            },
+            {
+              "unit": null,
+              "text": "Famous",
+              "slug": "famous",
+              "emoji": "🌟",
+              "ar": "مشهور",
+              "art": "img/art/famous.svg",
+              "artMap": "img/art/famous.svg",
+              "audio": "audio/words/famous.wav"
+            },
+            {
+              "unit": null,
+              "text": "Inventor",
+              "slug": "inventor",
+              "emoji": "💡",
+              "ar": "مخترع",
+              "art": "img/art/inventor.svg",
+              "artMap": "img/art/inventor.svg",
+              "audio": "audio/words/inventor.wav"
+            },
+            {
+              "unit": null,
+              "text": "Computer",
+              "slug": "computer",
+              "emoji": "💻",
+              "ar": "حاسوب",
+              "art": "img/art/computer.svg",
+              "artMap": "img/art/computer.svg",
+              "audio": "audio/words/computer.wav"
+            },
+            {
+              "unit": null,
+              "text": "Internet",
+              "slug": "internet",
+              "emoji": "🌐",
+              "ar": "إنترنت",
+              "art": "img/art/internet.svg",
+              "artMap": "img/art/internet.svg",
+              "audio": "audio/words/internet.wav"
+            },
+            {
+              "unit": null,
+              "text": "Email",
+              "slug": "email",
+              "emoji": "📧",
+              "ar": "بريد إلكتروني",
+              "art": "img/art/email.svg",
+              "artMap": "img/art/email.svg",
+              "audio": "audio/words/email.wav"
+            },
+            {
+              "unit": null,
+              "text": "Message",
+              "slug": "message",
+              "emoji": "💬",
+              "ar": "رسالة",
+              "art": "img/art/message.svg",
+              "artMap": "img/art/message.svg",
+              "audio": "audio/words/message.wav"
+            },
+            {
+              "unit": null,
+              "text": "Camera",
+              "slug": "camera",
+              "emoji": "📷",
+              "ar": "كاميرا",
+              "art": "img/art/camera.svg",
+              "artMap": "img/art/camera.svg",
+              "audio": "audio/words/camera.wav"
+            },
+            {
+              "unit": null,
+              "text": "Engineer",
+              "slug": "engineer",
+              "emoji": "👷",
+              "ar": "مهندس",
+              "art": "img/art/engineer.svg",
+              "artMap": "img/art/engineer.svg",
+              "audio": "audio/words/engineer.wav"
+            },
+            {
+              "unit": null,
+              "text": "Pilot",
+              "slug": "pilot",
+              "emoji": "👨‍✈️",
+              "ar": "طيار",
+              "art": "img/art/pilot.svg",
+              "artMap": "img/art/pilot.svg",
+              "audio": "audio/words/pilot.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 22,
+      "totalItems": 22
+    },
+    {
+      "id": "prep1",
+      "grade": "الأول الإعدادي",
+      "ages": "12-13 سنة",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 22,
+          "items": [
+            {
+              "unit": null,
+              "text": "Achievement",
+              "slug": "achievement",
+              "emoji": "🏆",
+              "ar": "إنجاز",
+              "art": "img/art/achievement.svg",
+              "artMap": "img/art/achievement.svg",
+              "audio": "audio/words/achievement.wav"
+            },
+            {
+              "unit": null,
+              "text": "Challenge",
+              "slug": "challenge",
+              "emoji": "🪜",
+              "ar": "تحدٍّ",
+              "art": "img/art/challenge.svg",
+              "artMap": "img/art/challenge.svg",
+              "audio": "audio/words/challenge.wav"
+            },
+            {
+              "unit": null,
+              "text": "Success",
+              "slug": "success",
+              "emoji": "🥇",
+              "ar": "نجاح",
+              "art": "img/art/success.svg",
+              "artMap": "img/art/success.svg",
+              "audio": "audio/words/success.wav"
+            },
+            {
+              "unit": null,
+              "text": "Skill",
+              "slug": "skill",
+              "emoji": "🎯",
+              "ar": "مهارة",
+              "art": "img/art/skill.svg",
+              "artMap": "img/art/skill.svg",
+              "audio": "audio/words/skill.wav"
+            },
+            {
+              "unit": null,
+              "text": "Knowledge",
+              "slug": "knowledge",
+              "emoji": "🧠",
+              "ar": "معرفة",
+              "art": "img/art/knowledge.svg",
+              "artMap": "img/art/knowledge.svg",
+              "audio": "audio/words/knowledge.wav"
+            },
+            {
+              "unit": null,
+              "text": "Culture",
+              "slug": "culture",
+              "emoji": "🎭",
+              "ar": "ثقافة",
+              "art": "img/art/culture.svg",
+              "artMap": "img/art/culture.svg",
+              "audio": "audio/words/culture.wav"
+            },
+            {
+              "unit": null,
+              "text": "Tourist",
+              "slug": "tourist",
+              "emoji": "🧳",
+              "ar": "سائح",
+              "art": "img/art/tourist.svg",
+              "artMap": "img/art/tourist.svg",
+              "audio": "audio/words/tourist.wav"
+            },
+            {
+              "unit": null,
+              "text": "Guide",
+              "slug": "guide",
+              "emoji": "🧭",
+              "ar": "مرشد",
+              "art": "img/art/guide.svg",
+              "artMap": "img/art/guide.svg",
+              "audio": "audio/words/guide.wav"
+            },
+            {
+              "unit": null,
+              "text": "Explain",
+              "slug": "explain",
+              "emoji": "💬",
+              "ar": "يشرح",
+              "art": "img/art/explain.svg",
+              "artMap": "img/art/explain.svg",
+              "audio": "audio/words/explain.wav"
+            },
+            {
+              "unit": null,
+              "text": "Suggest",
+              "slug": "suggest",
+              "emoji": "💡",
+              "ar": "يقترح",
+              "art": "img/art/suggest.svg",
+              "artMap": "img/art/suggest.svg",
+              "audio": "audio/words/suggest.wav"
+            },
+            {
+              "unit": null,
+              "text": "Compare",
+              "slug": "compare",
+              "emoji": "⚖️",
+              "ar": "يقارن",
+              "art": "img/art/compare.svg",
+              "artMap": "img/art/compare.svg",
+              "audio": "audio/words/compare.wav"
+            },
+            {
+              "unit": null,
+              "text": "Decision",
+              "slug": "decision",
+              "emoji": "📌",
+              "ar": "قرار",
+              "art": "img/art/decision.svg",
+              "artMap": "img/art/decision.svg",
+              "audio": "audio/words/decision.wav"
+            },
+            {
+              "unit": null,
+              "text": "Journey",
+              "slug": "journey",
+              "emoji": "🛤️",
+              "ar": "رحلة طويلة",
+              "art": "img/art/journey.svg",
+              "artMap": "img/art/journey.svg",
+              "audio": "audio/words/journey.wav"
+            },
+            {
+              "unit": null,
+              "text": "Adventure",
+              "slug": "adventure",
+              "emoji": "🌋",
+              "ar": "مغامرة",
+              "art": "img/art/adventure.svg",
+              "artMap": "img/art/adventure.svg",
+              "audio": "audio/words/adventure.wav"
+            },
+            {
+              "unit": null,
+              "text": "Explore",
+              "slug": "explore",
+              "emoji": "🔍",
+              "ar": "يستكشف",
+              "art": "img/art/explore.svg",
+              "artMap": "img/art/explore.svg",
+              "audio": "audio/words/explore.wav"
+            },
+            {
+              "unit": null,
+              "text": "Experience",
+              "slug": "experience",
+              "emoji": "🎫",
+              "ar": "خبرة",
+              "art": "img/art/experience.svg",
+              "artMap": "img/art/experience.svg",
+              "audio": "audio/words/experience.wav"
+            },
+            {
+              "unit": null,
+              "text": "Improve",
+              "slug": "improve",
+              "emoji": "📈",
+              "ar": "يحسّن",
+              "art": "img/art/improve.svg",
+              "artMap": "img/art/improve.svg",
+              "audio": "audio/words/improve.wav"
+            },
+            {
+              "unit": null,
+              "text": "Practice",
+              "slug": "practice",
+              "emoji": "🔁",
+              "ar": "تمرين",
+              "art": "img/art/practice.svg",
+              "artMap": "img/art/practice.svg",
+              "audio": "audio/words/practice.wav"
+            },
+            {
+              "unit": null,
+              "text": "Performance",
+              "slug": "performance",
+              "emoji": "🎤",
+              "ar": "أداء",
+              "art": "img/art/performance.svg",
+              "artMap": "img/art/performance.svg",
+              "audio": "audio/words/performance.wav"
+            },
+            {
+              "unit": null,
+              "text": "Confidence",
+              "slug": "confidence",
+              "emoji": "💪",
+              "ar": "ثقة",
+              "art": "img/art/confidence.svg",
+              "artMap": "img/art/confidence.svg",
+              "audio": "audio/words/confidence.wav"
+            },
+            {
+              "unit": null,
+              "text": "Respect",
+              "slug": "respect",
+              "emoji": "🙏",
+              "ar": "احترام",
+              "art": "img/art/respect.svg",
+              "artMap": "img/art/respect.svg",
+              "audio": "audio/words/respect.wav"
+            },
+            {
+              "unit": null,
+              "text": "Friendly",
+              "slug": "friendly",
+              "emoji": "😄",
+              "ar": "ودود",
+              "art": "img/art/friendly.svg",
+              "artMap": "img/art/friendly.svg",
+              "audio": "audio/words/friendly.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 22,
+      "totalItems": 22
+    },
+    {
+      "id": "prep2",
+      "grade": "الثاني الإعدادي",
+      "ages": "13-14 سنة",
+      "terms": [
+        null
+      ],
+      "units": [
+        {
+          "n": null,
+          "title": "(flat list, no unit metadata)",
+          "ar": null,
+          "count": 22,
+          "items": [
+            {
+              "unit": null,
+              "text": "Opinion",
+              "slug": "opinion",
+              "emoji": "🗣️",
+              "ar": "رأي",
+              "art": "img/art/opinion.svg",
+              "artMap": "img/art/opinion.svg",
+              "audio": "audio/words/opinion.wav"
+            },
+            {
+              "unit": null,
+              "text": "Argument",
+              "slug": "argument",
+              "emoji": "🥊",
+              "ar": "نقاش",
+              "art": "img/art/argument.svg",
+              "artMap": "img/art/argument.svg",
+              "audio": "audio/words/argument.wav"
+            },
+            {
+              "unit": null,
+              "text": "Reason",
+              "slug": "reason",
+              "emoji": "🧐",
+              "ar": "سبب",
+              "art": "img/art/reason.svg",
+              "artMap": "img/art/reason.svg",
+              "audio": "audio/words/reason.wav"
+            },
+            {
+              "unit": null,
+              "text": "Result",
+              "slug": "result",
+              "emoji": "🏁",
+              "ar": "نتيجة",
+              "art": "img/art/result.svg",
+              "artMap": "img/art/result.svg",
+              "audio": "audio/words/result.wav"
+            },
+            {
+              "unit": null,
+              "text": "Advice",
+              "slug": "advice",
+              "emoji": "🤔",
+              "ar": "نصيحة",
+              "art": "img/art/advice.svg",
+              "artMap": "img/art/advice.svg",
+              "audio": "audio/words/advice.wav"
+            },
+            {
+              "unit": null,
+              "text": "Responsibility",
+              "slug": "responsibility",
+              "emoji": "🤲",
+              "ar": "مسؤولية",
+              "art": "img/art/responsibility.svg",
+              "artMap": "img/art/responsibility.svg",
+              "audio": "audio/words/responsibility.wav"
+            },
+            {
+              "unit": null,
+              "text": "Environment",
+              "slug": "environment",
+              "emoji": "🌍",
+              "ar": "بيئة",
+              "art": "img/art/environment.svg",
+              "artMap": "img/art/environment.svg",
+              "audio": "audio/words/environment.wav"
+            },
+            {
+              "unit": null,
+              "text": "Pollution",
+              "slug": "pollution",
+              "emoji": "🏭",
+              "ar": "تلوث",
+              "art": "img/art/pollution.svg",
+              "artMap": "img/art/pollution.svg",
+              "audio": "audio/words/pollution.wav"
+            },
+            {
+              "unit": null,
+              "text": "Climate",
+              "slug": "climate",
+              "emoji": "🌦️",
+              "ar": "مناخ",
+              "art": "img/art/climate.svg",
+              "artMap": "img/art/climate.svg",
+              "audio": "audio/words/climate.wav"
+            },
+            {
+              "unit": null,
+              "text": "Technology",
+              "slug": "technology",
+              "emoji": "📱",
+              "ar": "تكنولوجيا",
+              "art": "img/art/technology.svg",
+              "artMap": "img/art/technology.svg",
+              "audio": "audio/words/technology.wav"
+            },
+            {
+              "unit": null,
+              "text": "Education",
+              "slug": "education",
+              "emoji": "🎓",
+              "ar": "تعليم",
+              "art": "img/art/education.svg",
+              "artMap": "img/art/education.svg",
+              "audio": "audio/words/education.wav"
+            },
+            {
+              "unit": null,
+              "text": "Opportunity",
+              "slug": "opportunity",
+              "emoji": "🚪",
+              "ar": "فرصة",
+              "art": "img/art/opportunity.svg",
+              "artMap": "img/art/opportunity.svg",
+              "audio": "audio/words/opportunity.wav"
+            },
+            {
+              "unit": null,
+              "text": "Effort",
+              "slug": "effort",
+              "emoji": "💪",
+              "ar": "جهد",
+              "art": "img/art/effort.svg",
+              "artMap": "img/art/effort.svg",
+              "audio": "audio/words/effort.wav"
+            },
+            {
+              "unit": null,
+              "text": "Encourage",
+              "slug": "encourage",
+              "emoji": "🎊",
+              "ar": "يشجع",
+              "art": "img/art/encourage.svg",
+              "artMap": "img/art/encourage.svg",
+              "audio": "audio/words/encourage.wav"
+            },
+            {
+              "unit": null,
+              "text": "Participate",
+              "slug": "participate",
+              "emoji": "🤝",
+              "ar": "يشارك",
+              "art": "img/art/participate.svg",
+              "artMap": "img/art/participate.svg",
+              "audio": "audio/words/participate.wav"
+            },
+            {
+              "unit": null,
+              "text": "Organize",
+              "slug": "organize",
+              "emoji": "🗂️",
+              "ar": "ينظم",
+              "art": "img/art/organize.svg",
+              "artMap": "img/art/organize.svg",
+              "audio": "audio/words/organize.wav"
+            },
+            {
+              "unit": null,
+              "text": "Present",
+              "slug": "present",
+              "emoji": "🎤",
+              "ar": "يعرض",
+              "art": "img/art/present.svg",
+              "artMap": "img/art/present.svg",
+              "audio": "audio/words/present.wav"
+            },
+            {
+              "unit": null,
+              "text": "Discuss",
+              "slug": "discuss",
+              "emoji": "💬",
+              "ar": "يناقش",
+              "art": "img/art/discuss.svg",
+              "artMap": "img/art/discuss.svg",
+              "audio": "audio/words/discuss.wav"
+            },
+            {
+              "unit": null,
+              "text": "Ambition",
+              "slug": "ambition",
+              "emoji": "🚀",
+              "ar": "طموح",
+              "art": "img/art/ambition.svg",
+              "artMap": "img/art/ambition.svg",
+              "audio": "audio/words/ambition.wav"
+            },
+            {
+              "unit": null,
+              "text": "Research",
+              "slug": "research",
+              "emoji": "🔬",
+              "ar": "بحث",
+              "art": "img/art/research.svg",
+              "artMap": "img/art/research.svg",
+              "audio": "audio/words/research.wav"
+            },
+            {
+              "unit": null,
+              "text": "Social",
+              "slug": "social",
+              "emoji": "👥",
+              "ar": "اجتماعي",
+              "art": "img/art/social.svg",
+              "artMap": "img/art/social.svg",
+              "audio": "audio/words/social.wav"
+            },
+            {
+              "unit": null,
+              "text": "Cooperation",
+              "slug": "cooperation",
+              "emoji": "🫶",
+              "ar": "تعاون",
+              "art": "img/art/cooperation.svg",
+              "artMap": "img/art/cooperation.svg",
+              "audio": "audio/words/cooperation.wav"
+            }
+          ]
+        }
+      ],
+      "status": "unverified",
+      "source": "no unit structure / no source in repo",
+      "duplicatesWithinGrade": [],
+      "uniqueWords": 22,
+      "totalItems": 22
+    }
+  ],
+  "totals": {
+    "items": 400,
+    "uniqueWordsAcrossGrades": 332,
+    "curriculumUnique": 332,
+    "wordsJsonEntries": 404
+  },
+  "issues": {
+    "spelling": [],
+    "missingArt": [],
+    "missingAudio": [],
+    "metaConsistency": [
+      {
+        "grade": "p2",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "p3",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "p4",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "p5",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "p6",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "prep1",
+        "problem": "unit missing n/title"
+      },
+      {
+        "grade": "prep2",
+        "problem": "unit missing n/title"
+      }
+    ],
+    "curriculumWordsNotInWordsJson": [],
+    "artIndexNotInArtFiles": [],
+    "artMapNotInArtFiles": [],
+    "crossGradeRepeats": [
+      {
+        "slug": "sad",
+        "count": 4
+      },
+      {
+        "slug": "happy",
+        "count": 3
+      },
+      {
+        "slug": "play",
+        "count": 3
+      },
+      {
+        "slug": "today",
+        "count": 3
+      },
+      {
+        "slug": "breakfast",
+        "count": 3
+      },
+      {
+        "slug": "lunch",
+        "count": 3
+      },
+      {
+        "slug": "hello",
+        "count": 2
+      },
+      {
+        "slug": "goodbye",
+        "count": 2
+      },
+      {
+        "slug": "friends",
+        "count": 2
+      },
+      {
+        "slug": "teacher",
+        "count": 2
+      },
+      {
+        "slug": "chair",
+        "count": 2
+      },
+      {
+        "slug": "desk",
+        "count": 2
+      },
+      {
+        "slug": "book",
+        "count": 2
+      },
+      {
+        "slug": "pencil",
+        "count": 2
+      },
+      {
+        "slug": "eyes",
+        "count": 2
+      },
+      {
+        "slug": "ears",
+        "count": 2
+      },
+      {
+        "slug": "nose",
+        "count": 2
+      },
+      {
+        "slug": "mouth",
+        "count": 2
+      },
+      {
+        "slug": "grandfather",
+        "count": 2
+      },
+      {
+        "slug": "grandmother",
+        "count": 2
+      },
+      {
+        "slug": "mother",
+        "count": 2
+      },
+      {
+        "slug": "sister",
+        "count": 2
+      },
+      {
+        "slug": "brother",
+        "count": 2
+      },
+      {
+        "slug": "garden",
+        "count": 2
+      },
+      {
+        "slug": "grass",
+        "count": 2
+      },
+      {
+        "slug": "run",
+        "count": 2
+      },
+      {
+        "slug": "jump",
+        "count": 2
+      },
+      {
+        "slug": "throw",
+        "count": 2
+      },
+      {
+        "slug": "catch",
+        "count": 2
+      },
+      {
+        "slug": "sunday",
+        "count": 2
+      },
+      {
+        "slug": "monday",
+        "count": 2
+      },
+      {
+        "slug": "tuesday",
+        "count": 2
+      },
+      {
+        "slug": "wednesday",
+        "count": 2
+      },
+      {
+        "slug": "thursday",
+        "count": 2
+      },
+      {
+        "slug": "friday",
+        "count": 2
+      },
+      {
+        "slug": "saturday",
+        "count": 2
+      },
+      {
+        "slug": "yesterday",
+        "count": 2
+      },
+      {
+        "slug": "morning",
+        "count": 2
+      },
+      {
+        "slug": "dinner",
+        "count": 2
+      },
+      {
+        "slug": "chicken",
+        "count": 2
+      },
+      {
+        "slug": "cheese",
+        "count": 2
+      },
+      {
+        "slug": "meat",
+        "count": 2
+      },
+      {
+        "slug": "big",
+        "count": 2
+      },
+      {
+        "slug": "small",
+        "count": 2
+      },
+      {
+        "slug": "on",
+        "count": 2
+      },
+      {
+        "slug": "under",
+        "count": 2
+      },
+      {
+        "slug": "angry",
+        "count": 2
+      },
+      {
+        "slug": "tired",
+        "count": 2
+      },
+      {
+        "slug": "cold",
+        "count": 2
+      },
+      {
+        "slug": "hot",
+        "count": 2
+      },
+      {
+        "slug": "bedroom",
+        "count": 2
+      },
+      {
+        "slug": "kitchen",
+        "count": 2
+      },
+      {
+        "slug": "bathroom",
+        "count": 2
+      },
+      {
+        "slug": "hospital",
+        "count": 2
+      },
+      {
+        "slug": "shop",
+        "count": 2
+      },
+      {
+        "slug": "street",
+        "count": 2
+      },
+      {
+        "slug": "school",
+        "count": 2
+      },
+      {
+        "slug": "park",
+        "count": 2
+      },
+      {
+        "slug": "zoo",
+        "count": 2
+      },
+      {
+        "slug": "beach",
+        "count": 2
+      }
+    ],
+    "crossGradeRepeatCount": 61
+  }
+}

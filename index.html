@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.6" /><!-- English Kids v6.6 -->
+<meta name="app-version" content="My English Buddy v6.7" /><!-- English Kids v6.7 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -823,7 +823,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.6</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.7</div>
       </main>
     </div>
   </section>
@@ -1926,8 +1926,108 @@ function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  /* keyboard focus follows screen changes: if the user was operating a control
+     (keyboard/AT), move focus into the newly-shown screen so tab order stays
+     logical and the child is not left focused on a hidden element. Mouse/touch
+     users (focus not on an interactive control) are left untouched. */
+  try{ moveFocusToScreen(id); }catch(e){}
+}
+function moveFocusToScreen(id){
+  const active=document.activeElement;
+  if(!active||active===document.body) return;
+  const onControl=active.matches&&active.matches('button,[tabindex],input,select,textarea,a,.chip,.card,.opt,.btile,.side-item,.av,.home-act,.rep-card');
+  if(!onControl) return;
+  const screen=document.getElementById('screen-'+id); if(!screen) return;
+  const tgt=screen.querySelector('h1,h2,button,[role="button"],[tabindex]');
+  if(tgt&&tgt!==active){ try{ tgt.focus({preventScroll:true}); }catch(_){ } }
 }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden){ try{ abortListening(); }catch(e){} } });
+
+/* ------------------ KEYBOARD ACCESSIBILITY ------------------
+   Many controls in this app are clickable <div>s (chips, cards, tiles,
+   answer options, avatar pickers, side-nav items). This delegated layer
+   makes every JS-bound clickable element reachable and operable with the
+   keyboard without touching the existing click logic. */
+const KB_SELECTOR='.chip,.card,.av,.opt,.home-act,.side-item,.story-sent,.story-opt,.btile,.bslot.filled,.sort-bucket,.rep-card,[role="button"],[role="radio"],[role="tab"],[role="option"],[tabindex]';
+const KB_ACTIVATE=new Set([' ','Enter','Spacebar']);
+function kbRoleFor(el){
+  const c=el.classList;
+  if(c.contains('opt')||c.contains('btile')||c.contains('sort-bucket')||c.contains('story-opt')||c.contains('story-sent')||c.contains('bslot')) return 'button';
+  if(c.contains('chip')) return 'radio';
+  if(c.contains('av')) return 'button';
+  if(c.contains('side-item')) return 'tab';
+  if(c.contains('card')||c.contains('home-act')||c.contains('rep-card')) return 'button';
+  return el.getAttribute('role')||'button';
+}
+function syncCustomA11y(root){
+  const scope=root&&root.querySelectorAll?root:document;
+  const nodes=scope.querySelectorAll(KB_SELECTOR);
+  nodes.forEach(el=>{
+    if(typeof el.onclick!=='function') return;
+    if(!el.hasAttribute('tabindex')&&!['INPUT','BUTTON','SELECT','TEXTAREA','A'].includes(el.tagName)) el.setAttribute('tabindex','0');
+    if(!el.hasAttribute('role')) el.setAttribute('role', kbRoleFor(el));
+    if(el.getAttribute('role')==='radio'||el.getAttribute('role')==='tab'){
+      const on=el.classList.contains('on')||el.classList.contains('active');
+      el.setAttribute('aria-checked', on?'true':'false');
+    }
+    if(!el.hasAttribute('aria-label')&&el.getAttribute('role')!=='button'){
+      const t=(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,80);
+      if(t) el.setAttribute('aria-label',t);
+    }
+  });
+}
+function kbActivate(el){
+  if(!el||typeof el.onclick!=='function') return;
+  if(el.hasAttribute('disabled')||el.getAttribute('aria-disabled')==='true') return;
+  try{ el.onclick({target:el,currentTarget:el}); }catch(e){}
+}
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape'){
+    const hm=document.getElementById('homeModal'), tr=document.getElementById('traceOverlay');
+    if(hm&&hm.style.display!=='none'){ hm.style.display='none'; if(hm._opener){ try{hm._opener.focus();}catch(_){} } return; }
+    if(tr&&tr.classList.contains('show')){ tr.classList.remove('show'); return; }
+  }
+  if(!KB_ACTIVATE.has(e.key)) return;
+  const el=e.target;
+  if(!el||!el.matches||!el.matches(KB_SELECTOR)) return;
+  /* native form controls handle their own activation */
+  if(['BUTTON','INPUT','SELECT','TEXTAREA','A'].includes(el.tagName)) return;
+  if(typeof el.onclick!=='function') return;
+  /* elements that ship their own key handler (e.g. Word Builder tiles) manage
+     Enter/Space themselves — do not double-activate them */
+  if(typeof el.onkeydown==='function') return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  kbActivate(el);
+});
+/* arrow keys move within a radio-like group (chips / options) */
+document.addEventListener('keydown',(e)=>{
+  if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return;
+  const el=e.target;
+  if(!el||!el.matches) return;
+  const group=el.closest('#ageChips,#levelChips,#schoolChips,#speedChips,#recChips,#sfxChips,#diffChips,#themeChips,#goalChips,#teacherChips,#teacherAudioChips,.opt-grid,.chip-group');
+  if(!group) return;
+  const peers=[...group.querySelectorAll('.chip,.opt')].filter(x=>typeof x.onclick==='function');
+  if(peers.length<2) return;
+  const i=peers.indexOf(el); if(i<0) return;
+  const dir=(e.key==='ArrowRight'||e.key==='ArrowDown')?1:-1;
+  const next=peers[(i+dir+peers.length)%peers.length];
+  e.preventDefault();
+  try{ next.focus(); }catch(_){}
+});
+/* radar: keep dynamically-injected custom controls accessible */
+function initA11yRadar(){
+  if(typeof MutationObserver!=='function') { syncCustomA11y(document); return; }
+  let pending=false;
+  const flush=()=>{ pending=false; try{ syncCustomA11y(document); }catch(e){} };
+  const mo=new MutationObserver(()=>{ if(pending) return; pending=true;
+    /* flush in a microtask so controls injected by a synchronous render are
+       focusable before the next user interaction (closes the 1-frame gap a
+       keyboard user could hit when tabbing immediately after a screen change) */
+    if(typeof queueMicrotask==='function') queueMicrotask(flush); else flush(); });
+  mo.observe(document.body,{childList:true,subtree:true});
+  syncCustomA11y(document);
+}
 
 /* ------------------ AUDIO ------------------ */
 function stopAudio(){ if(currentAudio){ try{currentAudio.pause();}catch(e){} currentAudio=null; } if('speechSynthesis' in window){ try{window.speechSynthesis.cancel();}catch(e){} } }
@@ -4854,7 +4954,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.6';
+    const local='6.7';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
@@ -4972,6 +5072,7 @@ else if(currentId && currentProfile()){ startupAction=function(){ enterHome(); }
 else { buildLogin(); startupAction=function(){ go('login'); }; }
 document.getElementById('btnWelcomeStart').onclick=function(){ startupAction(); };
 if(navigator.webdriver){ startupAction(); } else { go('welcome'); }
+try{ initA11yRadar(); }catch(e){}
 window.addEventListener('load', pickVoice);
 if(isFile){ const b=document.getElementById('fileBanner'); b.style.display='block';
   b.innerHTML='ℹ️ الأصوات والحروف تعمل أوفلاين في كل الحالات. تصحيح النطق بدون إنترنت يحتاج تشغيل التطبيق عبر سيرفر محلي (serve.ps1).'; }
