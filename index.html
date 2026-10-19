@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.4" /><!-- English Kids v6.4 -->
+<meta name="app-version" content="My English Buddy v6.5" /><!-- English Kids v6.5 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -498,6 +498,17 @@
   .btile{background:#fff; border:3px solid #7c3aed; border-radius:12px; padding:10px 14px; font-size:22px; font-weight:900; cursor:pointer; box-shadow:0 4px 0 #6d28d9; min-width:44px; min-height:44px}
   .btile:active{transform:translateY(3px); box-shadow:none}
   .btile.used{opacity:.25; pointer-events:none}
+  .btile:focus{outline:3px solid #f59e0b; outline-offset:2px}
+  .builder-word.nudge{animation:nudge .4s ease}
+  .bslot{display:inline-block; min-width:22px}
+  .bslot.filled{color:#1e1b4b}
+  .bslot.filled{cursor:pointer}
+  .bslot.slot-ok{border-bottom:3px solid #22c55e}
+  .bslot.slot-bad{color:#b45309; border-bottom:3px dotted #f59e0b}
+  .builder-hint{margin-top:8px; min-height:20px; font-size:13px; line-height:1.5}
+  .builder-hint .muted2{font-weight:800; color:#6d28d9}
+  .builder-model{margin-top:6px; font-weight:900; font-size:26px; letter-spacing:6px; color:#1e1b4b}
+  #builderBack{margin-inline-start:8px}
   .missing-word{font-size:40px; font-weight:900; letter-spacing:6px; direction:ltr; text-align:center; margin:12px 0; min-height:50px}
   .missing-word .blank{color:#ef4444; border-bottom:4px solid #ef4444; min-width:36px; display:inline-block}
   .count-emojis{font-size:34px; text-align:center; letter-spacing:6px; margin:10px 0; min-height:44px}
@@ -811,7 +822,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.4</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.5</div>
       </main>
     </div>
   </section>
@@ -3652,12 +3663,19 @@ function startBuilder(){
   if(cands.length<8) cands=uniqByWord(WORDS.filter(w=>w.t.length>=3&&w.t.length<=wl).map(w=>({t:w.t,emoji:w.emoji,ar:w.ar})));
   if(cands.length<8) cands=wordBank().filter(w=>w.t.length>=3);
   const queue=adaptiveWords(cands, roundCount(), 'words');
-  builderState={queue, idx:0, solved:0, correct:null, letters:[], allTiles:[], built:'', pos:0};
+  builderState={queue, idx:0, solved:0, correct:null, letters:[], allTiles:[], built:'', pos:0, placed:[], attempts:0, assisted:false, done:false, struggle:false};
   game={type:'builder', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false};
   document.getElementById('gameScore').textContent='0 / '+queue.length;
   document.getElementById('gameTime').hidden=true;
   renderBuilderRound();
   go('game'); startTimer();
+}
+function builderSlotHtml(b){
+  return b.letters.map((c,i)=>{
+    if(i>=b.pos) return '<span class="bslot" data-i="'+i+'">_</span>';
+    const ok=b.built[i]===c;
+    return '<span class="bslot filled '+(ok?'slot-ok':'slot-bad')+'" data-i="'+i+'" title="'+(ok?'حرف صحيح':'حرف غير صحيح')+'">'+b.built[i]+'</span>';
+  }).join(' ');
 }
 function renderBuilderRound(){
   const b=builderState;
@@ -3666,41 +3684,85 @@ function renderBuilderRound(){
   const distract='abcdefghijklmnopqrstuvwxyz'.split('').filter(c=>!letters.includes(c));
   const allTiles=shuffle([...letters, ...shuffle(distract).slice(0, Math.max(0,4-letters.length))]);
   b.correct=correct; b.letters=letters; b.allTiles=allTiles; b.built=''; b.pos=0;
+  b.placed=[]; b.attempts=0; b.assisted=false; b.done=false; b.struggle=false;
   game.answered=false;
   document.getElementById('gameScore').textContent=b.solved+' / '+b.queue.length;
   document.getElementById('qCount').textContent='🧱 كلمة '+(b.idx+1)+' من '+b.queue.length+' — اسمع وابنِ الكلمة';
-  document.getElementById('gPrompt').innerHTML=`<div class="big">${correct.emoji}</div><div class="builder-word" id="builderWord">${letters.map(()=>' _ ').join('')}</div>`;
-  document.getElementById('gPlayWrap').innerHTML='<button class="btn blue" id="gPlay">🔊 اسمع الكلمة</button>';
+  document.getElementById('gPrompt').innerHTML=`<div class="big">${correct.emoji}</div><div class="builder-word" id="builderWord">${builderSlotHtml(b)}</div><div class="builder-hint" id="builderHint"></div>`;
+  document.getElementById('gPlayWrap').innerHTML='<button class="btn blue" id="gPlay">🔊 اسمع الكلمة</button><button class="btn" id="builderBack" type="button" aria-label="مسح الحرف السابق" title="مسح الحرف السابق">⌫ مسح</button>';
   document.getElementById('gFeedback').innerHTML='';
   const tb=document.getElementById('builderTiles'); if(tb) tb.remove();
   const tilesBox=document.createElement('div'); tilesBox.className='builder-tiles'; tilesBox.id='builderTiles';
-  allTiles.forEach((ch,ti)=>{ const el=document.createElement('div'); el.className='btile'; el.textContent=ch; el.dataset.idx=ti; el.onclick=()=>builderPick(ch,ti,el); tilesBox.appendChild(el); });
+  allTiles.forEach((ch,ti)=>{ const el=document.createElement('div'); el.className='btile'; el.textContent=ch; el.dataset.idx=ti; el.setAttribute('role','button'); el.setAttribute('tabindex','0'); el.setAttribute('aria-label','حرف '+ch); el.onclick=()=>builderPick(ch,ti,el); tilesBox.appendChild(el); });
   const box=document.getElementById('gOptions'); box.innerHTML=''; box.className='opt-grid'; box.appendChild(tilesBox);
+  const bw=document.getElementById('builderWord'); if(bw) bw.onclick=(e)=>{ const s=e.target.closest('.bslot.filled'); if(s) builderClearFrom(+s.dataset.i); };
   const pb=document.getElementById('gPlay'); if(pb) pb.onclick=()=>say(wordFile(correct.t.toLowerCase()), correct.t);
+  const bb=document.getElementById('builderBack'); if(bb) bb.onclick=()=>builderBackspace();
   setTimeout(()=>{ say(wordFile(correct.t.toLowerCase()), correct.t); }, 250);
   updateGameReplayBtn();
 }
+function builderHint(html){ const el=document.getElementById('builderHint'); if(el) el.innerHTML=html||''; }
+function builderNudge(){ const bw=document.getElementById('builderWord'); if(!bw) return; bw.classList.remove('nudge'); void bw.offsetWidth; bw.classList.add('nudge'); }
+function builderRenderWord(){ const b=builderState; const bw=document.getElementById('builderWord'); if(bw&&b) bw.innerHTML=builderSlotHtml(b); }
 function builderPick(ch,ti,el){
-  const b=builderState; if(!b||game.answered) return;
+  const b=builderState; if(!b||game.answered||b.done) return;
+  if(b.pos>=b.letters.length) return;               /* word full: remove a letter before adding more */
   const expected=b.letters[b.pos];
-  const bw=document.getElementById('builderWord');
-  if(ch===expected){
-    el.classList.add('used'); b.built+=ch; b.pos++;
-    playTone(700,0.1); popFloat('✅');
-    bw.innerHTML=b.letters.map((c,i)=> i<b.pos? c : ' _ ').join('');
-    if(b.pos===b.letters.length){
-      game.answered=true; recordGame(true); game.combo++; if(game.combo>game.maxCombo) game.maxCombo=game.combo; b.solved++; game.correct=b.solved;
-      bumpWordStar(b.correct.t, true); playCorrect(); showCombo(game.combo);
-      progressDailyGame('builder'); evalAchv();
-      document.getElementById('gameScore').textContent=b.solved+' / '+b.queue.length;
-      document.getElementById('gFeedback').innerHTML='<div class="fb-text" style="color:#16a34a">ممتاز! بنيت الكلمة 🎉</div>';
-      setTimeout(()=>nextBuilderRound(), 900);
-    }
+  el.classList.add('used');
+  b.built+=ch; b.placed.push({ch,ti,ok:(ch===expected)}); b.pos++;
+  builderRenderWord();
+  if(ch===expected){ playTone(620,0.1); }
+  else { playTone(360,0.12); builderNudge(); builderHint('<span class="muted2">لا بأس 🌱 جرّب حرفًا آخر، أو اضغط ⌫ للتعديل.</span>'); }
+  if(b.pos===b.letters.length) evaluateBuilderWord();
+}
+function builderBackspace(){
+  const b=builderState; if(!b||game.answered||b.done||b.pos<=0) return;
+  const last=b.placed.pop(); b.pos--; b.built=b.built.slice(0,-1);
+  const t=document.querySelector('#builderTiles .btile[data-idx="'+(last?last.ti:-1)+'"]'); if(t) t.classList.remove('used');
+  builderRenderWord(); builderHint('');
+}
+function builderClearFrom(i){ const b=builderState; if(!b||game.answered||b.done) return; while(b.pos>i) builderBackspace(); }
+function evaluateBuilderWord(){
+  const b=builderState; if(!b||b.done) return;
+  if(b.built.toLowerCase()===b.correct.t.toLowerCase()){
+    b.done=true; game.answered=true;
+    const assisted=b.assisted, corrected=b.attempts>0;
+    b.solved++; game.correct=b.solved;
+    if(assisted){ recordAssistedAttempt(b.correct.t); }
+    else { game.combo++; if(game.combo>game.maxCombo) game.maxCombo=game.combo; recordGame(true); bumpWordStar(b.correct.t, true); playCorrect(); popFloat('⭐'); showCombo(game.combo); progressDailyGame('builder'); }
+    evalAchv();
+    document.getElementById('gameScore').textContent=b.solved+' / '+b.queue.length;
+    document.getElementById('gFeedback').innerHTML = corrected
+      ? '<div class="fb-text" style="color:#16a34a">أحسنت! صحّحت الخطأ بنفسك 👏</div>'
+      : '<div class="fb-text" style="color:#16a34a">ممتاز! بنيت الكلمة 🎉</div>';
+    builderHint('');
+    setTimeout(()=>nextBuilderRound(), 1000);
   } else {
-    game.answered=true; recordGame(false); game.combo=0; playTone(300,0.16); el.classList.add('wrong');
-    document.getElementById('gFeedback').innerHTML='<div class="fb-text" style="color:#ef4444">الحرف الصحيح: '+expected+'</div>';
-    setTimeout(()=>nextBuilderRound(), 1100);
+    b.attempts++;
+    builderRenderWord(); builderNudge(); playTone(300,0.16);
+    if(!b.struggle){ b.struggle=true; recordBuilderStruggle(b.correct.t); }
+    const firstBad=(()=>{ for(let i=0;i<b.pos;i++){ if(b.built[i]!==b.letters[i]) return i; } return 0; })();
+    if(b.attempts===1){
+      builderHint('<span class="muted2">محاولة جيدة! 🙂 استمع للكلمة مرة أخرى، واحتفظ بالحروف الصحيحة.</span>');
+    } else if(b.attempts===2){
+      builderHint('<span class="muted2">اقتربت! ركّز على الحرف رقم <b>'+(firstBad+1)+'</b> من اليسار — جرّب حرفًا مختلفًا.</span>');
+    } else {
+      b.assisted=true;
+      builderHint('<span class="muted2">لا بأس! هذه هي الكلمة الصحيحة:</span><div class="builder-model" dir="ltr">'+b.letters.join(' ')+'</div><span class="muted2">امسح حرفًا بـ ⌫ وأعد بناء الكلمة حرفًا حرفًا 💪</span>');
+    }
   }
+}
+function recordAssistedAttempt(word){
+  const p=currentProfile(); if(!p) return;
+  const s=p.stats; s.attempts++; s.lastPlayed=Date.now();
+  if(!s.games) s.games={attempts:0,correct:0}; s.games.attempts++;
+  learnEvent('builder', word, true, 50, true, true);   /* uncertain: no mastery change */
+  saveProfiles(); evalAchv();
+}
+function recordBuilderStruggle(word){
+  if(!currentProfile()) return;
+  learnEvent('builder', word, false, 0, true, true);   /* keeps the word due for a later unassisted retry */
+  saveProfiles();
 }
 function nextBuilderRound(){
   const b=builderState; if(!b) return;
@@ -4791,7 +4853,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.4';
+    const local='6.5';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
