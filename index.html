@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.5" /><!-- English Kids v6.5 -->
+<meta name="app-version" content="My English Buddy v6.6" /><!-- English Kids v6.6 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -503,6 +503,7 @@
   .bslot{display:inline-block; min-width:22px}
   .bslot.filled{color:#1e1b4b}
   .bslot.filled{cursor:pointer}
+  .bslot.filled:focus{outline:3px solid #f59e0b; outline-offset:2px}
   .bslot.slot-ok{border-bottom:3px solid #22c55e}
   .bslot.slot-bad{color:#b45309; border-bottom:3px dotted #f59e0b}
   .builder-hint{margin-top:8px; min-height:20px; font-size:13px; line-height:1.5}
@@ -822,7 +823,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.5</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.6</div>
       </main>
     </div>
   </section>
@@ -3674,7 +3675,7 @@ function builderSlotHtml(b){
   return b.letters.map((c,i)=>{
     if(i>=b.pos) return '<span class="bslot" data-i="'+i+'">_</span>';
     const ok=b.built[i]===c;
-    return '<span class="bslot filled '+(ok?'slot-ok':'slot-bad')+'" data-i="'+i+'" title="'+(ok?'حرف صحيح':'حرف غير صحيح')+'">'+b.built[i]+'</span>';
+    return '<span class="bslot filled '+(ok?'slot-ok':'slot-bad')+'" data-i="'+i+'" role="button" tabindex="0" aria-label="'+(ok?'حرف صحيح: '+b.built[i]+' — اضغط للمسح':'حرف غير صحيح: '+b.built[i]+' — اضغط للمسح')+'" title="'+(ok?'حرف صحيح':'حرف غير صحيح')+'">'+b.built[i]+'</span>';
   }).join(' ');
 }
 function renderBuilderRound(){
@@ -3693,9 +3694,9 @@ function renderBuilderRound(){
   document.getElementById('gFeedback').innerHTML='';
   const tb=document.getElementById('builderTiles'); if(tb) tb.remove();
   const tilesBox=document.createElement('div'); tilesBox.className='builder-tiles'; tilesBox.id='builderTiles';
-  allTiles.forEach((ch,ti)=>{ const el=document.createElement('div'); el.className='btile'; el.textContent=ch; el.dataset.idx=ti; el.setAttribute('role','button'); el.setAttribute('tabindex','0'); el.setAttribute('aria-label','حرف '+ch); el.onclick=()=>builderPick(ch,ti,el); tilesBox.appendChild(el); });
+  allTiles.forEach((ch,ti)=>{ const el=document.createElement('div'); el.className='btile'; el.textContent=ch; el.dataset.idx=ti; el.setAttribute('role','button'); el.setAttribute('tabindex','0'); el.setAttribute('aria-label','حرف '+ch); el.onclick=()=>builderPick(ch,ti,el); el.onkeydown=(e)=>{ if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){ e.preventDefault(); if(!el.classList.contains('used')) builderPick(ch,ti,el); } }; tilesBox.appendChild(el); });
   const box=document.getElementById('gOptions'); box.innerHTML=''; box.className='opt-grid'; box.appendChild(tilesBox);
-  const bw=document.getElementById('builderWord'); if(bw) bw.onclick=(e)=>{ const s=e.target.closest('.bslot.filled'); if(s) builderClearFrom(+s.dataset.i); };
+  const bw=document.getElementById('builderWord'); if(bw){ bw.onclick=(e)=>{ const s=e.target.closest('.bslot.filled'); if(s) builderClearFrom(+s.dataset.i); }; bw.onkeydown=(e)=>{ const s=e.target.closest('.bslot.filled'); if(s&&(e.key==='Enter'||e.key===' '||e.key==='Spacebar')){ e.preventDefault(); builderClearFrom(+s.dataset.i); } }; }
   const pb=document.getElementById('gPlay'); if(pb) pb.onclick=()=>say(wordFile(correct.t.toLowerCase()), correct.t);
   const bb=document.getElementById('builderBack'); if(bb) bb.onclick=()=>builderBackspace();
   setTimeout(()=>{ say(wordFile(correct.t.toLowerCase()), correct.t); }, 250);
@@ -3712,14 +3713,14 @@ function builderPick(ch,ti,el){
   b.built+=ch; b.placed.push({ch,ti,ok:(ch===expected)}); b.pos++;
   builderRenderWord();
   if(ch===expected){ playTone(620,0.1); }
-  else { playTone(360,0.12); builderNudge(); builderHint('<span class="muted2">لا بأس 🌱 جرّب حرفًا آخر، أو اضغط ⌫ للتعديل.</span>'); }
+  else { playTone(360,0.12); builderNudge(); if(!b.assisted) builderHint('<span class="muted2">لا بأس 🌱 جرّب حرفًا آخر، أو اضغط ⌫ للتعديل.</span>'); }
   if(b.pos===b.letters.length) evaluateBuilderWord();
 }
 function builderBackspace(){
   const b=builderState; if(!b||game.answered||b.done||b.pos<=0) return;
   const last=b.placed.pop(); b.pos--; b.built=b.built.slice(0,-1);
   const t=document.querySelector('#builderTiles .btile[data-idx="'+(last?last.ti:-1)+'"]'); if(t) t.classList.remove('used');
-  builderRenderWord(); builderHint('');
+  builderRenderWord(); if(!b.assisted) builderHint('');
 }
 function builderClearFrom(i){ const b=builderState; if(!b||game.answered||b.done) return; while(b.pos>i) builderBackspace(); }
 function evaluateBuilderWord(){
@@ -4853,7 +4854,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.5';
+    const local='6.6';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
