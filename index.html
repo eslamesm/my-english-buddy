@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v5.9" /><!-- English Kids v5.9 -->
+<meta name="app-version" content="My English Buddy v6.0" /><!-- English Kids v6.0 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -749,6 +749,11 @@
           <h2 class="title" style="font-size:clamp(18px,4.5vw,26px)">أقسام التعلّم</h2>
           <div class="grid four" id="modeGrid"></div>
         </section>
+        <section id="panel-session" class="panel">
+          <h2 class="title" style="font-size:clamp(18px,4.5vw,26px)">🧠 جلسة اليوم</h2>
+          <p class="subtitle" style="color:#ede9fe;font-size:13px">مراجعة ذكية قصيرة (5–10 دقائق) تبني على ما تعلّمه طفلك وتعطي الأولوية لما يحتاج تثبيتًا</p>
+          <div id="sessionHome"></div>
+        </section>
         <section id="panel-games" class="panel">
           <h2 class="title" style="font-size:clamp(18px,4.5vw,26px)">🎮 الألعاب</h2>
           <div class="grid three" id="gameGrid"></div>
@@ -806,7 +811,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v5.9</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.0</div>
       </main>
     </div>
   </section>
@@ -1140,6 +1145,7 @@
 </div>
 
 <script src="img/art/map.js"></script>
+<script src="engine.js"></script>
 <script>
 /* =========================================================
    English Kids - offline-first pronunciation trainer
@@ -1744,6 +1750,7 @@ function sanitizeProfile(p){
   if(!st.daily||typeof st.daily!=='object'||Array.isArray(st.daily)) st.daily={};
   if(!Array.isArray(st.recent)) st.recent=[];
   if(!st.games||typeof st.games!=='object'||Array.isArray(st.games)) st.games={attempts:0,correct:0};
+  o.learning=(window.LearningEngine)?LearningEngine.validateStore(o.learning):((o.learning&&typeof o.learning==='object'&&!Array.isArray(o.learning))?o.learning:{v:1,items:{}});
   return o;
 }
 function sanitizeProfiles(raw){
@@ -1789,6 +1796,34 @@ function currentProfile(){ return profiles.find(p=>p.id===currentId) || null; }
 })();
 /* migrate legacy schoolYear 'kg' -> 'kg1' after the KG split into KG1/KG2 */
 (function(){ let ch=false; profiles.forEach(p=>{ if(p.schoolYear==='kg'){ p.schoolYear='kg1'; ch=true; } }); if(ch) lsSet(PKEY, profiles); })();
+/* migrate storage schema to v2: seed the adaptive-learning store from old progress.
+   One-time + idempotent, backs up the v5.9 data first, never clears learner data. */
+const SCHEMA_VERSION=2, SKV='englishkids_schema_v';
+function seedLearningFromProgress(p){
+  if(!p||!window.LearningEngine) return false;
+  const empty=!p.learning||!p.learning.items||Object.keys(p.learning.items).length===0;
+  if(!empty) return false;
+  if(!p.progress||!Object.keys(p.progress).length) return false;
+  p.learning=LearningEngine.fromLegacyProgress(p.progress,{ now:Date.now(), lastAt:(p.stats&&p.stats.lastPlayed)||null });
+  return true;
+}
+(function migrateV2(){
+  let cur=0; try{ cur=parseInt(localStorage.getItem(SKV),10)||0; }catch(e){}
+  if(cur>=SCHEMA_VERSION) return;
+  try{
+    if(!localStorage.getItem('englishkids_backup_v59')){
+      const b={ at:Date.now(), profiles:null, current:null, settings:null };
+      try{ b.profiles=localStorage.getItem(PKEY); }catch(e){}
+      try{ b.current=localStorage.getItem(CKEY); }catch(e){}
+      try{ b.settings=localStorage.getItem(SKEY); }catch(e){}
+      try{ localStorage.setItem('englishkids_backup_v59', JSON.stringify(b)); }catch(e){}
+    }
+  }catch(e){}
+  let changed=false;
+  profiles.forEach(p=>{ if(seedLearningFromProgress(p)) changed=true; });
+  try{ localStorage.setItem(SKV, String(SCHEMA_VERSION)); }catch(e){}
+  if(changed) lsSet(PKEY, profiles);
+})();
 
 /* ------------------ THEME ------------------ */
 function themeActive(){ const t=settings.theme||'auto'; if(t==='auto'){ return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches); } return t==='dark'; }
@@ -1800,6 +1835,7 @@ function newProfile(name, age, avatar, levelKey, schoolYear){
     id:'p'+Date.now()+Math.floor(Math.random()*1000),
     name, age, avatar, levelKey, schoolYear:schoolYear||gradeFromAge(age), createdAt:Date.now(),
     progress:{},
+    learning:(window.LearningEngine)?LearningEngine.createStore():{v:1,items:{}},
     stats:{ attempts:0, timeMs:0, byMode:{}, daily:{}, recent:[], games:{attempts:0,correct:0}, lastPlayed:null }
   };
 }
@@ -1812,7 +1848,12 @@ function currentStreak(){ const p=currentProfile(); const daily=(p&&p.stats&&p.s
 function todayAttempts(){ const p=currentProfile(); const s=(p&&p.stats)||{}; const d=(s.daily&&s.daily[dayKey(Date.now())])||null; return d? d.attempts:0; }
 function setItemStars(mode,t,n){ const p=currentProfile(); if(!p) return; const k=itemKey(mode,t); p.progress[k]=Math.max(p.progress[k]||0,n); saveProfiles(); }
 function totalStars(){ const p=currentProfile(); if(!p) return 0; return Object.values(p.progress).reduce((a,b)=>a+b,0); }
-function recordAttempt(mode, itemName, score, stars){
+function learnEvent(mode, word, correct, score, hinted, uncertain){
+  const p=currentProfile(); if(!p||!window.LearningEngine||!word) return;
+  if(!p.learning||typeof p.learning!=='object') p.learning=LearningEngine.createStore();
+  LearningEngine.record(p.learning,{ skill:LearningEngine.skillFromMode(mode), word:String(word), correct:!!correct, score:score, hinted:!!hinted, uncertain:!!uncertain });
+}
+function recordAttempt(mode, itemName, score, stars, uncertain){
   const p=currentProfile(); if(!p) return;
   const s=p.stats; s.attempts++; s.lastPlayed=Date.now();
   const bm=s.byMode[mode] || (s.byMode[mode]={attempts:0,sumScore:0,three:0,two:0,one:0,zero:0});
@@ -1821,6 +1862,7 @@ function recordAttempt(mode, itemName, score, stars){
   bumpDay(s, stars, score);
   s.recent.unshift({mode,item:itemName,score,stars,ts:Date.now()});
   if(s.recent.length>80) s.recent.length=80;
+  learnEvent(mode, itemName, stars>=2, score, false, uncertain);
   saveProfiles();
   evalAchv();
 }
@@ -2409,21 +2451,26 @@ function scoreAttempt(alts, engine){
 function showScore(item,score,heard,engine){
   const fb=document.getElementById('feedback'); fb.dataset.scored='1';
   const rm=modeOfItem(item);
+  /* fairness: separate a speech-engine recognition failure from a real
+     pronunciation error, so we do not penalise the learner for the former. */
+  const heardNorm=normalize(heard||'');
+  const uncertain = !heardNorm || (score<25 && heardNorm.length<=2);
   let stars,color,msg;
   if(score>=80){ stars=3; color='#16a34a'; msg='ممتاز! نطق رائع 🎉'; }
   else if(score>=55){ stars=2; color='#0ea5e9'; msg='جيد جداً! قرّب أكثر 👍'; }
   else if(score>=30){ stars=1; color='#f59e0b'; msg='محاولة جيدة، اسمع ثم أعِد 🙂'; }
   else { stars=0; color='#ef4444'; msg='اسمعه من جديد ثم جرّب مرة أخرى 🔁'; }
+  if(uncertain){ stars=0; color='#7c3aed'; msg='لم أستطع سماعك بوضوح 🎤 اقترب من الميكروفون وأعد المحاولة، أو اسمع ببطء 🐢'; }
   const starStr='⭐'.repeat(stars)+'☆'.repeat(3-stars);
   const eng = engine==='offline'?'وضع بدون إنترنت':'وضع الإنترنت';
-  fb.innerHTML=`<div class="fb-score" style="color:${color}">${score}%</div>
+  fb.innerHTML=`<div class="fb-score" style="color:${color}">${uncertain?'—':score+'%'}</div>
     <div class="stars-earned pop">${starStr}</div>
     <div class="fb-text" style="color:${color}">${msg}</div>
     <div class="fb-heard">سمعت: "${heard||'—'}"</div>
     <div class="fb-engine">${eng}</div>`;
-  if(rm!=='letters' && stars<3 && heard && normalize(heard)){ fb.innerHTML+=spellHint(item.t, heard); }
+  if(!uncertain && rm!=='letters' && stars<3 && heard && normalize(heard)){ fb.innerHTML+=spellHint(item.t, heard); }
   if(currentMode==='recall') recallReveal();
-  recordAttempt(rm, item.t, score, stars);
+  recordAttempt(rm, item.t, score, stars, uncertain);
   if(stars===3){
     smartFailCount=0;
     const prev=itemStars(rm,item.t); if(prev<3){ setItemStars(rm,item.t,3); sessionStars+=(3-prev); }
@@ -2431,6 +2478,11 @@ function showScore(item,score,heard,engine){
     document.getElementById('btnNext').classList.add('glow');
     speakTTS(['Excellent!','Great job!','Perfect!','Wonderful!','Amazing!'][Math.floor(Math.random()*5)]);
   } else if(stars===2){ if(itemStars(rm,item.t)<2) setItemStars(rm,item.t,2); playTone(660,0.12); }
+  else if(uncertain){
+    playTone(520,0.12);
+    fb.innerHTML+='<div class="fb-text" style="color:#7c3aed;margin-top:8px">🎤 لم أعُدّ هذه محاولة خاطئة — جرّب مرة أخرى بصوت أوضح، أو اضغط 🐢 لسماع أبطأ.</div>';
+    if(stillOn(item)) smartRelisten(item);
+  }
   else {
     smartFailCount++;
     playTone(300,0.16); const c=document.getElementById('practiceCard'); c.classList.add('shake'); setTimeout(()=>c.classList.remove('shake'),480);
@@ -2508,6 +2560,7 @@ function showReward(o){
 function initSidebar(){
   const items=[
     {id:'learn',label:'📚 أقسام التعلّم',emoji:'📚'},
+    {id:'session',label:'🧠 جلسة اليوم',emoji:'🧠'},
     {id:'games',label:'🎮 الألعاب',emoji:'🎮'},
     {id:'curr',label:'📖 المنهج المصري',emoji:'📖'},
     {id:'smart',label:'🎤 الذكاء النطقي',emoji:'🎤'},
@@ -2525,7 +2578,7 @@ function initSidebar(){
   items.forEach(it=>{
     const d=document.createElement('div'); d.className='side-item'; d.dataset.panel='panel-'+it.id;
     d.innerHTML='<span class="semo">'+it.emoji+'</span><span>'+it.label+'</span>';
-    d.onclick=()=>{ document.querySelectorAll('.side-item').forEach(x=>x.classList.toggle('active',x===d)); document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+it.id)); if(it.id==='stories'){ buildStoryListHome(); } if(it.id==='achv'){ buildAchvHome(); } if(it.id==='rewards'){ buildRewardsHome(); } if(it.id==='daily'){ buildDailyHome(); } if(it.id==='lead'){ buildLeaderboard(); } if(it.id==='similar'){ buildSimilarGrid(); } if(it.id==='bank'){ buildBankGrid(); } if(it.id==='exam'){ buildExamGrid(); } };
+    d.onclick=()=>{ document.querySelectorAll('.side-item').forEach(x=>x.classList.toggle('active',x===d)); document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+it.id)); if(it.id==='session'){ buildSessionHome(); } if(it.id==='stories'){ buildStoryListHome(); } if(it.id==='achv'){ buildAchvHome(); } if(it.id==='rewards'){ buildRewardsHome(); } if(it.id==='daily'){ buildDailyHome(); } if(it.id==='lead'){ buildLeaderboard(); } if(it.id==='similar'){ buildSimilarGrid(); } if(it.id==='bank'){ buildBankGrid(); } if(it.id==='exam'){ buildExamGrid(); } };
     box.appendChild(d);
   });
   // activate first
@@ -2544,6 +2597,84 @@ function buildDailyHome(){
   const btn=document.createElement('button'); btn.className='btn green'; btn.style.marginTop='12px'; btn.textContent='▶️ ابدأ التحدّيات'; btn.onclick=()=>startGame('daily');
   box.appendChild(btn);
 }
+/* ------------------ ADAPTIVE DAILY SESSION (جلسة اليوم) ------------------ */
+const SKILL_META={
+  recognize:{e:'🔤',label:'قراءة وتمييز'},
+  listen:{e:'🎧',label:'استماع'},
+  spell:{e:'✍️',label:'تهجئة'},
+  pronounce:{e:'🎤',label:'نطق'}
+};
+const SKILL_TO_MODE={recognize:'words',listen:'listen',spell:'spell',pronounce:'recall'};
+let _wordIndex=null;
+function wordItemIndex(){
+  if(_wordIndex) return _wordIndex;
+  const idx={};
+  Object.keys(MODE_DATA).forEach(m=>{ (MODE_DATA[m]||[]).forEach(it=>{ const k=String(it.t||'').toLowerCase(); if(k&&!idx[k]) idx[k]={t:it.t,emoji:it.emoji||'',ar:it.ar||'',spoken:it.spoken||it.t}; }); });
+  _wordIndex=idx; return idx;
+}
+function newWordsForProfile(p, excludeWords, n){
+  const out=[];
+  const g=AGES.find(a=>a.key===p.levelKey)||levelFromAge(p.age);
+  const modes=g.modes.slice(); if(p.schoolYear) modes.push('egy:'+p.schoolYear);
+  const seen={}; if(p.learning&&p.learning.items) Object.keys(p.learning.items).forEach(k=>{ const pr=LearningEngine.splitKey(k); seen[String(pr.word).toLowerCase()]=1; });
+  for(let mi=0; mi<modes.length && out.length<n; mi++){ const m=modes[mi]; if(!MODE_DATA[m]) continue;
+    for(let i=0;i<MODE_DATA[m].length && out.length<n;i++){ const it=MODE_DATA[m][i]; const w=String(it.t||'').toLowerCase(); if(!w||seen[w]||excludeWords[w]) continue;
+      seen[w]=1; excludeWords[w]=1; out.push({ it:{t:it.t,emoji:it.emoji||'',ar:it.ar||'',spoken:it.spoken||it.t}, reason:'كلمة جديدة', skill:'recognize' }); } }
+  return out;
+}
+function buildSessionHome(){
+  const box=document.getElementById('sessionHome'); if(!box) return;
+  const p=currentProfile();
+  if(!p){ box.innerHTML='<div class="muted">أنشئ ملف طفل لعرض جلسة اليوم</div>'; return; }
+  if(!window.LearningEngine){ box.innerHTML='<div class="muted">محرّك التعلّم غير متاح</div>'; return; }
+  if(!p.learning) p.learning=LearningEngine.createStore();
+  const MAX=10;
+  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX});
+  const dueSet={}, freshSet={}, weakSet={};
+  sel.due.forEach(e=>dueSet[e.key]=1); sel.fresh.forEach(e=>freshSet[e.key]=1); sel.weak.forEach(e=>weakSet[e.key]=1);
+  const idx=wordItemIndex();
+  const chosen={};
+  const items=sel.plan.map(e=>{
+    const it=idx[String(e.word).toLowerCase()];
+    if(!it) return null;
+    const w=String(it.t).toLowerCase(); if(chosen[w]) return null; chosen[w]=1;
+    const reason=dueSet[e.key]?'مراجعة':(freshSet[e.key]?'كلمة جديدة':(weakSet[e.key]?'يحتاج تثبيتًا':'تدريب'));
+    return { it:it, reason:reason, skill:e.skill };
+  }).filter(Boolean);
+  let added=0;
+  if(items.length<MAX){ const more=newWordsForProfile(p, chosen, MAX-items.length); added=more.length; more.forEach(x=>items.push(x)); }
+  const st=LearningEngine.stats(p.learning, Date.now());
+  const head='<div class="row-center" style="gap:8px;flex-wrap:wrap;margin-bottom:8px">'+
+    '<span class="chip">🔁 للمراجعة: '+sel.due.length+'</span>'+
+    '<span class="chip">🌱 جديدة: '+(sel.fresh.length+added)+'</span>'+
+    '<span class="chip">🏅 مُتقَنة: '+st.mastered+'</span></div>';
+  if(!items.length){
+    box.innerHTML=head+'<div class="muted" style="padding:10px">لا شيء للمراجعة الآن 🎉 — يمكنك تعلّم كلمات جديدة.</div>'+
+      '<button class="btn green" id="sessionNew" style="margin-top:10px">▶️ تعلّم كلمات جديدة</button>';
+    const b=document.getElementById('sessionNew'); if(b) b.onclick=()=>startMode('words');
+    return;
+  }
+  box.innerHTML=head+'<div class="grid two" id="sessionGrid"></div>'+
+    '<button class="btn green" id="sessionStart" style="margin-top:12px">▶️ ابدأ جلسة اليوم ('+items.length+')</button>'+
+    '<p class="muted" style="font-size:12px;margin-top:6px">المدة المتوقعة: ~'+Math.max(5,items.length)+' دقائق</p>';
+  const g=document.getElementById('sessionGrid');
+  items.forEach(x=>{ const m=SKILL_META[x.skill]||SKILL_META.recognize;
+    const el=document.createElement('div'); el.className='card pop-card';
+    el.innerHTML='<span class="emoji">'+m.e+'</span><div class="name">'+capWord(x.it.t)+'</div><div class="hint">'+m.label+' • '+x.reason+'</div>';
+    g.appendChild(el);
+  });
+  const sb=document.getElementById('sessionStart'); if(sb) sb.onclick=()=>startDailySession(items);
+}
+function startDailySession(items){
+  stopMouth(); clearInterval(rushT);
+  if(!items||!items.length){ toast('لا شيء للمراجعة الآن 🎉'); return; }
+  currentMode='review'; recallRevealed=false; dailySessionActive=true;
+  list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:SKILL_TO_MODE[x.skill]||'words'}));
+  index=0; sessionStars=0; updateSessionStars();
+  renderItem(); go('practice'); startTimer();
+  toast('جلسة اليوم: '+list.length+' عنصرًا مخصّصًا 🧠');
+}
+let dailySessionActive=false;
 function greetHome(){
   if(settings.teacher===false || settings.teacherAudio===false) return;
   if(settings.greetDay===dayKey(Date.now())) return;
@@ -2654,7 +2785,8 @@ const ACHV=[
   {id:'story',   e:'📖', name:'قارئ صغير',      desc:'أكمل قصة كاملة',                 chk:p=>(p.stats.stories||0)>=1},
   {id:'gmaster', e:'👑', name:'بطل الألعاب',    desc:'العب كل الألعاب مرة واحدة',      chk:p=>isGameMaster()},
   {id:'boss',    e:'⚔️', name:'قاهر الزعماء',   desc:'اهزم زعيماً في معركة',           chk:p=>(p.stats.bossWins||0)>=1},
-  {id:'chall',   e:'🎯', name:'متحدٍّ يومي',    desc:'أكمل ٣ تحدّيات يومية',           chk:p=>(p.stats.challengeDone||0)>=3}
+  {id:'chall',   e:'🎯', name:'متحدٍّ يومي',    desc:'أكمل ٣ تحدّيات يومية',           chk:p=>(p.stats.challengeDone||0)>=3},
+  {id:'session', e:'🧠', name:'منتظم ذكي',      desc:'أكمل جلسة يوم كاملة',            chk:p=>(p.stats.sessions||0)>=1}
 ];
 function achvUnlocked(p,a){ return !!(p&&p.achv&&p.achv[a.id]); }
 function evalAchv(){
@@ -2827,7 +2959,7 @@ function enterHome(){
   buildModeGrid(); buildGameGrid(); buildCurGrid(); buildSmartGrid(); buildSimilarGrid(); applySettingsUI();
   const rc=buildReviewList().length; const rb=document.getElementById('btnReview');
   if(rb) rb.textContent= rc? ('🔁 مراجعة اليوم ('+rc+')') : '🔁 مراجعة اليوم';
-  buildHomeProgress(); buildHomeActs(); buildHomeCur();
+  buildHomeProgress(); buildHomeActs(); buildHomeCur(); buildSessionHome();
   applyTheme();
   greetHome();
   initSidebar();
@@ -3061,6 +3193,7 @@ document.getElementById('btnPrev').onclick=()=>{ if(index>0){ index--; renderIte
 document.getElementById('btnNext').onclick=()=>{ document.getElementById('btnNext').classList.remove('glow'); if(index<list.length-1){ index++; renderItem(); } else finishLevel(); };
 document.getElementById('btnRepeat').onclick=()=>{ cancelRelisten(); renderItem(); };
 function finishLevel(){
+  if(dailySessionActive){ dailySessionActive=false; const p=currentProfile(); if(p){ p.stats.sessions=(p.stats.sessions||0)+1; saveProfiles(); evalAchv(); } }
   const total=list.length;
   const earned=list.reduce((a,it)=>a+itemStars(modeOfItem(it),it.t),0);
   const maxPossible=total*3, perfect=list.filter(it=>itemStars(modeOfItem(it),it.t)===3).length;
@@ -3120,6 +3253,7 @@ function bumpWordStar(t, ok){
   const k=itemKey('words', String(t).toLowerCase());
   const cur=p.progress[k]||0;
   if(ok && cur<3){ p.progress[k]=Math.min(3, cur+1); saveProfiles(); }
+  learnEvent((typeof game!=='undefined'&&game&&game.type)?game.type:'words', t, !!ok, ok?90:20, false);
 }
 function popFloat(emoji){ const el=document.createElement('div'); el.className='sfx-pop'; el.textContent=emoji; el.style.left=(innerWidth/2-12)+'px'; el.style.top=(innerHeight/2-40)+'px'; document.body.appendChild(el); setTimeout(()=>el.remove(),700); }
 function showCombo(c){ if(c<2) return; const el=document.createElement('div'); el.className='combo-pill'; el.textContent='🔥 '+c+' سلسلة'; const fb=document.getElementById('gFeedback'); if(fb){ fb.prepend(el); } }
@@ -4395,6 +4529,36 @@ function buildReport(){
       <span style="color:${c};font-weight:900">${r.score}%</span><span class="muted">${hm}</span></div>`;
   }).join('') || '<div class="muted">لا يوجد نشاط بعد.</div>';
 
+  // adaptive-learning (measured) stats computed by the spaced-repetition engine
+  let learnCard='';
+  try{
+    const LE=window.LearningEngine;
+    if(LE){
+      if(!p.learning) p.learning=LE.createStore();
+      const ls=LE.stats(p.learning, Date.now());
+      const SKN={recognize:'قراءة وتمييز',listen:'استماع',spell:'تهجئة',pronounce:'نطق'};
+      if(!ls.total){
+        learnCard=`<div class="rep-card"><h3>🧠 التعلّم التكيّفي</h3>
+          <div class="muted">لا توجد بيانات تعلّم تكيّفي بعد — ستبدأ جلسة اليوم بجمعها تلقائيًا من تدريب الطفل.</div></div>`;
+      } else {
+        const masteredPct=Math.round(ls.mastered/Math.max(1,ls.total)*100);
+        learnCard=`<div class="rep-card"><h3>🧠 التعلّم التكيّفي (قياس فعلي)</h3>
+          <div class="muted" style="margin-top:4px">أرقام محسوبة من إجابات الطفل الفعلية وتُستخدم لبناء «جلسة اليوم». (قسم التقدّم أعلى الصفحة تقديري حسب المنهج.)</div>
+          <div class="stat-grid" style="margin-top:10px">
+            <div class="stat"><div class="v">${ls.total}</div><div class="l">عناصر مُتابَعة</div></div>
+            <div class="stat"><div class="v">${ls.mastered}</div><div class="l">مُتقَن</div></div>
+            <div class="stat"><div class="v">${ls.learning}</div><div class="l">قيد التعلّم</div></div>
+            <div class="stat"><div class="v">${ls.due}</div><div class="l">مستحق المراجعة</div></div>
+            <div class="stat"><div class="v">${ls.weak}</div><div class="l">يحتاج تثبيتًا</div></div>
+            <div class="stat"><div class="v">${masteredPct}%</div><div class="l">نسبة الإتقان</div></div>
+          </div>
+          ${LE.SKILLS.map(sk=>{ const b=ls.bySkill[sk]||{total:0,mastered:0,due:0}; const pct=b.total?Math.round(b.mastered/b.total*100):0;
+            return `<div class="brow"><span>${SKN[sk]||sk}</span><span>${b.mastered}/${b.total} (${pct}%)</span></div><div class="bar"><i style="width:${pct}%"></i></div>`; }).join('')}
+        </div>`;
+      }
+    }
+  }catch(e){}
+
   body.innerHTML=`
     <div class="rep-card">
       <div class="greet"><div class="av">${p.avatar}</div>
@@ -4408,6 +4572,7 @@ function buildReport(){
       </div>
       <div class="muted" style="margin-top:8px">متوسط الدرجة في المحاولات المنطوقة: ${avg}%</div>
     </div>
+    ${learnCard}
     <div class="rep-card">
       <h3>📚 التقدّم حسب القسم</h3>
       ${g.modes.map(m=>{ const st=starsForMode(m); const pct=Math.round(st.got/st.max*100);
@@ -4518,7 +4683,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='5.9';
+    const local='6.0';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
