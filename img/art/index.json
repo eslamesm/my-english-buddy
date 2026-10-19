@@ -2399,6 +2399,30 @@
     "emoji": "🫶",
     "src": "img/art/cooperation.svg"
   },
+  "drink": {
+    "en": "Drink",
+    "ar": "يشرب",
+    "emoji": "🥤",
+    "src": "img/art/drink.svg"
+  },
+  "sleep": {
+    "en": "Sleep",
+    "ar": "ينام",
+    "emoji": "😴",
+    "src": "img/art/sleep.svg"
+  },
+  "frog": {
+    "en": "Frog",
+    "ar": "ضفدع",
+    "emoji": "🐸",
+    "src": "img/art/frog.svg"
+  },
+  "sheep": {
+    "en": "Sheep",
+    "ar": "خروف",
+    "emoji": "🐑",
+    "src": "img/art/sheep.svg"
+  },
   "dad": {
     "en": "Dad",
     "ar": "أب",

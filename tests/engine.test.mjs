@@ -254,3 +254,89 @@ test('deterministic: identical inputs produce identical stores', () => {
   assert.equal(run(), run());
   assert.equal(run(), run());
 });
+
+test('v6.1: normalizeDailyNew accepts only configured targets', () => {
+  assert.deepEqual(LE.DAILY_NEW_OPTIONS, [3, 5, 10]);
+  assert.equal(LE.DAILY_NEW_DEFAULT, 5);
+  assert.equal(LE.normalizeDailyNew(3), 3);
+  assert.equal(LE.normalizeDailyNew(5), 5);
+  assert.equal(LE.normalizeDailyNew('10'), 10);
+  assert.equal(LE.normalizeDailyNew(7), 5);
+  assert.equal(LE.normalizeDailyNew(0), 5);
+  assert.equal(LE.normalizeDailyNew(-3), 5);
+  assert.equal(LE.normalizeDailyNew('x'), 5);
+  assert.equal(LE.normalizeDailyNew(undefined), 5);
+  assert.equal(LE.normalizeDailyNew(999), 5);
+});
+
+test('v6.1: skillProfile reports weakness only when data is reliable', () => {
+  const now = T(2026, 1, 20);
+  const s = LE.createStore();
+  // spell: 3 records, all repeatedly wrong -> strong weakness, reliable
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) LE.record(s, { skill: 'spell', word: 'w' + i, correct: false, score: 0 }, now);
+  }
+  // recognize: only 1 record -> not reliable, weakness must be 0
+  LE.record(s, { skill: 'recognize', word: 'solo', correct: false, score: 0 }, now);
+  const sp = LE.skillProfile(s, now);
+  assert.equal(sp.spell.reliable, true);
+  assert.ok(sp.spell.weakness > 0.5);
+  assert.equal(sp.recognize.reliable, false);
+  assert.equal(sp.recognize.weakness, 0);
+  assert.equal(sp.listen.total, 0);
+  assert.equal(sp.listen.reliable, false);
+});
+
+test('v6.1: weightSkills prioritises the weakest reliable skill without losing overdue coverage', () => {
+  const now = T(2026, 2, 5);
+  const s = LE.createStore();
+  // make spell reliably weak (many wrong, all overdue), recognize strong
+  for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 3; j++) LE.record(s, { skill: 'spell', word: 'sp' + i, correct: false, score: 0 }, now - 10 * DAY);
+  }
+  for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 4; j++) LE.record(s, { skill: 'recognize', word: 'rc' + i, correct: true, score: 95 }, now - 10 * DAY);
+  }
+  const plain = LE.selectPractice(s, { maxItems: 8, includeNew: false });
+  const weighted = LE.selectPractice(s, { maxItems: 8, includeNew: false, weightSkills: true });
+  assert.equal(weighted.weighted, true);
+  // same total coverage, no items lost
+  assert.equal(weighted.plan.length, plain.plan.length);
+  assert.equal(weighted.due.length, plain.due.length);
+  const spellFirst = weighted.plan.filter((e) => e.skill === 'spell').length;
+  const spellPlain = plain.plan.filter((e) => e.skill === 'spell').length;
+  assert.ok(spellFirst >= spellPlain);
+  assert.ok(weighted.plan.some((e) => e.skill === 'spell'));
+});
+
+test('v6.1: weightSkills falls back to v6.0 ordering when no skill is reliable', () => {
+  const now = T(2026, 2, 5);
+  const s = LE.createStore();
+  LE.record(s, { skill: 'spell', word: 'one', correct: true, score: 90 }, now - 10 * DAY);
+  const plain = LE.selectPractice(s, { maxItems: 8, includeNew: false });
+  const weighted = LE.selectPractice(s, { maxItems: 8, includeNew: false, weightSkills: true });
+  assert.equal(weighted.weighted, false);
+  assert.deepEqual(weighted.plan.map((e) => e.key), plain.plan.map((e) => e.key));
+});
+
+test('v6.1: newTarget hard-caps brand-new items placed in the plan', () => {
+  const now = T(2026, 3, 1);
+  const s = LE.createStore();
+  // seed fresh/new items
+  for (let i = 0; i < 20; i++) LE.ensureRecord(s, 'recognize', 'new' + i);
+  let plan = LE.selectPractice(s, { maxItems: 12, newPer: 1, duePer: 1, newTarget: 3 }).plan;
+  assert.equal(plan.filter((e) => e.rec.correctCount === 0 && e.rec.wrongCount === 0 && !e.rec.lastReviewed).length, 3);
+  plan = LE.selectPractice(s, { maxItems: 12, newPer: 1, duePer: 1, newTarget: 0 }).plan;
+  assert.equal(plan.filter((e) => e.rec.lastReviewed == null).length, 0);
+});
+
+test('v6.1: stats exposes per-skill reliability and weakness', () => {
+  const now = T(2026, 1, 20);
+  const s = LE.createStore();
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) LE.record(s, { skill: 'spell', word: 'sw' + i, correct: false, score: 0 }, now);
+  const st = LE.stats(s, now);
+  assert.equal(st.bySkill.spell.reliable, true);
+  assert.ok(st.bySkill.spell.weakness > 0);
+  assert.equal(st.bySkill.listen.reliable, false);
+  assert.equal(typeof st.bySkill.recognize.avgMastery, 'number');
+});

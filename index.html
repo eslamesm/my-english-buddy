@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.0" /><!-- English Kids v6.0 -->
+<meta name="app-version" content="My English Buddy v6.1" /><!-- English Kids v6.1 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -811,7 +811,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.0</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.1</div>
       </main>
     </div>
   </section>
@@ -1653,7 +1653,8 @@ CUR_GRADES.forEach(g=>{
     CUR_UNITS.push({key:'p1',   base:'p1', term:'1', grade:g.grade, ages:g.ages, emoji:g.emoji, words:CUR_WORDS.p1.filter(w=>w.term==='1')});
     CUR_UNITS.push({key:'p1t2', base:'p1', term:'2', grade:g.grade, ages:g.ages, emoji:g.emoji, words:CUR_WORDS.p1.filter(w=>w.term==='2')});
   } else {
-    CUR_UNITS.push({key:g.id, base:g.id, term:null, grade:g.grade, ages:g.ages, emoji:g.emoji, words:CUR_WORDS[g.id]});
+    const kgTerm=(g.id==='kg1'||g.id==='kg2')?'1':null;
+    CUR_UNITS.push({key:g.id, base:g.id, term:kgTerm, grade:g.grade, ages:g.ages, emoji:g.emoji, words:CUR_WORDS[g.id]});
   }
 });
 /* study units inside a term (each term has 6 units) */
@@ -1751,6 +1752,11 @@ function sanitizeProfile(p){
   if(!Array.isArray(st.recent)) st.recent=[];
   if(!st.games||typeof st.games!=='object'||Array.isArray(st.games)) st.games={attempts:0,correct:0};
   o.learning=(window.LearningEngine)?LearningEngine.validateStore(o.learning):((o.learning&&typeof o.learning==='object'&&!Array.isArray(o.learning))?o.learning:{v:1,items:{}});
+  o.dailyNew=(window.LearningEngine)?LearningEngine.normalizeDailyNew(o.dailyNew):([3,5,10].indexOf(parseInt(o.dailyNew,10))>=0?parseInt(o.dailyNew,10):5);
+  const se=(o.session&&typeof o.session==='object'&&!Array.isArray(o.session))?o.session:null;
+  if(se&&typeof se.day==='string'&&Array.isArray(se.keys)){
+    o.session={ day:se.day, index:Math.max(0,parseInt(se.index,10)||0), keys:se.keys.filter(x=>typeof x==='string').slice(0,40) };
+  } else o.session=null;
   return o;
 }
 function sanitizeProfiles(raw){
@@ -1836,6 +1842,8 @@ function newProfile(name, age, avatar, levelKey, schoolYear){
     name, age, avatar, levelKey, schoolYear:schoolYear||gradeFromAge(age), createdAt:Date.now(),
     progress:{},
     learning:(window.LearningEngine)?LearningEngine.createStore():{v:1,items:{}},
+    dailyNew:(window.LearningEngine?LearningEngine.DAILY_NEW_DEFAULT:5),
+    session:null,
     stats:{ attempts:0, timeMs:0, byMode:{}, daily:{}, recent:[], games:{attempts:0,correct:0}, lastPlayed:null }
   };
 }
@@ -2471,6 +2479,7 @@ function showScore(item,score,heard,engine){
   if(!uncertain && rm!=='letters' && stars<3 && heard && normalize(heard)){ fb.innerHTML+=spellHint(item.t, heard); }
   if(currentMode==='recall') recallReveal();
   recordAttempt(rm, item.t, score, stars, uncertain);
+  if(dailySessionActive){ try{ persistSession(); }catch(e){} }
   if(stars===3){
     smartFailCount=0;
     const prev=itemStars(rm,item.t); if(prev<3){ setItemStars(rm,item.t,3); sessionStars+=(3-prev); }
@@ -2617,10 +2626,27 @@ function newWordsForProfile(p, excludeWords, n){
   const g=AGES.find(a=>a.key===p.levelKey)||levelFromAge(p.age);
   const modes=g.modes.slice(); if(p.schoolYear) modes.push('egy:'+p.schoolYear);
   const seen={}; if(p.learning&&p.learning.items) Object.keys(p.learning.items).forEach(k=>{ const pr=LearningEngine.splitKey(k); seen[String(pr.word).toLowerCase()]=1; });
+  excludeWords=excludeWords||{};
   for(let mi=0; mi<modes.length && out.length<n; mi++){ const m=modes[mi]; if(!MODE_DATA[m]) continue;
     for(let i=0;i<MODE_DATA[m].length && out.length<n;i++){ const it=MODE_DATA[m][i]; const w=String(it.t||'').toLowerCase(); if(!w||seen[w]||excludeWords[w]) continue;
       seen[w]=1; excludeWords[w]=1; out.push({ it:{t:it.t,emoji:it.emoji||'',ar:it.ar||'',spoken:it.spoken||it.t}, reason:'كلمة جديدة', skill:'recognize' }); } }
   return out;
+}
+const DAILY_SESSION_MAX=10;
+function weakestSkill(p){
+  try{ const sp=LearningEngine.skillProfile(p.learning, Date.now()); let best=-1, focus=null;
+    LearningEngine.SKILLS.forEach(s=>{ if(sp[s].reliable && sp[s].weakness>best){ best=sp[s].weakness; focus=s; } });
+    return (focus && best>0.35)? {skill:focus, weakness:best} : null; }catch(e){ return null; }
+}
+function sessionSettingsHtml(p){
+  const opts=(window.LearningEngine?LearningEngine.DAILY_NEW_OPTIONS:[3,5,10]);
+  return '<div class="row-center" style="gap:8px;flex-wrap:wrap;margin:6px 0">'+
+    '<span class="muted" style="font-size:12px">🌱 كلمات جديدة يوميًا:</span>'+
+    opts.map(v=>'<span class="chip'+(p.dailyNew===v?' on':'')+'" data-dn="'+v+'">'+v+'</span>').join('')+
+    '</div><p class="muted" style="font-size:12px;margin:2px 0 8px">الهدف الحالي: '+p.dailyNew+' كلمة جديدة يوميًا (المراجعات المستحقة لها الأولوية دائمًا)</p>';
+}
+function wireSessionSettings(p, box){
+  box.querySelectorAll('[data-dn]').forEach(ch=>{ ch.onclick=()=>{ p.dailyNew=LearningEngine.normalizeDailyNew(ch.dataset.dn); saveProfiles(); buildSessionHome(); toast('هدف الكلمات الجديدة: '+p.dailyNew+' يوميًا 🌱'); }; });
 }
 function buildSessionHome(){
   const box=document.getElementById('sessionHome'); if(!box) return;
@@ -2628,34 +2654,54 @@ function buildSessionHome(){
   if(!p){ box.innerHTML='<div class="muted">أنشئ ملف طفل لعرض جلسة اليوم</div>'; return; }
   if(!window.LearningEngine){ box.innerHTML='<div class="muted">محرّك التعلّم غير متاح</div>'; return; }
   if(!p.learning) p.learning=LearningEngine.createStore();
-  const MAX=10;
-  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX});
-  const dueSet={}, freshSet={}, weakSet={};
-  sel.due.forEach(e=>dueSet[e.key]=1); sel.fresh.forEach(e=>freshSet[e.key]=1); sel.weak.forEach(e=>weakSet[e.key]=1);
+  const MAX=DAILY_SESSION_MAX, newTarget=LearningEngine.normalizeDailyNew(p.dailyNew);
   const idx=wordItemIndex();
-  const chosen={};
-  const items=sel.plan.map(e=>{
-    const it=idx[String(e.word).toLowerCase()];
-    if(!it) return null;
-    const w=String(it.t).toLowerCase(); if(chosen[w]) return null; chosen[w]=1;
-    const reason=dueSet[e.key]?'مراجعة':(freshSet[e.key]?'كلمة جديدة':(weakSet[e.key]?'يحتاج تثبيتًا':'تدريب'));
-    return { it:it, reason:reason, skill:e.skill };
-  }).filter(Boolean);
-  let added=0;
-  if(items.length<MAX){ const more=newWordsForProfile(p, chosen, MAX-items.length); added=more.length; more.forEach(x=>items.push(x)); }
+  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX, weightSkills:true, newTarget:newTarget});
+  const dueSet={}; sel.due.forEach(e=>dueSet[e.key]=1);
+
+  const reviews=[], seenR={};
+  const addRev=(e,reason)=>{ const it=idx[String(e.word).toLowerCase()]; if(!it) return; const key=e.key; if(seenR[key]) return; seenR[key]=1; reviews.push({it:it,reason:reason,skill:e.skill,key:key}); };
+  sel.due.forEach(e=>addRev(e,'مراجعة'));
+  sel.weak.forEach(e=>addRev(e, dueSet[e.key]?'مراجعة':'يحتاج تثبيتًا'));
+
+  const items=[], used={};
+  // reviews first; when reviews are plentiful leave no room for new words
+  const reviewTake=(reviews.length>=MAX)?MAX:Math.min(reviews.length, MAX-newTarget);
+  reviews.slice(0,reviewTake).forEach(r=>{ used[r.key]=1; items.push(r); });
+  // new words (store-new first, then curriculum) up to the configured target
+  let newAdded=0;
+  if(reviews.length<MAX){
+    const cand=[], seenW={};
+    sel.fresh.forEach(e=>{ const it=idx[String(e.word).toLowerCase()]; if(!it) return; const w=String(it.t).toLowerCase(); if(seenW[w]) return; seenW[w]=1; cand.push({it:it,skill:e.skill}); });
+    newWordsForProfile(p, seenW, newTarget).forEach(x=>cand.push({it:x.it,skill:'recognize'}));
+    const placedWords={}; items.forEach(r=>{ placedWords[String(r.it.t).toLowerCase()]=1; });
+    for(const c of cand){ if(items.length>=MAX||newAdded>=newTarget) break; const w=String(c.it.t).toLowerCase(); if(placedWords[w]||used['w:'+w]) continue; used['w:'+w]=1; items.push({it:c.it,reason:'كلمة جديدة',skill:c.skill}); newAdded++; }
+  }
+  // if fewer new words were available, top up with remaining reviews
+  for(const r of reviews){ if(items.length>=MAX) break; if(used[r.key]) continue; used[r.key]=1; items.push(r); }
+
   const st=LearningEngine.stats(p.learning, Date.now());
+  const focus=weakestSkill(p);
+  const dueShown=items.filter(x=>dueSet[LearningEngine.key(x.skill, x.it.t)]).length;
   const head='<div class="row-center" style="gap:8px;flex-wrap:wrap;margin-bottom:8px">'+
-    '<span class="chip">🔁 للمراجعة: '+sel.due.length+'</span>'+
-    '<span class="chip">🌱 جديدة: '+(sel.fresh.length+added)+'</span>'+
-    '<span class="chip">🏅 مُتقَنة: '+st.mastered+'</span></div>';
+    '<span class="chip">🔁 مراجعة: '+dueShown+'</span>'+
+    '<span class="chip">➕ تثبيت: '+Math.max(0,items.length-dueShown-newAdded)+'</span>'+
+    '<span class="chip">🌱 جديدة: '+newAdded+'</span>'+
+    '<span class="chip">🏅 مُتقَنة: '+st.mastered+'</span></div>'+
+    (focus? '<p class="muted" style="font-size:12px;margin:0 0 8px">🎯 تركيز اليوم: '+(SKILL_META[focus.skill]||{}).label+' (من أداء طفلك)</p>':'');
+  const settings=sessionSettingsHtml(p);
+
+  const today=dayKey(Date.now());
+  const canResume=p.session && p.session.day===today && p.session.index>0 && p.session.index<p.session.keys.length;
+
   if(!items.length){
-    box.innerHTML=head+'<div class="muted" style="padding:10px">لا شيء للمراجعة الآن 🎉 — يمكنك تعلّم كلمات جديدة.</div>'+
-      '<button class="btn green" id="sessionNew" style="margin-top:10px">▶️ تعلّم كلمات جديدة</button>';
-    const b=document.getElementById('sessionNew'); if(b) b.onclick=()=>startMode('words');
+    box.innerHTML=settings+head+'<div class="muted" style="padding:10px">لا مراجعات مستحقة ولا كلمات جديدة متاحة الآن 🎉 — أتقنت كل المحتوى المتاح لمستواك.</div>';
+    wireSessionSettings(p, box);
     return;
   }
-  box.innerHTML=head+'<div class="grid two" id="sessionGrid"></div>'+
-    '<button class="btn green" id="sessionStart" style="margin-top:12px">▶️ ابدأ جلسة اليوم ('+items.length+')</button>'+
+  const resumeHtml=canResume? '<button class="btn blue" id="sessionResume" style="margin-top:10px">⏯️ استئناف الجلسة ('+(p.session.index+1)+'/'+p.session.keys.length+')</button>' : '';
+  box.innerHTML=settings+head+'<div class="grid two" id="sessionGrid"></div>'+
+    '<button class="btn green" id="sessionStart" style="margin-top:12px">▶️ ابدأ جلسة اليوم ('+items.length+')</button>'+resumeHtml+
     '<p class="muted" style="font-size:12px;margin-top:6px">المدة المتوقعة: ~'+Math.max(5,items.length)+' دقائق</p>';
   const g=document.getElementById('sessionGrid');
   items.forEach(x=>{ const m=SKILL_META[x.skill]||SKILL_META.recognize;
@@ -2663,18 +2709,36 @@ function buildSessionHome(){
     el.innerHTML='<span class="emoji">'+m.e+'</span><div class="name">'+capWord(x.it.t)+'</div><div class="hint">'+m.label+' • '+x.reason+'</div>';
     g.appendChild(el);
   });
-  const sb=document.getElementById('sessionStart'); if(sb) sb.onclick=()=>startDailySession(items);
+  wireSessionSettings(p, box);
+  const sb=document.getElementById('sessionStart'); if(sb) sb.onclick=()=>launchSession(items,0);
+  const rb=document.getElementById('sessionResume'); if(rb) rb.onclick=()=>resumeSession(p);
 }
-function startDailySession(items){
+function launchSession(items, startIndex){
   stopMouth(); clearInterval(rushT);
   if(!items||!items.length){ toast('لا شيء للمراجعة الآن 🎉'); return; }
-  currentMode='review'; recallRevealed=false; dailySessionActive=true;
-  list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:SKILL_TO_MODE[x.skill]||'words'}));
-  index=0; sessionStars=0; updateSessionStars();
-  renderItem(); go('practice'); startTimer();
+  currentMode='review'; recallRevealed=false; dailySessionActive=true; dailySessionProfileId=currentId;
+  list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:(x._mode||SKILL_TO_MODE[x.skill]||'words')}));
+  index=Math.max(0, Math.min(startIndex||0, list.length-1)); sessionStars=0; updateSessionStars();
+  renderItem(); go('practice'); startTimer(); persistSession();
   toast('جلسة اليوم: '+list.length+' عنصرًا مخصّصًا 🧠');
 }
-let dailySessionActive=false;
+function resumeSession(p){
+  const keys=(p.session&&p.session.keys)||[]; const start=p.session?p.session.index:0;
+  const idx=wordItemIndex(); const chosen={}; const items=[];
+  keys.forEach(k=>{ const parts=LearningEngine.splitKey(k); const it=idx[String(parts.word).toLowerCase()]; if(!it) return; const w=String(it.t).toLowerCase(); if(chosen[w]) return; chosen[w]=1; items.push({it:it,skill:parts.skill,_mode:SKILL_TO_MODE[parts.skill]||'words'}); });
+  if(!items.length){ clearSession(); buildSessionHome(); return; }
+  launchSession(items, start);
+}
+function persistSession(){
+  const p=currentProfile(); if(!p) return;
+  if(!dailySessionActive || dailySessionProfileId!==currentId){ p.session=null; saveProfiles(); return; }
+  try{ p.session={ day:dayKey(Date.now()), index:index, keys:list.map(it=>LearningEngine.key(LearningEngine.skillFromMode(modeOfItem(it)), it.t)) }; }
+  catch(e){ p.session=null; }
+  saveProfiles();
+}
+function clearSession(){ const p=currentProfile(); if(p){ p.session=null; saveProfiles(); } }
+function endSession(){ dailySessionActive=false; dailySessionProfileId=null; }
+let dailySessionActive=false, dailySessionProfileId=null;
 function greetHome(){
   if(settings.teacher===false || settings.teacherAudio===false) return;
   if(settings.greetDay===dayKey(Date.now())) return;
@@ -2728,7 +2792,7 @@ function buildLogin(){
       <div style="flex:1"><div class="nm">${esc(p.name)}</div>
       <div class="meta">${p.age} سنة • ${g.title} • ⭐ ${Object.values(p.progress).reduce((a,b)=>a+b,0)}</div></div>
       <div style="font-size:22px;color:#c4b5fd">›</div>`;
-    el.onclick=()=>{ currentId=p.id; saveCurrent(); enterHome(); };
+    el.onclick=()=>{ if(dailySessionActive) persistSession(); currentId=p.id; saveCurrent(); enterHome(); };
     box.appendChild(el);
   });
 }
@@ -2949,6 +3013,7 @@ document.getElementById('storyStartQuiz').onclick=startStoryQuiz;
 
 /* ------------------ HOME ------------------ */
 function enterHome(){
+  if(dailySessionActive && dailySessionProfileId!==currentId) endSession();
   const p=currentProfile(); if(!p){ buildLogin(); go('login'); return; }
   const g=AGES.find(a=>a.key===p.levelKey)||levelFromAge(p.age);
   chosenAge=g;
@@ -3102,6 +3167,7 @@ function recallReveal(){
   document.getElementById('pAr').textContent=it.ar||'';
 }
 function startRecall(){
+  endSession();
   let q=dueItems().filter(x=>x.m!=='letters'&&x.m!=='sounds');
   if(!q.length){ toast('لا كلمات للمراجعة الآن — أتقن كلمات جديدة أولاً 🙂'); return; }
   currentMode='recall'; recallRevealed=false;
@@ -3111,6 +3177,7 @@ function startRecall(){
   toast('انطقها من ذاكرتك قبل رؤية الكلمة 🎤');
 }
 function startMode(mode){
+  endSession();
   currentMode=mode;
   list=MODE_DATA[mode].map((it,i)=>({...it,_i:i}));
   index=0; sessionStars=0; updateSessionStars();
@@ -3190,10 +3257,10 @@ document.getElementById('btnMic').onclick=async ()=>{
 };
 document.getElementById('btnReplayMe').onclick=()=>{ if(lastVoiceUrl){ const a=new Audio(lastVoiceUrl); a.play().catch(()=>toast('تعذّر تشغيل التسجيل')); } };
 document.getElementById('btnPrev').onclick=()=>{ if(index>0){ index--; renderItem(); } };
-document.getElementById('btnNext').onclick=()=>{ document.getElementById('btnNext').classList.remove('glow'); if(index<list.length-1){ index++; renderItem(); } else finishLevel(); };
+document.getElementById('btnNext').onclick=()=>{ document.getElementById('btnNext').classList.remove('glow'); if(index<list.length-1){ index++; if(dailySessionActive) persistSession(); renderItem(); } else finishLevel(); };
 document.getElementById('btnRepeat').onclick=()=>{ cancelRelisten(); renderItem(); };
 function finishLevel(){
-  if(dailySessionActive){ dailySessionActive=false; const p=currentProfile(); if(p){ p.stats.sessions=(p.stats.sessions||0)+1; saveProfiles(); evalAchv(); } }
+  if(dailySessionActive){ dailySessionActive=false; dailySessionProfileId=null; const p=currentProfile(); if(p){ p.stats.sessions=(p.stats.sessions||0)+1; p.session=null; saveProfiles(); evalAchv(); } }
   const total=list.length;
   const earned=list.reduce((a,it)=>a+itemStars(modeOfItem(it),it.t),0);
   const maxPossible=total*3, perfect=list.filter(it=>itemStars(modeOfItem(it),it.t)===3).length;
@@ -3260,6 +3327,7 @@ function showCombo(c){ if(c<2) return; const el=document.createElement('div'); e
 function gameRewardBonus(){ const p=currentProfile(); if(!p) return; p.stats.games=p.stats.games||{attempts:0,correct:0}; p.stats.bonusStars=(p.stats.bonusStars||0)+(game.combo>=5?2:game.combo>=3?1:0); saveProfiles(); }
 function startGame(type){
   clearInterval(rushT); rushT=null;
+  endSession();
   if(type==='rush'){ startRush(); return; }
   if(type==='memory'){ startMemory(); return; }
   if(type==='builder'){ startBuilder(); return; }
@@ -4019,6 +4087,7 @@ function startCur(gid){
   startCurDirect(gid);
 }
 function startCurDirect(gid){
+  endSession();
   if(!MODE_DATA['egy:'+gid]) return;
   currentMode='egy:'+gid;
   list=MODE_DATA['egy:'+gid].map((it,i)=>({...it,_i:i}));
@@ -4027,6 +4096,7 @@ function startCurDirect(gid){
 }
 function startCurUnit(gid,n){
   if(!n){ startCurDirect(gid); return; }
+  endSession();
   const key='egy:'+gid+'u'+n; if(!MODE_DATA[key]) return;
   currentMode=key;
   list=MODE_DATA[key].map((it,i)=>({...it,_i:i}));
@@ -4070,6 +4140,7 @@ function buildReviewList(){
   return dueItems().slice(0,12).map(x=>x.it);
 }
 function startReview(){
+  endSession();
   const items=buildReviewList();
   if(!items.length){ toast('لا توجد كلمات للمراجعة الآن 🎉'); return; }
   currentMode='review'; list=items; index=0; sessionStars=0; updateSessionStars();
@@ -4683,7 +4754,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.0';
+    const local='6.1';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }

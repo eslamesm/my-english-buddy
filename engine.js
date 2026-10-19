@@ -37,6 +37,9 @@
   const MASTERY_NAMES = ['new', 'learning', 'familiar', 'proficient', 'mastered'];
   const STORE_VERSION = 1;
   const MAX_STAGE = INTERVALS.length - 1;
+  const DAILY_NEW_OPTIONS = [3, 5, 10];             // configurable new-words-per-day targets
+  const DAILY_NEW_DEFAULT = 5;
+  const SKILL_RELIABLE_MIN = 3;                     // records needed before a skill weight is trusted
 
   const isNum = (v) => typeof v === 'number' && isFinite(v);
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -47,6 +50,11 @@
   }
   function normalizeSkill(s) {
     return SKILLS.indexOf(s) >= 0 ? s : 'recognize';
+  }
+  /* allowed "new words per day" targets; anything else falls back to the default */
+  function normalizeDailyNew(v) {
+    const n = intOr(v, DAILY_NEW_DEFAULT);
+    return DAILY_NEW_OPTIONS.indexOf(n) >= 0 ? n : DAILY_NEW_DEFAULT;
   }
   function key(skill, word) {
     return normalizeSkill(skill) + '::' + normalizeWord(word);
@@ -197,13 +205,48 @@
     return Math.max(0, Math.floor((dayStart(t) - dayStart(rec.nextReview)) / DAY));
   }
 
+  /* Per-skill aggregate profile used for skill-weighted selection.
+     `weakness` is only meaningful (0..1, higher = weaker) once a skill has at
+     least SKILL_RELIABLE_MIN records; otherwise it is 0 so no skill is
+     penalised on thin data (conservative fallback). */
+  function skillProfile(store, now) {
+    const out = {};
+    const sum = {};
+    SKILLS.forEach((s) => { out[s] = { skill: s, total: 0, mastered: 0, due: 0, weak: 0, avgMastery: 0, reliable: false, weakness: 0 }; sum[s] = 0; });
+    const items = (store && store.items) || {};
+    Object.keys(items).forEach((k) => {
+      const parts = splitKey(k); const rec = items[k]; const o = out[parts.skill];
+      if (!o || !rec) return;
+      o.total++; sum[parts.skill] += clamp(rec.mastery, 0, 4);
+      if (rec.mastery >= 4) o.mastered++;
+      if (rec.wrongCount >= 2 || rec.difficulty === 0) o.weak++;
+      if (isDue(rec, now)) o.due++;
+    });
+    SKILLS.forEach((s) => {
+      const o = out[s];
+      o.avgMastery = o.total ? sum[s] / o.total : 0;
+      o.reliable = o.total >= SKILL_RELIABLE_MIN;
+      const masteryWeak = 1 - (o.avgMastery / 4);
+      const dueRatio = o.total ? Math.min(1, o.due / Math.max(1, o.total)) : 0;
+      o.weakness = o.reliable ? clamp(0.6 * masteryWeak + 0.4 * dueRatio, 0, 1) : 0;
+    });
+    return out;
+  }
+
   /* Select practice items with a deliberate, documented policy:
      - "due" reviews are always preferred (most overdue first, then weakest)
      - brand-new items are only added up to `newPer` for every `duePer` due
        reviews (default 1 new per 3 due) so new words are never mixed in
        arbitrarily with overdue reviews.
      - repeated-error items (difficulty 0 / wrongCount>=2) are surfaced as `weak`
-       for easier practice. */
+       for easier practice.
+     - when `weightSkills` is set AND at least one skill has reliable data,
+       ties inside the same overdue-day / weak bucket are ordered toward the
+       weakest skill first (variety is preserved because every due item is
+       still included in overdue order). With no reliable skill data the
+       ordering is identical to v6.0 (conservative fallback).
+     - `newTarget` (when provided) hard-caps how many brand-new items may be
+       placed in the plan; reviews are never displaced by it. */
   function selectPractice(store, opts) {
     opts = opts || {};
     const now = isNum(opts.now) ? opts.now : Date.now();
@@ -212,6 +255,18 @@
     const duePer = Math.max(1, intOr(opts.duePer, 3));
     const newPer = Math.max(0, intOr(opts.newPer, 1));
     const includeNew = opts.includeNew !== false;
+    const weightSkills = !!opts.weightSkills;
+    const newTarget = (opts.newTarget == null) ? Infinity : Math.max(0, intOr(opts.newTarget, 0));
+
+    let rank = null;
+    if (weightSkills) {
+      const sp = skillProfile(store, now);
+      if (SKILLS.some((s) => sp[s].reliable)) {
+        rank = {};
+        SKILLS.slice().sort((a, b) => (sp[b].weakness - sp[a].weakness) || (a < b ? -1 : 1)).forEach((s, i) => { rank[s] = i; });
+      }
+    }
+    const rankOf = (s) => (rank && rank[s] != null) ? rank[s] : 0;
 
     const due = [], fresh = [], weak = [];
     const items = (store && store.items) || {};
@@ -227,27 +282,29 @@
       if (isDue(rec, now)) { entry.overdue = overdueDays(rec, now); due.push(entry); }
     });
 
-    due.sort((a, b) => (b.overdue - a.overdue) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1));
-    fresh.sort((a, b) => (a.key < b.key ? -1 : 1));
-    weak.sort((a, b) => (b.rec.wrongCount - a.rec.wrongCount) || (a.rec.mastery - b.rec.mastery));
+    due.sort((a, b) => (b.overdue - a.overdue) || (rankOf(a.skill) - rankOf(b.skill)) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1));
+    fresh.sort((a, b) => (rankOf(a.skill) - rankOf(b.skill)) || (a.key < b.key ? -1 : 1));
+    weak.sort((a, b) => (rankOf(a.skill) - rankOf(b.skill)) || (b.rec.wrongCount - a.rec.wrongCount) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1));
 
     const plan = [];
     const seen = {};
+    let freshUsed = 0;
     const push = (e) => { if (e && !seen[e.key] && plan.length < maxItems) { seen[e.key] = 1; plan.push(e); } };
+    const pushFresh = (e) => { if (freshUsed >= newTarget) return; const before = plan.length; push(e); if (plan.length > before) freshUsed++; };
     const pool = due.slice();
     const freshPool = fresh.slice();
     const weakPool = weak.slice();
     while (pool.length && plan.length < maxItems) {
       for (let i = 0; i < duePer && pool.length; i++) push(pool.shift());
       if (!includeNew) continue;
-      for (let i = 0; i < newPer && freshPool.length; i++) push(freshPool.shift());
+      for (let i = 0; i < newPer && freshPool.length; i++) pushFresh(freshPool.shift());
     }
     // top up from remaining due, then fresh only if still short
     while (plan.length < maxItems && pool.length) push(pool.shift());
-    if (includeNew) while (plan.length < maxItems && freshPool.length) push(freshPool.shift());
+    if (includeNew) while (plan.length < maxItems && freshPool.length) pushFresh(freshPool.shift());
     while (plan.length < maxItems && weakPool.length) push(weakPool.shift());
 
-    return { due: due, fresh: fresh, weak: weak, plan: plan, now: now };
+    return { due: due, fresh: fresh, weak: weak, plan: plan, now: now, weighted: !!rank };
   }
 
   /* ---------- aggregate stats (for the parent dashboard) ---------- */
@@ -271,6 +328,8 @@
       if (rec.wrongCount >= 2 || rec.difficulty === 0) out.weak++;
       if (isDue(rec, now)) { out.due++; if (bs) bs.due++; }
     });
+    const sp = skillProfile(store, now);
+    SKILLS.forEach((s) => { out.bySkill[s].reliable = sp[s].reliable; out.bySkill[s].weakness = sp[s].weakness; out.bySkill[s].avgMastery = Math.round(sp[s].avgMastery * 100) / 100; });
     return out;
   }
 
@@ -319,6 +378,8 @@
     INTERVALS: INTERVALS.slice(),
     SKILLS: SKILLS.slice(),
     MASTERY_NAMES: MASTERY_NAMES.slice(),
+    DAILY_NEW_OPTIONS: DAILY_NEW_OPTIONS.slice(),
+    DAILY_NEW_DEFAULT: DAILY_NEW_DEFAULT,
     DAY: DAY,
     dayStart: dayStart,
     endOfDay: endOfDay,
@@ -327,6 +388,7 @@
     splitKey: splitKey,
     normalizeWord: normalizeWord,
     normalizeSkill: normalizeSkill,
+    normalizeDailyNew: normalizeDailyNew,
     createStore: createStore,
     validateStore: validateStore,
     emptyRecord: emptyRecord,
@@ -335,6 +397,7 @@
     record: record,
     isDue: isDue,
     overdueDays: overdueDays,
+    skillProfile: skillProfile,
     selectPractice: selectPractice,
     stats: stats,
     skillFromMode: skillFromMode,

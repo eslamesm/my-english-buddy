@@ -2398,5 +2398,29 @@
   "ar": "تعاون",
   "emoji": "🫶",
   "slug": "cooperation"
+ },
+ {
+  "en": "Drink",
+  "ar": "يشرب",
+  "emoji": "🥤",
+  "slug": "drink"
+ },
+ {
+  "en": "Sleep",
+  "ar": "ينام",
+  "emoji": "😴",
+  "slug": "sleep"
+ },
+ {
+  "en": "Frog",
+  "ar": "ضفدع",
+  "emoji": "🐸",
+  "slug": "frog"
+ },
+ {
+  "en": "Sheep",
+  "ar": "خروف",
+  "emoji": "🐑",
+  "slug": "sheep"
  }
 ]
