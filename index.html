@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.2" /><!-- English Kids v6.2 -->
+<meta name="app-version" content="My English Buddy v6.3" /><!-- English Kids v6.3 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -811,7 +811,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.2</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.3</div>
       </main>
     </div>
   </section>
@@ -1906,12 +1906,16 @@ async function ensureMicPermission(){
 /* ------------------ NAV ------------------ */
 function go(id){
   stopTimer(); stopMouth();
+  /* never leave the microphone listening after the child leaves the practice
+     screen (or the app is backgrounded) — abort and reset the meter/hint. */
+  if(id!=='practice'){ try{ abortListening(); }catch(e){} try{ stopPulseMeter(); }catch(e){} try{ micHint(''); }catch(e){} }
   if(id==='home') pendingExam=null;
   if(id!=='practice') stopTeacher();
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){ try{ abortListening(); }catch(e){} } });
 
 /* ------------------ AUDIO ------------------ */
 function stopAudio(){ if(currentAudio){ try{currentAudio.pause();}catch(e){} currentAudio=null; } if('speechSynthesis' in window){ try{window.speechSynthesis.cancel();}catch(e){} } }
@@ -2270,6 +2274,10 @@ function micLevelShow(on){ const el=document.getElementById('micLevel'); if(el) 
 function micLevelSet(pct){ const f=document.getElementById('micLevelFill'); if(f) f.style.width=Math.max(0,Math.min(100,pct))+'%'; }
 function micHint(t){ const el=document.getElementById('micHint'); if(el) el.textContent=t||''; }
 let lastVoiceUrl=null, micPulse=null;
+/* a single in-flight Web Speech recognition; abortListening() cancels it and
+   rejects its pending promise with 'aborted' so nothing keeps the mic open. */
+let activeSRAbort=null;
+function abortListening(){ const f=activeSRAbort; activeSRAbort=null; try{ if(f) f(); }catch(e){} }
 function showReplay(on){ const w=document.getElementById('replayWrap'); if(w) w.style.display=on?'':'none'; }
 function makeRecorder(stream){
   try{ if(!window.MediaRecorder) return null;
@@ -2325,19 +2333,25 @@ async function ensureVosk(){
 }
 function voskOnce(grammar){
   return new Promise((resolve,reject)=>{
+    /* the mic stream must always be released, even if setup throws after
+       getUserMedia (e.g. audio-context/recognizer failure) so the browser
+       never shows the "recording" indicator after an error. */
+    let stream=null, source=null, proc=null, mute=null, recorder=null;
+    const releaseStream=()=>{ try{ if(recorder&&recorder.state==='recording') recorder.stop(); }catch(e){} try{ if(stream) stream.getTracks().forEach(t=>t.stop()); }catch(e){} };
+    const cleanup=()=>{ try{source&&source.disconnect();}catch(e){} try{proc&&proc.disconnect();}catch(e){} try{mute&&mute.disconnect();}catch(e){} releaseStream(); };
     (async()=>{
       const model=await ensureVosk();
-      const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}});
+      stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}});
       const ctx=ensureRecCtx();
       if(!ctx) throw new Error('no-audio-ctx');
       try{ if(ctx.state==='suspended') await ctx.resume(); }catch(e){}
-      const source=ctx.createMediaStreamSource(stream);
-      const proc=ctx.createScriptProcessor(4096,1,1);
-      const mute=ctx.createGain(); mute.gain.value=0;
+      source=ctx.createMediaStreamSource(stream);
+      proc=ctx.createScriptProcessor(4096,1,1);
+      mute=ctx.createGain(); mute.gain.value=0;
       const rec=grammar? new model.KaldiRecognizer(ctx.sampleRate,grammar): new model.KaldiRecognizer(ctx.sampleRate);
       rec.setWords(true);
       let text='', heard=false, lastVoice=Date.now();
-      const recorder=makeRecorder(stream);
+      recorder=makeRecorder(stream);
       micLevelShow(true); micHint('🎙️ أنا أسمعك... تحدّث الآن');
       rec.on('result',(m)=>{ const t=m&&m.result&&m.result.text; if(t){ text=(text+' '+t).trim(); heard=true; lastVoice=Date.now(); } });
       proc.onaudioprocess=(e)=>{ try{ rec.acceptWaveform(e.inputBuffer); }catch(err){ return; }
@@ -2351,14 +2365,13 @@ function voskOnce(grammar){
         const now=Date.now(); const quiet=now-lastVoice;
         const done=(now-start>maxDur)||(heard&&quiet>1100);
         if(done){ clearInterval(tick);
-          try{source.disconnect();}catch(e){} try{proc.disconnect();}catch(e){} try{mute.disconnect();}catch(e){}
+          cleanup();
           micLevelShow(false); micHint('');
-          try{ if(recorder&&recorder.state==='recording') recorder.stop(); }catch(e){}
           try{rec.retrieveFinalResult();}catch(e){}
-          setTimeout(()=>{ try{rec.remove();}catch(e){} try{stream.getTracks().forEach(t=>t.stop());}catch(e){} resolve({alts:[text], confidence:null}); },550);
+          setTimeout(()=>{ try{rec.remove();}catch(e){} resolve({alts:[text], confidence:null}); },550);
         }
       },120);
-    })().catch(reject);
+    })().catch(e=>{ cleanup(); reject(e); });
   });
 }
 function webSpeechOnce(){
@@ -2368,9 +2381,10 @@ function webSpeechOnce(){
     const started=Date.now(), HARD=12000;
     let finals=[], latest='', conf=null, finished=false, finishing=false;
     const hard=setTimeout(()=>finish(''), HARD);
+    activeSRAbort=()=>finish('aborted');
     r.onstart=()=>{ micLevelShow(true); micHint('🎙️ أنا أسمعك... تحدّث الآن'); startPulseMeter(); };
     function finish(err){
-      if(finished) return; finished=true; clearTimeout(hard);
+      if(finished) return; finished=true; clearTimeout(hard); activeSRAbort=null;
       stopPulseMeter(); micHint('');
       try{ r.onend=null; r.onerror=null; r.onresult=null; r.stop(); }catch(e){}
       const text=(finals.join(' ')||latest||'').trim();
@@ -4777,7 +4791,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.2';
+    const local='6.3';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
@@ -4856,8 +4870,10 @@ document.getElementById('btnPreload').onclick=async ()=>{ toast('جاري تجه
 document.getElementById('btnMicTest').onclick=async ()=>{
   const msg=document.getElementById('micTestMsg'), bar=document.getElementById('micBar'), fill=document.getElementById('micFill');
   msg.textContent=' جاري الطلب...'; msg.style.color='#6b5b95'; bar.style.display='block'; fill.style.width='0%';
+  let stream=null;
   try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}});
+    try{ stopAudio(); }catch(e){}
+    stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}});
     const ctx=ensureRecCtx()||new (window.AudioContext||window.webkitAudioContext)();
     try{ if(ctx.state==='suspended') await ctx.resume(); }catch(e){}
     const src=ctx.createMediaStreamSource(stream);
@@ -4871,12 +4887,13 @@ document.getElementById('btnMicTest').onclick=async ()=>{
       if(Date.now()<until) requestAnimationFrame(loop);
       else{ try{src.disconnect();}catch(e){} try{stream.getTracks().forEach(t=>t.stop());}catch(e){}
         if(peak>0.02){ msg.textContent='✅ الميكروفون يعمل جيداً'; msg.style.color='#16a34a'; }
-        else{ msg.textContent='⚠️ لم يُسمع صوت — اقترب وانطق، وتأكد من إذن الميكروفون'; msg.style.color='#f59e0b'; }
+        else{ msg.textContent='⚠️ لم يُسمع صوت — اقترب من الميكروفون، تحدّث لمدة ثانيتين، وتأكد من الإذن (اختبار فقط ولا يُحسب على الطفل)'; msg.style.color='#f59e0b'; }
         setTimeout(()=>{ bar.style.display='none'; fill.style.width='0%'; },900);
       }
     };
     loop();
   }catch(e){
+    try{ if(stream) stream.getTracks().forEach(t=>t.stop()); }catch(_){}
     const nm=(e&&e.name)||''; msg.style.color='#ef4444';
     msg.textContent=(nm==='NotAllowedError')?'❌ الميكروفون مرفوض — فعّل الإذن من إعدادات المتصفح 🔒':'❌ تعذّر الوصول للميكروفون';
     setTimeout(()=>{ bar.style.display='none'; },900);
