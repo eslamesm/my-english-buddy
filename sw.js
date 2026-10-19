@@ -2,7 +2,7 @@
    - Navigation (index.html) is network-first: you always see the latest version online,
      and the newest copy is cached for offline use.
    - Static files are cache-first with runtime population. */
-const CACHE = 'englishkids-v24';
+const CACHE = 'englishkids-v25';
 const CORE = [
   "./",
   "./index.html",
@@ -46,7 +46,16 @@ const CORE = [
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(CORE).catch(() => {}))
+    caches.open(CACHE).then((c) =>
+      // Cache core files individually so one missing/failed optional asset
+      // can never break the whole install (addAll is all-or-nothing).
+      // Entry HTML is re-fetched (cache:'reload') so a new SW never
+      // precaches a stale copy; everything else uses the normal HTTP cache.
+      Promise.all(CORE.map((url) => {
+        const fresh = (url === './' || url === './index.html');
+        return c.add(new Request(url, fresh ? {cache:'reload'} : undefined)).catch(() => {});
+      }))
+    )
   );
 });
 
@@ -75,14 +84,14 @@ self.addEventListener('fetch', (event) => {
           }
           return res;
         })
-        .catch(() => caches.match(req).then((c) => c || caches.match('./index.html')))
+        .catch(() => caches.open(CACHE).then((c) => c.match(req)).then((r) => r || caches.match('./index.html')))
     );
     return;
   }
 
   // Other assets: cache-first
   event.respondWith(
-    caches.match(req).then((cached) => {
+    caches.open(CACHE).then((cached) => cached.match(req)).then((cached) => {
       if (cached) return cached;
       return fetch(req)
         .then((res) => {
@@ -92,7 +101,10 @@ self.addEventListener('fetch', (event) => {
           }
           return res;
         })
-        .catch(() => caches.match('./index.html'));
+        // Never answer a failed asset (audio/image/model/js…) with HTML:
+        // return a real 404 so <img onerror>, audio fallbacks and model
+        // loading code can detect the failure and fall back correctly.
+        .catch(() => new Response('', {status:404, statusText:'Not Found'}));
     })
   );
 });

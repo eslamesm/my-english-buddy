@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v5.8" /><!-- English Kids v5.8 -->
+<meta name="app-version" content="My English Buddy v5.9" /><!-- English Kids v5.9 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -806,7 +806,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v5.8</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v5.9</div>
       </main>
     </div>
   </section>
@@ -1264,6 +1264,7 @@ function picHTML(word, emoji, cls, fbCls, eager){
   return '<span class="'+fb+'">'+(emoji||'📦')+'</span>';
 }
 function imgFail(el){ const sp=document.createElement('span'); sp.className=el.dataset.fb||'oe'; sp.textContent=el.dataset.em||'📦'; el.replaceWith(sp); }
+function esc(v){ return String(v==null?'':v).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 const AGES = [
   {key:'3-5',   label:'٣ - ٥',  emoji:'🧒', title:'المستوى المبتدئ',  modes:['sounds','letters','words','cvc'], min:3},
@@ -1278,7 +1279,6 @@ const AVATAR_LIST=[
   {e:'🦖',s:10},{e:'🐲',s:25},{e:'🦸',s:50},{e:'🤖',s:100},{e:'🧚',s:150},{e:'🦋',s:200},{e:'🚀',s:250},{e:'🎃',s:300}
 ];
 const ALL_AVATARS=AVATAR_LIST.slice(0,16);
-function avUnlocked(a){ const t=totalStars(); return t>=a.s; }
 function avUnlocked(a){ return totalStars()>=(a.s||0); }
 
 const GAMES = {
@@ -1692,15 +1692,101 @@ const sentFile   = (i)   => 'audio/sentences/' + i + '.wav';
 /* ------------------ STORAGE ------------------ */
 const isAndroid = /android/i.test(navigator.userAgent);
 const PKEY='englishkids_profiles_v3', CKEY='englishkids_current_v3', SKEY='englishkids_settings_v3';
-function lsGet(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
-function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
-let profiles = lsGet(PKEY, []);
+let storageWarned=false;
+function storageWarn(msg){ if(storageWarned) return; storageWarned=true; try{ toast(msg); }catch(e){} }
+function lsGet(k,d){
+  let raw=null;
+  try{ raw=localStorage.getItem(k); }catch(e){ return d; }
+  if(raw==null||raw==='') return d;
+  try{ return JSON.parse(raw); }
+  catch(e){
+    try{ console.warn('localStorage key corrupt, kept as backup:', k); localStorage.setItem(k+'.corrupt', raw.slice(0,200000)); }catch(e2){}
+    return d;
+  }
+}
+function lsSet(k,v){
+  let data; try{ data=JSON.stringify(v); }catch(e){ return false; }
+  try{ localStorage.setItem(k,data); return true; }
+  catch(e){}
+  /* quota exceeded: compact heavy profile history once, then retry */
+  try{
+    if(k===PKEY && Array.isArray(v)){
+      v.forEach(p=>{ if(p&&p.stats){
+        if(Array.isArray(p.stats.recent)) p.stats.recent=p.stats.recent.slice(0,20);
+        if(p.stats.daily&&typeof p.stats.daily==='object'){ const ks=Object.keys(p.stats.daily).sort(); ks.slice(0,Math.max(0,ks.length-60)).forEach(dk=>delete p.stats.daily[dk]); }
+      } });
+      localStorage.setItem(k,JSON.stringify(v));
+      storageWarn('⚠️ مساحة التخزين ممتلئة — تم تنظيف سجل قديم تلقائيًا');
+      return true;
+    }
+  }catch(e2){}
+  storageWarn('⚠️ تعذّر حفظ البيانات — مساحة التخزين ممتلئة');
+  return false;
+}
+function sanitizeProfile(p){
+  if(!p||typeof p!=='object'||Array.isArray(p)) return null;
+  if(typeof p.id!=='string'||!p.id) return null;
+  if(typeof p.name!=='string'||!p.name.trim()) return null;
+  const o=Object.assign({},p);
+  o.name=o.name.slice(0,60);
+  o.age=Math.max(3,Math.min(14, parseInt(o.age,10)||6));
+  o.avatar=(typeof o.avatar==='string'&&AVATAR_LIST.some(a=>a.e===o.avatar))?o.avatar:'🦁';
+  o.levelKey=AGES.some(g=>g.key===o.levelKey)?o.levelKey:levelFromAge(o.age).key;
+  o.schoolYear=(o.schoolYear==='kg')?'kg1':((typeof o.schoolYear==='string'&&CUR_GRADES.some(gd=>gd.id===o.schoolYear))?o.schoolYear:gradeFromAge(o.age));
+  o.createdAt=typeof o.createdAt==='number'?o.createdAt:Date.now();
+  if(!o.progress||typeof o.progress!=='object'||Array.isArray(o.progress)) o.progress={};
+  Object.keys(o.progress).forEach(k=>{ const v=o.progress[k]; if(typeof v!=='number'||!isFinite(v)||v<0) delete o.progress[k]; });
+  const st=(o.stats&&typeof o.stats==='object'&&!Array.isArray(o.stats))?o.stats:{};
+  o.stats=st;
+  st.attempts=Math.max(0,parseInt(st.attempts,10)||0);
+  st.timeMs=Math.max(0,parseInt(st.timeMs,10)||0);
+  if(!st.byMode||typeof st.byMode!=='object'||Array.isArray(st.byMode)) st.byMode={};
+  if(!st.daily||typeof st.daily!=='object'||Array.isArray(st.daily)) st.daily={};
+  if(!Array.isArray(st.recent)) st.recent=[];
+  if(!st.games||typeof st.games!=='object'||Array.isArray(st.games)) st.games={attempts:0,correct:0};
+  return o;
+}
+function sanitizeProfiles(raw){
+  if(!Array.isArray(raw)) return [];
+  const out=[], seen={};
+  raw.forEach(p=>{ const q=sanitizeProfile(p); if(q&&!seen[q.id]){ seen[q.id]=1; out.push(q); } });
+  return out;
+}
+const rawProfiles=lsGet(PKEY, []);
+let profiles = sanitizeProfiles(rawProfiles);
 let currentId = lsGet(CKEY, null);
-let settings = Object.assign({rate:1.0, recMode:isAndroid?'offline':'auto', sfx:true, voice:null, difficulty:'normal', teacher:true, teacherAudio:true, teacherVoice:null, teacherRate:null, teacherPitch:1.0, teacherVolume:1.0, theme:'auto', goal:10}, lsGet(SKEY, {}));
+if(typeof currentId!=='string'||!profiles.some(p=>p.id===currentId)) currentId = profiles.length? profiles[0].id : null;
+const SETTINGS_DEFAULTS={rate:1.0, recMode:isAndroid?'offline':'auto', sfx:true, voice:null, difficulty:'normal', teacher:true, teacherAudio:true, teacherVoice:null, teacherRate:null, teacherPitch:1.0, teacherVolume:1.0, theme:'auto', goal:10};
+const rawSettings=lsGet(SKEY, {});
+let settings = Object.assign({}, SETTINGS_DEFAULTS, (rawSettings&&typeof rawSettings==='object'&&!Array.isArray(rawSettings))?rawSettings:{});
+(function validateSettings(){
+  const num=(v,lo,hi,def)=>{ let n=parseFloat(v); if(!isFinite(n)) n=def; return Math.max(lo,Math.min(hi,n)); };
+  if(['auto','online','offline'].indexOf(settings.recMode)<0) settings.recMode=SETTINGS_DEFAULTS.recMode;
+  if(['easy','normal','hard'].indexOf(settings.difficulty)<0) settings.difficulty='normal';
+  if(['light','dark','auto'].indexOf(settings.theme)<0) settings.theme='auto';
+  settings.rate=num(settings.rate,0.4,1.6,1.0);
+  settings.goal=[5,10,20].indexOf(parseInt(settings.goal,10))>=0? parseInt(settings.goal,10):10;
+  if(typeof settings.sfx!=='boolean') settings.sfx=true;
+  if(typeof settings.teacher!=='boolean') settings.teacher=true;
+  if(typeof settings.teacherAudio!=='boolean') settings.teacherAudio=true;
+  if(settings.voice!=null&&typeof settings.voice!=='string') settings.voice=null;
+  if(settings.teacherVoice!=null&&typeof settings.teacherVoice!=='string') settings.teacherVoice=null;
+  settings.teacherRate=(settings.teacherRate==null)?null:num(settings.teacherRate,0.5,1.6,1.0);
+  settings.teacherPitch=num(settings.teacherPitch,0.6,1.6,1.0);
+  settings.teacherVolume=num(settings.teacherVolume,0,1,1.0);
+  if(settings.greetDay!=null&&typeof settings.greetDay!=='string') delete settings.greetDay;
+})();
 function saveSettings(){ lsSet(SKEY, settings); }
 function saveProfiles(){ lsSet(PKEY, profiles); }
 function saveCurrent(){ lsSet(CKEY, currentId); }
 function currentProfile(){ return profiles.find(p=>p.id===currentId) || null; }
+/* persist repaired storage so the next load starts clean */
+(function persistRepairs(){
+  let changed=false;
+  try{ if(!Array.isArray(rawProfiles)||JSON.stringify(rawProfiles)!==JSON.stringify(profiles)) changed=true; }catch(e){}
+  try{ if(!rawSettings||typeof rawSettings!=='object'||Array.isArray(rawSettings)||JSON.stringify(rawSettings)!==JSON.stringify(settings)) changed=true; }catch(e){}
+  if(changed){ try{ lsSet(PKEY, profiles); lsSet(SKEY, settings); if(typeof currentId!=='string') lsSet(CKEY, currentId); }catch(e){} }
+})();
 /* migrate legacy schoolYear 'kg' -> 'kg1' after the KG split into KG1/KG2 */
 (function(){ let ch=false; profiles.forEach(p=>{ if(p.schoolYear==='kg'){ p.schoolYear='kg1'; ch=true; } }); if(ch) lsSet(PKEY, profiles); })();
 
@@ -2123,7 +2209,7 @@ document.getElementById('traceDone').onclick=()=>{ try{ evaluateTrace(); }catch(
 document.getElementById('traceClose').onclick=()=>{ document.getElementById('traceOverlay').classList.remove('show'); };
 
 /* ------------------ RECOGNITION ------------------ */
-let voskModel=null, voskLoading=null, voskFailed=false;
+let voskModel=null, voskLoading=null, voskFailed=false, voskFails=0;
 /* live mic meter + voice replay */
 function micLevelShow(on){ const el=document.getElementById('micLevel'); if(el) el.classList.toggle('on',!!on); if(!on) micLevelSet(0); }
 function micLevelSet(pct){ const f=document.getElementById('micLevelFill'); if(f) f.style.width=Math.max(0,Math.min(100,pct))+'%'; }
@@ -2144,17 +2230,42 @@ function startPulseMeter(){ stopPulseMeter(); micLevelShow(true); let o=0; micPu
 function stopPulseMeter(){ if(micPulse){ clearInterval(micPulse); micPulse=null; } micLevelShow(false); micLevelSet(0); }
 function updateVoskStatus(t){ const el=document.getElementById('voskStatus'); if(el) el.textContent=t||''; }
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=()=>res(); s.onerror=()=>rej(new Error('script')); document.head.appendChild(s); }); }
+async function purgeVoskCache(){
+  try{
+    if(!('caches' in window)) return;
+    const keys=await caches.keys();
+    for(const k of keys){ try{ const c=await caches.open(k); await c.delete(new Request('vosk/model.tar.gz')); }catch(e){} }
+  }catch(e){}
+}
 async function ensureVosk(){
   if(voskModel) return voskModel;
-  if(voskFailed) throw new Error('vosk-unavailable');
+  if(voskFailed && voskFails>=2) throw new Error('vosk-unavailable');
   if(voskLoading) return voskLoading;
   voskLoading=(async()=>{
     if(!window.Vosk) await loadScript('vosk/vosk.js');
     if(!window.Vosk) throw new Error('vosk-load');
-    try{ if(!isFile) await fetch('vosk/model.tar.gz'); }catch(e){}
+    if(!isFile){
+      let res=null;
+      try{ res=await fetch('vosk/model.tar.gz'); }catch(e){ res=null; }
+      if(!res||!res.ok) throw new Error('vosk-model-fetch');
+      const ct=(res.headers.get('content-type')||'').toLowerCase();
+      if(ct.indexOf('text/html')>=0) throw new Error('vosk-model-html');
+      const cl=parseInt(res.headers.get('content-length')||'0',10);
+      if(cl>0&&cl<1048576) throw new Error('vosk-model-tiny');
+      try{ await res.arrayBuffer(); }catch(e){ throw new Error('vosk-model-body'); }
+    }
     const m=await window.Vosk.createModel('vosk/model.tar.gz', -1);
-    voskModel=m; updateVoskStatus('✅ الوضع الأوفلاين جاهز'); return m;
-  })().catch((e)=>{ voskFailed=true; voskLoading=null; updateVoskStatus('⚠️ الوضع الأوفلاين غير متاح هنا'); throw e; });
+    voskModel=m; voskFails=0; voskFailed=false; updateVoskStatus('✅ الوضع الأوفلاين جاهز'); return m;
+  })().catch(async (e)=>{
+    /* incomplete/corrupt download: drop the cached copy so the next
+       attempt fetches a fresh one instead of failing forever */
+    voskFails++;
+    if(voskFails>=2) voskFailed=true;
+    voskLoading=null;
+    if(String(e&&e.message).indexOf('vosk-model')===0||String(e&&e.message).indexOf('vosk-load')===0) await purgeVoskCache();
+    updateVoskStatus(voskFailed?'⚠️ الوضع الأوفلاين غير متاح هنا':'⚠️ تعذّر تحميل النموذج — أعد المحاولة');
+    throw e;
+  });
   return voskLoading;
 }
 function voskOnce(grammar){
@@ -2483,7 +2594,7 @@ function buildLogin(){
     const g=AGES.find(a=>a.key===p.levelKey)||levelFromAge(p.age);
     const el=document.createElement('div'); el.className='prof';
     el.innerHTML=`<div class="av">${p.avatar}</div>
-      <div style="flex:1"><div class="nm">${p.name}</div>
+      <div style="flex:1"><div class="nm">${esc(p.name)}</div>
       <div class="meta">${p.age} سنة • ${g.title} • ⭐ ${Object.values(p.progress).reduce((a,b)=>a+b,0)}</div></div>
       <div style="font-size:22px;color:#c4b5fd">›</div>`;
     el.onclick=()=>{ currentId=p.id; saveCurrent(); enterHome(); };
@@ -2502,7 +2613,7 @@ function buildRewards(){
   const next=ALL_AVATARS.find(a=>a.s>total);
   hero.innerHTML=`<div class="rep-card" style="text-align:center">
     <div style="font-size:64px">${p.avatar}</div>
-    <div class="nm">${p.name}</div>
+    <div class="nm">${esc(p.name)}</div>
     <div class="stars-top" style="justify-content:center;margin-top:6px">⭐ ${total}</div>
     ${next? `<div class="muted" style="margin-top:10px">التالي: 🔒 ${next.e} عند ${next.s} ⭐</div>
       <div class="bar" style="height:12px;border-radius:99px;background:#e9e4fb;overflow:hidden;margin-top:8px"><i style="width:${Math.min(100,Math.round(total/next.s*100))}%;background:linear-gradient(90deg,#a78bfa,#7c3aed)"></i></div>`
@@ -3667,7 +3778,7 @@ function buildLeaderboard(){
   box.innerHTML='<h3 style="font-weight:900;color:#6d28d9">🏆 لوحة الصدارة (أعلى نجوم)</h3>';
   sorted.forEach((p,i)=>{ const total=Object.values(p.progress||{}).reduce((x,y)=>x+y,0)+(p.stats.bonusStars||0);
     const row=document.createElement('div'); row.className='leader-row';
-    row.innerHTML=`<div class="rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</div><div style="font-size:26px">${p.avatar}</div><div class="nm">${p.name}</div><div style="font-weight:900;color:#f59e0b">⭐ ${total}</div>`;
+    row.innerHTML=`<div class="rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</div><div style="font-size:26px">${p.avatar}</div><div class="nm">${esc(p.name)}</div><div style="font-weight:900;color:#f59e0b">⭐ ${total}</div>`;
     box.appendChild(row);
   });
   if(sorted.length===0) box.innerHTML+='<div class="muted">لا يوجد لاعبون بعد</div>';
@@ -4263,7 +4374,6 @@ function buildReport(){
 
   // consecutive practice days (streak)
   const daily=s.daily||{};
-  function addDaysStr(iso,n){ const [y,m,d]=iso.split('-').map(Number); return dayKey(new Date(y,m-1+n,d,12).getTime()); }
   let streak=0; let k=dayKey(Date.now());
   if(!daily[k]) k=addDaysStr(k,-1);
   while(daily[k]&&streak<1000){ streak++; k=addDaysStr(k,-1); }
@@ -4288,7 +4398,7 @@ function buildReport(){
   body.innerHTML=`
     <div class="rep-card">
       <div class="greet"><div class="av">${p.avatar}</div>
-        <div><div class="nm">${p.name}</div><div class="lvl">${p.age} سنة • ${g.title}</div>
+        <div><div class="nm">${esc(p.name)}</div><div class="lvl">${p.age} سنة • ${g.title}</div>
         <div class="lvl" style="color:#f59e0b">${streak>0? '🔥 '+streak+' يوم متتالي من التدريب': 'ابدأ التدريب اليوم للاستمرارية 🔥'}</div></div></div>
       <div class="stat-grid" style="margin-top:12px">
         <div class="stat"><div class="v">${totalStars()}</div><div class="l">مجموع النجوم</div></div>
@@ -4371,7 +4481,7 @@ function buildReport(){
       <div class="cdeco">🏅</div>
       <h1>★ شهادة إنجاز ★</h1>
       <div style="font-size:15px;font-weight:700">تشهد هذه الشهادة أن</div>
-      <div class="cname">${p.avatar} ${p.name}</div>
+      <div class="cname">${p.avatar} ${esc(p.name)}</div>
       <div class="cmeta">أتم بنجاح تدريب النطق باللغة الإنجليزية على مستوى «${g.title}»<br/>بجمع ${total} نجمة مع ${s.attempts} محاولة نطق تدريبية</div>
       <div class="cstars">${'⭐'.repeat(Math.min(5, Math.max(1, Math.round(total/12))))}</div>
       <div class="cbox">
@@ -4385,10 +4495,13 @@ function buildReport(){
     setTimeout(()=>document.body.classList.remove('printCert'), 4000);
   };
   addEventListener('afterprint', ()=>document.body.classList.remove('printCert'));
+  document.getElementById('repReset').onclick=()=>{ if(confirm('تصفير كل تقدّم '+p.name+'؟')){ p.progress={}; p.stats={attempts:0,timeMs:0,byMode:{},recent:[],games:{attempts:0,correct:0},rush:{best:0,total:0},lastPlayed:null}; saveProfiles(); buildReport(); toast('تم تصفير التقدّم'); } };
+  document.getElementById('repDelete').onclick=()=>{ if(confirm('حذف حساب '+p.name+' نهائياً؟')){ profiles=profiles.filter(x=>x.id!==p.id); saveProfiles(); currentId=null; saveCurrent(); buildLogin(); go('login'); } };
+}
 function printReport(){
   const sheet=document.getElementById('reportPrintSheet'); if(!sheet) return;
   const src=document.getElementById('reportBody');
-  sheet.innerHTML='<h1>📊 تقرير «'+ (currentProfile()?currentProfile().name:'') +'»</h1>';
+  sheet.innerHTML='<h1>📊 تقرير «'+ esc(currentProfile()?currentProfile().name:'') +'»</h1>';
   if(src) sheet.appendChild(src.cloneNode(true));
   document.body.classList.add('printReport');
   setTimeout(()=>{ try{ window.print(); }catch(e){} }, 250);
@@ -4405,7 +4518,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='5.8';
+    const local='5.9';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
@@ -4420,16 +4533,7 @@ async function checkAppUpdate(force=false){
 document.getElementById('btnCheckUpdate')?.addEventListener('click',()=>checkAppUpdate(true));
 function buildStoryListHome(){ const box=document.getElementById('storyListHome'); if(!box) return; box.innerHTML=''; STORIES.forEach((s,i)=>{ const done=false; const el=document.createElement('div'); el.className='story-card pop-card'; el.style.animationDelay=(i*40)+'ms'; el.innerHTML='<div class="se">'+s.e+'</div><div class="st">'+s.title+'</div><div class="sa">'+s.ar+'</div>'; el.onclick=()=>openStory(s.id); box.appendChild(el); }); }
 function buildAchvHome(){ const p=currentProfile(); const grid=document.getElementById('achvGridHome'); if(!grid||!p) return; const got=ACHV.filter(a=>achvUnlocked(p,a)).length; grid.innerHTML=''; ACHV.forEach(a=>{ const on=achvUnlocked(p,a); const el=document.createElement('div'); el.className='achv '+(on?'on':'locked'); el.innerHTML='<div class="ae">'+(on?a.e:'🔒')+'</div><div class="an">'+a.name+'</div><div class="ad">'+a.desc+'</div>'; grid.appendChild(el); }); }
-function buildRewardsHome(){ const p=currentProfile(); const grid=document.getElementById('rewardsGridHome'); const hero=document.getElementById('rewardsHeroHome'); if(!p||!grid||!hero) return; const total=totalStars(); hero.innerHTML='<div class="rep-card" style="text-align:center"><div style="font-size:56px">'+p.avatar+'</div><div class="nm">'+p.name+'</div><div class="stars-top" style="justify-content:center;margin-top:6px">⭐ '+total+'</div></div>'; grid.innerHTML=''; ALL_AVATARS.forEach(a=>{ const locked=!avUnlocked(a); const el=document.createElement('div'); el.className='rav'+(a.e===p.avatar?' cur':'')+(locked?' locked':''); el.innerHTML='<div class="re">'+a.e+'</div><div class="rl">'+(locked?'🔒 '+a.s+' ⭐':'مفتوح')+'</div>'; el.onclick=()=>{ if(locked){ toast('اجمع '+a.s+' ⭐ لفتح '+a.e+'!'); return; } if(a.e===p.avatar){ toast('هذا شكل طفلك الحالي 🙂'); return; } p.avatar=a.e; saveProfiles(); buildRewardsHome(); document.getElementById('homeAv').textContent=p.avatar; toast('تم تغيير الأفاتار! 🎉'); }; grid.appendChild(el); }); }
-function greetHome(){
-  if(settings.teacher===false || settings.teacherAudio===false) return;
-  if(settings.greetDay===dayKey(Date.now())) return;
-  settings.greetDay=dayKey(Date.now()); saveSettings();
-  setTimeout(()=>{ const p=currentProfile(); if(p && document.getElementById('screen-home').classList.contains('active')) speakTTS('Hello '+(p.name||'friend')+'. Welcome to English fun!'); }, 900);
-}
-  document.getElementById('repReset').onclick=()=>{ if(confirm('تصفير كل تقدّم '+p.name+'؟')){ p.progress={}; p.stats={attempts:0,timeMs:0,byMode:{},recent:[],games:{attempts:0,correct:0},rush:{best:0,total:0},lastPlayed:null}; saveProfiles(); buildReport(); toast('تم تصفير التقدّم'); } };
-  document.getElementById('repDelete').onclick=()=>{ if(confirm('حذف حساب '+p.name+' نهائياً؟')){ profiles=profiles.filter(x=>x.id!==p.id); saveProfiles(); currentId=null; saveCurrent(); buildLogin(); go('login'); } };
-}
+function buildRewardsHome(){ const p=currentProfile(); const grid=document.getElementById('rewardsGridHome'); const hero=document.getElementById('rewardsHeroHome'); if(!p||!grid||!hero) return; const total=totalStars(); hero.innerHTML='<div class="rep-card" style="text-align:center"><div style="font-size:56px">'+p.avatar+'</div><div class="nm">'+esc(p.name)+'</div><div class="stars-top" style="justify-content:center;margin-top:6px">⭐ '+total+'</div></div>'; grid.innerHTML=''; ALL_AVATARS.forEach(a=>{ const locked=!avUnlocked(a); const el=document.createElement('div'); el.className='rav'+(a.e===p.avatar?' cur':'')+(locked?' locked':''); el.innerHTML='<div class="re">'+a.e+'</div><div class="rl">'+(locked?'🔒 '+a.s+' ⭐':'مفتوح')+'</div>'; el.onclick=()=>{ if(locked){ toast('اجمع '+a.s+' ⭐ لفتح '+a.e+'!'); return; } if(a.e===p.avatar){ toast('هذا شكل طفلك الحالي 🙂'); return; } p.avatar=a.e; saveProfiles(); buildRewardsHome(); document.getElementById('homeAv').textContent=p.avatar; toast('تم تغيير الأفاتار! 🎉'); }; grid.appendChild(el); }); }
 document.getElementById('btnReport').onclick=openReport;
 
 /* ------------------ SETTINGS UI ------------------ */
