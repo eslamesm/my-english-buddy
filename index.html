@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.3" /><!-- English Kids v6.3 -->
+<meta name="app-version" content="My English Buddy v6.4" /><!-- English Kids v6.4 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -811,7 +811,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.3</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.4</div>
       </main>
     </div>
   </section>
@@ -3264,7 +3264,7 @@ function playItem(rate){
   const m=modeOfItem(item);
   if(m==='letters') return say(letterFile(item.t,'full'), item.t+'. '+item.t+' says '+item.sound+'. '+item.word+'.', rate);
   else if(m==='sounds') return say(letterFile(item.t,'sound'), item.sound, rate);
-  else if(m==='words'||(m&&m.indexOf('egy:')===0)) return say(wordFile((item.word||item.t).toLowerCase()), item.word||item.t, rate);
+  else if(m==='words'||m==='cvc'||m==='listen'||m==='spell'||m==='recall'||(m&&m.indexOf('egy:')===0)) return say(wordFile((item.word||item.t).toLowerCase()), item.word||item.t, rate);
   else if(m==='phrases') return say(phraseFile(item._i), item.t, rate);
   else return say(sentFile(item._i), item.t, rate);
 }
@@ -4791,7 +4791,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.3';
+    const local='6.4';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }
