@@ -1,0 +1,22 @@
+# Exclude non-release files from Vercel uploads.
+# The app is a static PWA served from the repo root; only runtime assets should ship.
+
+# Internal curriculum documentation & tooling (v6.8 work)
+docs/
+tools/
+
+# Repository tests
+tests/
+
+# Repo/dev metadata
+.git/
+.gitignore
+.vercelignore
+.vercel/
+.netlify/
+
+# Editor / OS cruft
+*.md
+*.log
+.env*
+*.ps1
