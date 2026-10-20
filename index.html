@@ -167,7 +167,11 @@
   .rw-v{font-weight:900; white-space:nowrap}
   .coach-line{display:flex; align-items:flex-start; gap:8px; background:rgba(14,165,233,.08); border:2px solid rgba(14,165,233,.25); border-radius:18px; padding:10px 12px; margin:12px auto 4px; max-width:420px; text-align:right; font-weight:800; font-size:13px; color:#0c4a6e; line-height:1.6}
   .coach-line .cl-ico{font-size:20px; flex:none}
+.coach-line .cl-tx{flex:1 1 auto}
+.coach-line .cl-spk{flex:none; border:2px solid rgba(14,165,233,.4); background:#fff; color:#0369a1; border-radius:12px; width:34px; height:34px; font-size:16px; line-height:1; cursor:pointer; padding:0}
+.coach-line .cl-spk:active{transform:scale(.94)}
   body.dark .coach-line{background:rgba(56,189,248,.12); border-color:rgba(56,189,248,.3); color:#bae6fd}
+  body.dark .coach-line .cl-spk{background:#0b1220; color:#7dd3fc; border-color:rgba(56,189,248,.45)}
   body.dark .rw-row{color:#e9e4ff}
   body.dark .rw-h{color:#c4b5fd}
   .pop{animation:pop .5s ease both}
@@ -2115,21 +2119,41 @@ function pickVoice(){
   try{ fillTeacherVoiceSel(); }catch(e){}
 }
 if('speechSynthesis' in window){ pickVoice(); window.speechSynthesis.onvoiceschanged=pickVoice; }
-function speakTTS(text, rate){
+/* speakTTSFull(text, rate) -> Promise<'ok'|'cancel'|'error'|'timeout'|'unavailable'|'muted'>
+   Coordinated speech lifecycle for the English UI voice. Unlike the legacy boolean
+   wrapper, this distinguishes a genuinely FINISHED utterance ('ok') from cancellation,
+   engine error, the safety timeout, or a missing/muted engine. Only 'ok' may be treated
+   as successful playback; everything else is a failure (and must not be recorded as played).
+   Speech is serialized through speechSeq so a newer request supersedes an older one.
+   `started` is set true only when the engine signals onstart (or, for engines without
+   onstart, once speak() did not throw). */
+let speechSeq=0;
+function speechGuardMs(text){ return Math.min(9000, 2500+String(text||'').length*120); }
+function speakTTSFull(text, rate){
   return new Promise((resolve)=>{
-    if(!('speechSynthesis' in window)||!text){ resolve(false); return; }
-    stopAudio();
+    if(!('speechSynthesis' in window)||!text){ resolve('unavailable'); return; }
+    const my=++speechSeq;
+    try{ window.speechSynthesis.cancel(); }catch(e){}
     const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=Math.max(0.4,Math.min(1.6, rate||settings.rate)); u.pitch=1.0;
     let chosen=null;
     if(settings.voice) chosen=(window.speechSynthesis.getVoices()||[]).find(x=>x.name===settings.voice)||null;
-    u.voice = chosen || usVoice || null;
-    let done=false; const fin=(ok)=>{ if(done) return; done=true; clearTimeout(guard); resolve(ok); };
-    u.onend=()=>fin(true); u.onerror=()=>fin(false);
-    /* safety: some mobile engines never fire onend; don't hang the flow */
-    const guard=setTimeout(()=>fin(true), Math.min(9000, 2500+String(text).length*120));
-    try{ window.speechSynthesis.speak(u); }
-    catch(e){ try{ window.speechSynthesis.cancel(); }catch(_){} fin(false); }
+    try{ u.voice = chosen || usVoice || null; }catch(e){}
+    let done=false; let started=false; let spoke=false;
+    const fin=(status)=>{ if(done) return; done=true; clearTimeout(guard); resolve(status); };
+    /* onstart confirms the engine actually began speaking (when supported). Engines that
+       never fire onstart still count as "attempted" via the speak() call below. */
+    u.onstart=()=>{ started=true; };
+    u.onend=()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'ok':'error'); };
+    u.onerror=()=>fin('error');
+    /* safety: some mobile engines never fire onend; never hang. If it never started, it's
+       an error; if it started but didn't end, it's a timeout (a failure either way). */
+    const guard=setTimeout(()=>fin((started||spoke)?'timeout':'error'), speechGuardMs(text));
+    try{ window.speechSynthesis.speak(u); spoke=true; }
+    catch(e){ try{ window.speechSynthesis.cancel(); }catch(_){} fin('error'); }
   });
+}
+function speakTTS(text, rate){
+  return speakTTSFull(text, rate).then(s=>s==='ok');
 }
 async function say(path, fallbackText, rate){
   let ok=false;
@@ -2176,15 +2200,24 @@ function updateTeacherMute(){ const m=document.getElementById('teacherMute'); if
 function ttsSay(text, opt){
   opt=opt||{};
   return new Promise(resolve=>{
-    if(!text || !('speechSynthesis' in window)){ resolve(false); return; }
-    const v=arVoice(); if(!v){ resolve(false); return; }
+    if(!text || !('speechSynthesis' in window)){ resolve('unavailable'); return; }
+    const v=arVoice();  /* may be null on devices without an Arabic voice installed */
+    const my=++speechSeq;
     try{
       window.speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(text);
-      u.lang=v.lang; u.voice=v; u.rate=opt.rate||tRate(); u.pitch=opt.pitch||tPitch(); u.volume=tVol();
-      u.onend=()=>resolve(true); u.onerror=()=>resolve(false);
-      window.speechSynthesis.speak(u);
-    }catch(e){ resolve(false); }
+      u.lang=(v&&v.lang)||'ar'; if(v){ try{ u.voice=v; }catch(e){} }
+      u.rate=opt.rate||tRate(); u.pitch=opt.pitch||tPitch(); u.volume=tVol();
+      let done=false; let started=false; let spoke=false;
+      const fin=(status)=>{ if(done) return; done=true; clearTimeout(guard); resolve(status); };
+      /* only report success if this utterance is still the current one AND it started */
+      u.onstart=()=>{ started=true; };
+      u.onend=()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'ok':'error'); };
+      u.onerror=()=>fin('error');
+      /* safety: an Arabic engine that stalls (no onend/onerror) must not hang the promise */
+      const guard=setTimeout(()=>fin((started||spoke)?'timeout':'error'), speechGuardMs(text));
+      window.speechSynthesis.speak(u); spoke=true;
+    }catch(e){ resolve('error'); }
   });
 }
 function playClip(id, opt){
@@ -2194,6 +2227,11 @@ function playClip(id, opt){
     let a; try{ a=new Audio(TCLIP+id+'.wav'); }catch(e){ resolve(false); return; }
     let done=false; const fin=(ok)=>{ if(done) return; done=true; if(teacherAudio===a) teacherAudio=null; resolve(ok); };
     teacherAudio=a; a.volume=tVol()*(opt.vol==null?1:opt.vol); a.playbackRate=opt.rate||tRate();
+    /* starting a clip supersedes any in-flight TTS: bump the speech token so an older
+       utterance resolves as 'cancel', and stop current speech (not clips). A newer
+       utterance started afterwards gets a higher token and is unaffected. */
+    ++speechSeq;
+    try{ window.speechSynthesis.cancel(); }catch(e){}
     a.onended=()=>fin(true); a.onerror=()=>{ TCLIP_MISSING[id]=1; fin(false); };
     const pr=a.play(); if(pr&&pr.catch) pr.catch(()=>{ TCLIP_MISSING[id]=1; fin(false); });
   });
@@ -2202,7 +2240,7 @@ function playClip(id, opt){
 async function teacherVoiceOut(clipId, text, opt){
   if(!teacherAudioOn()) return false;
   if(clipId){ const ok=await playClip(clipId, opt); if(ok) return true; }
-  if(text){ return await ttsSay(text, opt); }
+  if(text){ const s=await ttsSay(text, opt); return s==='ok'; }
   return false;
 }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
@@ -2742,7 +2780,13 @@ function showReward(o){
   if(sumEl){ if(o.summary){ sumEl.innerHTML=o.summary; sumEl.style.display=''; } else { sumEl.innerHTML=''; sumEl.style.display='none'; } }
   const coachEl=document.getElementById('rewardCoach');
   if(coachEl){
-    if(o.summary && o.coach){ coachEl.innerHTML='<span class="cl-ico">🦉</span><span>'+esc(o.coach.text||'')+'</span>'; coachEl.style.display=''; }
+    if(o.summary && o.coach){
+      coachEl.innerHTML='<span class="cl-ico">🦉</span><span class="cl-tx">'+esc(o.coach.text||'')+'</span>'+
+        '<button type="button" class="cl-spk" id="rewardCoachSpeak" aria-label="استمع لرسالة المدرّب" title="استمع">🔊</button>';
+      coachEl.style.display='';
+      const spk=coachEl.querySelector('#rewardCoachSpeak');
+      if(spk){ spk.onclick=(ev)=>{ ev.stopPropagation(); speakCoachLine(o.coach.text||''); }; }
+    }
     else { coachEl.innerHTML=''; coachEl.style.display='none'; }
   }
   rewardAgain=o.again||null;
@@ -2928,37 +2972,44 @@ function persistSession(){
 function clearSession(){ const p=currentProfile(); if(p){ p.session=null; saveProfiles(); } }
 function endSession(){ dailySessionActive=false; dailySessionProfileId=null; }
 let dailySessionActive=false, dailySessionProfileId=null;
+let greetHomeBusy=false;
 function greetHome(){
   if(settings.teacher===false || settings.teacherAudio===false) return;
-  if(settings.greetDay===dayKey(Date.now())) return;
-  settings.greetDay=dayKey(Date.now()); saveSettings();
-  /* Smart Coach: a single, once-per-day spoken tip through the existing teacher
-     voice ladder (clip -> Arabic TTS -> silent). It is chained off the greeting's
-     OWN completion promise (speakTTS resolves on onend / onerror / its safety
-     guard) so it never interrupts the greeting and needs no polling timer.
-     Gated by the same once-per-day flag, so it never repeats on re-render.
-     If teacher audio is unavailable the line is still shown visually. */
-  setTimeout(()=>{
-    const p=currentProfile();
-    if(!p || !document.getElementById('screen-home').classList.contains('active')) return;
-    let greetDone;
-    try{ greetDone=speakTTS('Hello '+(p.name||'friend')+'. Welcome to English fun!'); }
-    catch(e){ greetDone=Promise.resolve(false); }
-    Promise.resolve(greetDone).then((greetedOk)=>{
-      /* Only speak the coach once the greeting has actually finished playing.
-         If the greeting did not play (no voices / error / muted engine), skip the
-         spoken coach entirely rather than risk talking over anything; the visual
-         coach line on the home screen remains available either way. */
-      if(greetedOk!==true) return;
-      try{
-        if(settings.teacher===false || settings.teacherAudio===false) return;
-        if(!document.getElementById('screen-home').classList.contains('active')) return;
-        const cm=coachFor({});
-        if(!cm || cm.id==='generic') return;
-        if(typeof teacherVoiceOut!=='function') return;
-        teacherVoiceOut(null, cm.text, {});
-      }catch(e){}
-    });
+  const today=dayKey(Date.now());
+  const needGreet=settings.greetDay!==today;
+  const needCoach=settings.coachSpokenDay!==today;
+  if(!needGreet && !needCoach) return;
+  const p=currentProfile();
+  if(!p) return;
+  /* single-flight: never queue a second greeting/coach timer while one is in progress.
+     Released on every path (success, failure, timeout, exception) so it retries later
+     if the daily flags were not set. */
+  if(greetHomeBusy) return;
+  greetHomeBusy=true;
+  /* Coordinated once-per-day speech: the English greeting (if not yet delivered today)
+     plays first; when it SETTLES (finished, failed, blocked, or timed out) the Arabic
+     Smart Coach tip is attempted independently. The coach is NOT gated on greeting
+     success, so a blocked/failed greeting never silences the coach. greetDay is only
+     recorded once the greeting genuinely completes, so a failed greeting retries later. */
+  setTimeout(async ()=>{
+    try{
+      if(document.getElementById('screen-home').classList.contains('active')){
+        if(needGreet){
+          const st=await speakTTSFull('Hello '+(p.name||'friend')+'. Welcome to English fun!');
+          if(st==='ok'){ settings.greetDay=dayKey(Date.now()); saveSettings(); }
+        }
+        if(settings.teacher!==false && settings.teacherAudio!==false &&
+           document.getElementById('screen-home').classList.contains('active') &&
+           settings.coachSpokenDay!==dayKey(Date.now())){
+          const cm=coachFor({});
+          if(cm && typeof teacherVoiceOut==='function'){
+            const spoke=await teacherVoiceOut(null, cm.text, {});
+            if(spoke){ settings.coachSpokenDay=dayKey(Date.now()); saveSettings(); }
+          }
+        }
+      }
+    }catch(e){}
+    finally{ greetHomeBusy=false; }
   }, 900);
 }
 
@@ -3290,7 +3341,13 @@ function buildHomeProgress(){
   const coachEl=document.getElementById('homeCoach');
   if(coachEl){
     const cm=coachFor({});
-    if(cm){ coachEl.innerHTML='<span class="cl-ico">🦉</span><span>'+esc(cm.text)+'</span>'; coachEl.style.display=''; }
+    if(cm){
+      coachEl.innerHTML='<span class="cl-ico">🦉</span><span class="cl-tx">'+esc(cm.text)+'</span>'+
+        '<button type="button" class="cl-spk" id="coachSpeak" aria-label="استمع لرسالة المدرّب" title="استمع">🔊</button>';
+      coachEl.style.display='';
+      const spk=coachEl.querySelector('#coachSpeak');
+      if(spk){ spk.onclick=(ev)=>{ ev.stopPropagation(); speakCoachNow(); }; }
+    }
     else { coachEl.innerHTML=''; coachEl.style.display='none'; }
   }
   const s=learnerPathStats(); if(!s){ box.innerHTML=''; return; }
@@ -3573,6 +3630,35 @@ function coachFor(extra){
     const ctx=coachContext({ events:events, dailyNewToday:extra.dailyNewToday });
     return LearningEngine.coachMessage(ctx);
   }catch(e){ return null; }
+}
+/* Tap-to-hear / retry: always attempts the CURRENT coach line on a user gesture,
+   regardless of the once-per-day gate. Used by the coach speaker button and as the
+   accessible fallback when automated speech is blocked or failed. Records the daily
+   coach flag ONLY on a confirmed successful playback so a manual retry never stands in
+   for, or falsely marks, the automatic daily delivery. */
+async function speakCoachNow(){
+  try{
+    if(!teacherAudioOn()){ audioFailNotice(); return false; }
+    const cm=coachFor({});
+    if(!cm || typeof teacherVoiceOut!=='function'){ audioFailNotice(); return false; }
+    const spoke=await teacherVoiceOut(null, cm.text, {});
+    if(spoke){ settings.coachSpokenDay=dayKey(Date.now()); saveSettings(); }
+    else { audioFailNotice(); }
+    return spoke;
+  }catch(e){ return false; }
+}
+/* Speak an arbitrary coach line on a user gesture (e.g. the reward screen). Deliberately
+   does NOT touch the daily coach flag: the reward line is a transient session message,
+   not the once-per-day home coach. Shows the failure notice if it could not play. */
+async function speakCoachLine(text){
+  try{
+    if(!text){ return false; }
+    if(!teacherAudioOn()){ audioFailNotice(); return false; }
+    if(typeof teacherVoiceOut!=='function'){ audioFailNotice(); return false; }
+    const spoke=await teacherVoiceOut(null, text, {});
+    if(!spoke){ audioFailNotice(); }
+    return spoke;
+  }catch(e){ return false; }
 }
 
 /* ------------------ GAMES ------------------ */

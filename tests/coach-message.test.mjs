@@ -158,3 +158,40 @@ test('SKILL_LABELS export is a stable copy covering all engine skills', () => {
   assert.equal(typeof LE.SKILL_LABELS, 'object');
   LE.SKILLS.forEach(s => assert.equal(typeof LE.SKILL_LABELS[s], 'string'));
 });
+
+/* ------------------------------------------------------------------ *
+ * v7.0 audio lifecycle support: every coach message (including the
+ * generic welcome tip) must be a clean, speakable string, because the
+ * app now speaks the generic line too and passes text straight to TTS.
+ * ------------------------------------------------------------------ */
+
+test('every coach branch yields speakable text (generic included)', () => {
+  const cases = [
+    LE.coachMessage({}),                                                   // generic
+    LE.coachMessage({ weakestSkill: 'pronounce', skillReliable: true }),   // skill
+    LE.coachMessage({ dueCount: 3 }),                                      // due
+    LE.coachMessage({ streak: 7 }),                                        // streak7
+    LE.coachMessage({ streak: 3 }),                                        // streak3
+    LE.coachMessage({ todayAttempts: 10, goal: 10 }),                      // goalDone
+    LE.coachMessage({ todayAttempts: 2, goal: 10 }),                       // goalProgress
+    LE.coachMessage({ independent: 1, accuracy: 100 }),                    // sessionPerfect
+    LE.coachMessage({ incorrect: 1, accuracy: 0 }),                        // sessionRetry
+    LE.coachMessage({ uncertain: 1 })                                      // sessionHeard
+  ];
+  for (const m of cases) {
+    assert.ok(shape(m), 'branch ' + (m && m.id) + ' must be populated');
+    const t = m.text;
+    assert.ok(t.trim().length >= 8, 'text too short to speak: ' + t);
+    assert.ok(!/[<>]/.test(t), 'text must not contain markup: ' + t);
+    assert.ok(!/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(t), 'text must not contain control chars');
+    assert.ok(!/\s{3,}/.test(t), 'text must not contain long runs of whitespace');
+  }
+});
+
+test('generic welcome tip is non-empty and stable (spoken for new learners)', () => {
+  const a = LE.coachMessage({});
+  const b = LE.coachMessage({});
+  assert.equal(a.id, 'generic');
+  assert.equal(a.text, b.text, 'generic tip must be deterministic');
+  assert.ok(a.text.trim().length >= 8, 'generic tip must be speakable');
+});
