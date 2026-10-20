@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.9" /><!-- English Kids v6.9 -->
+<meta name="app-version" content="My English Buddy v7.0" /><!-- English Kids v7.0 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -165,6 +165,9 @@
   .rw-row:last-child{border-bottom:none}
   .rw-k{opacity:.85}
   .rw-v{font-weight:900; white-space:nowrap}
+  .coach-line{display:flex; align-items:flex-start; gap:8px; background:rgba(14,165,233,.08); border:2px solid rgba(14,165,233,.25); border-radius:18px; padding:10px 12px; margin:12px auto 4px; max-width:420px; text-align:right; font-weight:800; font-size:13px; color:#0c4a6e; line-height:1.6}
+  .coach-line .cl-ico{font-size:20px; flex:none}
+  body.dark .coach-line{background:rgba(56,189,248,.12); border-color:rgba(56,189,248,.3); color:#bae6fd}
   body.dark .rw-row{color:#e9e4ff}
   body.dark .rw-h{color:#c4b5fd}
   .pop{animation:pop .5s ease both}
@@ -751,6 +754,7 @@
     </div>
 
     <h2 class="home-sec-title">📊 تقدّمك <span class="sec-en">Progress</span></h2>
+    <div id="homeCoach" class="coach-line" style="display:none"></div>
     <div class="home-stats" id="homeStats"></div>
 
     <h2 class="home-sec-title">🚀 الأنشطة <span class="sec-en">Activities</span></h2>
@@ -831,7 +835,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.9</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v7.0</div>
       </main>
     </div>
   </section>
@@ -1147,6 +1151,7 @@
       <p class="subtitle" id="rewardSub" style="color:#6b5b95"></p>
       <div class="stars-earned" id="rewardStars">⭐⭐⭐</div>
       <div id="rewardSummary" class="reward-summary" style="display:none"></div>
+      <div id="rewardCoach" class="coach-line" style="display:none"></div>
       <div class="row-center">
         <button class="btn primary" id="rewardAgain">🔁 مرة أخرى</button>
         <button class="btn green" id="rewardExtra" style="display:none"></button>
@@ -2735,6 +2740,11 @@ function showReward(o){
   document.getElementById('rewardStars').textContent=o.stars||'⭐⭐⭐';
   const sumEl=document.getElementById('rewardSummary');
   if(sumEl){ if(o.summary){ sumEl.innerHTML=o.summary; sumEl.style.display=''; } else { sumEl.innerHTML=''; sumEl.style.display='none'; } }
+  const coachEl=document.getElementById('rewardCoach');
+  if(coachEl){
+    if(o.summary && o.coach){ coachEl.innerHTML='<span class="cl-ico">🦉</span><span>'+esc(o.coach.text||'')+'</span>'; coachEl.style.display=''; }
+    else { coachEl.innerHTML=''; coachEl.style.display='none'; }
+  }
   rewardAgain=o.again||null;
   const againBtn=document.getElementById('rewardAgain');
   if(o.again){ againBtn.style.display=''; againBtn.textContent=o.againLabel||'🔁 مرة أخرى'; againBtn.onclick=()=>{ if(rewardAgain) rewardAgain(); else go('home'); }; }
@@ -2922,7 +2932,34 @@ function greetHome(){
   if(settings.teacher===false || settings.teacherAudio===false) return;
   if(settings.greetDay===dayKey(Date.now())) return;
   settings.greetDay=dayKey(Date.now()); saveSettings();
-  setTimeout(()=>{ const p=currentProfile(); if(p && document.getElementById('screen-home').classList.contains('active')) speakTTS('Hello '+(p.name||'friend')+'. Welcome to English fun!'); }, 900);
+  /* Smart Coach: a single, once-per-day spoken tip through the existing teacher
+     voice ladder (clip -> Arabic TTS -> silent). It is chained off the greeting's
+     OWN completion promise (speakTTS resolves on onend / onerror / its safety
+     guard) so it never interrupts the greeting and needs no polling timer.
+     Gated by the same once-per-day flag, so it never repeats on re-render.
+     If teacher audio is unavailable the line is still shown visually. */
+  setTimeout(()=>{
+    const p=currentProfile();
+    if(!p || !document.getElementById('screen-home').classList.contains('active')) return;
+    let greetDone;
+    try{ greetDone=speakTTS('Hello '+(p.name||'friend')+'. Welcome to English fun!'); }
+    catch(e){ greetDone=Promise.resolve(false); }
+    Promise.resolve(greetDone).then((greetedOk)=>{
+      /* Only speak the coach once the greeting has actually finished playing.
+         If the greeting did not play (no voices / error / muted engine), skip the
+         spoken coach entirely rather than risk talking over anything; the visual
+         coach line on the home screen remains available either way. */
+      if(greetedOk!==true) return;
+      try{
+        if(settings.teacher===false || settings.teacherAudio===false) return;
+        if(!document.getElementById('screen-home').classList.contains('active')) return;
+        const cm=coachFor({});
+        if(!cm || cm.id==='generic') return;
+        if(typeof teacherVoiceOut!=='function') return;
+        teacherVoiceOut(null, cm.text, {});
+      }catch(e){}
+    });
+  }, 900);
 }
 
 /* ------------------ REGISTER / LOGIN ------------------ */
@@ -3250,6 +3287,12 @@ function learnerPathStats(){
 }
 function buildHomeProgress(){
   const box=document.getElementById('homeStats'); if(!box) return;
+  const coachEl=document.getElementById('homeCoach');
+  if(coachEl){
+    const cm=coachFor({});
+    if(cm){ coachEl.innerHTML='<span class="cl-ico">🦉</span><span>'+esc(cm.text)+'</span>'; coachEl.style.display=''; }
+    else { coachEl.innerHTML=''; coachEl.style.display='none'; }
+  }
   const s=learnerPathStats(); if(!s){ box.innerHTML=''; return; }
   const pct=s.total? Math.round(s.mastered/s.total*100):0;
   const gpct=Math.min(100, Math.round(s.today/s.goal*100));
@@ -3452,6 +3495,7 @@ function finishLevel(){
     again: ()=>{ index=0; sessionStars=0; sessionEvents=[]; updateSessionStars(); renderItem(); go('practice'); startTimer(); },
     speak: perfect===total?'You are a superstar!':'Great work!' };
   rw.summary=sessionSummaryHtml();
+  rw.coach=coachFor({ session:true });
   if(pendingExam){ const pe=pendingExam; pendingExam=null; rw.again=()=>startExam(pe.gid, pe.n); rw.againLabel='📝 ابدأ الامتحان'; rw.speak='Great! Now start the exam!'; }
   showReward(rw);
 }
@@ -3480,6 +3524,55 @@ function sessionSummaryHtml(){
   rows.push('<div class="rw-row"><span class="rw-k">📅 كلمات جديدة اليوم</span><span class="rw-v">'+sum.dailyNewToday+' / '+sum.dailyTarget+'</span></div>');
   rows.push('<div class="rw-row"><span class="rw-k">🔔 للمراجعة لاحقاً</span><span class="rw-v">'+sum.dueRemaining+'</span></div>');
   return '<h3 class="rw-h">ملخّص الجلسة</h3>'+rows.join('');
+}
+
+/* ------------------ SMART COACH (deterministic, measured data only) ------------------
+   Gathers ONLY real, already-measured numbers and hands them to the pure engine
+   LearningEngine.coachMessage(). No randomness, no new persistence. Safe if the
+   engine is missing or any value is unavailable. */
+function coachContext(extra){
+  extra=extra||{};
+  const p=currentProfile();
+  const ctx={};
+  try{
+    const g=settings.goal;
+    ctx.goal=(g==null?10:g);
+  }catch(e){}
+  ctx.todayAttempts=todayAttempts();
+  ctx.streak=currentStreak();
+  /* dueCount uses the engine's TRUE spaced-repetition due count (items whose
+     nextReview has arrived), NOT dueItems() — the latter returns every
+     not-yet-3-star word and would make the "due" branch dominate all usage. */
+  try{
+    if(p && window.LearningEngine && LearningEngine.stats){
+      ctx.dueCount=LearningEngine.stats(p.learning, Date.now()).due;
+    }
+  }catch(e){}
+  if(p){
+    ctx.dailyTarget=(window.LearningEngine?LearningEngine.normalizeDailyNew(p.dailyNew):p.dailyNew);
+    const wk=weakestSkill(p);
+    if(wk){ ctx.weakestSkill=wk.skill; ctx.skillReliable=true; }
+    try{
+      const sum=(window.LearningEngine&&LearningEngine.summarizeSession)
+        ? LearningEngine.summarizeSession(Array.isArray(extra.events)?extra.events:[], {})
+        : null;
+      if(sum){
+        ctx.accuracy=sum.accuracy; ctx.stars=sum.stars;
+        ctx.independent=sum.independent; ctx.incorrect=sum.incorrect; ctx.uncertain=sum.uncertain;
+      }
+    }catch(e){}
+  }
+  ctx.dailyNewToday=(typeof extra.dailyNewToday==='number')?extra.dailyNewToday:ctx.dailyNewToday;
+  return ctx;
+}
+function coachFor(extra){
+  extra=extra||{};
+  try{
+    if(!(window.LearningEngine&&LearningEngine.coachMessage)) return null;
+    const events=(extra.session && Array.isArray(sessionEvents))?sessionEvents:null;
+    const ctx=coachContext({ events:events, dailyNewToday:extra.dailyNewToday });
+    return LearningEngine.coachMessage(ctx);
+  }catch(e){ return null; }
 }
 
 /* ------------------ GAMES ------------------ */
@@ -5011,7 +5104,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.9';
+    const local='7.0';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }

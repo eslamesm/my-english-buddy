@@ -1,4 +1,4 @@
-/* My English Buddy — Adaptive Learning Engine (v6.9)
+/* My English Buddy — Adaptive Learning Engine (v7.0)
    ------------------------------------------------------------------
    Pure, dependency-free, offline-first module. No DOM, no network,
    no language framework. Runs in the browser (window.LearningEngine)
@@ -416,6 +416,115 @@
     return out;
   }
 
+  /* ---------- smart coach message (deterministic, for home + session summary) ----------
+     Pure function: given a small bag of ALREADY-MEASURED learner numbers, returns a
+     stable coaching message. No randomness, no storage, no DOM, no clock, no network —
+     fully unit-testable and identical for identical input.
+
+     It never invents personal data: every branch is driven by a real measurement, and
+     when the evidence is too thin it falls back to generic encouragement.
+
+     ctx (all optional; malformed values are ignored):
+       weakestSkill   skill id ('recognize'|'listen'|'spell'|'pronounce') — ONLY used
+                      when `skillReliable` is true, otherwise ignored
+       skillReliable  true when the weakest skill has enough records to be trusted
+       dueCount       number of items due for review
+       streak         consecutive practice days
+       todayAttempts  attempts recorded today
+       goal           today's attempt goal (e.g. 5/10/20)
+       dailyTarget    new-words-per-day target
+       dailyNewToday  new words met today
+       accuracy       0..100 over real (non-uncertain) answers this session
+       stars          0..3 session rating
+       independent    independent answers this session
+       incorrect      genuine wrong answers this session
+       uncertain      speech-recognition "not heard" results this session
+
+     Result: { id, key, text } — `id` is a stable branch identifier, `key` is a stable
+     dedupe key (id + deciding numbers) so the UI can avoid repeating the same line. */
+  const COACH_SKILL_LABELS = {
+    recognize: 'قراءة وتمييز',
+    listen: 'استماع',
+    spell: 'تهجئة',
+    pronounce: 'نطق'
+  };
+  const COACH_GOAL_OPTIONS = [5, 10, 20];
+  function coachMessage(ctx) {
+    const c = (ctx && typeof ctx === 'object' && !Array.isArray(ctx)) ? ctx : {};
+    const n = (v, d) => (typeof v === 'number' && isFinite(v) ? v : d);
+
+    const dueCount = Math.max(0, intOr(c.dueCount, 0));
+    const streak = Math.max(0, intOr(c.streak, 0));
+    const todayAttempts = Math.max(0, intOr(c.todayAttempts, 0));
+    const goalRaw = intOr(c.goal, 0);
+    const goal = COACH_GOAL_OPTIONS.indexOf(goalRaw) >= 0 ? goalRaw : 10;
+    const dailyTarget = normalizeDailyNew(c.dailyTarget);
+    const dailyNewToday = Math.max(0, intOr(c.dailyNewToday, 0));
+    const accuracy = clamp(Math.round(n(c.accuracy, 0)), 0, 100);
+    const stars = clamp(intOr(c.stars, 0), 0, 3);
+    const independent = Math.max(0, intOr(c.independent, 0));
+    const incorrect = Math.max(0, intOr(c.incorrect, 0));
+    const uncertain = Math.max(0, intOr(c.uncertain, 0));
+    const sessionAnswered = independent + incorrect;
+    const hasSession = sessionAnswered > 0 || uncertain > 0;
+
+    const skillId = SKILLS.indexOf(c.weakestSkill) >= 0 ? c.weakestSkill : null;
+    const skillReliable = c.skillReliable === true;
+
+    const make = (id, key, text) => ({ id: id, key: key, text: text });
+
+    /* 1. Reliable weakest-skill guidance — only when the reliability threshold is met.
+          Never claims a weakness on thin data. */
+    if (skillId && skillReliable) {
+      const label = COACH_SKILL_LABELS[skillId];
+      return make('skill', 'skill:' + skillId, 'لاحظتُ أن مهارة «' + label + '» تحتاج تركيزاً أكثر. جرّبنا معاً خطوة بخطوة 🧩');
+    }
+
+    /* 2. Due-review reminder */
+    if (dueCount > 0) {
+      return make('due', 'due:' + (dueCount >= 10 ? 'many' : dueCount >= 5 ? 'some' : 'few'),
+        'لديك ' + dueCount + ' كلمة مستحقة للمراجعة. مراجعة قصيرة اليوم تحافظ على قوّتك 🔔');
+    }
+
+    /* 3. Streak milestone or encouragement */
+    if (streak > 0 && streak % 7 === 0) {
+      return make('streak7', 'streak7:' + streak, 'رائع! ' + streak + ' أيام متتالية من التدريب — أسبوع كامل من الالتزام 🌈');
+    }
+    if (streak >= 3) {
+      return make('streak3', 'streak3:' + streak, 'أحسنت! ' + streak + ' أيام متتالية من التدريب. استمرّ هكذا 🔥');
+    }
+
+    /* 4. Daily-goal progress or completion */
+    if (todayAttempts >= goal) {
+      return make('goalDone', 'goalDone:' + goal, 'أكملت هدف اليوم! ' + todayAttempts + ' / ' + goal + ' تمريناً 🎯');
+    }
+    if (todayAttempts > 0) {
+      const left = goal - todayAttempts;
+      return make('goalProgress', 'goalProgress:' + todayAttempts + '/' + goal,
+        'أنت على الطريق: ' + todayAttempts + ' / ' + goal + ' اليوم. تبقّى ' + left + ' فقط 💪');
+    }
+
+    /* 5. Session-specific encouragement from valid results.
+          An uncertain-only session is NOT described as wrong — it is gentle. */
+    if (hasSession) {
+      if (sessionAnswered > 0 && incorrect === 0 && uncertain === 0 && independent > 0) {
+        return make('sessionPerfect', 'sessionPerfect', 'جلسة مثالية — كل الإجابات مستقلة وصحيحة، أحسنت 🌟');
+      }
+      if (sessionAnswered > 0 && incorrect > 0) {
+        return make('sessionRetry', 'sessionRetry:' + accuracy, 'تدرّبنا معاً اليوم؛ بعض الكلمات تحتاج مراجعة قصيرة وسنعاود المحاولة 🔁');
+      }
+      if (sessionAnswered === 0 && uncertain > 0) {
+        return make('sessionHeard', 'sessionHeard', 'لم أسمعك بوضوح هذه المرة — هذا ليس خطأ، لنجرّب من جديد بصوت أوضح 🎤');
+      }
+      if (independent > 0) {
+        return make('sessionGood', 'sessionGood:' + stars, 'أحسنت! كان أداؤك جيداً اليوم، واصل التدريب 👍');
+      }
+    }
+
+    /* 6. Generic encouragement when evidence is insufficient */
+    return make('generic', 'generic', 'مرحباً! جاهزون لجلسة تعلّم ممتعة اليوم؟ هيّا نتدرّب 🌱');
+  }
+
   /* ---------- legacy migration ---------- */
   /* stars (0..3) from the v5.x `progress` map -> engine record.
      3 stars (fully learned in the old model) becomes mastery 4 (mastered). */
@@ -484,6 +593,8 @@
     selectPractice: selectPractice,
     stats: stats,
     summarizeSession: summarizeSession,
+    coachMessage: coachMessage,
+    SKILL_LABELS: Object.assign({}, COACH_SKILL_LABELS),
     skillFromMode: skillFromMode,
     fromLegacyProgress: fromLegacyProgress
   };
