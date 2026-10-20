@@ -2067,7 +2067,16 @@ function initA11yRadar(){
 }
 
 /* ------------------ AUDIO ------------------ */
-function stopAudio(){ if(currentAudio){ try{currentAudio.pause();}catch(e){} currentAudio=null; } if('speechSynthesis' in window){ try{window.speechSynthesis.cancel();}catch(e){} } }
+/* Token serializing speech requests. Bumped when a new utterance starts AND when an
+   external stop cancels the current one, so a superseded utterance can never be
+   reported as a successful ('ok') playback. */
+let speechSeq=0;
+/* invalidateSpeech(): supersede any in-flight utterance so it can never resolve 'ok',
+   then cancel the engine. Bumping the token is the authoritative signal: an utterance
+   whose token no longer matches is a failure, regardless of onend/onerror fired later.
+   Safe to call repeatedly (the token is monotonic; only equality is compared). */
+function invalidateSpeech(){ speechSeq++; if('speechSynthesis' in window){ try{window.speechSynthesis.cancel();}catch(e){} } }
+function stopAudio(){ if(currentAudio){ try{currentAudio.pause();}catch(e){} currentAudio=null; } invalidateSpeech(); }
 function safeRate(r){ let v=parseFloat(r); if(!isFinite(v)||v<=0) v=parseFloat(settings.rate); if(!isFinite(v)||v<=0) v=1; return Math.max(0.4, Math.min(1.6, v)); }
 function playFile(path, rate){
   return new Promise((resolve)=>{
@@ -2127,7 +2136,6 @@ if('speechSynthesis' in window){ pickVoice(); window.speechSynthesis.onvoicescha
    Speech is serialized through speechSeq so a newer request supersedes an older one.
    `started` is set true only when the engine signals onstart (or, for engines without
    onstart, once speak() did not throw). */
-let speechSeq=0;
 function speechGuardMs(text){ return Math.min(9000, 2500+String(text||'').length*120); }
 function speakTTSFull(text, rate){
   return new Promise((resolve)=>{
@@ -2145,9 +2153,10 @@ function speakTTSFull(text, rate){
     u.onstart=()=>{ started=true; };
     u.onend=()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'ok':'error'); };
     u.onerror=()=>fin('error');
-    /* safety: some mobile engines never fire onend; never hang. If it never started, it's
-       an error; if it started but didn't end, it's a timeout (a failure either way). */
-    const guard=setTimeout(()=>fin((started||spoke)?'timeout':'error'), speechGuardMs(text));
+    /* safety: some mobile engines never fire onend; never hang. A superseded utterance is
+       a cancel; otherwise an unstarted one is an error and a started-but-unfinished one is
+       a timeout (both failures). Success is only ever granted while the token still matches. */
+    const guard=setTimeout(()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'timeout':'error'); }, speechGuardMs(text));
     try{ window.speechSynthesis.speak(u); spoke=true; }
     catch(e){ try{ window.speechSynthesis.cancel(); }catch(_){} fin('error'); }
   });
@@ -2193,7 +2202,7 @@ function teacherSayNow(text){
   if(teacherTimer){ clearInterval(teacherTimer); teacherTimer=null; }
   b.classList.remove('typing'); b.textContent=text||'';
 }
-function stopTeacherAudio(){ if(teacherAudio){ try{teacherAudio.pause();}catch(e){} teacherAudio=null; } if('speechSynthesis' in window){ try{window.speechSynthesis.cancel();}catch(e){} } }
+function stopTeacherAudio(){ if(teacherAudio){ try{teacherAudio.pause();}catch(e){} teacherAudio=null; } invalidateSpeech(); }
 function stopTeacher(){ teacherSeq++; stopTeacherAudio(); }
 function teacherMuted(){ return settings.teacherAudio===false; }
 function updateTeacherMute(){ const m=document.getElementById('teacherMute'); if(m) m.textContent=teacherMuted()? '🔇' : '🔊'; }
@@ -2214,8 +2223,9 @@ function ttsSay(text, opt){
       u.onstart=()=>{ started=true; };
       u.onend=()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'ok':'error'); };
       u.onerror=()=>fin('error');
-      /* safety: an Arabic engine that stalls (no onend/onerror) must not hang the promise */
-      const guard=setTimeout(()=>fin((started||spoke)?'timeout':'error'), speechGuardMs(text));
+      /* safety: an Arabic engine that stalls (no onend/onerror) must not hang the promise;
+         a superseded/cancelled utterance is a cancel, never a success. */
+      const guard=setTimeout(()=>{ if(my!==speechSeq){ fin('cancel'); return; } fin((started||spoke)?'timeout':'error'); }, speechGuardMs(text));
       window.speechSynthesis.speak(u); spoke=true;
     }catch(e){ resolve('error'); }
   });
