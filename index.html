@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#2563eb" />
-<meta name="app-version" content="My English Buddy v6.7" /><!-- English Kids v6.7 -->
+<meta name="app-version" content="My English Buddy v6.9" /><!-- English Kids v6.9 -->
 <meta name="apple-mobile-web-app-title" content="My English Buddy" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" />
@@ -159,6 +159,14 @@
   .spell .okl{color:#1e1b4b}
   .spell .wl{color:#fff; background:#ef4444; border-radius:6px; padding:0 3px; box-shadow:0 2px 0 #b91c1c}
   .stars-earned{font-size:clamp(30px,10vw,50px); letter-spacing:4px}
+  .reward-summary{background:rgba(124,58,237,.08); border:2px solid rgba(124,58,237,.25); border-radius:18px; padding:12px 14px; margin:14px auto 4px; max-width:420px; text-align:right}
+  .rw-h{margin:0 0 8px; font-size:15px; color:#6b5b95; text-align:center}
+  .rw-row{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:5px 2px; font-size:13px; font-weight:700; color:#3b2f63; border-bottom:1px dashed rgba(124,58,237,.18)}
+  .rw-row:last-child{border-bottom:none}
+  .rw-k{opacity:.85}
+  .rw-v{font-weight:900; white-space:nowrap}
+  body.dark .rw-row{color:#e9e4ff}
+  body.dark .rw-h{color:#c4b5fd}
   .pop{animation:pop .5s ease both}
   @keyframes pop{0%{transform:scale(.4); opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1); opacity:1}}
   .shake{animation:shake .45s}
@@ -823,7 +831,7 @@
           <div id="leaderboard"></div>
         </section>
         <p class="note">🔊 ارفع الصوت • 🎤 اسمح بالميكروفون • الأفضل Chrome أو Edge</p>
-        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.7</div>
+        <div style="text-align:center; color:#ede9fe; font-size:12px; margin-top:8px; font-weight:700">الإصدار v6.9</div>
       </main>
     </div>
   </section>
@@ -1138,6 +1146,7 @@
       <h2 class="title" id="rewardTitle" style="font-size:clamp(24px,7vw,38px)">أحسنت!</h2>
       <p class="subtitle" id="rewardSub" style="color:#6b5b95"></p>
       <div class="stars-earned" id="rewardStars">⭐⭐⭐</div>
+      <div id="rewardSummary" class="reward-summary" style="display:none"></div>
       <div class="row-center">
         <button class="btn primary" id="rewardAgain">🔁 مرة أخرى</button>
         <button class="btn green" id="rewardExtra" style="display:none"></button>
@@ -1883,9 +1892,27 @@ function recordAttempt(mode, itemName, score, stars, uncertain){
   bumpDay(s, stars, score);
   s.recent.unshift({mode,item:itemName,score,stars,ts:Date.now()});
   if(s.recent.length>80) s.recent.length=80;
+  const wasNew=isNewWord(mode, itemName);
   learnEvent(mode, itemName, stars>=2, score, false, uncertain);
+  sessionOutcome(mode, itemName, uncertain ? 'uncertain' : (stars>=2 ? 'independent' : 'incorrect'), false, wasNew);
   saveProfiles();
   evalAchv();
+}
+/* true when the learner had never answered this word+skill before (a genuinely
+   new item) — read BEFORE the engine records the attempt. Safe on bad data. */
+function isNewWord(mode, word){
+  try{
+    const p=currentProfile(); if(!p||!p.learning||!window.LearningEngine||!word) return false;
+    const rec=LearningEngine.getRecord(p.learning, LearningEngine.skillFromMode(mode), word);
+    return !rec || (rec.correctCount===0 && rec.wrongCount===0 && rec.mastery===0);
+  }catch(e){ return false; }
+}
+/* record one attempt into the in-memory session log used by finishLevel().
+   Distinguishes independent success from genuine mistakes and from speech-
+   recognition uncertainty (which is never counted as a language failure). */
+function sessionOutcome(mode, word, outcome, corrected, isNew){
+  if(!word) return;
+  sessionEvents.push({ word:String(word), skill:(window.LearningEngine?LearningEngine.skillFromMode(mode):'recognize'), outcome:outcome, corrected:!!corrected, isNew:!!isNew });
 }
 function recordGame(correct){ const p=currentProfile(); if(!p) return; p.stats.games.attempts++; if(correct)p.stats.games.correct++; p.stats.attempts++; p.stats.lastPlayed=Date.now(); bumpDay(p.stats, 0, correct?100:0); saveProfiles(); evalAchv(); }
 
@@ -1896,6 +1923,7 @@ function stopTimer(){ if(timerStart){ const p=currentProfile(); if(p){ p.stats.t
 
 /* ------------------ STATE ------------------ */
 let chosenAge=null, currentMode=null, list=[], index=0, sessionStars=0, recognizing=false;
+let sessionEvents=[];   /* in-memory attempt log for the end-of-session summary (never persisted) */
 let currentAudio=null;
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 const isFile = location.protocol === 'file:';
@@ -2705,6 +2733,8 @@ function showReward(o){
   document.getElementById('rewardTitle').textContent=o.title||'أحسنت!';
   document.getElementById('rewardSub').textContent=o.sub||'';
   document.getElementById('rewardStars').textContent=o.stars||'⭐⭐⭐';
+  const sumEl=document.getElementById('rewardSummary');
+  if(sumEl){ if(o.summary){ sumEl.innerHTML=o.summary; sumEl.style.display=''; } else { sumEl.innerHTML=''; sumEl.style.display='none'; } }
   rewardAgain=o.again||null;
   const againBtn=document.getElementById('rewardAgain');
   if(o.again){ againBtn.style.display=''; againBtn.textContent=o.againLabel||'🔁 مرة أخرى'; againBtn.onclick=()=>{ if(rewardAgain) rewardAgain(); else go('home'); }; }
@@ -2867,7 +2897,7 @@ function launchSession(items, startIndex){
   if(!items||!items.length){ toast('لا شيء للمراجعة الآن 🎉'); return; }
   currentMode='review'; recallRevealed=false; dailySessionActive=true; dailySessionProfileId=currentId;
   list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:(x._mode||SKILL_TO_MODE[x.skill]||'words')}));
-  index=Math.max(0, Math.min(startIndex||0, list.length-1)); sessionStars=0; updateSessionStars();
+  index=Math.max(0, Math.min(startIndex||0, list.length-1)); sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer(); persistSession();
   toast('جلسة اليوم: '+list.length+' عنصرًا مخصّصًا 🧠');
 }
@@ -3321,7 +3351,7 @@ function startRecall(){
   if(!q.length){ toast('لا كلمات للمراجعة الآن — أتقن كلمات جديدة أولاً 🙂'); return; }
   currentMode='recall'; recallRevealed=false;
   list=q.slice(0,8).map(x=>x.it);
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
   toast('انطقها من ذاكرتك قبل رؤية الكلمة 🎤');
 }
@@ -3329,7 +3359,7 @@ function startMode(mode){
   endSession();
   currentMode=mode;
   list=MODE_DATA[mode].map((it,i)=>({...it,_i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   if((settings.recMode==='offline'||settings.recMode==='auto')&&!voskModel) ensureVosk().catch(()=>{});
   renderItem(); go('practice'); startTimer();
 }
@@ -3419,10 +3449,37 @@ function finishLevel(){
     title: perfect===total?'أحسنت! أكملت كل الكلمات بإتقان':'أحسنت! أكملت القسم',
     sub:`أتقنت ${perfect} من ${total} • نجوم القسم: ${earned}/${maxPossible}`,
     stars:'⭐'.repeat(avg)+'☆'.repeat(3-avg),
-    again: ()=>{ index=0; sessionStars=0; updateSessionStars(); renderItem(); go('practice'); startTimer(); },
+    again: ()=>{ index=0; sessionStars=0; sessionEvents=[]; updateSessionStars(); renderItem(); go('practice'); startTimer(); },
     speak: perfect===total?'You are a superstar!':'Great work!' };
+  rw.summary=sessionSummaryHtml();
   if(pendingExam){ const pe=pendingExam; pendingExam=null; rw.again=()=>startExam(pe.gid, pe.n); rw.againLabel='📝 ابدأ الامتحان'; rw.speak='Great! Now start the exam!'; }
   showReward(rw);
+}
+/* build the end-of-session summary block from the in-memory session log.
+   All numbers come from the pure engine summariser; uncertain ASR is shown
+   but never counted as a language failure. Safe if the engine is unavailable. */
+function sessionSummaryHtml(){
+  const p=currentProfile();
+  const dueRemaining=dueItems().length;
+  const dailyTarget=p?(window.LearningEngine?LearningEngine.normalizeDailyNew(p.dailyNew):p.dailyNew):5;
+  const newToday=sessionEvents.filter(e=>e.isNew).map(e=>String(e.word).toLowerCase()).filter((w,i,a)=>a.indexOf(w)===i).length;
+  let sum;
+  try{
+    sum=(window.LearningEngine&&LearningEngine.summarizeSession)
+      ? LearningEngine.summarizeSession(sessionEvents,{ dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining, totalItems:list.length })
+      : { total:sessionEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining };
+  }catch(e){ sum={ total:sessionEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining }; }
+  if(!sum.total) return '';
+  const rows=[];
+  rows.push('<div class="rw-row"><span class="rw-k">✅ إجابات مستقلة</span><span class="rw-v" style="color:#16a34a">'+sum.independent+'</span></div>');
+  if(sum.assisted) rows.push('<div class="rw-row"><span class="rw-k">🤝 بمساعدة (تلميح)</span><span class="rw-v" style="color:#f59e0b">'+sum.assisted+'</span></div>');
+  if(sum.incorrect) rows.push('<div class="rw-row"><span class="rw-k">🔁 يحتاج إعادة</span><span class="rw-v" style="color:#ef4444">'+sum.incorrect+'</span></div>');
+  if(sum.uncertain) rows.push('<div class="rw-row"><span class="rw-k">🎤 لم أسمعك بوضوح (ليست خطأ)</span><span class="rw-v" style="color:#7c3aed">'+sum.uncertain+'</span></div>');
+  const skills=(sum.skillsPracticed||[]).map(s=>(SKILL_META[s]||{}).label).filter(Boolean).join(' • ');
+  if(skills) rows.push('<div class="rw-row"><span class="rw-k">🧩 مهارات تدربت</span><span class="rw-v" style="font-size:12px">'+skills+'</span></div>');
+  rows.push('<div class="rw-row"><span class="rw-k">📅 كلمات جديدة اليوم</span><span class="rw-v">'+sum.dailyNewToday+' / '+sum.dailyTarget+'</span></div>');
+  rows.push('<div class="rw-row"><span class="rw-k">🔔 للمراجعة لاحقاً</span><span class="rw-v">'+sum.dueRemaining+'</span></div>');
+  return '<h3 class="rw-h">ملخّص الجلسة</h3>'+rows.join('');
 }
 
 /* ------------------ GAMES ------------------ */
@@ -4291,7 +4348,7 @@ function startCurDirect(gid){
   if(!MODE_DATA['egy:'+gid]) return;
   currentMode='egy:'+gid;
   list=MODE_DATA['egy:'+gid].map((it,i)=>({...it,_i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
 }
 function startCurUnit(gid,n){
@@ -4300,7 +4357,7 @@ function startCurUnit(gid,n){
   const key='egy:'+gid+'u'+n; if(!MODE_DATA[key]) return;
   currentMode=key;
   list=MODE_DATA[key].map((it,i)=>({...it,_i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
 }
 function showCurUnits(gid){
@@ -4343,7 +4400,7 @@ function startReview(){
   endSession();
   const items=buildReviewList();
   if(!items.length){ toast('لا توجد كلمات للمراجعة الآن 🎉'); return; }
-  currentMode='review'; list=items; index=0; sessionStars=0; updateSessionStars();
+  currentMode='review'; list=items; index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
   toast('مراجعة ذكية: '+list.length+' كلمة تحتاج تحسين 🧠');
 }
@@ -4536,7 +4593,7 @@ function startBankPractice(){
   const set=uniqByWord(words).slice(0,40);
   currentMode='words';
   list=set.map((w,i)=>({t:w.t, emoji:w.emoji, ar:w.ar, spoken:String(w.t).toLowerCase(), _i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
   toast('تدريب على '+list.length+' كلمة من بنك الكلمات 🗂️');
 }
@@ -4615,7 +4672,7 @@ function startPreExamReview(gid, n, weak){
   pendingExam={gid, n};
   currentMode='words';
   list=set.map((w,i)=>({t:w.t, emoji:w.emoji, ar:w.ar, spoken:String(w.t).toLowerCase(), _i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
   toast('مراجعة سريعة قبل الامتحان: '+list.length+' كلمة 🧠');
 }
@@ -4703,7 +4760,7 @@ function startExamReview(){
   if(!le||!le.wrong||!le.wrong.length){ toast('لا توجد أخطاء للمراجعة 🎉'); return; }
   currentMode='words';
   list=le.wrong.map((w,i)=>({t:w.t, emoji:w.emoji, ar:w.ar, spoken:String(w.t).toLowerCase(), _i:i}));
-  index=0; sessionStars=0; updateSessionStars();
+  index=0; sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer();
   toast('مراجعة أخطاء الامتحان: '+list.length+' كلمة 🎯');
 }
@@ -4954,7 +5011,7 @@ async function checkAppUpdate(force=false){
     const txt=await res.text();
     const m=txt.match(/(?:My English Buddy|English Kids) v(\d+\.\d+)/);
     const remote=m? m[1]:'0';
-    const local='6.7';
+    const local='6.9';
     if(force||remote>local){
       if(confirm('تم العثور على تحديث جديد v'+remote+' (لديك v'+local+'). هل ترغب بتطبيق التحديث الآن؟ سيُعيد تحميل التطبيق.')){
         if('serviceWorker' in navigator){ try{ const regs=await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r=>r.unregister())); }catch(e){} }

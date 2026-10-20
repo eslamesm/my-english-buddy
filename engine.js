@@ -1,4 +1,4 @@
-/* My English Buddy — Adaptive Learning Engine (v6.0)
+/* My English Buddy — Adaptive Learning Engine (v6.9)
    ------------------------------------------------------------------
    Pure, dependency-free, offline-first module. No DOM, no network,
    no language framework. Runs in the browser (window.LearningEngine)
@@ -333,6 +333,89 @@
     return out;
   }
 
+  /* ---------- session summary (deterministic, for the end-of-session screen) ----------
+     Pure function: takes an in-memory list of attempt events and returns a plain
+     summary object. No randomness, no storage, no DOM — so it is fully unit-testable.
+
+     Each event is a small object; unknown / malformed events are ignored (safe on
+     partial or legacy data):
+       { word, skill, outcome, corrected } where outcome is one of:
+         'independent' — answered correctly with no help
+         'assisted'    — reached the answer only after a hint / reveal (counts as an
+                         attempt, never as mastery, never as a "wrong answer")
+         'incorrect'   — a genuine wrong answer (not counted for uncertain ASR)
+         'uncertain'   — the speech engine could not hear clearly; NOT a language
+                         failure and never counted as a mistake
+       corrected: true when the learner fixed their own mistake before finishing.
+
+     opts (all optional):
+       dailyTarget   new-words target for today (defaults to DAILY_NEW_DEFAULT)
+       dailyNewToday number of genuinely-new items met so far today
+       dueRemaining  count of items still due for review AFTER this session
+       totalItems    number of items in the session (defaults to distinct words seen)
+
+     Result:
+       {
+         total, independent, assisted, incorrect, uncertain, corrected,
+         answered,                 // independent + incorrect (real answers)
+         accuracy,                 // 0..100 over real answers
+         perfect,                  // all answered items independent, none wrong
+         stars,                    // 0..3 child-facing rating
+         bySkill: { skill: { total, independent, assisted, incorrect, uncertain } },
+         skillsPracticed: [skill...],   // in canonical SKILLS order
+         dailyTarget, dailyNewToday, dailyProgress,   // 0..100
+         dueRemaining
+       }
+  */
+  function emptySkillTally() { return { total: 0, independent: 0, assisted: 0, incorrect: 0, uncertain: 0 }; }
+  function summarizeSession(events, opts) {
+    opts = opts || {};
+    const out = {
+      total: 0, independent: 0, assisted: 0, incorrect: 0, uncertain: 0, corrected: 0,
+      answered: 0, accuracy: 0, perfect: false, stars: 0,
+      bySkill: {}, skillsPracticed: [],
+      dailyTarget: normalizeDailyNew(opts.dailyTarget),
+      dailyNewToday: Math.max(0, intOr(opts.dailyNewToday, 0)),
+      dailyProgress: 0,
+      dueRemaining: Math.max(0, intOr(opts.dueRemaining, 0))
+    };
+    SKILLS.forEach((s) => { out.bySkill[s] = emptySkillTally(); });
+
+    const list = Array.isArray(events) ? events : [];
+    const seenWords = {};
+    list.forEach((ev) => {
+      if (!ev || typeof ev !== 'object') return;
+      const word = normalizeWord(ev.word);
+      if (!word) return;
+      const skill = normalizeSkill(ev.skill);
+      const outcome = ev.outcome;
+      if (outcome !== 'independent' && outcome !== 'assisted' && outcome !== 'incorrect' && outcome !== 'uncertain') return;
+      seenWords[word] = 1;
+      out.total++;
+      out[outcome]++;
+      const t = out.bySkill[skill];
+      t.total++; t[outcome]++;
+      if (ev.corrected) out.corrected++;
+    });
+
+    out.answered = out.independent + out.incorrect;
+    out.accuracy = out.answered ? Math.round((out.independent / out.answered) * 100) : 0;
+    out.perfect = out.answered > 0 && out.independent === out.answered && out.incorrect === 0;
+    // star rating weighs independent success, ignores uncertain ASR entirely.
+    if (out.independent === 0 && out.assisted === 0) out.stars = 0;
+    else if (out.incorrect === 0 && out.assisted === 0) out.stars = 3;
+    else if (out.accuracy >= 60) out.stars = 2;
+    else out.stars = 1;
+
+    out.skillsPracticed = SKILLS.filter((s) => out.bySkill[s].total > 0);
+    const distinct = Object.keys(seenWords).length;
+    const sessionItems = isNum(opts.totalItems) ? Math.max(0, intOr(opts.totalItems, 0)) : distinct;
+    out.sessionItems = sessionItems;
+    const denom = Math.max(out.dailyTarget, 1);
+    out.dailyProgress = clamp(Math.round((out.dailyNewToday / denom) * 100), 0, 100);
+    return out;
+  }
+
   /* ---------- legacy migration ---------- */
   /* stars (0..3) from the v5.x `progress` map -> engine record.
      3 stars (fully learned in the old model) becomes mastery 4 (mastered). */
@@ -400,6 +483,7 @@
     skillProfile: skillProfile,
     selectPractice: selectPractice,
     stats: stats,
+    summarizeSession: summarizeSession,
     skillFromMode: skillFromMode,
     fromLegacyProgress: fromLegacyProgress
   };
