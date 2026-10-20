@@ -1,0 +1,422 @@
+{
+  "cur:p1:term1:u1:hello": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:goodbye": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:play": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:friends": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:bag": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:shakehands": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:teacher": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:board": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:desk": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:chair": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:book": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u1:pencil": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:grass": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:flower": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:tree": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:sky": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:bird": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:butterfly": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:circle": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:square": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:triangle": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:rectangle": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:green": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:blue": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:red": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u2:yellow": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:parents": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:father": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:mother": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:sister": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:brother": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:grandmother": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u3:grandfather": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:head": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:eyes": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:ears": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:nose": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:mouth": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:tongue": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:arm": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:hand": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:leg": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:foot": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:toe": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:see": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:hear": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:smell": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:taste": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u4:touch": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:farm": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:cow": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:horse": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:duck": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:chicken": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:milk": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:cheese": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:meat": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:eggs": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:big": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u5:small": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:pets": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:cat": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:dog": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:turtle": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:jungle": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:lion": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:tiger": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:elephant": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:monkey": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:giraffe": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:snake": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:in": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:on": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p1:term1:u6:under": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim1_Tr1.pdf"
+  },
+  "cur:p2:morning": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:today": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:weather": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:wind": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:house": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:kitchen": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:bedroom": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:bathroom": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:garden": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p2:on": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim2_Tr1.pdf, English_Prim2_Tr2.pdf"
+  },
+  "cur:p3:doctor": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim3_Tr1.pdf"
+  },
+  "cur:p3:farmer": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim3_Tr1.pdf"
+  },
+  "cur:p3:baker": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim3_Tr1.pdf"
+  },
+  "cur:p4:english": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim4_Tr1.pdf"
+  },
+  "cur:p4:station": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim4_Tr1.pdf"
+  },
+  "cur:p5:river": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim5_Tr1.pdf"
+  },
+  "cur:p5:desert": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim5_Tr1.pdf"
+  },
+  "cur:p6:future": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:plan": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:group": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:important": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:famous": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:email": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:message": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:p6:engineer": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prim6_Tr1.pdf, English_Prim6_Tr2.pdf"
+  },
+  "cur:prep1:skill": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  },
+  "cur:prep1:guide": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  },
+  "cur:prep1:adventure": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  },
+  "cur:prep1:experience": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  },
+  "cur:prep1:performance": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  },
+  "cur:prep1:friendly": {
+    "matchStatus": "verified_exact",
+    "evidenceRef": "Listed in the official Scope & Sequence vocabulary of English_Prp1_Tr1.pdf"
+  }
+}

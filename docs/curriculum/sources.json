@@ -1,0 +1,306 @@
+{
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-10-20",
+  "academicYear": "2025/2026",
+  "academicYearStatus": "verified_from_retrieved_documents",
+  "academicYearEvidence": "The retrieved Ministry-hosted Student Book PDFs carry a printed academic-year label of \"2025/2026\" on their Scope-and-Sequence / cover pages (e.g. English_Prim2_Tr1.pdf page 0 reads \"2 Primary Term 1 2025/2026\"). The Ministry electronic library portal also lists a card titled \"الكتب المدرسية 2026-2027\". The books themselves are the 2025/2026 editions, so the verified alignment year is 2025/2026.",
+  "jurisdiction": "Egypt",
+  "issuingAuthority": "Ministry of Education and Technical Education (وزارة التربية والتعليم والتعليم الفني)",
+  "portal": {
+    "name": "MOE Electronic Library (المكتبة الإلكترونية)",
+    "url": "https://ellibrary.moe.gov.eg/",
+    "retrievedAt": "2026-10-20",
+    "notes": "Official Ministry-hosted portal. The Secondary book list page ./Books-sec/ is live and loads its catalogue from ./Books-sec/books.json, which points all book files at the Ministry content host elearnningcontent.blob.core.windows.net. Directories ./Books-Kindergarten/, ./Books-Primary/ and ./Books-Preparatory/ return HTTP 404, but the Primary/KG/Preparatory Student Book PDFs are still live on the Ministry content host (discovered via the same host pattern and confirmed retrievable)."
+  },
+  "sourceHost": {
+    "name": "MOE e-learning content host (Azure Blob Storage)",
+    "url": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/",
+    "retrievedAt": "2026-10-20",
+    "notes": "Ministry-owned content host. Direct download of Student Book PDFs succeeds (HTTP 200, application/pdf). Filenames follow the pattern <Stage>/<Grade>/Term<N>/StudentBook/English_<code>_Tr<N>.pdf. Stage spelling on the host uses 'KG', 'Primary' and the misspelling 'Prepratory'."
+  },
+  "discoveryAttempts": [
+    {
+      "url": "https://moe.gov.eg/ar/elearningenterypage/e-learning/",
+      "retrievedAt": "2026-10-20",
+      "result": "empty",
+      "notes": "Official e-learning entry page. Rendered no content items; no downloadable English student books, audio, or teacher guides present."
+    },
+    {
+      "url": "https://ellibrary.moe.gov.eg/",
+      "retrievedAt": "2026-10-20",
+      "result": "links_only",
+      "notes": "Active cards: Egyptian Baccalaureate, Student Books (./Books/), Performance Assessments, plus links to Books-Kindergarten/Primary/Preparatory/sec. The KG/Primary/Preparatory level pages 404, but ./Books-sec/ and its books.json are live."
+    },
+    {
+      "url": "https://ellibrary.moe.gov.eg/Books-sec/books.json",
+      "retrievedAt": "2026-10-20",
+      "result": "json_catalogue",
+      "notes": "Live JSON catalogue (96 Secondary books). Revealed the Ministry content host URL pattern used by all book links. Only Secondary-stage books are listed in this file."
+    },
+    {
+      "url": "https://ellibrary.moe.gov.eg/Books-Kindergarten/",
+      "retrievedAt": "2026-10-20",
+      "result": "http_404",
+      "notes": "Book-list page 404. The KG Student Book PDFs were nevertheless located on the Ministry content host by pattern."
+    },
+    {
+      "url": "https://ellibrary.moe.gov.eg/Books-Primary/",
+      "retrievedAt": "2026-10-20",
+      "result": "http_404",
+      "notes": "Book-list page 404. The Primary Student Book PDFs were nevertheless located on the Ministry content host by pattern."
+    },
+    {
+      "url": "https://ellibrary.moe.gov.eg/Books-Preparatory/",
+      "retrievedAt": "2026-10-20",
+      "result": "http_404",
+      "notes": "Book-list page 404. The Preparatory Student Book PDFs were nevertheless located on the Ministry content host by pattern."
+    },
+    {
+      "url": "https://madrasetnaplus.eg/",
+      "retrievedAt": "2026-10-20",
+      "result": "requires_auth",
+      "notes": "Official MOE-linked platform; content behind authentication."
+    }
+  ],
+  "publishedPolicy": {
+    "primaryEvidenceOnly": "Only Ministry-hosted files or documents directly linked from the Ministry portal are recorded as verified sources.",
+    "thirdPartyPolicy": "Third-party study sites and search engines were used only to locate candidate document titles/editions; none are treated as primary evidence. Every recorded source URL was then retrieved directly from the Ministry host.",
+    "noInferenceFromFilename": "A PDF is not considered official merely because its filename contains a grade or year; each source below was downloaded and its content inspected (PDF magic bytes, page count, SHA-256, printed grade/term/year where present in the text layer).",
+    "copyrightPolicy": "No copyrighted textbook pages are stored or reproduced. Only references, hashes, page counts and limited short evidence strings needed for internal verification are recorded.",
+    "termScopeCaveat": "Where a Student Book for a grade's second term could not be located on the Ministry host, only the located term is recorded; the missing term is listed in sourceRequestList."
+  },
+  "sources": [
+    {
+      "id": "kg1-t1-sb-2025",
+      "grade": "kg1", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – KG1 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "KG1", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/KG/KG1/Term1/StudentBook/English_KG1_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 100, "bytes": 8212061,
+      "sha256": "7ee2a063dc2d86097fc532fd75c7130efff93f8f9af94ac2f1f4a706c21f5ce9",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded from the Ministry content host (HTTP 200, application/pdf, %PDF magic). Text layer is image-based (0 extractable words), so printed grade/term/year could not be confirmed from the text layer."
+    },
+    {
+      "id": "kg2-t1-sb-2025",
+      "grade": "kg2", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – KG2 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "KG2", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/KG/KG2/Term1/StudentBook/English_KG2_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 124, "bytes": 12389586,
+      "sha256": "b943c3c6c02d742fb683a2eea27fc4f7252afd330e3bfecb390ee7fe255db6b3",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded from the Ministry content host (HTTP 200, application/pdf). Text layer is image-based (0 extractable words)."
+    },
+    {
+      "id": "p1-t1-sb-2025",
+      "grade": "p1", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 1 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 1", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary1/Term1/StudentBook/English_Prim1_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 128, "bytes": 62617017,
+      "sha256": "299906db7f3af0bda021a1d9ef1f0d25fe7078c02185259999c7ac0971d056e5",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover/scope text layer confirms 'Term 1' and '2025/2026' and contains Scope-and-Sequence vocabulary tables (pages 2-3)."
+    },
+    {
+      "id": "p1-t2-sb-2025",
+      "grade": "p1", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 1 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 1", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary1/Term2/StudentBook/English_Prim1_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 3657055,
+      "sha256": "7801a44617231ae63f67973c4002e5a701ccc0549a52ce77aabc51c69cb6283d",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Text layer present but this term's vocabulary is presented as images; no Scope-and-Sequence vocabulary table in the text layer."
+    },
+    {
+      "id": "p2-t1-sb-2025",
+      "grade": "p2", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 2 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 2", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary2/Term1/StudentBook/English_Prim2_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 104, "bytes": 27579594,
+      "sha256": "1ecbda2910da476afc57012323b4186046f07172a13644fc6677c8c36fc1f506",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Scope-and-Sequence vocabulary tables present in text layer (pages 2,3,5...)."
+    },
+    {
+      "id": "p2-t2-sb-2025",
+      "grade": "p2", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 2 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 2", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary2/Term2/StudentBook/English_Prim2_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 26910676,
+      "sha256": "5038d894aa962332b32c458fe19ceec3b97fdd64bcd174cc964ab2e30f31b120",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover text confirms '2 Primary Term 2 2025/2026'."
+    },
+    {
+      "id": "p3-t1-sb-2025",
+      "grade": "p3", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 3 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 3", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary3/Term1/StudentBook/English_Prim3_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 120, "bytes": 12472783,
+      "sha256": "cce6c07a81fe8e4bdcb625ff75accef65a7ea1141d4a4ea0839e0c8a906ac08c",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf)."
+    },
+    {
+      "id": "p3-t2-sb-2025",
+      "grade": "p3", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 3 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 3", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary3/Term2/StudentBook/English_Prim3_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 4670382,
+      "sha256": "03e8dd0192ca4ed8c11b7770ccdf2a7883e2b6901d9becf17948caaed84bb401",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf)."
+    },
+    {
+      "id": "p4-t1-sb-2025",
+      "grade": "p4", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 4 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 4", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary4/Term1/StudentBook/English_Prim4_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 120, "bytes": 24468434,
+      "sha256": "8b701098c0c204b2905589350e46107b0a3e7f043761450c989262f4fead9cac",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover text confirms 'Primary 2025/2026 Term 1'."
+    },
+    {
+      "id": "p4-t2-sb-2025",
+      "grade": "p4", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 4 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 4", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary4/Term2/StudentBook/English_Prim4_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 220739768,
+      "sha256": "9a22c0318c180943a7bc828cc3dc3bad38240434d40e8e9b98a6c4f6086659e7",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf)."
+    },
+    {
+      "id": "p5-t1-sb-2025",
+      "grade": "p5", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 5 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 5", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary5/Term1/StudentBook/English_Prim5_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 17515912,
+      "sha256": "fba8bc24043a698cbf5f0a07296f24fdc042ca79a69f4d38d59f1a24fdbeb0f1",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover text confirms 'Primary 2025/2026 Term 1'."
+    },
+    {
+      "id": "p5-t2-sb-2025",
+      "grade": "p5", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 5 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 5", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary5/Term2/StudentBook/English_Prim5_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 120, "bytes": 7084870,
+      "sha256": "aef529cd101582baafb4d3bc6ff803e2737cc0b48cec5374cdb493fcc81f95dd",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). First page text confirms the 'Primary 5 Framework'."
+    },
+    {
+      "id": "p6-t1-sb-2025",
+      "grade": "p6", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Primary 6 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 6", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary6/Term1/StudentBook/English_Prim6_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 15956703,
+      "sha256": "dfd983affc19aeb337aa7b1a5dea4fb1edede5a688b3331d73427fe77d70d2b6",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover text confirms 'Primary 2025/2026 Term 1'."
+    },
+    {
+      "id": "p6-t2-sb-2025",
+      "grade": "p6", "term": "term2", "resourceType": "student_book",
+      "officialTitle": "English – Primary 6 – Term 2 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 6", "termLabel": "Term 2",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary6/Term2/StudentBook/English_Prim6_Tr2.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 11383781,
+      "sha256": "f8b90ecfd776c3bb211b8177e52af7dd65358e88907b902e36af2708cbb57e6d",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Cover text confirms 'Primary 2025/2026 Term 2'."
+    },
+    {
+      "id": "prep1-t1-sb-2025",
+      "grade": "prep1", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Preparatory 1 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Preparatory 1", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Prepratory/Prepratory1/Term1/StudentBook/English_Prp1_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 5709994,
+      "sha256": "ea7ff069abf310e53745b0ce2720dca9fbd5267174bcda1b2ed1d1467901ae1f",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Ministry host stage folder is spelled 'Prepratory'. Text layer confirms 'Preparatory One - Term 1' and 'Academic Year: 2025/2026'."
+    },
+    {
+      "id": "prep2-t1-sb-2025",
+      "grade": "prep2", "term": "term1", "resourceType": "student_book",
+      "officialTitle": "English – Preparatory 2 – Term 1 (Student Book)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Preparatory 2", "termLabel": "Term 1",
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Prepratory/Prepratory2/Term1/StudentBook/English_Prp2_Tr1.pdf",
+      "retrievedAt": "2026-10-20", "pageCount": 112, "bytes": 38336305,
+      "sha256": "ad9cf0c69b0bc64cc0daa7d323eb819ed4377600f9f3f5a0f03e14d4a5bd1726",
+      "verificationStatus": "verified_exact",
+      "notes": "Downloaded (HTTP 200, application/pdf). Ministry host stage folder is spelled 'Prepratory'."
+    },
+    {
+      "id": "moe-scope-2025",
+      "grade": null, "term": null, "resourceType": "scope_evidence",
+      "officialTitle": "English – Scope & Sequence vocabulary (as printed in the 2025/2026 MOE Student Books)",
+      "issuingAuthority": "Ministry of Education and Technical Education",
+      "academicYear": "2025/2026", "edition": "2025/2026", "gradeLevel": "Primary 1–6, Preparatory 1, KG1–2 (Term 1)", "termLabel": null,
+      "sourceUrl": "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/",
+      "retrievedAt": "2026-10-20", "pageCount": null, "bytes": null,
+      "sha256": null,
+      "verificationStatus": "verified_exact",
+      "notes": "Aggregates the unit-by-unit 'Vocabulary' columns of the official Scope & Sequence pages found in the retrieved Student Books (e.g. English_Prim1_Tr1.pdf pages 2–3; English_Prim3_Tr1.pdf page 3). Used as the authoritative evidence for item-level alignment. This entry references the Ministry content host root; individual book URLs and hashes are recorded on each student-book source above. Individual per-grade scope-page page numbers are recorded in the content mapping generation process."
+    }
+  ],
+  "grades": [
+    { "grade": "kg1",   "label": "KG1",          "term1SourceId": "kg1-t1-sb-2025", "term2SourceId": null, "coverageStatus": "partial_term", "appStructureStatus": "unit_structured", "notes": "Term 1 Student Book retrieved and verified. No Term 2 KG1 Student Book located on the Ministry host. Text layer is image-based, limiting item-level textual verification." },
+    { "grade": "kg2",   "label": "KG2",          "term1SourceId": "kg2-t1-sb-2025", "term2SourceId": null, "coverageStatus": "partial_term", "appStructureStatus": "unit_structured", "notes": "Term 1 Student Book retrieved and verified. No Term 2 KG2 Student Book located on the Ministry host. Text layer is image-based, limiting item-level textual verification." },
+    { "grade": "p1",    "label": "Primary 1",    "term1SourceId": "p1-t1-sb-2025", "term2SourceId": "p1-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "unit_structured", "notes": "Both terms' Student Books retrieved and verified. Term 1 text layer contains official Scope-and-Sequence vocabulary." },
+    { "grade": "p2",    "label": "Primary 2",    "term1SourceId": "p2-t1-sb-2025", "term2SourceId": "p2-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "flat_list", "notes": "Both terms' Student Books retrieved and verified." },
+    { "grade": "p3",    "label": "Primary 3",    "term1SourceId": "p3-t1-sb-2025", "term2SourceId": "p3-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "flat_list", "notes": "Both terms' Student Books retrieved and verified." },
+    { "grade": "p4",    "label": "Primary 4",    "term1SourceId": "p4-t1-sb-2025", "term2SourceId": "p4-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "flat_list", "notes": "Both terms' Student Books retrieved and verified." },
+    { "grade": "p5",    "label": "Primary 5",    "term1SourceId": "p5-t1-sb-2025", "term2SourceId": "p5-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "flat_list", "notes": "Both terms' Student Books retrieved and verified." },
+    { "grade": "p6",    "label": "Primary 6",    "term1SourceId": "p6-t1-sb-2025", "term2SourceId": "p6-t2-sb-2025", "coverageStatus": "full_source_retrieved", "appStructureStatus": "flat_list", "notes": "Both terms' Student Books retrieved and verified." },
+    { "grade": "prep1", "label": "Preparatory 1","term1SourceId": "prep1-t1-sb-2025", "term2SourceId": null, "coverageStatus": "partial_term", "appStructureStatus": "flat_list", "notes": "Term 1 Student Book retrieved and verified. No Term 2 Prep1 Student Book located on the Ministry host." },
+    { "grade": "prep2", "label": "Preparatory 2","term1SourceId": "prep2-t1-sb-2025", "term2SourceId": null, "coverageStatus": "partial_term", "appStructureStatus": "flat_list", "notes": "Term 1 Student Book retrieved and verified. No Term 2 Prep2 Student Book located on the Ministry host." }
+  ],
+  "verifiedSourceCount": 16,
+  "verifiedSourceStatement": "16 Ministry-hosted English Student Book PDFs were retrieved directly from the Ministry content host on 2026-10-20 and verified (HTTP 200, application/pdf, non-zero pages, recorded SHA-256). They cover: KG1 T1, KG2 T1, Primary 1-6 (both terms each), Preparatory 1 T1 and Preparatory 2 T1. These are the printed 2025/2026 editions. In addition, one evidence entry (moe-scope-2025) aggregates the printed Scope & Sequence vocabulary tables from those books; it is not counted as a separate book source. No Term 2 book was located for KG1, KG2, Prep1 or Prep2. No Ministry-hosted Teacher Guide or audio pack was located.",
+  "sourceRequestList": [
+    "Official English Student Book PDF for KG1 Term 2 (2025/2026 or current).",
+    "Official English Student Book PDF for KG2 Term 2 (2025/2026 or current).",
+    "Official English Student Book PDF for Preparatory 1 Term 2 (2025/2026 or current).",
+    "Official English Student Book PDF for Preparatory 2 Term 2 (2025/2026 or current).",
+    "Official English Teacher Guide(s) for all ten grades.",
+    "Official English audio resource packs (listening tracks) for all ten grades.",
+    "Official English syllabus / curriculum-framework document (unit-by-unit vocabulary lists) covering all ten grades.",
+    "OCR-enabled or accessible text versions of the KG1 and KG2 Student Books (currently image-only).",
+    "An official unit-by-unit vocabulary list for Preparatory 2 (no Scope & Sequence page in the retrieved Term 1 book's text layer).",
+    "Repair of the Electronic Library book-list sub-pages (Books-Kindergarten/Primary/Preparatory currently HTTP 404) or an alternate Ministry-hosted catalogue path.",
+    "Confirmation that the app's supplemental banks (LETTERS/CVC/WORDS/PHRASES/SENTENCES) may be treated as supplementary practice and need not map to a specific textbook.",
+    "An official illustration/audio cross-reference list so image and listening associations can be verified against sources."
+  ]
+}
