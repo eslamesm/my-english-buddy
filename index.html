@@ -1887,12 +1887,13 @@ function currentStreak(){ const p=currentProfile(); const daily=(p&&p.stats&&p.s
 function todayAttempts(){ const p=currentProfile(); const s=(p&&p.stats)||{}; const d=(s.daily&&s.daily[dayKey(Date.now())])||null; return d? d.attempts:0; }
 function setItemStars(mode,t,n){ const p=currentProfile(); if(!p) return; const k=itemKey(mode,t); p.progress[k]=Math.max(p.progress[k]||0,n); saveProfiles(); }
 function totalStars(){ const p=currentProfile(); if(!p) return 0; return Object.values(p.progress).reduce((a,b)=>a+b,0); }
-function learnEvent(mode, word, correct, score, hinted, uncertain){
+function learnEvent(mode, word, correct, score, hinted, uncertain, revealed){
   const p=currentProfile(); if(!p||!window.LearningEngine||!word) return;
   if(!p.learning||typeof p.learning!=='object') p.learning=LearningEngine.createStore();
-  LearningEngine.record(p.learning,{ skill:LearningEngine.skillFromMode(mode), word:String(word), correct:!!correct, score:score, hinted:!!hinted, uncertain:!!uncertain });
+  LearningEngine.record(p.learning,{ skill:LearningEngine.skillFromMode(mode), word:String(word), correct:!!correct, score:score, hinted:!!hinted, uncertain:!!uncertain, revealed:!!revealed, assisted:(!!hinted || !!revealed) });
 }
-function recordAttempt(mode, itemName, score, stars, uncertain){
+function recordAttempt(mode, itemName, score, stars, uncertain, opts){
+  opts = opts || {};
   const p=currentProfile(); if(!p) return;
   const s=p.stats; s.attempts++; s.lastPlayed=Date.now();
   const bm=s.byMode[mode] || (s.byMode[mode]={attempts:0,sumScore:0,three:0,two:0,one:0,zero:0});
@@ -1902,8 +1903,13 @@ function recordAttempt(mode, itemName, score, stars, uncertain){
   s.recent.unshift({mode,item:itemName,score,stars,ts:Date.now()});
   if(s.recent.length>80) s.recent.length=80;
   const wasNew=isNewWord(mode, itemName);
-  learnEvent(mode, itemName, stars>=2, score, false, uncertain);
-  sessionOutcome(mode, itemName, uncertain ? 'uncertain' : (stars>=2 ? 'independent' : 'incorrect'), false, wasNew);
+  const hinted = !!(opts.hinted || opts.assisted);
+  const revealed = !!opts.revealed;
+  const corr = !!(stars>=2);
+  // Determine outcome
+  let outcome = uncertain ? 'uncertain' : (corr ? (hinted||revealed ? 'assisted' : 'independent') : 'incorrect');
+  learnEvent(mode, itemName, corr, score, hinted, uncertain, revealed);
+  sessionOutcome(mode, itemName, outcome, false, wasNew);
   saveProfiles();
   evalAchv();
 }
@@ -2448,7 +2454,8 @@ function traceRecord(stars){
   if(stars>prev) sessionStars+=Math.max(0,stars-prev);
   updateSessionStars(); renderDots();
   document.getElementById('totalStars').textContent='⭐ '+totalStars();
-  recordAttempt('letters', it.t, stars>=3?100:stars===2?70:40, stars);
+  const hasHint = false;
+  recordAttempt('letters', it.t, stars>=3?100:stars===2?70:40, stars, false, {hinted: hasHint});
 }
 document.getElementById('btnTrace').onclick=()=>{ const it=list[index]; if(it) traceOpen(it.t); };
 document.getElementById('traceOverlay').addEventListener('pointerdown',e=>{ if(e.target.id==='traceCanvas') traceStart(e); });
@@ -2699,7 +2706,8 @@ function showScore(item,score,heard,engine,confidence){
     <div class="fb-engine">${eng}</div>`;
   if(!uncertain && rm!=='letters' && stars<3 && heard && normalize(heard)){ fb.innerHTML+=spellHint(item.t, heard); }
   if(currentMode==='recall') recallReveal();
-  recordAttempt(rm, item.t, score, stars, uncertain);
+  const recalled = !!(typeof game!=='undefined' && game && game.recalled);
+  recordAttempt(rm, item.t, score, stars, uncertain, {hinted: recalled || !!(game&&game.hintsUsed), revealed: recalled});
   if(dailySessionActive){ try{ persistSession(); }catch(e){} }
   if(stars===3){
     smartFailCount=0;
@@ -3452,8 +3460,11 @@ let recallRevealed=false;
 function recallReveal(){
   if(currentMode!=='recall') return;
   recallRevealed=true;
+  if(typeof game!=='undefined' && game) game.recalled = true;
   const it=list[index]; document.getElementById('pWord').textContent=it.t;
-  document.getElementById('pAr').textContent=it.ar||'';
+  document.getElementById('pAr').textContent=it.ar;
+  const btn=document.getElementById('btnReveal'); if(btn) btn.disabled=true;
+  stopMouth(); playWithMouth(()=>speakTTSFull(it.t,{mode:'words',word:it.t,allowInterrupt:true})); 
 }
 function startRecall(){
   endSession();
@@ -3714,8 +3725,9 @@ function bumpWordStar(t, ok){
   const p=currentProfile(); if(!p||!t) return;
   const k=itemKey('words', String(t).toLowerCase());
   const cur=p.progress[k]||0;
-  if(ok && cur<3){ p.progress[k]=Math.min(3, cur+1); saveProfiles(); }
-  learnEvent((typeof game!=='undefined'&&game&&game.type)?game.type:'words', t, !!ok, ok?90:20, false);
+  const hinted = !!(typeof game!=='undefined' && game && (game.hintsUsed>0 || game.revealed));
+  if(ok && cur<3 && !hinted){ p.progress[k]=Math.min(3, cur+1); saveProfiles(); } else if(ok && cur<3 && hinted){ /* assisted, don't promote */ }
+  learnEvent((typeof game!=='undefined'&&game&&game.type)?game.type:'words', t, !!ok, ok?90:20, hinted, false, !!(typeof game!=='undefined' && game && game.revealed));
 }
 function popFloat(emoji){ const el=document.createElement('div'); el.className='sfx-pop'; el.textContent=emoji; el.style.left=(innerWidth/2-12)+'px'; el.style.top=(innerHeight/2-40)+'px'; document.body.appendChild(el); setTimeout(()=>el.remove(),700); }
 function showCombo(c){ if(c<2) return; const el=document.createElement('div'); el.className='combo-pill'; el.textContent='🔥 '+c+' سلسلة'; const fb=document.getElementById('gFeedback'); if(fb){ fb.prepend(el); } }
@@ -3879,7 +3891,7 @@ renderOpt=(o)=>`${picHTML(o.t,o.emoji,'og','oe')}<div class="ow">${o.t}</div>`;
 
   if(game.type==='spell'){
     const hintBtn=document.createElement('button'); hintBtn.className='hint-btn'; hintBtn.textContent='💡 تلميح';
-    hintBtn.onclick=()=>{ if(game.answered) return; game.hintsUsed++;
+    hintBtn.onclick=()=>{ if(game.answered) return; game.hintsUsed++; game.revealed = true;
       document.querySelectorAll('#gOptions .opt').forEach(el=>{ if(el.dataset.key===game.correctKey) el.classList.add('reveal'); else el.style.opacity='0.35'; });
       hintBtn.disabled=true; };
     pw.appendChild(hintBtn);
@@ -4103,12 +4115,16 @@ function recordAssistedAttempt(word){
   const p=currentProfile(); if(!p) return;
   const s=p.stats; s.attempts++; s.lastPlayed=Date.now();
   if(!s.games) s.games={attempts:0,correct:0}; s.games.attempts++;
-  learnEvent('builder', word, true, 50, true, true);   /* uncertain: no mastery change */
+  learnEvent('builder', word, true, 50, true, false, true);
+  const wasNew = isNewWord ? isNewWord('builder', word) : false;
+  try { sessionOutcome('builder', word, 'assisted', false, wasNew); } catch(e){}
   saveProfiles(); evalAchv();
 }
 function recordBuilderStruggle(word){
   if(!currentProfile()) return;
-  learnEvent('builder', word, false, 0, true, true);   /* keeps the word due for a later unassisted retry */
+  learnEvent('builder', word, false, 0, true, false, true);
+  const wasNew = isNewWord ? isNewWord('builder', word) : false;
+  try { sessionOutcome('builder', word, 'incorrect', false, wasNew); } catch(e){}
   saveProfiles();
 }
 function nextBuilderRound(){

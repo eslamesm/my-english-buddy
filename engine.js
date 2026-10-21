@@ -81,7 +81,8 @@
     return {
       mastery: 0, correctCount: 0, wrongCount: 0, streak: 0,
       lastReviewed: null, nextReview: null, reviewInterval: 0,
-      difficulty: 1, pronunciationAttempts: 0, hintsUsed: 0
+      difficulty: 1, pronunciationAttempts: 0, hintsUsed: 0,
+      assistedCount: 0
     };
   }
 
@@ -95,6 +96,7 @@
     o.difficulty = clamp(intOr(r.difficulty, 1), 0, 2);
     o.pronunciationAttempts = Math.max(0, intOr(r.pronunciationAttempts, 0));
     o.hintsUsed = Math.max(0, intOr(r.hintsUsed, 0));
+    o.assistedCount = Math.max(0, intOr(r.assistedCount, 0));
 
     let ri = intOr(r.reviewInterval, 0);
     if (ri < 0) ri = 0;
@@ -166,19 +168,40 @@
     const before = rec.mastery;
     if (skill === 'pronounce') rec.pronunciationAttempts++;
     if (ev.hinted) rec.hintsUsed++;
+    if (ev.revealed) rec.hintsUsed = (rec.hintsUsed || 0) + 1; // count reveals as assistance
+    // ensure backward compat for new fields
+    if (rec.assistedCount == null) rec.assistedCount = 0;
+
     // Speech engine could not recognise clearly: count the attempt but do NOT
     // penalise mastery / reschedule — recognition failure != pronunciation error.
-    if (ev.uncertain) return { changed: true, record: rec, uncertain: true, key: key(skill, ev.word) };
+    if (ev.uncertain) return { changed: true, record: rec, uncertain: true, key: key(skill, ev.word), outcome: 'uncertain' };
 
     rec.lastReviewed = t;
 
+    const assisted = correct && (ev.hinted || ev.revealed || ev.assisted);
     if (correct) {
+      if (assisted) {
+        // Correct but assisted: do NOT promote mastery independently
+        rec.correctCount++;
+        rec.streak = Math.max(rec.streak, 0); // don't reset streak harshly, but don't advance it
+        rec.assistedCount = (rec.assistedCount || 0) + 1;
+        // Keep mastery unchanged for pure assistance; do not advance review interval aggressively
+        if (rec.reviewInterval === 0) {
+          rec.reviewInterval = 1;
+          rec.nextReview = dayStart(t) + rec.reviewInterval * DAY;
+        } else {
+          // gentle nudge forward but less than independent correct
+          rec.nextReview = dayStart(t) + Math.max(1, Math.floor(rec.reviewInterval / 2)) * DAY;
+        }
+        return { changed: true, record: rec, promoted: false, key: key(skill, ev.word), outcome: 'assisted' };
+      }
       rec.correctCount++;
       rec.streak++;
       rec.mastery = clamp(rec.mastery + 1, 0, 4);
       rec.reviewInterval = advanceInterval(rec.reviewInterval);
       rec.nextReview = dayStart(t) + rec.reviewInterval * DAY;
       if (score >= 80 && rec.mastery >= 2) rec.difficulty = clamp(rec.difficulty + 1, 0, 2);
+      return { changed: true, record: rec, promoted: rec.mastery > before, key: key(skill, ev.word), outcome: 'independent' };
     } else {
       rec.wrongCount++;
       rec.streak = 0;
@@ -187,8 +210,8 @@
       rec.reviewInterval = 0;                                              // relearn
       rec.nextReview = dayStart(t);                                        // due immediately (earlier review)
       rec.difficulty = rec.wrongCount >= 2 ? 0 : clamp(rec.difficulty - 1, 0, 1);
+      return { changed: true, record: rec, promoted: rec.mastery > before, key: key(skill, ev.word), outcome: 'incorrect' };
     }
-    return { changed: true, record: rec, promoted: rec.mastery > before, key: key(skill, ev.word) };
   }
 
   /* ---------- due / selection ---------- */
