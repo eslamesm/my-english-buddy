@@ -280,6 +280,7 @@
     const includeNew = opts.includeNew !== false;
     const weightSkills = !!opts.weightSkills;
     const newTarget = (opts.newTarget == null) ? Infinity : Math.max(0, intOr(opts.newTarget, 0));
+    const recencyWindowMs = isNum(opts.recencyWindowMs) ? opts.recencyWindowMs : 10 * 60 * 1000; // 10 min window
 
     let rank = null;
     if (weightSkills) {
@@ -301,28 +302,65 @@
       const entry = { key: k, skill: parts.skill, word: parts.word, rec: rec };
       const isNew = rec.correctCount === 0 && rec.wrongCount === 0 && !rec.lastReviewed;
       if (isNew) { fresh.push(entry); return; }
-      if (rec.wrongCount >= 2 || rec.difficulty === 0) weak.push(entry);
-      if (isDue(rec, now)) { entry.overdue = overdueDays(rec, now); due.push(entry); }
+      // Weak if repeated errors or difficulty 0; also consider assisted/incorrect patterns
+      const assistedCount = rec.assistedCount || 0;
+      const hasAssistedStruggle = assistedCount >= 2 && rec.correctCount >= assistedCount; // many assists
+      if (rec.wrongCount >= 2 || rec.difficulty === 0 || hasAssistedStruggle) weak.push(entry);
+      if (isDue(rec, now)) {
+        entry.overdue = overdueDays(rec, now);
+        entry.assistedCount = assistedCount;
+        entry.wrongCount = rec.wrongCount || 0;
+        entry.mastery = rec.mastery || 0;
+        due.push(entry);
+      }
     });
 
-    due.sort((a, b) => (b.overdue - a.overdue) || (rankOf(a.skill) - rankOf(b.skill)) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1));
+    // Enhanced sorting: due by overdue desc, then by need (weakness) - prefer items with more wrongs/assists and lower mastery
+    due.sort((a, b) => {
+      const aNeed = (a.wrongCount >= 2 ? 2 : 0) + (a.assistedCount >= 2 ? 1 : 0) + (a.mastery < 2 ? 1 : 0);
+      const bNeed = (b.wrongCount >= 2 ? 2 : 0) + (b.assistedCount >= 2 ? 1 : 0) + (b.mastery < 2 ? 1 : 0);
+      return (b.overdue - a.overdue) || (bNeed - aNeed) || (rankOf(a.skill) - rankOf(b.skill)) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1);
+    });
     fresh.sort((a, b) => (rankOf(a.skill) - rankOf(b.skill)) || (a.key < b.key ? -1 : 1));
-    weak.sort((a, b) => (rankOf(a.skill) - rankOf(b.skill)) || (b.rec.wrongCount - a.rec.wrongCount) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1));
+    weak.sort((a, b) => {
+      const aNeed = (a.rec.wrongCount || 0) * 2 + (a.rec.assistedCount || 0);
+      const bNeed = (b.rec.wrongCount || 0) * 2 + (b.rec.assistedCount || 0);
+      return (rankOf(a.skill) - rankOf(b.skill)) || (bNeed - aNeed) || (b.rec.wrongCount - a.rec.wrongCount) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1);
+    });
 
     const plan = [];
     const seen = {};
+    const recentlySeen = opts.recentlySeen || {}; // key -> timestamp
     let freshUsed = 0;
-    const push = (e) => { if (e && !seen[e.key] && plan.length < maxItems) { seen[e.key] = 1; plan.push(e); } };
+    const isRecentlySeen = (e) => {
+      if (!e || !recentlySeen[e.key]) return false;
+      const ts = recentlySeen[e.key];
+      if (!isNum(ts)) return false;
+      return (now - ts) < recencyWindowMs;
+    };
+    const push = (e) => {
+      if (!e) return;
+      if (seen[e.key]) return;
+      // Avoid immediate repeat unless it's a critical due item with strong need
+      if (isRecentlySeen(e)) {
+        const isCriticalDue = e.overdue >= 1 && ((e.wrongCount >= 2) || (e.assistedCount >= 3) || e.rec.difficulty === 0);
+        if (!isCriticalDue) return; // skip recent non-critical to reduce repetition
+      }
+      if (plan.length >= maxItems) return;
+      seen[e.key] = 1;
+      plan.push(e);
+    };
     const pushFresh = (e) => { if (freshUsed >= newTarget) return; const before = plan.length; push(e); if (plan.length > before) freshUsed++; };
     const pool = due.slice();
     const freshPool = fresh.slice();
     const weakPool = weak.slice();
+    // Balanced interleaving: prioritize due, sprinkle weak/fresh according to policy
     while (pool.length && plan.length < maxItems) {
       for (let i = 0; i < duePer && pool.length; i++) push(pool.shift());
       if (!includeNew) continue;
       for (let i = 0; i < newPer && freshPool.length; i++) pushFresh(freshPool.shift());
     }
-    // top up from remaining due, then fresh only if still short
+    // top up from remaining due (critical reviews must not be blocked)
     while (plan.length < maxItems && pool.length) push(pool.shift());
     if (includeNew) while (plan.length < maxItems && freshPool.length) pushFresh(freshPool.shift());
     while (plan.length < maxItems && weakPool.length) push(weakPool.shift());
