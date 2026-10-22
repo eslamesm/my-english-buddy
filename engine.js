@@ -228,6 +228,40 @@
     return Math.max(0, Math.floor((dayStart(t) - dayStart(rec.nextReview)) / DAY));
   }
 
+  /* ---------- recency policy (shared with the UI layer) ----------
+     An item that was shown very recently is skipped so the learner is not
+     asked the same thing twice in a row. A *critical* due review is never
+     skipped: it is strongly overdue, or it was missed many times, or it
+     carries the hardest difficulty. `recentlySeen` maps an engine key
+     ("skill::word") to the timestamp (ms) when the item was last shown. */
+  function isCriticalDue(entry) {
+    if (!entry) return false;
+    const rec = entry.rec || {};
+    const overdue = isNum(entry.overdue) ? entry.overdue : 0;
+    const wrongCount = isNum(entry.wrongCount) ? entry.wrongCount : (isNum(rec.wrongCount) ? rec.wrongCount : 0);
+    const assistedCount = isNum(entry.assistedCount) ? entry.assistedCount : (isNum(rec.assistedCount) ? rec.assistedCount : 0);
+    const difficulty = isNum(rec.difficulty) ? rec.difficulty : 1;
+    return overdue >= 1 && ((wrongCount >= 2) || (assistedCount >= 3) || difficulty === 0);
+  }
+  function isRecentlyBlocked(entry, recentlySeen, opts) {
+    if (!entry || !recentlySeen) return false;
+    const ts = recentlySeen[entry.key];
+    if (!isNum(ts)) return false;
+    opts = opts || {};
+    const now = isNum(opts.now) ? opts.now : Date.now();
+    const recencyWindowMs = isNum(opts.recencyWindowMs) ? opts.recencyWindowMs : 10 * 60 * 1000;
+    if ((now - ts) >= recencyWindowMs) return false; // the window expired
+    return !isCriticalDue(entry);
+  }
+  /* Keeps the candidates that are safe to show now. When every candidate was
+     shown recently the full list is returned instead of an empty one, so a
+     session can never be starved by the recency filter. */
+  function filterRecent(entries, recentlySeen, opts) {
+    const list = entries || [];
+    const kept = list.filter((e) => !isRecentlyBlocked(e, recentlySeen, opts));
+    return kept.length ? kept : list.slice();
+  }
+
   /* Per-skill aggregate profile used for skill-weighted selection.
      `weakness` is only meaningful (0..1, higher = weaker) once a skill has at
      least SKILL_RELIABLE_MIN records; otherwise it is 0 so no skill is
@@ -332,20 +366,11 @@
     const seen = {};
     const recentlySeen = opts.recentlySeen || {}; // key -> timestamp
     let freshUsed = 0;
-    const isRecentlySeen = (e) => {
-      if (!e || !recentlySeen[e.key]) return false;
-      const ts = recentlySeen[e.key];
-      if (!isNum(ts)) return false;
-      return (now - ts) < recencyWindowMs;
-    };
     const push = (e) => {
       if (!e) return;
       if (seen[e.key]) return;
       // Avoid immediate repeat unless it's a critical due item with strong need
-      if (isRecentlySeen(e)) {
-        const isCriticalDue = e.overdue >= 1 && ((e.wrongCount >= 2) || (e.assistedCount >= 3) || e.rec.difficulty === 0);
-        if (!isCriticalDue) return; // skip recent non-critical to reduce repetition
-      }
+      if (isRecentlyBlocked(e, recentlySeen, { now: now, recencyWindowMs: recencyWindowMs })) return; // skip recent non-critical to reduce repetition
       if (plan.length >= maxItems) return;
       seen[e.key] = 1;
       plan.push(e);
@@ -652,6 +677,9 @@
     overdueDays: overdueDays,
     skillProfile: skillProfile,
     selectPractice: selectPractice,
+    isCriticalDue: isCriticalDue,
+    isRecentlyBlocked: isRecentlyBlocked,
+    filterRecent: filterRecent,
     stats: stats,
     summarizeSession: summarizeSession,
     coachMessage: coachMessage,

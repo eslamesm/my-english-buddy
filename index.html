@@ -2899,6 +2899,20 @@ function sessionSettingsHtml(p){
 function wireSessionSettings(p, box){
   box.querySelectorAll('[data-dn]').forEach(ch=>{ ch.onclick=()=>{ p.dailyNew=LearningEngine.normalizeDailyNew(ch.dataset.dn); saveProfiles(); buildSessionHome(); toast('هدف الكلمات الجديدة: '+p.dailyNew+' يوميًا 🌱'); }; });
 }
+const SESSION_RECENCY_WINDOW_MS=10*60*1000; // نافذة تجنّب تكرار نفس العنصر (ms)
+const recencyByProfile={}; // profileId -> { engineKey: timestamp }
+function recencyLog(pid){
+  const id=pid||currentId||'_default';
+  if(!recencyByProfile[id]) recencyByProfile[id]={};
+  return recencyByProfile[id];
+}
+function markShown(key,pid){
+  if(!key) return;
+  const log=recencyLog(pid), now=Date.now();
+  log[key]=now;
+  const cut=now-SESSION_RECENCY_WINDOW_MS*6; // تنظيف السجلات القديمة
+  Object.keys(log).forEach(k=>{ if(log[k]<cut) delete log[k]; });
+}
 function buildSessionHome(){
   const box=document.getElementById('sessionHome'); if(!box) return;
   const p=currentProfile();
@@ -2907,13 +2921,19 @@ function buildSessionHome(){
   if(!p.learning) p.learning=LearningEngine.createStore();
   const MAX=DAILY_SESSION_MAX, newTarget=LearningEngine.normalizeDailyNew(p.dailyNew);
   const idx=wordItemIndex();
-  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX, weightSkills:true, newTarget:newTarget});
+  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX, weightSkills:true, newTarget:newTarget, recentlySeen:recencyLog(p.id), recencyWindowMs:SESSION_RECENCY_WINDOW_MS});
   const dueSet={}; sel.due.forEach(e=>dueSet[e.key]=1);
 
   const reviews=[], seenR={};
   const addRev=(e,reason)=>{ const it=idx[String(e.word).toLowerCase()]; if(!it) return; const key=e.key; if(seenR[key]) return; seenR[key]=1; reviews.push({it:it,reason:reason,skill:e.skill,key:key}); };
-  sel.due.forEach(e=>addRev(e,'مراجعة'));
-  sel.weak.forEach(e=>addRev(e, dueSet[e.key]?'مراجعة':'يحتاج تثبيتًا'));
+  const cand=[], seenC={};
+  const addC=(e,reason)=>{ if(!e||seenC[e.key]) return; if(!idx[String(e.word).toLowerCase()]) return; seenC[e.key]=1; cand.push({e:e,reason:reason}); };
+  sel.due.forEach(e=>addC(e,'مراجعة'));
+  sel.weak.forEach(e=>addC(e, dueSet[e.key]?'مراجعة':'يحتاج تثبيتًا'));
+  // تجنّب تكرار ما عُرض مؤخرًا؛ المراجعات الحرجة لا تُمنع، ولا تُفرَّغ القائمة أبدًا
+  const keep={};
+  LearningEngine.filterRecent(cand.map(c=>c.e), recencyLog(p.id), {now:Date.now(), recencyWindowMs:SESSION_RECENCY_WINDOW_MS}).forEach(e=>{ keep[e.key]=1; });
+  cand.forEach(c=>{ if(keep[c.e.key]) addRev(c.e,c.reason); });
 
   const items=[], used={};
   // reviews first; when reviews are plentiful leave no room for new words
@@ -2968,7 +2988,7 @@ function launchSession(items, startIndex){
   stopMouth(); clearInterval(rushT);
   if(!items||!items.length){ toast('لا شيء للمراجعة الآن 🎉'); return; }
   currentMode='review'; recallRevealed=false; dailySessionActive=true; dailySessionProfileId=currentId;
-  list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:(x._mode||SKILL_TO_MODE[x.skill]||'words')}));
+  list=items.map((x,i)=>({t:x.it.t, word:x.it.t, emoji:x.it.emoji, ar:x.it.ar, spoken:x.it.spoken||x.it.t, _i:i, _mode:(x._mode||SKILL_TO_MODE[x.skill]||'words'), _key:(x.key||(window.LearningEngine?LearningEngine.key(x.skill||'recognize', x.it.t):null))}));
   index=Math.max(0, Math.min(startIndex||0, list.length-1)); sessionStars=0; sessionEvents=[]; updateSessionStars();
   renderItem(); go('practice'); startTimer(); persistSession();
   toast('جلسة اليوم: '+list.length+' عنصرًا مخصّصًا 🧠');
@@ -2976,7 +2996,7 @@ function launchSession(items, startIndex){
 function resumeSession(p){
   const keys=(p.session&&p.session.keys)||[]; const start=p.session?p.session.index:0;
   const idx=wordItemIndex(); const chosen={}; const items=[];
-  keys.forEach(k=>{ const parts=LearningEngine.splitKey(k); const it=idx[String(parts.word).toLowerCase()]; if(!it) return; const w=String(it.t).toLowerCase(); if(chosen[w]) return; chosen[w]=1; items.push({it:it,skill:parts.skill,_mode:SKILL_TO_MODE[parts.skill]||'words'}); });
+  keys.forEach(k=>{ const parts=LearningEngine.splitKey(k); const it=idx[String(parts.word).toLowerCase()]; if(!it) return; const w=String(it.t).toLowerCase(); if(chosen[w]) return; chosen[w]=1; items.push({it:it,skill:parts.skill,_mode:SKILL_TO_MODE[parts.skill]||'words', key:LearningEngine.key(parts.skill, parts.word)}); });
   if(!items.length){ clearSession(); buildSessionHome(); return; }
   launchSession(items, start);
 }
@@ -3487,7 +3507,7 @@ function startMode(mode){
 function updateSessionStars(){ document.getElementById('sessionStars').textContent='⭐ '+sessionStars; }
 function renderItem(){
   smartFailCount=0; cancelRelisten(); stopPulseMeter(); micHint(''); showReplay(false);
-  const item=list[index]; const isLetters=(currentMode==='letters'||currentMode==='sounds'); const isRecall=currentMode==='recall';
+  const item=list[index]; try{ if(item&&item._key) markShown(item._key, dailySessionActive?dailySessionProfileId:currentId); }catch(e){} const isLetters=(currentMode==='letters'||currentMode==='sounds'); const isRecall=currentMode==='recall';
   if(!isRecall) recallRevealed=false;
   document.getElementById('pEmoji').innerHTML=picHTML(item.word||item.t, item.emoji, 'big-img','big-emoji', true);
   if(isLetters){
