@@ -266,7 +266,80 @@
      `weakness` is only meaningful (0..1, higher = weaker) once a skill has at
      least SKILL_RELIABLE_MIN records; otherwise it is 0 so no skill is
      penalised on thin data (conservative fallback). */
-  function skillProfile(store, now) {
+  const SKILL_PERF_RELIABLE_MIN_ATTEMPTS = 3;
+  const SKILL_PERF_RECENT_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function computeSkillPerformance(store, opts) {
+    opts = opts || {};
+    const now = isNum(opts.now) ? opts.now : Date.now();
+    const recentWindowMs = isNum(opts.recentWindowMs) ? opts.recentWindowMs : SKILL_PERF_RECENT_WINDOW_MS;
+    const minAttempts = isNum(opts.minAttempts) ? opts.minAttempts : SKILL_PERF_RELIABLE_MIN_ATTEMPTS;
+    const out = {};
+    SKILLS.forEach((s) => { out[s] = { skill: s, attempts: 0, independent: 0, assisted: 0, incorrect: 0, uncertain: 0, recentAttempts: 0, recentIncorrect: 0, recentAssisted: 0, recentIndependent: 0, accuracy: 0, recentAccuracy: 0, reliable: false, recentReliable: false, weakness: 0, hasRecentTemporalData: false }; });
+    const items = (store && store.items) || {};
+    Object.keys(items).forEach((k) => {
+      const parts = splitKey(k);
+      const rec = items[k];
+      const o = out[parts.skill];
+      if (!o || !rec) return;
+      const c = Math.max(0, intOr(rec.correctCount, 0));
+      const w = Math.max(0, intOr(rec.wrongCount, 0));
+      const aCount = Math.max(0, intOr(rec.assistedCount, 0));
+      const p = Math.max(0, intOr(rec.pronunciationAttempts, 0));
+      // assisted answers are counted in correctCount too; keep them separate from
+      // independent performance so support does not inflate reliability/accuracy.
+      const independentCount = Math.max(0, c - aCount);
+      const realAttempts = independentCount + w;
+      if (realAttempts > 0) {
+        o.attempts += realAttempts;
+        o.independent += independentCount;
+        o.incorrect += w;
+      }
+      o.assisted += aCount;
+      if (p > 0) o.pronunciationAttempts = (o.pronunciationAttempts || 0) + p;
+    });
+
+    // "Recent" performance is only derived from explicitly timestamped attempts
+    // (opts.attempts / opts.recentAttempts), never from cumulative item counters.
+    const timed = Array.isArray(opts.attempts) ? opts.attempts : (Array.isArray(opts.recentAttempts) ? opts.recentAttempts : null);
+    if (timed) {
+      timed.forEach((ev) => {
+        if (!ev || typeof ev !== 'object') return;
+        const o = out[normalizeSkill(ev.skill)];
+        if (!o) return;
+        const at = isNum(ev.at) ? ev.at : (isNum(ev.t) ? ev.t : null);
+        if (at != null && (now - at) > recentWindowMs) return;
+        const outcome = ev.outcome;
+        if (outcome === 'uncertain') { o.uncertain++; return; }
+        if (outcome !== 'independent' && outcome !== 'assisted' && outcome !== 'incorrect') {
+          if (ev.correct === true) { if (ev.assisted || ev.hinted || ev.revealed) { o.recentAssisted++; o.hasRecentTemporalData = true; } else { o.recentAttempts++; o.recentIndependent++; o.hasRecentTemporalData = true; } }
+          else if (ev.correct === false) { o.recentAttempts++; o.recentIncorrect++; o.hasRecentTemporalData = true; }
+          return;
+        }
+        o.hasRecentTemporalData = true;
+        if (outcome === 'assisted') o.recentAssisted++;
+        else if (outcome === 'incorrect') { o.recentAttempts++; o.recentIncorrect++; }
+        else { o.recentAttempts++; o.recentIndependent++; }
+      });
+    }
+
+    SKILLS.forEach((s) => {
+      const o = out[s];
+      const real = o.independent + (o.incorrect || 0);
+      o.accuracy = real > 0 ? o.independent / real : 0;
+      const rReal = o.recentIndependent + (o.recentIncorrect || 0);
+      o.recentAccuracy = rReal > 0 ? o.recentIndependent / rReal : 0;
+      o.reliable = (o.attempts >= minAttempts);
+      // Recent performance requires explicitly timestamped attempts and real answers.
+      o.recentReliable = o.hasRecentTemporalData && (o.recentAttempts >= minAttempts) && rReal >= 1;
+      const perfWeak = o.recentReliable ? (1 - o.recentAccuracy) : (o.reliable ? (1 - o.accuracy) : 0);
+      o.weakness = clamp(perfWeak, 0, 1);
+    });
+    return out;
+  }
+
+  function skillProfile(store, now, opts) {
+    opts = opts || {};
     const out = {};
     const sum = {};
     SKILLS.forEach((s) => { out[s] = { skill: s, total: 0, mastered: 0, due: 0, weak: 0, avgMastery: 0, reliable: false, weakness: 0 }; sum[s] = 0; });
@@ -285,7 +358,23 @@
       o.reliable = o.total >= SKILL_RELIABLE_MIN;
       const masteryWeak = 1 - (o.avgMastery / 4);
       const dueRatio = o.total ? Math.min(1, o.due / Math.max(1, o.total)) : 0;
-      o.weakness = o.reliable ? clamp(0.6 * masteryWeak + 0.4 * dueRatio, 0, 1) : 0;
+      let weakness = o.reliable ? clamp(0.6 * masteryWeak + 0.4 * dueRatio, 0, 1) : 0;
+      // Phase 4: incorporate reliable skill performance if provided or computable
+      const skillPerf = opts.skillPerf || opts.skillPerformance || null;
+      if (skillPerf && skillPerf[s]) {
+        const sp = skillPerf[s];
+        // Do not let assisted-only data drive reliability
+        const hasReal = (sp.attempts || 0) >= 1 || (sp.recentAttempts || 0) >= 1;
+        if ((sp.recentReliable || sp.reliable) && hasReal) {
+          const perfW = sp.recentReliable ? sp.weakness : (sp.reliable ? clamp(1 - (sp.accuracy || 0), 0, 1) : 0);
+          if (o.reliable) {
+            weakness = clamp(0.5 * masteryWeak + 0.2 * dueRatio + 0.3 * perfW, 0, 1);
+          } else {
+            weakness = clamp(0.7 * perfW + 0.3 * dueRatio, 0, 1);
+          }
+        }
+      }
+      o.weakness = weakness;
     });
     return out;
   }
@@ -318,10 +407,23 @@
 
     let rank = null;
     if (weightSkills) {
-      const sp = skillProfile(store, now);
-      if (SKILLS.some((s) => sp[s].reliable)) {
+      const skillPerf = opts.skillPerf || opts.skillPerformance || computeSkillPerformance(store, {
+        now: now,
+        attempts: opts.attempts,
+        recentAttempts: opts.recentAttempts,
+        recentWindowMs: opts.skillPerfWindowMs
+      });
+      const sp = skillProfile(store, now, { skillPerf: skillPerf });
+      if (SKILLS.some((s) => sp[s].reliable || (skillPerf && skillPerf[s] && ((skillPerf[s].recentReliable || skillPerf[s].reliable) && ((skillPerf[s].attempts||0) + (skillPerf[s].recentAttempts||0)) >= 1)))) {
         rank = {};
-        SKILLS.slice().sort((a, b) => (sp[b].weakness - sp[a].weakness) || (a < b ? -1 : 1)).forEach((s, i) => { rank[s] = i; });
+        SKILLS.slice().sort((a, b) => {
+          const wa = sp[b].weakness - sp[a].weakness;
+          if (Math.abs(wa) > 1e-9) return wa;
+          const pa = skillPerf && skillPerf[a] ? (skillPerf[a].recentReliable ? (1 - skillPerf[a].recentAccuracy) : (skillPerf[a].reliable ? (1 - (skillPerf[a].accuracy || 0)) : 0)) : 0;
+          const pb = skillPerf && skillPerf[b] ? (skillPerf[b].recentReliable ? (1 - skillPerf[b].recentAccuracy) : (skillPerf[b].reliable ? (1 - (skillPerf[b].accuracy || 0)) : 0)) : 0;
+          if (Math.abs(pb - pa) > 1e-9) return pb - pa;
+          return (a < b ? -1 : 1);
+        }).forEach((s, i) => { rank[s] = i; });
       }
     }
     const rankOf = (s) => (rank && rank[s] != null) ? rank[s] : 0;
@@ -362,33 +464,47 @@
       return (rankOf(a.skill) - rankOf(b.skill)) || (bNeed - aNeed) || (b.rec.wrongCount - a.rec.wrongCount) || (a.rec.mastery - b.rec.mastery) || (a.key < b.key ? -1 : 1);
     });
 
-    const plan = [];
-    const seen = {};
     const recentlySeen = opts.recentlySeen || {}; // key -> timestamp
-    let freshUsed = 0;
-    const push = (e) => {
-      if (!e) return;
-      if (seen[e.key]) return;
-      // Avoid immediate repeat unless it's a critical due item with strong need
-      if (isRecentlyBlocked(e, recentlySeen, { now: now, recencyWindowMs: recencyWindowMs })) return; // skip recent non-critical to reduce repetition
-      if (plan.length >= maxItems) return;
-      seen[e.key] = 1;
-      plan.push(e);
-    };
-    const pushFresh = (e) => { if (freshUsed >= newTarget) return; const before = plan.length; push(e); if (plan.length > before) freshUsed++; };
-    const pool = due.slice();
-    const freshPool = fresh.slice();
-    const weakPool = weak.slice();
-    // Balanced interleaving: prioritize due, sprinkle weak/fresh according to policy
-    while (pool.length && plan.length < maxItems) {
-      for (let i = 0; i < duePer && pool.length; i++) push(pool.shift());
-      if (!includeNew) continue;
-      for (let i = 0; i < newPer && freshPool.length; i++) pushFresh(freshPool.shift());
+    const maxPerItem = (opts.maxPerItem == null) ? 1 : Math.max(1, intOr(opts.maxPerItem, 1));
+
+    function buildPlan(allowRecencyBypass) {
+      const plan = [];
+      const seen = {};
+      const keyCountInPlan = {};
+      let freshUsed = 0;
+      const push = (e) => {
+        if (!e) return;
+        if (seen[e.key]) return;
+        if (keyCountInPlan[e.key] >= maxPerItem) return;
+        // Avoid immediate repeat unless it's a critical due item with strong need
+        if (!allowRecencyBypass && isRecentlyBlocked(e, recentlySeen, { now: now, recencyWindowMs: recencyWindowMs })) return; // skip recent non-critical to reduce repetition
+        if (plan.length >= maxItems) return;
+        seen[e.key] = 1;
+        keyCountInPlan[e.key] = (keyCountInPlan[e.key] || 0) + 1;
+        plan.push(e);
+      };
+      const pushFresh = (e) => { if (freshUsed >= newTarget) return; const before = plan.length; push(e); if (plan.length > before) freshUsed++; };
+      const pool = due.slice();
+      const freshPool = fresh.slice();
+      const weakPool = weak.slice();
+      // Balanced interleaving: prioritize due, sprinkle weak/fresh according to policy
+      while (pool.length && plan.length < maxItems) {
+        for (let i = 0; i < duePer && pool.length; i++) push(pool.shift());
+        if (!includeNew) continue;
+        for (let i = 0; i < newPer && freshPool.length; i++) pushFresh(freshPool.shift());
+      }
+      // top up from remaining due (critical reviews must not be blocked)
+      while (plan.length < maxItems && pool.length) push(pool.shift());
+      if (includeNew) while (plan.length < maxItems && freshPool.length) pushFresh(freshPool.shift());
+      while (plan.length < maxItems && weakPool.length) push(weakPool.shift());
+      return plan;
     }
-    // top up from remaining due (critical reviews must not be blocked)
-    while (plan.length < maxItems && pool.length) push(pool.shift());
-    if (includeNew) while (plan.length < maxItems && freshPool.length) pushFresh(freshPool.shift());
-    while (plan.length < maxItems && weakPool.length) push(weakPool.shift());
+
+    let plan = buildPlan(false);
+    if (plan.length === 0) {
+      // Fallback: do not empty session if everything blocked by recency
+      plan = buildPlan(true);
+    }
 
     return { due: due, fresh: fresh, weak: weak, plan: plan, now: now, weighted: !!rank };
   }
@@ -676,6 +792,7 @@
     isDue: isDue,
     overdueDays: overdueDays,
     skillProfile: skillProfile,
+    computeSkillPerformance: computeSkillPerformance,
     selectPractice: selectPractice,
     isCriticalDue: isCriticalDue,
     isRecentlyBlocked: isRecentlyBlocked,
