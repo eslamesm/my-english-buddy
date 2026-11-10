@@ -268,6 +268,19 @@
      penalised on thin data (conservative fallback). */
   const SKILL_PERF_RELIABLE_MIN_ATTEMPTS = 3;
   const SKILL_PERF_RECENT_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+  /* Small device clock skew is tolerated. A timestamp further in the future
+     than this is treated as invalid rather than as a very recent attempt. */
+  const SKILL_PERF_FUTURE_SKEW_MS = 5 * 60 * 1000;
+
+  /* Resolve an attempt timestamp in milliseconds. Precedence is at -> t -> ts;
+     only finite numeric values are accepted. */
+  function attemptTimestamp(ev) {
+    if (!ev || typeof ev !== 'object') return null;
+    if (isNum(ev.at)) return ev.at;
+    if (isNum(ev.t)) return ev.t;
+    if (isNum(ev.ts)) return ev.ts;
+    return null;
+  }
 
   function computeSkillPerformance(store, opts) {
     opts = opts || {};
@@ -301,16 +314,29 @@
 
     // "Recent" performance is only derived from explicitly timestamped attempts
     // (opts.attempts / opts.recentAttempts), never from cumulative item counters.
+    // Accepted timestamp fields are at, then t, then ts (milliseconds). An event
+    // with no valid timestamp is never counted as recent performance.
+    // `attempts` is authoritative when it is an array (even an empty one);
+    // `recentAttempts` is the older fallback used when `attempts` is not an array.
     const timed = Array.isArray(opts.attempts) ? opts.attempts : (Array.isArray(opts.recentAttempts) ? opts.recentAttempts : null);
     if (timed) {
       timed.forEach((ev) => {
         if (!ev || typeof ev !== 'object') return;
         const o = out[normalizeSkill(ev.skill)];
         if (!o) return;
-        const at = isNum(ev.at) ? ev.at : (isNum(ev.t) ? ev.t : null);
-        if (at != null && (now - at) > recentWindowMs) return;
+        const at = attemptTimestamp(ev);
+        const hasTimestamp = at != null;
+        if (hasTimestamp) {
+          // Reject timestamps that are implausibly far in the future. Timestamps
+          // slightly ahead of `now` are accepted to tolerate device clock skew.
+          if (at > now + SKILL_PERF_FUTURE_SKEW_MS) return;
+          if ((now - at) > recentWindowMs) return;
+        }
         const outcome = ev.outcome;
+        // Keep the diagnostic uncertain count even for undated events, but do
+        // not let such events enter any recent-performance calculation.
         if (outcome === 'uncertain') { o.uncertain++; return; }
+        if (!hasTimestamp) return;
         if (outcome !== 'independent' && outcome !== 'assisted' && outcome !== 'incorrect') {
           if (ev.correct === true) { if (ev.assisted || ev.hinted || ev.revealed) { o.recentAssisted++; o.hasRecentTemporalData = true; } else { o.recentAttempts++; o.recentIndependent++; o.hasRecentTemporalData = true; } }
           else if (ev.correct === false) { o.recentAttempts++; o.recentIncorrect++; o.hasRecentTemporalData = true; }

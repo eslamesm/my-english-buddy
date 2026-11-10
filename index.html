@@ -1800,6 +1800,14 @@ const rawProfiles=lsGet(PKEY, []);
 let profiles = sanitizeProfiles(rawProfiles);
 let currentId = lsGet(CKEY, null);
 if(typeof currentId!=='string'||!profiles.some(p=>p.id===currentId)) currentId = profiles.length? profiles[0].id : null;
+/* last identity already written by saveCurrent(); the epoch moves only on a
+   real transition, so re-saving the active profile cannot invalidate an
+   in-flight recognition. In-memory by design: storage failures must never make
+   the epoch decision depend on whether lsSet() succeeded. */
+let savedCurrentId = currentId;
+/* profile identity epoch: bumped only when the selected identity changes so an
+   in-flight recognition can never be validated by an A->B->A round trip. */
+let profileEpoch=0;
 const SETTINGS_DEFAULTS={rate:1.0, recMode:isAndroid?'offline':'auto', sfx:true, voice:null, difficulty:'normal', teacher:true, teacherAudio:true, teacherVoice:null, teacherRate:null, teacherPitch:1.0, teacherVolume:1.0, theme:'auto', goal:10};
 const rawSettings=lsGet(SKEY, {});
 let settings = Object.assign({}, SETTINGS_DEFAULTS, (rawSettings&&typeof rawSettings==='object'&&!Array.isArray(rawSettings))?rawSettings:{});
@@ -1822,7 +1830,7 @@ let settings = Object.assign({}, SETTINGS_DEFAULTS, (rawSettings&&typeof rawSett
 })();
 function saveSettings(){ lsSet(SKEY, settings); }
 function saveProfiles(){ lsSet(PKEY, profiles); }
-function saveCurrent(){ lsSet(CKEY, currentId); }
+function saveCurrent(){ if(currentId!==savedCurrentId){ profileEpoch++; savedCurrentId=currentId; } lsSet(CKEY, currentId); }
 function currentProfile(){ return profiles.find(p=>p.id===currentId) || null; }
 /* persist repaired storage so the next load starts clean */
 (function persistRepairs(){
@@ -1909,7 +1917,7 @@ function recordAttempt(mode, itemName, score, stars, uncertain, opts){
   // Determine outcome
   let outcome = uncertain ? 'uncertain' : (corr ? (hinted||revealed ? 'assisted' : 'independent') : 'incorrect');
   learnEvent(mode, itemName, corr, score, hinted, uncertain, revealed);
-  sessionOutcome(mode, itemName, outcome, false, wasNew);
+  sessionOutcome(mode, itemName, outcome, false, wasNew, p.id);
   saveProfiles();
   evalAchv();
 }
@@ -1925,9 +1933,10 @@ function isNewWord(mode, word){
 /* record one attempt into the in-memory session log used by finishLevel().
    Distinguishes independent success from genuine mistakes and from speech-
    recognition uncertainty (which is never counted as a language failure). */
-function sessionOutcome(mode, word, outcome, corrected, isNew){
+function sessionOutcome(mode, word, outcome, corrected, isNew, profileId){
   if(!word) return;
-  sessionEvents.push({ word:String(word), skill:(window.LearningEngine?LearningEngine.skillFromMode(mode):'recognize'), outcome:outcome, corrected:!!corrected, isNew:!!isNew });
+  const skill=(window.LearningEngine?LearningEngine.skillFromMode(mode):'recognize');
+  sessionEvents.push({ word:String(word), skill:skill, outcome:outcome, corrected:!!corrected, isNew:!!isNew, profileId: profileId || null });
 }
 function recordGame(correct){ const p=currentProfile(); if(!p) return; p.stats.games.attempts++; if(correct)p.stats.games.correct++; p.stats.attempts++; p.stats.lastPlayed=Date.now(); bumpDay(p.stats, 0, correct?100:0); saveProfiles(); evalAchv(); }
 
@@ -2477,7 +2486,39 @@ let lastVoiceUrl=null, micPulse=null;
 /* a single in-flight Web Speech recognition; abortListening() cancels it and
    rejects its pending promise with 'aborted' so nothing keeps the mic open. */
 let activeSRAbort=null;
-function abortListening(){ const f=activeSRAbort; activeSRAbort=null; try{ if(f) f(); }catch(e){} }
+let activeVoskCancel=null;
+/* Per-recognition context (R1/R2): identity, originating item and a
+   generation/epoch token. A result is only accepted while this exact context
+   is still the live attempt for the same profile, list, index and item. */
+let activeRecognitionCtx=null, recognitionSeq=0, scoreAttemptContext=null;
+function beginRecognitionContext(){
+  if(activeRecognitionCtx) activeRecognitionCtx.cancelled=true;
+  const ctx={ generation:++recognitionSeq, cancelled:false,
+    profileId:currentId, profileEpoch:profileEpoch,
+    item:list[index], listRef:list, indexAtStart:index, mode:currentMode,
+    startedAt:Date.now() };
+  /* During the permission/model-setup phase no engine callback exists yet, so
+     park a guard in the existing SR-abort slot. The unchanged abortListening()
+     invokes it synchronously on any explicit cancellation. */
+  ctx.srGuard=()=>{ ctx.cancelled=true; };
+  activeRecognitionCtx=ctx;
+  activeSRAbort=ctx.srGuard;
+  return ctx;
+}
+function isRecognitionContextValid(ctx){
+  if(!ctx || ctx.cancelled || activeRecognitionCtx!==ctx) return false;
+  if(ctx.generation!==recognitionSeq) return false;
+  if(ctx.profileId!==currentId || ctx.profileEpoch!==profileEpoch) return false;
+  if(list!==ctx.listRef || index!==ctx.indexAtStart) return false;
+  if(list[index]!==ctx.item) return false;
+  if(ctx.mode!==currentMode) return false;
+  return true;
+}
+function endRecognitionContext(ctx){
+  if(activeRecognitionCtx===ctx) activeRecognitionCtx=null;
+  if(ctx && activeSRAbort===ctx.srGuard) activeSRAbort=null;
+}
+function abortListening(){ const f=activeSRAbort; activeSRAbort=null; try{ if(f) f(); }catch(e){} const v=activeVoskCancel; try{ if(v) v(); }catch(e){} }
 function showReplay(on){ const w=document.getElementById('replayWrap'); if(w) w.style.display=on?'':'none'; }
 function makeRecorder(stream){
   try{ if(!window.MediaRecorder) return null;
@@ -2533,18 +2574,39 @@ async function ensureVosk(){
 }
 function voskOnce(grammar){
   return new Promise((resolve,reject)=>{
+    /* R1: bind this invocation to the recognition context active at entry. If
+       that context was already invalidated (abort before the fallback starts)
+       no microphone is ever requested. */
+    const rctx=activeRecognitionCtx;
+    if(rctx && rctx.cancelled){ reject(new Error('aborted')); return; }
     /* the mic stream must always be released, even if setup throws after
        getUserMedia (e.g. audio-context/recognizer failure) so the browser
        never shows the "recording" indicator after an error. */
     let stream=null, source=null, proc=null, mute=null, recorder=null;
     const releaseStream=()=>{ try{ if(recorder&&recorder.state==='recording') recorder.stop(); }catch(e){} try{ if(stream) stream.getTracks().forEach(t=>t.stop()); }catch(e){} };
     const cleanup=()=>{ try{source&&source.disconnect();}catch(e){} try{proc&&proc.disconnect();}catch(e){} try{mute&&mute.disconnect();}catch(e){} releaseStream(); };
+    let cancelled=false, settled=false;
+    let tick=null, doneTimer=null;
+    const stopTimers=()=>{ try{ if(tick){ clearInterval(tick); tick=null; } }catch(e){} try{ if(doneTimer){ clearTimeout(doneTimer); doneTimer=null; } }catch(e){} };
+    const settleResolve=(v)=>{ if(settled) return; settled=true; stopTimers(); if(activeVoskCancel===cancel) activeVoskCancel=null; cleanup(); micLevelShow(false); micHint(''); resolve(v); };
+    const settleReject=(e)=>{ if(settled) return; settled=true; stopTimers(); if(activeVoskCancel===cancel) activeVoskCancel=null; if(e&&e.message==='aborted'){ const c=activeRecognitionCtx; if(c) c.cancelled=true; } cleanup(); micLevelShow(false); micHint(''); reject(e); };
+    const cancel=()=>{ if(settled) return; cancelled=true; settleReject(new Error('aborted')); };
+    activeVoskCancel=cancel;
     (async()=>{
       const model=await ensureVosk();
+      if(cancelled){ settleReject(new Error('aborted')); return; }
       stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}});
+      if(cancelled){
+        /* the permission prompt may resolve after cancellation: release the
+           newly returned stream immediately instead of waiting for a helper
+           that is already settled */
+        try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+        settleReject(new Error('aborted')); return;
+      }
       const ctx=ensureRecCtx();
       if(!ctx) throw new Error('no-audio-ctx');
       try{ if(ctx.state==='suspended') await ctx.resume(); }catch(e){}
+      if(cancelled){ settleReject(new Error('aborted')); return; }
       source=ctx.createMediaStreamSource(stream);
       proc=ctx.createScriptProcessor(4096,1,1);
       mute=ctx.createGain(); mute.gain.value=0;
@@ -2553,25 +2615,26 @@ function voskOnce(grammar){
       let text='', heard=false, lastVoice=Date.now();
       recorder=makeRecorder(stream);
       micLevelShow(true); micHint('🎙️ أنا أسمعك... تحدّث الآن');
-      rec.on('result',(m)=>{ const t=m&&m.result&&m.result.text; if(t){ text=(text+' '+t).trim(); heard=true; lastVoice=Date.now(); } });
-      proc.onaudioprocess=(e)=>{ try{ rec.acceptWaveform(e.inputBuffer); }catch(err){ return; }
+      rec.on('result',(m)=>{ if(cancelled||settled) return; const t=m&&m.result&&m.result.text; if(t){ text=(text+' '+t).trim(); heard=true; lastVoice=Date.now(); } });
+      proc.onaudioprocess=(e)=>{ if(cancelled||settled) return; try{ rec.acceptWaveform(e.inputBuffer); }catch(err){ return; }
         const buf=e.inputBuffer.getChannelData(0); let s=0; for(let i=0;i<buf.length;i+=8){ s+=buf[i]*buf[i]; }
         const rms=Math.sqrt(s/(buf.length/8)); micLevelSet(Math.min(100,Math.round(rms*260))); if(rms>0.012) lastVoice=Date.now(); };
       source.connect(proc); proc.connect(mute); mute.connect(ctx.destination);
       const start=Date.now();
       const rm=(currentMode==='review'&&list[index]&&list[index]._mode)?list[index]._mode:currentMode;
       const maxDur = rm==='sentences'?8000:(rm==='phrases'?6500:5000);
-      const tick=setInterval(()=>{
+      tick=setInterval(()=>{
+        if(cancelled){ settleReject(new Error('aborted')); return; }
         const now=Date.now(); const quiet=now-lastVoice;
         const done=(now-start>maxDur)||(heard&&quiet>1100);
-        if(done){ clearInterval(tick);
+        if(done){ clearInterval(tick); tick=null;
           cleanup();
           micLevelShow(false); micHint('');
           try{rec.retrieveFinalResult();}catch(e){}
-          setTimeout(()=>{ try{rec.remove();}catch(e){} resolve({alts:[text], confidence:null}); },550);
+          doneTimer=setTimeout(()=>{ if(cancelled){ settleReject(new Error('aborted')); return; } try{rec.remove();}catch(e){} settleResolve({alts:[text], confidence:null}); },550);
         }
       },120);
-    })().catch(e=>{ cleanup(); reject(e); });
+    })().catch(e=>{ cleanup(); settleReject(e); });
   });
 }
 function webSpeechOnce(){
@@ -2587,6 +2650,8 @@ function webSpeechOnce(){
       if(finished) return; finished=true; clearTimeout(hard); activeSRAbort=null;
       stopPulseMeter(); micHint('');
       try{ r.onend=null; r.onerror=null; r.onresult=null; r.stop(); }catch(e){}
+      if(err==='aborted'){ const c=activeRecognitionCtx; if(c) c.cancelled=true; }
+      if(err==='aborted'){ reject(new Error('aborted')); return; }
       const text=(finals.join(' ')||latest||'').trim();
       if(text) resolve({alts:(finals.length?finals:[text]), confidence:conf}); else reject(new Error(err||'no-speech'));
     }
@@ -2604,7 +2669,7 @@ function webSpeechOnce(){
       const er=e.error||'sr-error';
       // Android closes the mic after short silence; restart to keep listening for the child
       if((er==='no-speech'||er==='aborted') && !finals.length && Date.now()-started<HARD-1200){ try{ r.start(); return; }catch(_){} }
-      if(er==='aborted' && (finals.length||latest)){ finish(''); return; }
+      if(er==='aborted' && (finals.length||latest)){ finish('aborted'); return; }
       finish(er);
     };
     r.onend=()=>{
@@ -2618,11 +2683,43 @@ function webSpeechOnce(){
 }
 function grammarFor(){ return GRAMMAR; }
 async function recognizeOnce(){
+  /* R1: snapshot the live recognition context. Cancellation invalidates this
+     exact object, so a rejected Web Speech attempt can never start Vosk. */
+  const rctx=activeRecognitionCtx;
+  const cancelledNow=()=>!!(rctx&&rctx.cancelled);
+  if(cancelledNow()) throw new Error('aborted');
   const mode=settings.recMode;
   const offline=(mode==='offline')||(mode==='auto'&&(!navigator.onLine||isAndroid));
-  if(offline){ try{ const v=await voskOnce(grammarFor()); return {alts:v.alts,engine:'offline',confidence:v.confidence}; }catch(e){ if(mode==='offline') throw e; } }
-  try{ if(!SR) throw new Error('no-web-speech'); const v=await webSpeechOnce(); return {alts:v.alts,engine:'online',confidence:v.confidence}; }
-  catch(e){ try{ const v=await voskOnce(grammarFor()); return {alts:v.alts,engine:'offline',confidence:v.confidence}; }catch(e2){ throw e; } }
+  if(offline){
+    try{
+      if(cancelledNow()) throw new Error('aborted');
+      const v=await voskOnce(grammarFor());
+      if(cancelledNow()) throw new Error('aborted');
+      return {alts:v.alts,engine:'offline',confidence:v.confidence};
+    }catch(e){
+      if(cancelledNow()||mode==='offline') throw (cancelledNow()?new Error('aborted'):e);
+    }
+  }
+  try{
+    if(cancelledNow()) throw new Error('aborted');
+    if(!SR) throw new Error('no-web-speech');
+    const v=await webSpeechOnce();
+    if(cancelledNow()) throw new Error('aborted');
+    return {alts:v.alts,engine:'online',confidence:v.confidence};
+  }
+  catch(e){
+    /* cancellation must never fall through into a second engine */
+    if(cancelledNow()) throw new Error('aborted');
+    try{
+      if(cancelledNow()) throw new Error('aborted');
+      const v=await voskOnce(grammarFor());
+      if(cancelledNow()) throw new Error('aborted');
+      return {alts:v.alts,engine:'offline',confidence:v.confidence};
+    }catch(e2){
+      if(cancelledNow()) throw new Error('aborted');
+      throw e;
+    }
+  }
 }
 
 /* ------------------ SCORING ------------------ */
@@ -2669,12 +2766,17 @@ function spellHint(target, heard){
   const focus = letters.length===1? `ركّز على حرف «${letters[0]}»` : 'ركّز على الحروف المحددة';
   return `<div class="spell"><div class="muted2">تصحيح الحروف — ${focus}:</div><div class="spec" dir="ltr">${html}</div></div>`;
 }
-function scoreAttempt(alts, engine, confidence){
-  const item=list[index];
+function scoreAttempt(alts, engine, confidence, profileId, attemptAt){
+  /* R2: consume the context handed over synchronously by the mic attempt. A
+     stale continuation therefore validates ITS OWN context, never the live one. */
+  const rctx=scoreAttemptContext;
+  scoreAttemptContext=null;
+  if(rctx && !isRecognitionContextValid(rctx)) return;
+  const item=(rctx&&rctx.item)?rctx.item:list[index];
   let best=0, heard=alts[0]||'';
   const targets=[item.spoken]; if(currentMode==='letters'||currentMode==='sounds'){ targets.push(item.word,item.t,item.sound); }
   alts.forEach(alt=>{ const s=bestSimilarity(alt,targets); if(s>best){ best=s; heard=alt; } });
-  showScore(item,best,heard,engine,confidence);
+  showScore(item,best,heard,engine,confidence,profileId,attemptAt,rctx);
 }
 /* fairness: separate a speech-engine recognition failure from a real
    pronunciation error, so we do not penalise the learner for the former.
@@ -2687,8 +2789,20 @@ function isUncertain(score, heard, confidence){
   const lowConf=(typeof confidence==='number'&&isFinite(confidence))?(confidence<0.55):null;
   return score<25 && (lowConf===true || h.length<=2);
 }
-function showScore(item,score,heard,engine,confidence){
-  const fb=document.getElementById('feedback'); fb.dataset.scored='1';
+function showScore(item,score,heard,engine,confidence,profileId,attemptAt,rctx){
+  const fb=document.getElementById('feedback');
+  if (profileId && profileId !== currentId) {
+    fb.innerHTML = '<div class="fb-text" style="color:#94a3b8">تم تجاهل المحاولة (تبديل ملف)</div>';
+    return;
+  }
+  if(!profileId || typeof profileId!=='string' || !profiles.find(p=>p.id===profileId)){
+    fb.innerHTML = '<div class="fb-text" style="color:#94a3b8">تم تجاهل المحاولة (تبديل ملف)</div>';
+    return;
+  }
+  /* R2: the profile checks above are identity-only. A stale result must also be
+     rejected when the attempt context (item, list, index, mode, epoch) is gone. */
+  if(rctx && !isRecognitionContextValid(rctx)) return;
+  fb.dataset.scored='1';
   const rm=modeOfItem(item);
   const uncertain = isUncertain(score, heard, confidence);
   let stars,color,msg;
@@ -2707,6 +2821,10 @@ function showScore(item,score,heard,engine,confidence){
   if(!uncertain && rm!=='letters' && stars<3 && heard && normalize(heard)){ fb.innerHTML+=spellHint(item.t, heard); }
   if(currentMode==='recall') recallReveal();
   const recalled = !!(typeof game!=='undefined' && game && game.recalled);
+  const rollOutcome = uncertain ? 'uncertain' : (stars>=2 ? ((recalled || !!(game&&game.hintsUsed)) ? 'assisted' : 'independent') : 'incorrect');
+  if(typeof recentSkillAttempts!=='undefined'){
+    recentSkillAttempts.record(profileId, LearningEngine.skillFromMode(rm), rollOutcome, attemptAt, { now: Date.now(), mode: rm });
+  }
   recordAttempt(rm, item.t, score, stars, uncertain, {hinted: recalled || !!(game&&game.hintsUsed), revealed: recalled});
   if(dailySessionActive){ try{ persistSession(); }catch(e){} }
   if(stars===3){
@@ -2921,7 +3039,7 @@ function buildSessionHome(){
   if(!p.learning) p.learning=LearningEngine.createStore();
   const MAX=DAILY_SESSION_MAX, newTarget=LearningEngine.normalizeDailyNew(p.dailyNew);
   const idx=wordItemIndex();
-  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX, weightSkills:true, newTarget:newTarget, recentlySeen:recencyLog(p.id), recencyWindowMs:SESSION_RECENCY_WINDOW_MS});
+  const sel=LearningEngine.selectPractice(p.learning,{maxItems:MAX, weightSkills:true, newTarget:newTarget, recentlySeen:recencyLog(p.id), recencyWindowMs:SESSION_RECENCY_WINDOW_MS, attempts:(typeof recentSkillAttempts!=='undefined'?recentSkillAttempts.listFor(p.id):undefined)});
   const dueSet={}; sel.due.forEach(e=>dueSet[e.key]=1);
 
   const reviews=[], seenR={};
@@ -3484,7 +3602,7 @@ function recallReveal(){
   const it=list[index]; document.getElementById('pWord').textContent=it.t;
   document.getElementById('pAr').textContent=it.ar;
   const btn=document.getElementById('btnReveal'); if(btn) btn.disabled=true;
-  stopMouth(); playWithMouth(()=>speakTTSFull(it.t,{mode:'words',word:it.t,allowInterrupt:true})); 
+  stopMouth(); playWithMouth(()=>speakTTSFull(it.t,{mode:'words',word:it.t,allowInterrupt:true}));
 }
 function startRecall(){
   endSession();
@@ -3561,7 +3679,14 @@ document.getElementById('btnListen').onclick=()=>{ cancelRelisten(); if(currentM
 document.getElementById('btnSlow').onclick=()=>{ cancelRelisten(); if(currentMode==='recall') recallReveal(); const r=Math.max(0.45, Math.min(0.7, (settings.rate||1)*0.6)); playWithMouth(()=>playItem(r)); };
 document.getElementById('btnMic').onclick=async ()=>{
   if(recognizing) return;
+  if(!currentId || typeof currentId!=='string' || !profiles.find(p=>p.id===currentId)){
+    const fb0=document.getElementById('feedback');
+    if(fb0) fb0.innerHTML='<div class="fb-text" style="color:#94a3b8">اختر ملفاً شخصياً أولاً</div>';
+    return;
+  }
+  const attemptProfileId=currentId; const attemptAt=Date.now();
   ensureRecCtx();
+  const rctx=beginRecognitionContext();
   recognizing=true; cancelRelisten(); stopTeacher(); stopAudio();
   const mic=document.getElementById('btnMic'); mic.classList.add('listening');
   const fb=document.getElementById('feedback'); fb.dataset.scored='';
@@ -3569,11 +3694,17 @@ document.getElementById('btnMic').onclick=async ()=>{
   fb.innerHTML='<div class="fb-text" style="color:#ef4444">🎤 أنا أسمعك... انطق الآن</div>';
   try{
     if(!isAndroid) await ensureMicPermission();
-    if(wantVosk && !voskModel){ fb.innerHTML='<div class="fb-text" style="color:#7c3aed">⏳ تجهيز التعرف على النطق (أول مرة فقط)...</div>'; try{ await ensureVosk(); }catch(e){} fb.innerHTML='<div class="fb-text" style="color:#ef4444">🎤 أنا أسمعك... انطق الآن</div>'; }
-    const {alts,engine,confidence}=await recognizeOnce(); if(!alts.some(t=>normalize(t))) throw new Error('no-speech'); scoreAttempt(alts,engine,confidence);
+    if(rctx.cancelled) return;
+    if(wantVosk && !voskModel){ fb.innerHTML='<div class="fb-text" style="color:#7c3aed">⏳ تجهيز التعرف على النطق (أول مرة فقط)...</div>'; try{ await ensureVosk(); }catch(e){} if(rctx.cancelled) return; fb.innerHTML='<div class="fb-text" style="color:#ef4444">🎤 أنا أسمعك... انطق الآن</div>'; }
+    const {alts,engine,confidence}=await recognizeOnce();
+    if(rctx.cancelled) return;
+    if(!alts.some(t=>normalize(t))) throw new Error('no-speech');
+    if(!isRecognitionContextValid(rctx)) return;
+    scoreAttemptContext=rctx;
+    scoreAttempt(alts,engine,confidence,attemptProfileId,attemptAt);
   }
   catch(e){ recogError(e); }
-  finally{ recognizing=false; mic.classList.remove('listening'); }
+  finally{ endRecognitionContext(rctx); recognizing=false; mic.classList.remove('listening'); }
 };
 document.getElementById('btnReplayMe').onclick=()=>{ if(lastVoiceUrl){ const a=new Audio(lastVoiceUrl); a.play().catch(()=>toast('تعذّر تشغيل التسجيل')); } };
 document.getElementById('btnPrev').onclick=()=>{ if(index>0){ index--; renderItem(); } };
@@ -3602,15 +3733,16 @@ function finishLevel(){
    but never counted as a language failure. Safe if the engine is unavailable. */
 function sessionSummaryHtml(){
   const p=currentProfile();
+  const myEvents=sessionEvents.filter(e=>e && e.profileId===currentId);
   const dueRemaining=dueItems().length;
   const dailyTarget=p?(window.LearningEngine?LearningEngine.normalizeDailyNew(p.dailyNew):p.dailyNew):5;
-  const newToday=sessionEvents.filter(e=>e.isNew).map(e=>String(e.word).toLowerCase()).filter((w,i,a)=>a.indexOf(w)===i).length;
+  const newToday=myEvents.filter(e=>e.isNew).map(e=>String(e.word).toLowerCase()).filter((w,i,a)=>a.indexOf(w)===i).length;
   let sum;
   try{
     sum=(window.LearningEngine&&LearningEngine.summarizeSession)
-      ? LearningEngine.summarizeSession(sessionEvents,{ dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining, totalItems:list.length })
-      : { total:sessionEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining };
-  }catch(e){ sum={ total:sessionEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining }; }
+      ? LearningEngine.summarizeSession(myEvents,{ dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining, totalItems:list.length })
+      : { total:myEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining };
+  }catch(e){ sum={ total:myEvents.length, independent:0, assisted:0, incorrect:0, uncertain:0, skillsPracticed:[], dailyProgress:0, dailyTarget:dailyTarget, dailyNewToday:newToday, dueRemaining:dueRemaining }; }
   if(!sum.total) return '';
   const rows=[];
   rows.push('<div class="rw-row"><span class="rw-k">✅ إجابات مستقلة</span><span class="rw-v" style="color:#16a34a">'+sum.independent+'</span></div>');
@@ -3667,7 +3799,7 @@ function coachFor(extra){
   extra=extra||{};
   try{
     if(!(window.LearningEngine&&LearningEngine.coachMessage)) return null;
-    const events=(extra.session && Array.isArray(sessionEvents))?sessionEvents:null;
+    const events=(extra.session && Array.isArray(sessionEvents))?sessionEvents.filter(e=>e && e.profileId===currentId):null;
     const ctx=coachContext({ events:events, dailyNewToday:extra.dailyNewToday });
     return LearningEngine.coachMessage(ctx);
   }catch(e){ return null; }
@@ -3703,7 +3835,14 @@ async function speakCoachLine(text){
 }
 
 /* ------------------ GAMES ------------------ */
-let game={type:null, qIndex:0, correct:0, len:10, answered:false, pool:null, combo:0, maxCombo:0, hintsUsed:0};
+/* Page-lifetime unique game-session id: monotonic counter + time + random suffix.
+   Never persisted; a replay starts a new session and gets a new id. */
+let _gameSessionSeq=0;
+function newGameSessionId(type){
+  _gameSessionSeq++;
+  return String(type||'game')+':'+_gameSessionSeq.toString(36)+':'+Date.now().toString(36)+':'+Math.random().toString(36).slice(2,8);
+}
+let game={type:null, qIndex:0, correct:0, len:10, answered:false, pool:null, combo:0, maxCombo:0, hintsUsed:0, profileId:null, sessionId:null};
 let rushT=null;
 let memState=null, builderState=null, missingState=null, countState=null, sortState=null, bossState=null, dailyState=null, similarState=null, examState=null, pendingExam=null;
 function curriculumWords(){ const out=[]; Object.values(CUR_WORDS).forEach(arr=>arr.forEach(w=>out.push({t:w.t,emoji:w.emoji,ar:w.ar}))); return out; }
@@ -3765,6 +3904,7 @@ function startGame(type){
   if(type==='daily'){ startDaily(); return; }
   const dl=gameOpts();
   game={type, qIndex:0, correct:0, len:dl.len, answered:false, combo:0, maxCombo:0, hintsUsed:0,
+    profileId: currentId, sessionId: newGameSessionId(type),
     pool: adaptiveWords(wordBank(), Math.max(dl.len+4, 12), 'words')};
   document.getElementById('gameScore').textContent='0 / 0';
   document.getElementById('gameTime').hidden=true;
@@ -3774,6 +3914,7 @@ function startRush(){
   stopMouth(); clearInterval(rushT); rushT=null;
   const rushSec = settings.difficulty==='easy'?30 : settings.difficulty==='hard'?60 : 45;
   game={type:'rush', correct:0, timeLeft:rushSec, answered:false, wordFirst:Math.random()<0.5,
+    profileId: currentId, sessionId: newGameSessionId('rush'),
     pool: adaptiveWords(uniqByWord([...wordBank(), ...curriculumWords()]), 24, 'words')};
   document.getElementById('gameScore').textContent='0';
   document.getElementById('gameTime').hidden=false; document.getElementById('gameTime').textContent='⏱️ '+rushSec;
@@ -3959,7 +4100,10 @@ function answerGame(btn, o){
   if(game.answered) return; game.answered=true;
   const key=(game.type==='letter'? o.emoji : o.t);
   const correct=(key===game.correctKey);
+  const _gSkill = game.type==='listen'?'listen':game.type==='spell'?'spell':'recognize';
+  const _gAttemptId = game.sessionId+':'+game.qIndex;
   recordGame(correct);
+  recordGameAttempt(game.profileId, _gSkill, correct, o.t, false, !!game.revealed, game.type, _gAttemptId);
   if(correct){ game.correct++; game.combo++; if(game.combo>game.maxCombo) game.maxCombo=game.combo; btn.classList.add('correct'); playCorrect(); popFloat('⭐'); showCombo(game.combo);
     if(game.type==='listen'||game.type==='spell') bumpWordStar(game.correctObj&&game.correctObj.t, true); }
   else { game.combo=0; btn.classList.add('wrong'); playTone(300,0.16);
@@ -3979,7 +4123,7 @@ function startMemory(){
   const pool=adaptiveWords(wordBank(), pairs, 'words');
   const cards=[]; pool.forEach(p=>{ cards.push({...p,id:p.t,matched:false,open:false}); cards.push({...p,id:p.t,matched:false,open:false}); });
   memState={cards:shuffle(cards), flipped:[], lock:false, matched:0, pairs:pool.length, moves:0};
-  game={type:'memory', correct:0, len:pool.length, combo:0, maxCombo:0, answered:false};
+  game={type:'memory', correct:0, len:pool.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('memory')};
   document.getElementById('gameScore').textContent='0 / '+pool.length;
   document.getElementById('gameTime').hidden=true;
   document.getElementById('qCount').textContent='🧠 افتح بطاقتين وحاول تذكر مكانهما!';
@@ -4043,7 +4187,7 @@ function startBuilder(){
   if(cands.length<8) cands=wordBank().filter(w=>w.t.length>=3);
   const queue=adaptiveWords(cands, roundCount(), 'words');
   builderState={queue, idx:0, solved:0, correct:null, letters:[], allTiles:[], built:'', pos:0, placed:[], attempts:0, assisted:false, done:false, struggle:false};
-  game={type:'builder', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false};
+  game={type:'builder', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('builder')};
   document.getElementById('gameScore').textContent='0 / '+queue.length;
   document.getElementById('gameTime').hidden=true;
   renderBuilderRound();
@@ -4137,14 +4281,14 @@ function recordAssistedAttempt(word){
   if(!s.games) s.games={attempts:0,correct:0}; s.games.attempts++;
   learnEvent('builder', word, true, 50, true, false, true);
   const wasNew = isNewWord ? isNewWord('builder', word) : false;
-  try { sessionOutcome('builder', word, 'assisted', false, wasNew); } catch(e){}
+  try { sessionOutcome('builder', word, 'assisted', false, wasNew, currentId, Date.now()); } catch(e){}
   saveProfiles(); evalAchv();
 }
 function recordBuilderStruggle(word){
   if(!currentProfile()) return;
   learnEvent('builder', word, false, 0, true, false, true);
   const wasNew = isNewWord ? isNewWord('builder', word) : false;
-  try { sessionOutcome('builder', word, 'incorrect', false, wasNew); } catch(e){}
+  try { sessionOutcome('builder', word, 'incorrect', false, wasNew, currentId, Date.now()); } catch(e){}
   saveProfiles();
 }
 function nextBuilderRound(){
@@ -4166,7 +4310,7 @@ function startMissing(){
   const cands=uniqByWord(wordBank().filter(w=>w.t.length>=3));
   const queue=adaptiveWords(cands, roundCount(), 'words');
   missingState={queue, idx:0, solved:0, correct:null, missIdx:0, missLetter:'', opts:[]};
-  game={type:'missing', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false};
+  game={type:'missing', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('missing')};
   document.getElementById('gameScore').textContent='0 / '+queue.length;
   document.getElementById('gameTime').hidden=true;
   renderMissingRound();
@@ -4198,6 +4342,7 @@ function answerMissing(btn,ch){
   const m=missingState;
   const ok=(ch===m.missLetter);
   recordGame(ok);
+  recordGameAttempt(game.profileId, 'recognize', ok, m.correct.t, false, false, 'missing', game.sessionId+':'+m.idx);
   document.querySelectorAll('#gOptions .opt').forEach(el=>{ if(el.dataset.key===m.missLetter) el.classList.add('reveal'); });
   if(ok){ btn.classList.add('correct'); playCorrect(); popFloat('⭐'); game.combo++; if(game.combo>game.maxCombo) game.maxCombo=game.combo; showCombo(game.combo);
     m.solved++; game.correct=m.solved; bumpWordStar(m.correct.t, true);
@@ -4218,7 +4363,7 @@ function startCount(){
   stopMouth(); clearInterval(rushT);
   const total=roundCount();
   countState={idx:0, solved:0, total, num:0, em:'', correctWord:'', opts:[]};
-  game={type:'count', correct:0, len:total, combo:0, maxCombo:0, answered:false};
+  game={type:'count', correct:0, len:total, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('count')};
   document.getElementById('gameScore').textContent='0 / '+total;
   document.getElementById('gameTime').hidden=true;
   renderCountRound();
@@ -4275,7 +4420,7 @@ function startSort(){
   if(cands.length<8) cands=wordBank();
   const queue=adaptiveWords(cands, roundCount(), 'words');
   sortState={queue, useCats, idx:0, solved:0, word:null, correctCat:null};
-  game={type:'sort', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false};
+  game={type:'sort', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('sort')};
   document.getElementById('gameScore').textContent='0 / '+queue.length;
   document.getElementById('gameTime').hidden=true;
   renderSortRound();
@@ -4301,6 +4446,7 @@ function answerSort(btn,cat){
   const s=sortState;
   const ok=(cat.key===s.correctCat.key);
   recordGame(ok);
+  recordGameAttempt(game.profileId, 'recognize', ok, s.word.t, false, false, 'sort', game.sessionId+':'+s.idx);
   document.querySelectorAll('#gOptions .sort-bucket').forEach(el=>{ if(el.dataset.key===s.correctCat.key) el.classList.add('correct'); });
   if(ok){ btn.classList.add('correct'); playCorrect(); popFloat('⭐'); game.combo++; if(game.combo>game.maxCombo) game.maxCombo=game.combo; showCombo(game.combo); s.solved++; game.correct=s.solved; bumpWordStar(s.word.t, true); document.getElementById('gFeedback').innerHTML='<div class="fb-text" style="color:#16a34a">تصنيف صحيح! 🎉</div>'; }
   else { btn.classList.add('wrong'); game.combo=0; playTone(300,0.16); document.getElementById('gFeedback').innerHTML='<div class="fb-text" style="color:#ef4444">التصنيف الصحيح: '+s.correctCat.label+'</div>'; }
@@ -4319,7 +4465,7 @@ function startBoss(){
   stopMouth(); clearInterval(rushT);
   const total=roundCount();
   bossState={total, answeredQ:0, correct:0, bossHp:100, combo:0, maxCombo:0, queue:adaptiveWords(wordBank(), total, 'words')};
-  game={type:'boss', correct:0, len:total, combo:0, maxCombo:0, answered:false};
+  game={type:'boss', correct:0, len:total, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('boss')};
   document.getElementById('gameScore').textContent='0 / '+total;
   document.getElementById('gameTime').hidden=true;
   document.getElementById('qCount').textContent='⚔️ اهزم الزعيم بسلسلة إجابات صحيحة! كل إجابة صحيحة تقلّل صحته';
@@ -4364,6 +4510,7 @@ function nextBossQ(){
 function answerBoss(btn, ok){
   if(game.answered) return; game.answered=true;
   recordGame(ok);
+  recordGameAttempt(game.profileId, 'recognize', ok, game.correctKey, false, false, 'boss', game.sessionId+':'+bossState.answeredQ);
   if(ok){ bossState.correct++; bossState.combo++; if(bossState.combo>bossState.maxCombo) bossState.maxCombo=bossState.combo;
     const dmg=10+Math.min(20,bossState.combo*2); bossState.bossHp=Math.max(0,bossState.bossHp-dmg);
     btn.classList.add('correct'); playCorrect(); popFloat('💥'); showCombo(bossState.combo);
@@ -4419,7 +4566,7 @@ function getDaily(){
 function startDaily(){
   stopMouth(); clearInterval(rushT);
   const ch=getDaily();
-  game={type:'daily', correct:0, len:ch.length, combo:0, maxCombo:0, answered:false};
+  game={type:'daily', correct:0, len:ch.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('daily')};
   document.getElementById('gameScore').textContent=ch.filter(c=>c.done).length+' / '+ch.length;
   document.getElementById('gameTime').hidden=true;
   document.getElementById('qCount').textContent='🎯 تحدّيات اليوم — أكملها لكسب نجوم إضافية';
@@ -4685,7 +4832,7 @@ function startSimilarGroup(gi){
   if(grp.length<2){ toast('لا توجد كلمات كافية في هذه المجموعة'); return; }
   const total=Math.max(6, roundCount());
   similarState={group:grp, gi, idx:0, solved:0, total, correct:null};
-  game={type:'similar', correct:0, len:total, combo:0, maxCombo:0, answered:false};
+  game={type:'similar', correct:0, len:total, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('similar')};
   document.getElementById('gameScore').textContent='0 / '+total;
   document.getElementById('gameTime').hidden=true;
   document.getElementById('qCount').textContent='🧩 اسمع الكلمة واختر الصورة الصحيحة';
@@ -4716,6 +4863,7 @@ function answerSimilar(btn,o){
   const st=similarState; if(!st) return;
   const ok=(o.t===st.correct.t);
   recordGame(ok);
+  recordGameAttempt(game.profileId, 'recognize', ok, st.correct.t, false, false, 'similar', game.sessionId+':'+st.idx);
   document.querySelectorAll('#gOptions .opt').forEach(el=>{ if(el.dataset.key===st.correct.t) el.classList.add('reveal'); });
   if(ok){
     btn.classList.add('correct'); playCorrect(); popFloat('⭐');
@@ -4882,7 +5030,7 @@ function promptExam(gid, n){
   if(weak.length<3){ startExam(gid, n); return; }
   const box=document.getElementById('examUnits'); if(!box){ startExam(gid, n); return; }
   const u=CUR_UNITS.find(x=>x.key===gid);
-  let title=u?curUnitLabel(u):''; 
+  let title=u?curUnitLabel(u):'';
   if(n){ const s=(CUR_SUBUNITS[gid]||[]).find(x=>x.n===n); if(s) title='الوحدة '+n+': '+s.ar; }
   box.innerHTML='<div style="grid-column:1/-1;text-align:center;font-weight:800;color:#ede9fe;margin:6px 0">مراجعة قبل الامتحان — '+title+'</div>'+
     '<div class="card pop-card" style="grid-column:1/-1"><span class="emoji">🧠</span><div class="name">عندك '+weak.length+' كلمات غلطت فيها سابقًا</div><div class="hint">راجعها بسرعة قبل ما تبدأ الامتحان</div>'+
@@ -4910,7 +5058,7 @@ function startExam(gid, n){
   const queue=examBuildQuestions(words, 10);
   if(!queue.length){ toast('لا توجد كلمات لهذا الامتحان'); return; }
   examState={key:gid, unitN:n||0, label, queue, idx:0, correct:0, wrongList:[], rightList:[]};
-  game={type:'exam', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false};
+  game={type:'exam', correct:0, len:queue.length, combo:0, maxCombo:0, answered:false, profileId: currentId, sessionId: newGameSessionId('exam')};
   document.getElementById('gameScore').textContent='0 / '+queue.length;
   document.getElementById('gameTime').hidden=true;
   go('game'); updateGameReplayBtn(); startTimer(); renderExamQ();
@@ -5066,7 +5214,7 @@ function buildReport(){
   while(daily[k]&&streak<1000){ streak++; k=addDaysStr(k,-1); }
 
   // weak words
-  let weak=[]; 
+  let weak=[];
   const reportModes=[...g.modes, 'egy:'+(p.schoolYear||gradeFromAge(p.age))];
   reportModes.forEach(m=>{ (MODE_DATA[m]||[]).forEach(it=>{ const st=itemStars(m,it.t); if(st<3) weak.push({m,it,st}); }); });
   weak.sort((a,b)=>a.st-b.st); weak=weak.slice(0,12);
@@ -5366,6 +5514,131 @@ window.__appDiag=async function(){
   const ver=(document.querySelector('meta[name="app-version"]')||{}).content||'';
   return {version:ver, swCache, controlled};
 };
+/* =========================================================
+   D6: recentSkillAttempts and recordGameAttempt
+   ========================================================= */
+
+/* PHASE5_RECENT_ATTEMPTS_START */
+function createRecentSkillAttempts() {
+  const WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+  const MAX_PER_PROFILE = 100;
+  const FUTURE_SKEW_MS = 5 * 60 * 1000;
+  const VALID_SKILLS = ['recognize', 'listen', 'spell', 'pronounce'];
+  const VALID_OUTCOMES = ['independent', 'assisted', 'incorrect', 'uncertain'];
+
+  const buckets = {};
+
+  function record(profileId, skill, outcome, at, opts) {
+    if (!profileId || typeof profileId !== 'string') return null;
+    if (VALID_SKILLS.indexOf(skill) < 0) return null;
+    if (VALID_OUTCOMES.indexOf(outcome) < 0) return null;
+    if (typeof at !== 'number' || !isFinite(at)) return null;
+
+    const now = (opts && typeof opts.now === 'number') ? opts.now : Date.now();
+
+    if (at > now + FUTURE_SKEW_MS) return null;
+    if ((now - at) > WINDOW_MS) return null;
+    if (opts && opts.mode === 'builder') return null;
+
+    if (!buckets[profileId]) buckets[profileId] = [];
+
+    // Prune expired entries BEFORE dedup check so expired attemptIds don't block
+    buckets[profileId] = buckets[profileId].filter(function(e) { return (now - e.at) <= WINDOW_MS; });
+
+    const attemptId = (opts && opts.attemptId) || null;
+    if (attemptId) {
+      const existing = buckets[profileId].find(function(e) { return e._attemptId === attemptId; });
+      if (existing) return null;
+    }
+
+    const entry = {
+      at: at,
+      outcome: outcome,
+      profileId: profileId,
+      skill: skill,
+      _attemptId: attemptId || undefined
+    };
+
+    buckets[profileId].push(entry);
+
+    if (buckets[profileId].length > MAX_PER_PROFILE) {
+      buckets[profileId] = buckets[profileId].slice(-MAX_PER_PROFILE);
+    }
+
+    return { at: entry.at, outcome: entry.outcome, profileId: entry.profileId, skill: entry.skill };
+  }
+
+  function listFor(profileId, opts) {
+    if (!buckets[profileId]) return [];
+    const now = (opts && typeof opts.now === 'number') ? opts.now : Date.now();
+
+    buckets[profileId] = buckets[profileId].filter(function(e) { return (now - e.at) <= WINDOW_MS; });
+
+    return buckets[profileId].map(function(e) {
+      return { at: e.at, outcome: e.outcome, profileId: e.profileId, skill: e.skill };
+    });
+  }
+
+  function sizeFor(profileId, opts) {
+    return listFor(profileId, opts).length;
+  }
+
+  function clear(profileId) {
+    if (profileId) {
+      delete buckets[profileId];
+    } else {
+      for (const key in buckets) {
+        delete buckets[key];
+      }
+    }
+  }
+
+  return {
+    WINDOW_MS: WINDOW_MS,
+    record: record,
+    listFor: listFor,
+    sizeFor: sizeFor,
+    clear: clear
+  };
+}
+/* PHASE5_RECENT_ATTEMPTS_END */
+
+const recentSkillAttempts = createRecentSkillAttempts();
+
+/* PHASE5_GAME_ATTEMPT_START */
+function recordGameAttempt(profileId, skill, ok, word, hinted, revealed, mode, attemptId) {
+  if(typeof recentSkillAttempts!=='undefined'){
+    if (!profileId) return;
+    if (!word) return;
+    const validSkills = ['recognize', 'listen', 'spell', 'pronounce'];
+    if (validSkills.indexOf(skill) < 0) return;
+    const excludedModes = ['builder', 'memory', 'count', 'exam', 'rush', 'daily'];
+    if (excludedModes.indexOf(mode) >= 0) return;
+
+    let outcome;
+    if (!ok) {
+      outcome = 'incorrect';
+    } else if (hinted || revealed) {
+      outcome = 'assisted';
+    } else {
+      outcome = 'independent';
+    }
+
+    recentSkillAttempts.record(profileId, skill, outcome, Date.now(), {
+      now: Date.now(),
+      mode: mode,
+      attemptId: attemptId
+    });
+  }
+}
+
+function recordedGameAttempts() {
+  return [];
+}
+/* PHASE5_GAME_ATTEMPT_END */
+
+
+
 </script>
 </body>
 </html>

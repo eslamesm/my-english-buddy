@@ -153,3 +153,248 @@ test('phase4: maxPerItem applied to final plan after merge', () => {
   const keys = sel.plan.map(e=>e.key);
   assert.equal(new Set(keys).size, keys.length);
 });
+
+/* ------------------------- D8: timestamp validation ------------------------- */
+
+test('phase4 D8: undated attempts are never counted as recent performance', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect' },
+      { skill: 'spell', outcome: 'incorrect' },
+      { skill: 'spell', outcome: 'incorrect' }
+    ]
+  });
+  assert.equal(perf.spell.recentAttempts, 0);
+  assert.equal(perf.spell.recentIncorrect, 0);
+  assert.equal(perf.spell.recentIndependent, 0);
+  assert.equal(perf.spell.hasRecentTemporalData, false);
+  assert.equal(perf.spell.recentReliable, false);
+  assert.equal(perf.spell.weakness, 0);
+});
+
+test('phase4 D8: invalid timestamps are never counted as recent performance', () => {
+  const now = T(2026, 1, 1);
+  const badValues = [null, undefined, NaN, Infinity, '1700000000000', {}, []];
+  badValues.forEach((bad) => {
+    const perf = LE.computeSkillPerformance(LE.createStore(), {
+      now,
+      attempts: [
+        { skill: 'spell', outcome: 'incorrect', at: bad },
+        { skill: 'spell', outcome: 'incorrect', at: bad },
+        { skill: 'spell', outcome: 'incorrect', at: bad }
+      ]
+    });
+    assert.equal(perf.spell.recentAttempts, 0, 'invalid at: ' + String(bad));
+    assert.equal(perf.spell.hasRecentTemporalData, false, 'invalid at: ' + String(bad));
+    assert.equal(perf.spell.recentReliable, false, 'invalid at: ' + String(bad));
+  });
+});
+
+test('phase4 D8: t alone is accepted as a timestamp', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', t: now - 1000 },
+      { skill: 'spell', outcome: 'incorrect', t: now - 2000 },
+      { skill: 'spell', outcome: 'incorrect', t: now - 3000 }
+    ]
+  });
+  assert.equal(perf.spell.recentAttempts, 3);
+  assert.equal(perf.spell.recentIncorrect, 3);
+  assert.equal(perf.spell.hasRecentTemporalData, true);
+  assert.equal(perf.spell.recentReliable, true);
+});
+
+test('phase4 D8: recent ts alone is accepted as a timestamp', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'independent', ts: now - 1000 },
+      { skill: 'spell', outcome: 'independent', ts: now - 2000 },
+      { skill: 'spell', outcome: 'independent', ts: now - 3000 }
+    ]
+  });
+  assert.equal(perf.spell.recentAttempts, 3);
+  assert.equal(perf.spell.recentIndependent, 3);
+  assert.equal(perf.spell.hasRecentTemporalData, true);
+  assert.equal(perf.spell.recentReliable, true);
+});
+
+test('phase4 D8: old ts is excluded by the recent window', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', ts: now - 8 * DAY },
+      { skill: 'spell', outcome: 'incorrect', ts: now - 8 * DAY },
+      { skill: 'spell', outcome: 'incorrect', ts: now - 8 * DAY }
+    ]
+  });
+  assert.equal(perf.spell.recentAttempts, 0);
+  assert.equal(perf.spell.hasRecentTemporalData, false);
+  assert.equal(perf.spell.recentReliable, false);
+  assert.equal(perf.spell.weakness, 0);
+});
+
+test('phase4 D8: mixed attempts count only the valid recent event', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now - 1000 },       // valid, recent
+      { skill: 'spell', outcome: 'incorrect' },                         // undated
+      { skill: 'spell', outcome: 'incorrect', at: now - 8 * DAY },      // old
+      { skill: 'spell', outcome: 'incorrect', at: 'not-a-timestamp' },  // invalid
+      { skill: 'spell', outcome: 'incorrect', at: now + 10 * 60 * 1000 } // unreasonable future
+    ]
+  });
+  assert.equal(perf.spell.recentAttempts, 1);
+  assert.equal(perf.spell.recentIncorrect, 1);
+  assert.equal(perf.spell.hasRecentTemporalData, true);
+  assert.equal(perf.spell.recentReliable, false, 'one event is below the 3-attempt reliability floor');
+});
+
+test('phase4 D8: recentAttempts works as the fallback source', () => {
+  const now = T(2026, 1, 1);
+
+  const undated = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    recentAttempts: [
+      { skill: 'spell', outcome: 'incorrect' },
+      { skill: 'spell', outcome: 'incorrect' },
+      { skill: 'spell', outcome: 'incorrect' }
+    ]
+  });
+  assert.equal(undated.spell.recentAttempts, 0);
+
+  const dated = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    recentAttempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now - 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now - 2000 },
+      { skill: 'spell', outcome: 'incorrect', at: now - 3000 }
+    ]
+  });
+  assert.equal(dated.spell.recentAttempts, 3);
+  assert.equal(dated.spell.recentReliable, true);
+});
+
+test('phase4 D8: explicit empty attempts takes precedence over recentAttempts', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [],
+    recentAttempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now - 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now - 2000 },
+      { skill: 'spell', outcome: 'incorrect', at: now - 3000 }
+    ]
+  });
+  // Documented behavior: an explicit attempts array is authoritative, even empty;
+  // recentAttempts is only consulted when attempts is not an array.
+  assert.equal(perf.spell.recentAttempts, 0);
+  assert.equal(perf.spell.hasRecentTemporalData, false);
+});
+
+test('phase4 D8: undated uncertain keeps its diagnostic count but not recent performance', () => {
+  const now = T(2026, 1, 1);
+  const perf = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'uncertain' },
+      { skill: 'spell', outcome: 'uncertain' },
+      { skill: 'spell', outcome: 'uncertain' }
+    ]
+  });
+  assert.equal(perf.spell.uncertain, 3, 'diagnostic uncertain count is preserved');
+  assert.equal(perf.spell.recentAttempts, 0);
+  assert.equal(perf.spell.hasRecentTemporalData, false);
+  assert.equal(perf.spell.recentReliable, false);
+});
+
+test('phase4 D8: unreasonably future timestamps are rejected; small clock skew is tolerated', () => {
+  const now = T(2026, 1, 1);
+
+  const farFuture = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now + 10 * 60 * 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now + 10 * 60 * 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now + 10 * 60 * 1000 }
+    ]
+  });
+  assert.equal(farFuture.spell.recentAttempts, 0);
+  assert.equal(farFuture.spell.hasRecentTemporalData, false);
+
+  const smallSkew = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now + 60 * 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now + 60 * 1000 },
+      { skill: 'spell', outcome: 'incorrect', at: now + 60 * 1000 }
+    ]
+  });
+  assert.equal(smallSkew.spell.recentAttempts, 3);
+  assert.equal(smallSkew.spell.recentReliable, true);
+});
+
+test('phase4 D8: timestamp precedence is at, then t, then ts', () => {
+  const now = T(2026, 1, 1);
+
+  const atWins = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: now - 8 * DAY, t: now - 1000, ts: now - 1000 }
+    ]
+  });
+  assert.equal(atWins.spell.recentAttempts, 0, 'a valid at is not overridden by a newer t/ts');
+
+  const tWins = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: 'bad', t: now - 1000 }
+    ]
+  });
+  assert.equal(tWins.spell.recentAttempts, 1);
+
+  const tsWins = LE.computeSkillPerformance(LE.createStore(), {
+    now,
+    attempts: [
+      { skill: 'spell', outcome: 'incorrect', at: 'bad', t: 'bad', ts: now - 1000 }
+    ]
+  });
+  assert.equal(tsWins.spell.recentAttempts, 1);
+});
+
+test('phase4 D8: undated attempts do not change practice plan ordering', () => {
+  const now = T(2026, 1, 1);
+  const store = LE.createStore();
+  ['r1','r2','r3'].forEach(w => {
+    LE.record(store, { skill: 'recognize', word: w, correct: true }, now - 20 * DAY);
+    LE.getRecord(store, 'recognize', w).nextReview = now - 2 * DAY;
+  });
+  ['l1','l2','l3'].forEach(w => {
+    LE.record(store, { skill: 'listen', word: w, correct: true }, now - 20 * DAY);
+    LE.getRecord(store, 'listen', w).nextReview = now - 2 * DAY;
+  });
+  const base = LE.selectPractice(store, {
+    now, maxItems: 6, weightSkills: true, includeNew: false
+  });
+  const withUndated = LE.selectPractice(store, {
+    now, maxItems: 6, weightSkills: true, includeNew: false,
+    attempts: [
+      { skill: 'recognize', outcome: 'incorrect' },
+      { skill: 'recognize', outcome: 'incorrect' },
+      { skill: 'recognize', outcome: 'incorrect' }
+    ]
+  });
+  assert.deepEqual(
+    withUndated.plan.map(e => e.key),
+    base.plan.map(e => e.key),
+    'undated events must not create a fake weak-skill priority'
+  );
+});
