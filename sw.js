@@ -2,11 +2,12 @@
    - Navigation (index.html) is network-first: you always see the latest version online,
      and the newest copy is cached for offline use.
    - Static files are cache-first with runtime population. */
-const CACHE = 'englishkids-v35';
+const CACHE = 'englishkids-v36';
 const CORE = [
   "./",
   "./index.html",
   "./engine.js",
+  "./placement.js",
   "./manifest.webmanifest",
   "./icon.svg",
   "./icon-192.png",

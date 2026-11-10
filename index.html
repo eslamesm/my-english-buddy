@@ -694,21 +694,22 @@
         <div class="chips" id="ageChips"></div>
       </div>
       <div class="field">
+        <label>🏫 السنة الدراسية (المنهج المصري)</label>
+        <div class="chips" id="schoolChips"></div>
+        <div class="muted" id="schoolHint">يُقترح حسب العمر — اختر سنة الطفل الفعلية في المدرسة.</div>
+      </div>
+      <div class="field">
+        <label>🎯 المستوى</label>
+        <div class="chips" id="levelChips"></div>
+        <div class="muted" id="levelHint">المستوى المقترح حسب الصف — يمكنك تغييره.</div>
+      </div>
+      <div class="field">
         <label>🙂 اختر شكل الأفاتار</label>
         <div class="avatars" id="avatarBox"></div>
       </div>
-      <div class="field">
-        <label>🎯 اختر المستوى</label>
-        <div class="chips" id="levelChips"></div>
-        <div class="muted" id="levelHint">يُقترح تلقائياً حسب العمر — يمكنك تغييره.</div>
-      </div>
-      <div class="field">
-        <label>🏫 السنة الدراسية (المنهج المصري)</label>
-        <div class="chips" id="schoolChips"></div>
-        <div class="muted" id="schoolHint">يُقترح حسب العمر — يمكنك تعديلها من إعدادات الوالدين لاحقاً.</div>
-      </div>
-      <div class="row-center">
-        <button class="btn green" id="btnCreate">✅ إنشاء الحساب والبدء</button>
+      <div class="row-center" style="flex-wrap:wrap;gap:10px">
+        <button class="btn green" id="btnCreate">🎯 إنشاء الحساب وابدأ اختبار تحديد المستوى</button>
+        <button class="btn small back" id="btnCreateSkip" type="button">💨 تخطي واستخدام المستوى اليدوي/الافتراضي</button>
       </div>
     </div>
     <div id="fileBanner" class="banner" style="display:none"></div>
@@ -755,6 +756,19 @@
       <button class="btn small purple" id="btnAchv" style="padding:5px 7px;font-size:10px">🏅 الإنجازات</button>
       <button class="btn small back" id="btnSwitch" style="padding:5px 7px;font-size:10px">👥 تبديل الطفل</button>
       <button class="btn small purple" id="btnReport" style="padding:5px 7px;font-size:10px">🔐 إعدادات الوالدين</button>
+    </div>
+
+    <!-- Placement-test card: 'start' until the first run, 'resume' once it is in flight -->
+    <div id="placementCard" style="display:none; margin:12px 0; align-items:center; gap:12px; background:linear-gradient(90deg,#f1eaff 0%,#e9f0ff 100%); border:1.5px solid #c9b8f7; border-radius:18px; padding:12px 14px; box-shadow:0 8px 20px rgba(80,50,160,.14)">
+      <span aria-hidden="true" style="font-size:36px; line-height:1">🎯</span>
+      <span style="flex:1; min-width:0">
+        <span id="placementCardTitle" style="display:block; font-weight:900; color:#3b2a6e; font-size:14px">حدد المستوى المناسب لطفلك</span>
+        <span id="placementCardText" class="muted" style="display:block; margin-top:2px; font-size:12px">اختبار تحديد المستوى — اختياري، ٣ دقائق، بدون وقت.</span>
+        <span style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+          <button class="btn small primary" id="pcStart" type="button">🎯 ابدأ الاختبار</button>
+          <button class="btn small back" id="pcHide" type="button">إخفاء</button>
+        </span>
+      </span>
     </div>
 
     <h2 class="home-sec-title">📊 تقدّمك <span class="sec-en">Progress</span></h2>
@@ -851,7 +865,7 @@
       <div class="spacer"></div>
       <div class="stars-top" id="testStars">🎯</div>
     </div>
-    <div class="qcount" style="color:#fff">اختبار تحديد المستوى — ١٠ أسئلة</div>
+    <div class="qcount" style="color:#fff">اختبار تحديد المستوى — خذ وقتك 🙂</div>
     <div class="practice">
       <div class="progress-dots" id="testDots"></div>
       <div class="gprompt" id="testPrompt"></div>
@@ -1060,6 +1074,7 @@
         <div class="setrow">
           <label>🎯 تحديد المستوى</label>
           <button class="btn small primary" id="btnRetest" type="button">إعادة اختبار تحديد المستوى</button>
+          <div class="muted" id="placementNote" style="margin-top:6px; font-size:12px"></div>
         </div>
         <div class="setrow">
           <label>🏫 سنة الطفل الدراسية (المنهج المصري)</label>
@@ -1176,6 +1191,7 @@
 
 <script src="img/art/map.js"></script>
 <script src="engine.js"></script>
+<script src="placement.js"></script>
 <script>
 /* =========================================================
    English Kids - offline-first pronunciation trainer
@@ -1697,19 +1713,8 @@ Object.keys(CUR_SUBUNITS).forEach(gid=>{ CUR_SUBUNITS[gid].forEach(s=>{
   MODE_DATA[key]=s.words.map(w=>({t:w[0],emoji:w[1],ar:w[2],spoken:w[0].toLowerCase()}));
 }); });
 
-/* Placement test question list (ascending difficulty) */
-const TEST_Q=[
-  {kind:'wordPic', word:'Cat',  emoji:'🐱'},
-  {kind:'wordPic', word:'Sun',  emoji:'☀️'},
-  {kind:'wordPic', word:'Book', emoji:'📕'},
-  {kind:'picWord', word:'Dog',  emoji:'🐶'},
-  {kind:'picWord', word:'Ball', emoji:'⚽'},
-  {kind:'listen',  word:'Milk', emoji:'🥛'},
-  {kind:'listen',  word:'Cake', emoji:'🍰'},
-  {kind:'letter',  letter:'A',  word:'Apple', emoji:'🍎'},
-  {kind:'letter',  letter:'B',  word:'Ball',  emoji:'⚽'},
-  {kind:'wordWord',word:'Apple',emoji:'🍎'}
-];
+/* Placement questions are generated by placement.js from the curriculum above
+   (adaptive, deterministic, grade-scoped). The old fixed TEST_Q list lived here. */
 
 const VOCAB = [...new Set([
   ...LETTERS.flatMap(l=>[l.word,l.word.toLowerCase(),l.t,l.t.toLowerCase(),l.sound]),
@@ -1841,9 +1846,10 @@ function currentProfile(){ return profiles.find(p=>p.id===currentId) || null; }
 })();
 /* migrate legacy schoolYear 'kg' -> 'kg1' after the KG split into KG1/KG2 */
 (function(){ let ch=false; profiles.forEach(p=>{ if(p.schoolYear==='kg'){ p.schoolYear='kg1'; ch=true; } }); if(ch) lsSet(PKEY, profiles); })();
-/* migrate storage schema to v2: seed the adaptive-learning store from old progress.
-   One-time + idempotent, backs up the v5.9 data first, never clears learner data. */
-const SCHEMA_VERSION=2, SKV='englishkids_schema_v';
+/* migrate storage schema to v3, composed of the ordered 2→3 steps below.
+   Never clears learner data; each step is one-time, guarded by SKV and
+   idempotent. Backups are taken before the first write. */
+const SCHEMA_VERSION=3, SKV='englishkids_schema_v';
 function seedLearningFromProgress(p){
   if(!p||!window.LearningEngine) return false;
   const empty=!p.learning||!p.learning.items||Object.keys(p.learning.items).length===0;
@@ -1854,7 +1860,7 @@ function seedLearningFromProgress(p){
 }
 (function migrateV2(){
   let cur=0; try{ cur=parseInt(localStorage.getItem(SKV),10)||0; }catch(e){}
-  if(cur>=SCHEMA_VERSION) return;
+  if(cur>=2) return;
   try{
     if(!localStorage.getItem('englishkids_backup_v59')){
       const b={ at:Date.now(), profiles:null, current:null, settings:null };
@@ -1866,8 +1872,51 @@ function seedLearningFromProgress(p){
   }catch(e){}
   let changed=false;
   profiles.forEach(p=>{ if(seedLearningFromProgress(p)) changed=true; });
+  const wroteV2 = (!changed) || lsSet(PKEY, profiles);
+  if(!wroteV2){ console.log('[migrateV2] profile write failed; SKV not bumped'); return; }
+  try{ localStorage.setItem(SKV, '2'); }catch(e){}
+})();
+/* migrate storage schema to v3: give legacy profiles a non-destructive placement snapshot.
+   levelKey / schoolYear are preserved untouched; levelManual defaults to true so an
+   existing (possibly parent-chosen) level is never silently rewritten.
+   englishkids_backup_v3 is written before the first PKEY write, only when SKV < 3;
+   if the backup cannot be made, the migration aborts and SKV stays below 3. */
+(function migrateV3(){
+  let cur=0; try{ cur=parseInt(localStorage.getItem(SKV),10)||0; }catch(e){}
+  if(cur>=SCHEMA_VERSION) return;
+  let backupExists=false;
+  try{ backupExists = !!localStorage.getItem('englishkids_backup_v3'); }catch(e){ backupExists=false; }
+  if(!backupExists){
+    const b={ at:Date.now(), profiles:null, current:null, settings:null };
+    try{ b.profiles=localStorage.getItem(PKEY); }catch(e){}
+    try{ b.current=localStorage.getItem(CKEY); }catch(e){}
+    try{ b.settings=localStorage.getItem(SKEY); }catch(e){}
+    let backupOk=true;
+    try{ localStorage.setItem('englishkids_backup_v3', JSON.stringify(b)); }catch(e){ backupOk=false; }
+    /* F2: if the backup cannot be created, stop before touching learner data or SKV. */
+    if(!backupOk){ console.log('[migrateV3] backup failed; migration aborted (SKV unchanged)'); return; }
+  }
+  let count=0;
+  try{
+    if(window.Placement && typeof Placement.migrateProfiles==='function'){
+      count=Placement.migrateProfiles(profiles,{});
+    } else {
+      /* placement.js not yet available: make sure the app still boots cleanly.
+         We only mark a legacy snapshot as done in memory; SKV stays at 2 so the
+         migration runs again on the next load. */
+      profiles.forEach(p=>{ if(p&&typeof p==='object' && p.placement==null) p.placement=null; });
+      console.log('[migrateV3] placement.js not loaded; SKV not bumped');
+      return;
+    }
+  }catch(e){ console.log('[migrateV3] skipped:', e && e.message); return; }
+  /* F1: SKV is committed only after the PKEY write succeeds (or nothing needed writing). */
+  let wrote=true;
+  if(count>0){
+    wrote = lsSet(PKEY, profiles);
+    if(!wrote){ console.log('[migrateV3] profile write failed; SKV not bumped'); return; }
+    console.log('[migrateV3] migrated '+count+' profile(s): placement=none, levelManual preserved');
+  }
   try{ localStorage.setItem(SKV, String(SCHEMA_VERSION)); }catch(e){}
-  if(changed) lsSet(PKEY, profiles);
 })();
 
 /* ------------------ THEME ------------------ */
@@ -1879,6 +1928,8 @@ function newProfile(name, age, avatar, levelKey, schoolYear){
   return {
     id:'p'+Date.now()+Math.floor(Math.random()*1000),
     name, age, avatar, levelKey, schoolYear:schoolYear||gradeFromAge(age), createdAt:Date.now(),
+    levelManual:false,
+    placement:null,
     progress:{},
     learning:(window.LearningEngine)?LearningEngine.createStore():{v:1,items:{}},
     dailyNew:(window.LearningEngine?LearningEngine.DAILY_NEW_DEFAULT:5),
@@ -3170,7 +3221,7 @@ function greetHome(){
 }
 
 /* ------------------ REGISTER / LOGIN ------------------ */
-let reg = { name:'', age:6, avatar:'🦁', levelKey:'5-7', schoolYear:'p1' };
+let reg = { name:'', age:6, avatar:'🦁', levelKey:'5-7', schoolYear:'p1', levelManual:false };
 function setWelcome(prof){
   const wt=document.getElementById('welcomeTxt');
   if(!wt) return;
@@ -3180,7 +3231,7 @@ function setWelcome(prof){
 function buildRegister(){
   setWelcome(currentProfile());
   const ac=document.getElementById('ageChips'); ac.innerHTML='';
-  for(let a=3;a<=14;a++){ const c=document.createElement('div'); c.className='chip'+(a===reg.age?' on':''); c.textContent=a; c.onclick=()=>{ reg.age=a; reg.levelKey=levelFromAge(a).key; reg.schoolYear=gradeFromAge(a); buildRegister(); }; ac.appendChild(c); }
+  for(let a=3;a<=14;a++){ const c=document.createElement('div'); c.className='chip'+(a===reg.age?' on':''); c.textContent=a; c.onclick=()=>{ reg.age=a; reg.schoolYear=gradeFromAge(a); if(!reg.levelManual) reg.levelKey=Placement.defaultLevel(reg.schoolYear); buildRegister(); }; ac.appendChild(c); }
   const ab=document.getElementById('avatarBox'); ab.innerHTML='';
   ALL_AVATARS.forEach(av=>{
     const locked=!avUnlocked(av);
@@ -3190,19 +3241,31 @@ function buildRegister(){
     ab.appendChild(d);
   });
   const lc=document.getElementById('levelChips'); lc.innerHTML='';
-  AGES.forEach(g=>{ const c=document.createElement('div'); c.className='chip'+(g.key===reg.levelKey?' on':''); c.textContent=g.emoji+' '+g.title; c.onclick=()=>{ reg.levelKey=g.key; buildRegister(); }; lc.appendChild(c); });
-  document.getElementById('levelHint').textContent='المستوى المقترح حسب العمر: '+levelFromAge(reg.age).title+' — يمكنك تغييره.';
+  AGES.forEach(g=>{ const c=document.createElement('div'); c.className='chip'+(g.key===reg.levelKey?' on':''); c.textContent=g.emoji+' '+g.title; c.onclick=()=>{ reg.levelKey=g.key; reg.levelManual=(g.key!==Placement.defaultLevel(reg.schoolYear)); buildRegister(); }; lc.appendChild(c); });
+  const suggLevel=Placement.defaultLevel(reg.schoolYear);
+  const suggTitle=(AGES.find(a=>a.key===suggLevel)||AGES[1]).title;
+  document.getElementById('levelHint').textContent='المستوى المقترح حسب الصف: '+suggTitle+(reg.levelManual?' — اخترت مستوى مختلفًا يدويًا.':' — يمكنك تغييره.');
   const sc=document.getElementById('schoolChips'); sc.innerHTML='';
-  CUR_GRADES.forEach(gd=>{ const c=document.createElement('div'); c.className='chip'+(gd.id===reg.schoolYear?' on':''); c.textContent=gd.emoji+' '+gd.grade; c.onclick=()=>{ reg.schoolYear=gd.id; buildRegister(); }; sc.appendChild(c); });
-  const sugg=CUR_GRADES.find(x=>x.id===gradeFromAge(reg.age));
-  document.getElementById('schoolHint').textContent='يُقترح حسب العمر: '+sugg.grade+' — ولكنك حر في اختيار سنة الطفل الفعلية في المدرسة.';
+  CUR_GRADES.forEach(gd=>{ const c=document.createElement('div'); c.className='chip'+(gd.id===reg.schoolYear?' on':''); c.textContent=gd.emoji+' '+gd.grade; c.onclick=()=>{ reg.schoolYear=gd.id; if(!reg.levelManual) reg.levelKey=Placement.defaultLevel(gd.id); buildRegister(); }; sc.appendChild(c); });
+  const byAge=CUR_GRADES.find(x=>x.id===gradeFromAge(reg.age))||CUR_GRADES[0];
+  document.getElementById('schoolHint').textContent='يُقترح حسب العمر: '+byAge.grade+' — اختر سنة الطفل الفعلية في المدرسة.';
+}
+function createProfileFromRegister(){
+  const name=(document.getElementById('regName').value||'').trim();
+  if(name.length<2){ toast('اكتب اسم الطفل أولاً 🙂'); return null; }
+  const p=newProfile(name, reg.age, reg.avatar, reg.levelKey, reg.schoolYear);
+  p.levelManual=!!reg.levelManual;
+  p.placement=Placement.none();
+  profiles.push(p); saveProfiles(); currentId=p.id; saveCurrent();
+  return p;
 }
 document.getElementById('btnCreate').onclick=()=>{
-  const name=(document.getElementById('regName').value||'').trim();
-  if(name.length<2){ toast('اكتب اسم الطفل أولاً 🙂'); return; }
-  const p=newProfile(name, reg.age, reg.avatar, reg.levelKey, reg.schoolYear);
-  profiles.push(p); saveProfiles(); currentId=p.id; saveCurrent();
+  if(!createProfileFromRegister()) return;
   startTest();
+};
+document.getElementById('btnCreateSkip').onclick=()=>{
+  if(!createProfileFromRegister()) return;
+  finishTest(true);
 };
 function buildLogin(){
   const box=document.getElementById('profList'); box.innerHTML='';
@@ -3219,7 +3282,7 @@ function buildLogin(){
     box.appendChild(el);
   });
 }
-document.getElementById('btnAddChild').onclick=()=>{ reg={name:'',age:6,avatar:'🦁',levelKey:'5-7',schoolYear:'p1'}; document.getElementById('regName').value=''; buildRegister(); go('register'); };
+document.getElementById('btnAddChild').onclick=()=>{ reg={name:'',age:6,avatar:'🦁',levelKey:'5-7',schoolYear:'p1',levelManual:false}; document.getElementById('regName').value=''; buildRegister(); go('register'); };
 document.getElementById('btnSwitch').onclick=()=>{ buildLogin(); go('login'); };
 document.getElementById('btnRewards').onclick=()=>{ buildRewards(); go('rewards'); };
 
@@ -3435,6 +3498,48 @@ document.getElementById('storyPlayAll').onclick=storySpeakAll;
 document.getElementById('storyStartQuiz').onclick=startStoryQuiz;
 
 /* ------------------ HOME ------------------ */
+function buildPlacementCard(p){
+  const card=document.getElementById('placementCard'); if(!card) return;
+  const prof=p||currentProfile();
+  if(!prof){ card.style.display='none'; return; }
+  const st=prof.placement&&prof.placement.status;
+  const show=(st==='none'||st==='running')&&!prof.placementCardHidden;
+  if(!show){ card.style.display='none'; return; }
+  const title=document.getElementById('placementCardTitle');
+  const txt=document.getElementById('placementCardText');
+  const btn=document.getElementById('pcStart');
+  if(st==='none'){
+    if(title) title.textContent='حدد المستوى المناسب لطفلك';
+    if(txt) txt.textContent='اختبار تحديد المستوى لـ «'+prof.name+'» — اختياري، ٣ دقائق، بدون وقت.';
+    if(btn){ btn.textContent='🎯 ابدأ الاختبار'; btn.dataset.mode='start'; }
+    card.dataset.mode='start';
+  }else{
+    const answers=(prof.placement.answers||[]).length;
+    const total=prof.placement.len||Placement.LIMITS.default;
+    if(title) title.textContent='أكمل اختبار تحديد المستوى لـ «'+prof.name+'»';
+    if(txt) txt.textContent='جاوبت '+answers+' من '+total+' سؤال — تقدر تواصل من حيث توقفت.';
+    if(btn){ btn.textContent='⏩ استكمال الاختبار'; btn.dataset.mode='resume'; }
+    card.dataset.mode='resume';
+  }
+  card.style.display='flex';
+}
+function buildPlacementNote(){
+  const el=document.getElementById('placementNote'); if(!el) return;
+  const p=currentProfile(); if(!p){ el.textContent=''; return; }
+  const g=AGES.find(a=>a.key===p.levelKey)||levelFromAge(p.age);
+  const suggKey=Placement.defaultLevel(placementProfileGrade(p));
+  const sg=AGES.find(a=>a.key===suggKey);
+  const pl=p.placement;
+  let line='الحالي: «'+g.title+'» • المقترح حسب الصف: «'+(sg?sg.title:suggKey)+'»';
+  if(p.levelManual) line+=' • مستواك اليدوي محفوظ';
+  if(pl&&pl.status==='done'){
+    const d=new Date(pl.takenAt||Date.now());
+    const asc=AGES.find(a=>a.key===pl.assignedLevel);
+    line+=' • آخر اختبار: «'+(asc?asc.title:pl.assignedLevel)+'» ('+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+')';
+  } else if(pl&&pl.status==='skipped'){ line+=' • تم تخطي الاختبار'; }
+  else { line+=' • لم يُحدَّد المستوى بعد'; }
+  el.textContent=line;
+}
 function enterHome(){
   if(dailySessionActive && dailySessionProfileId!==currentId) endSession();
   const p=currentProfile(); if(!p){ buildLogin(); go('login'); return; }
@@ -3447,6 +3552,7 @@ function enterHome(){
   buildModeGrid(); buildGameGrid(); buildCurGrid(); buildSmartGrid(); buildSimilarGrid(); applySettingsUI();
   const rc=buildReviewList().length; const rb=document.getElementById('btnReview');
   if(rb) rb.textContent= rc? ('🔁 مراجعة اليوم ('+rc+')') : '🔁 مراجعة اليوم';
+  buildPlacementCard(p);
   buildHomeProgress(); buildHomeActs(); buildHomeCur(); buildSessionHome();
   applyTheme();
   greetHome();
@@ -4623,89 +4729,151 @@ function isGameMaster(){
 const _origStartGame=startGame;
 startGame=function(type){ const p=currentProfile(); if(p){ p.stats.gamesPlayed=p.stats.gamesPlayed||{}; p.stats.gamesPlayed[type]=true; saveProfiles(); } _origStartGame(type); if(isGameMaster()){ const p2=currentProfile(); if(p2&&!p2.stats.gameMaster){ p2.stats.gameMaster=1; saveProfiles(); toast('🏅 وسام بطل الألعاب مفتوح! أكملت كل الألعاب!'); confettiBurst(); } } };
 
-/* ------------------ PLACEMENT TEST ------------------ */
+/* ------------------ PLACEMENT TEST (adaptive, placement.js) ------------------ */
 let tst=null;
+let _placementCur=null;
+function placementCurriculum(){
+  if(_placementCur) return _placementCur;
+  _placementCur=Placement.createCurriculum({
+    grades:CUR_GRADES,
+    words:CUR_WORDS,
+    subunits:CUR_SUBUNITS,
+    fallback:{ words:WORDS, phrases:PHRASES, sentences:SENTENCES },
+    log:(...a)=>{ try{ console.log('[placement]',...a); }catch(e){} }
+  });
+  return _placementCur;
+}
+function placementProfileGrade(p){
+  const g=p&&p.schoolYear;
+  return (g && CUR_GRADES.some(x=>x.id===g))? g : gradeFromAge((p&&p.age)||6);
+}
 function goHomeSafe(){
   const p=currentProfile();
   if(!p){ if(profiles.length){ buildLogin(); go('login'); } else { buildRegister(); go('register'); } return; }
   enterHome();
 }
-function startTest(){
-  tst={qIndex:0, correct:0, len:TEST_Q.length};
-  document.getElementById('testStars').textContent='🎯 '+tst.len+' أسئلة';
+function startTest(opts){
+  opts=opts||{};
+  const p=currentProfile();
+  if(!p){ goHomeSafe(); return; }
+  const cur=placementCurriculum();
+  const grade=placementProfileGrade(p);
+  let state=null;
+  if(!opts.fresh) state=Placement.resume(p.placement,{ curriculum:cur });
+  if(!state) state=Placement.start({ curriculum:cur, grade:grade, len:Placement.LIMITS.default, seed:opts.seed });
+  tst={ state:state, cur:cur, q:null, answered:false };
+  p.placement=Placement.running(state);
+  saveProfiles();
+  document.getElementById('testStars').textContent='🎯 '+(state.qIndex+1)+' / '+state.len;
   go('test'); renderTestQ();
 }
-function quitTest(){ finishTest(true); }
-document.getElementById('btnSkipTest').onclick=()=>finishTest(true);
-function testLevelFromScore(c){ return c<=3?'3-5':c<=6?'5-7':c<=8?'7-10':'10-14'; }
-function renderTestDots(){
-  const box=document.getElementById('testDots'); if(!box) return;
-  box.innerHTML=Array.from({length:tst.len},(_,i)=>`<span class="dot${i<tst.qIndex?' done':''}"></span>`).join('');
+/* Leaving the screen keeps the run resumable; explicit skip uses finishTest(true). */
+function quitTest(){
+  if(tst){ const p=currentProfile(); if(p){ p.placement=Placement.running(tst.state); saveProfiles(); } }
+  tst=null; enterHome();
 }
-function testOptions(q){
-  const pool=(q.kind==='letter'? LETTERS : WORDS).filter(x=>{
-    const w=q.word.toLowerCase(), xw=String(x.word||x.t).toLowerCase();
-    return xw!==w; });
-  const ds=shuffle(pool).slice(0,2).map(x=>({t:String(x.word||x.t), emoji:x.emoji||'🔤'}));
-  const correct={t:q.word, emoji:q.kind==='letter'? q.emoji : q.emoji};
-  return shuffle([correct, ...ds]);
+document.getElementById('btnSkipTest').onclick=()=>finishTest(true);
+function renderTestDots(){
+  const box=document.getElementById('testDots'); if(!box||!tst) return;
+  const at=tst.state.qIndex, len=tst.state.len;
+  box.innerHTML=Array.from({length:len},(_,i)=>`<span class="dot${i<at?' done':''}"></span>`).join('');
 }
 function renderTestQ(){
-  const box=document.getElementById('testOpts'); box.innerHTML='';
+  const box=document.getElementById('testOpts'); if(!box||!tst) return;
+  box.innerHTML='';
   document.getElementById('testFeedback').innerHTML='';
   const pw=document.getElementById('testPlayWrap'); pw.innerHTML='';
-  const q=TEST_Q[tst.qIndex];
   const gp=document.getElementById('testPrompt');
-  const opts=testOptions(q);
-  tst.ansKey=q.kind==='picWord'? q.word.toLowerCase() : q.emoji;
-  if(q.kind==='wordPic') gp.innerHTML='<div class="big-word" dir="ltr">'+q.word+'</div><div class="muted">اختر الصورة المناسبة</div>';
-  else if(q.kind==='picWord') gp.innerHTML='<div class="big">'+q.emoji+'</div><div class="muted">ما اسم هذا بالإنجليزية؟</div>';
-  else if(q.kind==='listen'){ gp.innerHTML='<div class="big">🔊</div>'; pw.innerHTML='<button class="btn blue" id="tPlay">🔁 اسمع الكلمة</button>'; }
-  else if(q.kind==='wordWord') gp.innerHTML='<div class="big-word" dir="ltr">'+q.word+'</div><div class="muted">اختر الصورة المناسبة</div>';
-  else gp.innerHTML='<div class="ltr">'+q.letter+'</div><div class="muted">اختر الصورة التي تبدأ بهذا الحرف</div>';
+  const q=Placement.nextQuestion(tst.cur, tst.state);
+  if(!q){ finishTest(false); return; }
+  tst.q=q; tst.answered=false;
+  document.getElementById('testStars').textContent='🎯 '+(tst.state.qIndex+1)+' / '+tst.state.len;
+  if(q.kind==='wordPic')
+    gp.innerHTML='<div class="big-word" dir="ltr">'+esc(q.word)+'</div><div class="muted">اختر الصورة المناسبة</div>';
+  else if(q.kind==='picWord')
+    gp.innerHTML='<div class="big">'+(q.emoji||'🖼️')+'</div><div class="muted">ما اسم هذا بالإنجليزية؟</div>';
+  else if(q.kind==='wordWord')
+    gp.innerHTML='<div class="big-word" dir="ltr">'+esc(q.word)+'</div><div class="muted">اختر المعنى الصحيح</div>';
+  else if(q.kind==='listen'){
+    gp.innerHTML='<div class="big">🔊</div><div class="muted">اسمع واختر الصورة</div>';
+    pw.innerHTML='<button class="btn blue" id="tPlay" type="button">🔁 اسمع الكلمة</button>';
+  } else {
+    gp.innerHTML='<div class="big-word" dir="ltr">'+esc(q.letter)+'</div><div class="muted">اختر الصورة التي تبدأ بهذا الحرف</div>';
+    pw.innerHTML='<button class="btn blue" id="tPlay" type="button">🔁 اسمع الحرف</button>';
+  }
   const tpb=document.getElementById('tPlay');
-  if(tpb) tpb.onclick=()=>say(wordFile(q.word.toLowerCase()), q.word);
-  opts.forEach(o=>{
+  if(tpb) tpb.onclick=()=>{ if(q.kind==='letter') speakTTS(q.letter,0.9); else say(q.audio,q.word); };
+  q.options.forEach(o=>{
     const b=document.createElement('div'); b.className='opt';
-    b.innerHTML=(q.kind==='picWord')? `<div class="ow" dir="ltr">${o.t}</div>` : picHTML(o.t,o.emoji,'og','oe');
+    if(q.kind==='picWord') b.innerHTML='<div class="ow" dir="ltr">'+esc(o.word)+'</div>';
+    else if(q.kind==='wordWord') b.innerHTML='<div class="ow" dir="rtl">'+esc(o.ar||'')+'</div>';
+    else b.innerHTML=picHTML(o.word,o.emoji,'og','oe');
     b.onclick=()=>answerTest(b,o);
     box.appendChild(b);
   });
   renderTestDots();
-  if(q.kind==='listen') setTimeout(()=>{ const p=document.getElementById('tPlay'); if(p) p.onclick(); }, 350);
+  if(q.kind==='listen') setTimeout(()=>{ if(!tst||tst.answered) return; const b=document.getElementById('tPlay'); if(b) b.onclick(); },350);
+  else if(q.kind==='wordPic'||q.kind==='picWord') setTimeout(()=>{ if(!tst||tst.answered) return; say(q.audio,q.word); },250);
+  else if(q.kind==='letter') setTimeout(()=>{ if(!tst||tst.answered) return; speakTTS(q.letter,0.9); },250);
 }
 function answerTest(btn,o){
-  if(!tst||tst.answered) return; tst.answered=true;
-  const q=TEST_Q[tst.qIndex];
-  const isOk=(q.kind==='picWord')? (o.t.toLowerCase()===q.word.toLowerCase()) : (o.emoji===tst.ansKey);
-  if(isOk){ tst.correct++; btn.classList.add('correct'); playCorrect(); }
+  if(!tst||tst.answered) return;
+  const q=tst.q;
+  const res=Placement.answer(tst.cur, tst.state, o.key);
+  tst.answered=true;
+  if(res.correct){ btn.classList.add('correct'); playCorrect(); }
   else{
     btn.classList.add('wrong'); playTone(300,0.16);
-    document.querySelectorAll('#testOpts .opt').forEach(el=>{
-      const v=(q.kind==='picWord')? (el.querySelector('.ow')?.textContent||'').toLowerCase() : (el.querySelector('.oe')?.textContent||'');
-      if(v===(q.kind==='picWord'? q.word.toLowerCase(): tst.ansKey)) el.classList.add('reveal');
-    });
+    const nodes=document.querySelectorAll('#testOpts .opt');
+    q.options.forEach((op,i)=>{ if(nodes[i] && op.key===q.answerKey) nodes[i].classList.add('reveal'); });
   }
-  document.getElementById('testFeedback').innerHTML=isOk
+  document.getElementById('testFeedback').innerHTML=res.correct
     ? '<div class="fb-text" style="color:#16a34a">صح! 👏</div>'
-    : '<div class="fb-text" style="color:#ef4444">الصح: '+q.word+' ✓</div>';
-  tst.qIndex++; renderTestDots();
-  setTimeout(()=>{ tst.answered=false; if(tst.qIndex>=tst.len) finishTest(false); else renderTestQ(); }, 900);
+    : '<div class="fb-text" style="color:#ef4444">الصح: '+esc(q.word)+' ✓</div>';
+  const p=currentProfile();
+  if(p){ p.placement=Placement.running(tst.state); saveProfiles(); }
+  document.getElementById('testStars').textContent='🎯 '+Math.min(tst.state.len,tst.state.qIndex+1)+' / '+tst.state.len;
+  renderTestDots();
+  setTimeout(()=>{ if(!tst) return; tst.answered=false; if(tst.state.qIndex>=tst.state.len) finishTest(false); else renderTestQ(); },900);
 }
 function finishTest(skip){
   stopTimer(); stopMouth();
   const p=currentProfile(); if(!p){ tst=null; goHomeSafe(); return; }
-  const correct = tst? tst.correct : 0;
-  const levelKey = skip? levelFromAge(p.age).key : testLevelFromScore(correct);
-  p.levelKey=levelKey; saveProfiles(); tst=null;
-  if(skip){ enterHome(); toast('أبقينا المستوى المناسب لعمرك 🎯'); return; }
-  const g=AGES.find(a=>a.key===levelKey);
-  const sc=Math.min(3,Math.max(1,Math.round(correct/TEST_Q.length*3)));
-  showReward({ emoji:'🏅', title:'🎯 نتيجة تحديد المستوى',
-    sub:`أجبت صح على ${correct} من ${TEST_Q.length} — مستواك: «${g.title}»`,
+  const cur=placementCurriculum();
+  const grade=placementProfileGrade(p);
+  if(skip){
+    const levelKey=(p.levelManual&&p.levelKey)? p.levelKey : Placement.defaultLevel(grade);
+    if(!p.levelManual) p.levelKey=levelKey;
+    p.placement=Placement.skipped(grade, levelKey);
+    tst=null; saveProfiles();
+    const g=AGES.find(a=>a.key===p.levelKey)||AGES[0];
+    enterHome();
+    toast('استخدمنا مستوى «'+g.title+'» — تقدر تعمل اختبار تحديد المستوى لاحقًا من إعدادات الوالدين 🎯');
+    return;
+  }
+  const result=Placement.finish(cur, tst? tst.state : null);
+  const keepManual=!!p.levelManual;
+  p.placement=result;
+  if(!keepManual) p.levelKey=result.assignedLevel;
+  tst=null; saveProfiles();
+  const g=AGES.find(a=>a.key===p.levelKey)||AGES[0];
+  const total=result.answers.length;
+  const correct=result.answers.filter(a=>a.correct).length;
+  const sc=Math.min(3,Math.max(1,Math.round(correct/Math.max(1,total)*3)));
+  let sub='أجبت صح على '+correct+' من '+total+' — المستوى المقترح: «'+(AGES.find(a=>a.key===result.assignedLevel)||g).title+'»';
+  if(keepManual) sub+=' — احتفظنا بمستواك اليدوي «'+g.title+'».';
+  if(result.farFromDefault){
+    const sgId=Placement.suggestedGradeFor(result.assignedTier, CUR_GRADES.map(x=>x.id));
+    const sg=CUR_GRADES.find(x=>x.id===sgId);
+    if(sg) sub+=' — قد يناسب طفلك أكثر: '+sg.grade+' (يمكن تغييره من إعدادات الوالدين).';
+  }
+  showReward({ emoji:'🏅', title:'🎯 نتيجة تحديد المستوى', sub:sub,
     stars:'⭐'.repeat(sc)+'☆'.repeat(3-sc),
-    speak: correct>=8?'Outstanding!':'Good try!' });
+    speak: correct>=Math.ceil(total*0.8)?'Outstanding!':'Good try!' });
+  try{ buildPlacementNote(); }catch(e){}
 }
+document.getElementById('pcStart').onclick=()=>{ const p=currentProfile(); if(p) p.placementCardHidden=false; startTest(); };
+document.getElementById('pcHide').onclick=()=>{ const p=currentProfile(); if(!p) return; p.placementCardHidden=true; saveProfiles(); buildPlacementCard(p); };
 
 /* ------------------ CURRICULUM ------------------ */
 function startCur(gid){
@@ -4762,7 +4930,14 @@ function buildCurGrid(){
       <span class="badge">⭐ ${done}/${data.length}</span>`;
     el.onclick=()=>startCur(u.key); g.appendChild(el); });
 }
-document.getElementById('btnRetest').onclick=()=>{ startTest(); };
+document.getElementById('btnRetest').onclick=()=>{
+  const p=currentProfile();
+  if(p && p.placement && p.placement.status==='running'){
+    const answered=(p.placement.answers||[]).length;
+    if(!confirm('هناك اختبار تحديد مستوى جارٍ لـ «'+p.name+'» ('+answered+' إجابة).\nإعادة الاختبار تبدأ من جديد وتمسح الإجابات الحالية.\nمتابعة؟')) return;
+  }
+  startTest({fresh:true});
+};
 
 /* ------------------ SRS REVIEW (مراجعة اليوم) ------------------ */
 function buildReviewList(){
@@ -5153,7 +5328,7 @@ function openReport(){
 }
 document.getElementById('gateBtn').onclick=()=>{
   const v=parseInt(document.getElementById('gateInput').value,10);
-  if(v===gateAns){ document.getElementById('gateCard').style.display='none'; document.getElementById('parentBody').style.display='block'; buildSchoolChips(); const pbtn=document.getElementById('btnPrintReport'); if(pbtn) pbtn.hidden=false; const ubtn=document.getElementById('btnCheckUpdate'); if(ubtn) ubtn.hidden=false; }
+  if(v===gateAns){ document.getElementById('gateCard').style.display='none'; document.getElementById('parentBody').style.display='block'; buildSchoolChips(); buildPlacementNote(); const pbtn=document.getElementById('btnPrintReport'); if(pbtn) pbtn.hidden=false; const ubtn=document.getElementById('btnCheckUpdate'); if(ubtn) ubtn.hidden=false; }
   else { document.getElementById('gateMsg').textContent='إجابة خاطئة، حاول مرة أخرى'; document.getElementById('gateInput').value=''; }
 };
 function buildSchoolChips(){
@@ -5164,7 +5339,7 @@ function buildSchoolChips(){
   CUR_GRADES.forEach(gd=>{
     const c=document.createElement('div'); c.className='chip'+(cur===gd.id?' on':'');
     c.textContent=gd.emoji+' '+gd.grade; sc.appendChild(c);
-    c.addEventListener('click',()=>{ p.schoolYear=gd.id; saveProfiles(); buildSchoolChips(); buildCurGrid(); toast('سنة الطفل الآن: '+gd.grade+' 🏫'); });
+    c.addEventListener('click',()=>{ p.schoolYear=gd.id; if(!p.levelManual) p.levelKey=Placement.defaultLevel(gd.id); saveProfiles(); buildSchoolChips(); buildCurGrid(); toast('سنة الطفل الآن: '+gd.grade+' 🏫 — يمكنك إعادة اختبار تحديد المستوى'); });
   });
 }
 function fmtTime(ms){ const m=Math.round(ms/60000); if(m<60) return m+' دقيقة'; const h=Math.floor(m/60); return h+' س '+ (m%60)+' د'; }
