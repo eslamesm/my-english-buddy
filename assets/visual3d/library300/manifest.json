@@ -1,0 +1,390 @@
+{
+  "batch": "library300",
+  "count": 96,
+  "assets": [
+    {
+      "key": "community-father-b300",
+      "path": "assets/visual3d/library300/community-father-b300.png"
+    },
+    {
+      "key": "community-mother-b300",
+      "path": "assets/visual3d/library300/community-mother-b300.png"
+    },
+    {
+      "key": "community-son-b300",
+      "path": "assets/visual3d/library300/community-son-b300.png"
+    },
+    {
+      "key": "community-daughter-b300",
+      "path": "assets/visual3d/library300/community-daughter-b300.png"
+    },
+    {
+      "key": "grandfather-b300",
+      "path": "assets/visual3d/library300/grandfather-b300.png"
+    },
+    {
+      "key": "grandmother-b300",
+      "path": "assets/visual3d/library300/grandmother-b300.png"
+    },
+    {
+      "key": "baby-b300",
+      "path": "assets/visual3d/library300/baby-b300.png"
+    },
+    {
+      "key": "doctor-b300",
+      "path": "assets/visual3d/library300/doctor-b300.png"
+    },
+    {
+      "key": "firefighter-2-b300",
+      "path": "assets/visual3d/library300/firefighter-2-b300.png"
+    },
+    {
+      "key": "police-officer-b300",
+      "path": "assets/visual3d/library300/police-officer-b300.png"
+    },
+    {
+      "key": "teacher-b300",
+      "path": "assets/visual3d/library300/teacher-b300.png"
+    },
+    {
+      "key": "reader-girl-b300",
+      "path": "assets/visual3d/library300/reader-girl-b300.png"
+    },
+    {
+      "key": "cat-orange-b300",
+      "path": "assets/visual3d/library300/cat-orange-b300.png"
+    },
+    {
+      "key": "puppy-b300",
+      "path": "assets/visual3d/library300/puppy-b300.png"
+    },
+    {
+      "key": "cow-spotted-b300",
+      "path": "assets/visual3d/library300/cow-spotted-b300.png"
+    },
+    {
+      "key": "sheep-white-b300",
+      "path": "assets/visual3d/library300/sheep-white-b300.png"
+    },
+    {
+      "key": "goat-white-b300",
+      "path": "assets/visual3d/library300/goat-white-b300.png"
+    },
+    {
+      "key": "horse-brown-b300",
+      "path": "assets/visual3d/library300/horse-brown-b300.png"
+    },
+    {
+      "key": "lion-gold-b300",
+      "path": "assets/visual3d/library300/lion-gold-b300.png"
+    },
+    {
+      "key": "tiger-orange-b300",
+      "path": "assets/visual3d/library300/tiger-orange-b300.png"
+    },
+    {
+      "key": "elephant-grey-b300",
+      "path": "assets/visual3d/library300/elephant-grey-b300.png"
+    },
+    {
+      "key": "monkey-brown-b300",
+      "path": "assets/visual3d/library300/monkey-brown-b300.png"
+    },
+    {
+      "key": "rabbit-white-b300",
+      "path": "assets/visual3d/library300/rabbit-white-b300.png"
+    },
+    {
+      "key": "zebra-striped-b300",
+      "path": "assets/visual3d/library300/zebra-striped-b300.png"
+    },
+    {
+      "key": "duckling-b300",
+      "path": "assets/visual3d/library300/duckling-b300.png"
+    },
+    {
+      "key": "hen-b300",
+      "path": "assets/visual3d/library300/hen-b300.png"
+    },
+    {
+      "key": "rooster-b300",
+      "path": "assets/visual3d/library300/rooster-b300.png"
+    },
+    {
+      "key": "bluebird-b300",
+      "path": "assets/visual3d/library300/bluebird-b300.png"
+    },
+    {
+      "key": "owl-b300",
+      "path": "assets/visual3d/library300/owl-b300.png"
+    },
+    {
+      "key": "penguin-b300",
+      "path": "assets/visual3d/library300/penguin-b300.png"
+    },
+    {
+      "key": "dolphin-b300",
+      "path": "assets/visual3d/library300/dolphin-b300.png"
+    },
+    {
+      "key": "clownfish-b300",
+      "path": "assets/visual3d/library300/clownfish-b300.png"
+    },
+    {
+      "key": "turtle-green-b300",
+      "path": "assets/visual3d/library300/turtle-green-b300.png"
+    },
+    {
+      "key": "frog-b300",
+      "path": "assets/visual3d/library300/frog-b300.png"
+    },
+    {
+      "key": "snake-b300",
+      "path": "assets/visual3d/library300/snake-b300.png"
+    },
+    {
+      "key": "butterfly-b300",
+      "path": "assets/visual3d/library300/butterfly-b300.png"
+    },
+    {
+      "key": "red-apple-b300",
+      "path": "assets/visual3d/library300/red-apple-b300.png"
+    },
+    {
+      "key": "yellow-banana-b300",
+      "path": "assets/visual3d/library300/yellow-banana-b300.png"
+    },
+    {
+      "key": "orange-fruit-b300",
+      "path": "assets/visual3d/library300/orange-fruit-b300.png"
+    },
+    {
+      "key": "purple-grapes-b300",
+      "path": "assets/visual3d/library300/purple-grapes-b300.png"
+    },
+    {
+      "key": "red-strawberry-b300",
+      "path": "assets/visual3d/library300/red-strawberry-b300.png"
+    },
+    {
+      "key": "watermelon-slice-b300",
+      "path": "assets/visual3d/library300/watermelon-slice-b300.png"
+    },
+    {
+      "key": "pineapple-gold-b300",
+      "path": "assets/visual3d/library300/pineapple-gold-b300.png"
+    },
+    {
+      "key": "mango-ripe-b300",
+      "path": "assets/visual3d/library300/mango-ripe-b300.png"
+    },
+    {
+      "key": "green-pear-b300",
+      "path": "assets/visual3d/library300/green-pear-b300.png"
+    },
+    {
+      "key": "red-cherries-b300",
+      "path": "assets/visual3d/library300/red-cherries-b300.png"
+    },
+    {
+      "key": "yellow-lemon-b300",
+      "path": "assets/visual3d/library300/yellow-lemon-b300.png"
+    },
+    {
+      "key": "coconut-half-b300",
+      "path": "assets/visual3d/library300/coconut-half-b300.png"
+    },
+    {
+      "key": "tomato-red-b300",
+      "path": "assets/visual3d/library300/tomato-red-b300.png"
+    },
+    {
+      "key": "carrot-orange-b300",
+      "path": "assets/visual3d/library300/carrot-orange-b300.png"
+    },
+    {
+      "key": "potato-brown-b300",
+      "path": "assets/visual3d/library300/potato-brown-b300.png"
+    },
+    {
+      "key": "cucumber-b300",
+      "path": "assets/visual3d/library300/cucumber-b300.png"
+    },
+    {
+      "key": "corn-yellow-b300",
+      "path": "assets/visual3d/library300/corn-yellow-b300.png"
+    },
+    {
+      "key": "lettuce-b300",
+      "path": "assets/visual3d/library300/lettuce-b300.png"
+    },
+    {
+      "key": "broccoli-b300",
+      "path": "assets/visual3d/library300/broccoli-b300.png"
+    },
+    {
+      "key": "eggplant-b300",
+      "path": "assets/visual3d/library300/eggplant-b300.png"
+    },
+    {
+      "key": "red-pepper-b300",
+      "path": "assets/visual3d/library300/red-pepper-b300.png"
+    },
+    {
+      "key": "onion-b300",
+      "path": "assets/visual3d/library300/onion-b300.png"
+    },
+    {
+      "key": "garlic-b300",
+      "path": "assets/visual3d/library300/garlic-b300.png"
+    },
+    {
+      "key": "salad-bowl-b300",
+      "path": "assets/visual3d/library300/salad-bowl-b300.png"
+    },
+    {
+      "key": "roast-chicken-b300",
+      "path": "assets/visual3d/library300/roast-chicken-b300.png"
+    },
+    {
+      "key": "fried-egg-b300",
+      "path": "assets/visual3d/library300/fried-egg-b300.png"
+    },
+    {
+      "key": "cheese-wedge-b300",
+      "path": "assets/visual3d/library300/cheese-wedge-b300.png"
+    },
+    {
+      "key": "bread-loaf-b300",
+      "path": "assets/visual3d/library300/bread-loaf-b300.png"
+    },
+    {
+      "key": "rice-bowl-b300",
+      "path": "assets/visual3d/library300/rice-bowl-b300.png"
+    },
+    {
+      "key": "vegetable-soup-b300",
+      "path": "assets/visual3d/library300/vegetable-soup-b300.png"
+    },
+    {
+      "key": "glass-milk-b300",
+      "path": "assets/visual3d/library300/glass-milk-b300.png"
+    },
+    {
+      "key": "orange-juice-b300",
+      "path": "assets/visual3d/library300/orange-juice-b300.png"
+    },
+    {
+      "key": "water-bottle-b300",
+      "path": "assets/visual3d/library300/water-bottle-b300.png"
+    },
+    {
+      "key": "chocolate-cake-b300",
+      "path": "assets/visual3d/library300/chocolate-cake-b300.png"
+    },
+    {
+      "key": "pink-icecream-b300",
+      "path": "assets/visual3d/library300/pink-icecream-b300.png"
+    },
+    {
+      "key": "popcorn-b300",
+      "path": "assets/visual3d/library300/popcorn-b300.png"
+    },
+    {
+      "key": "school-backpack-b300",
+      "path": "assets/visual3d/library300/school-backpack-b300.png"
+    },
+    {
+      "key": "stack-books-b300",
+      "path": "assets/visual3d/library300/stack-books-b300.png"
+    },
+    {
+      "key": "open-storybook-b300",
+      "path": "assets/visual3d/library300/open-storybook-b300.png"
+    },
+    {
+      "key": "blue-notebook-b300",
+      "path": "assets/visual3d/library300/blue-notebook-b300.png"
+    },
+    {
+      "key": "yellow-pencil-b300",
+      "path": "assets/visual3d/library300/yellow-pencil-b300.png"
+    },
+    {
+      "key": "pink-eraser-b300",
+      "path": "assets/visual3d/library300/pink-eraser-b300.png"
+    },
+    {
+      "key": "yellow-ruler-b300",
+      "path": "assets/visual3d/library300/yellow-ruler-b300.png"
+    },
+    {
+      "key": "red-scissors-b300",
+      "path": "assets/visual3d/library300/red-scissors-b300.png"
+    },
+    {
+      "key": "glue-stick-b300",
+      "path": "assets/visual3d/library300/glue-stick-b300.png"
+    },
+    {
+      "key": "crayon-set-b300",
+      "path": "assets/visual3d/library300/crayon-set-b300.png"
+    },
+    {
+      "key": "art-palette-b300",
+      "path": "assets/visual3d/library300/art-palette-b300.png"
+    },
+    {
+      "key": "laptop-blue-b300",
+      "path": "assets/visual3d/library300/laptop-blue-b300.png"
+    },
+    {
+      "key": "single-bed-b300",
+      "path": "assets/visual3d/library300/single-bed-b300.png"
+    },
+    {
+      "key": "wooden-chair-b300",
+      "path": "assets/visual3d/library300/wooden-chair-b300.png"
+    },
+    {
+      "key": "wooden-table-b300",
+      "path": "assets/visual3d/library300/wooden-table-b300.png"
+    },
+    {
+      "key": "green-sofa-b300",
+      "path": "assets/visual3d/library300/green-sofa-b300.png"
+    },
+    {
+      "key": "purple-armchair-b300",
+      "path": "assets/visual3d/library300/purple-armchair-b300.png"
+    },
+    {
+      "key": "bookshelf-2-b300",
+      "path": "assets/visual3d/library300/bookshelf-2-b300.png"
+    },
+    {
+      "key": "table-lamp-b300",
+      "path": "assets/visual3d/library300/table-lamp-b300.png"
+    },
+    {
+      "key": "alarm-clock-2-b300",
+      "path": "assets/visual3d/library300/alarm-clock-2-b300.png"
+    },
+    {
+      "key": "curtained-window-b300",
+      "path": "assets/visual3d/library300/curtained-window-b300.png"
+    },
+    {
+      "key": "wooden-door-b300",
+      "path": "assets/visual3d/library300/wooden-door-b300.png"
+    },
+    {
+      "key": "small-house-b300",
+      "path": "assets/visual3d/library300/small-house-b300.png"
+    },
+    {
+      "key": "potted-tree-b300",
+      "path": "assets/visual3d/library300/potted-tree-b300.png"
+    }
+  ]
+}

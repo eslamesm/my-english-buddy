@@ -155,9 +155,11 @@ test('static: sessionEvents keeps its exact shape and still has builder events',
 
 test('static: finishLevel and enterHome do not clear sessionEvents', () => {
   const flRaw = html.slice(html.indexOf('function finishLevel(){'), html.indexOf('/* build the end-of-session summary block'));
-  // The only reset inside finishLevel is the user-triggered "again" callback,
-  // which is intentional and pre-existing. Automatic clears are what we forbid.
-  const fl = flRaw.replace(/again: \(\)=>\{[^}]*\}/, 'again: () => {}');
+  // The only resets inside finishLevel are the user-triggered "again" callbacks
+  // (celebration and, since 2026-11-24, the zero-participation encouragement variant
+  // has its own identical one), which are intentional and pre-existing. Automatic
+  // clears are what we forbid.
+  const fl = flRaw.replace(/again: \(\)=>\{[^}]*\}/g, 'again: () => {}');
   assert.ok(!/sessionEvents=\[\]/.test(fl));
   const eh = html.slice(html.indexOf('function enterHome(){'), html.indexOf('function buildModeGrid(){'));
   assert.ok(!/sessionEvents=\[\]/.test(eh));

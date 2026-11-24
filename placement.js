@@ -183,7 +183,7 @@
   /* ------------------------------ curriculum ------------------------------ */
 
   /* Only single alphabetic words are usable: wordFile() maps them to
-     audio/words/<lowercase>.wav and picSrc() maps them to img/art/<slug>.svg. */
+     audio/words/<lowercase>.wav and the 3D art map resolves available illustrations. */
   function normalizeItem(raw) {
     if (raw == null) return null;
     const word = typeof raw === 'string' ? raw : (raw.t || raw.word || '');
@@ -371,7 +371,7 @@
       ar: target.ar,
       letter: built.letter,
       audio: 'audio/words/' + target.key + '.wav',
-      image: 'img/art/' + slug(target.word) + '.svg',
+      image: (typeof window !== 'undefined' && window.ART_IMG_3D && window.ART_IMG_3D[slug(target.word)]) || '',
       answerKey: target.key,
       options: options
     };

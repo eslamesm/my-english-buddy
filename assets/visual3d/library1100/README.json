@@ -1,0 +1,27 @@
+{
+  "batch": "library1100",
+  "count": 16,
+  "size": [
+    512,
+    512
+  ],
+  "alpha": true,
+  "assets": {
+    "thesunisverybrighttoday": "assets/visual3d/library1100/thesunisverybrighttoday.png",
+    "ihavealittlecatathome": "assets/visual3d/library1100/ihavealittlecatathome.png",
+    "canihavesomewaterplease": "assets/visual3d/library1100/canihavesomewaterplease.png",
+    "mymothermakesadeliciouscake": "assets/visual3d/library1100/mymothermakesadeliciouscake.png",
+    "wegotoschooleverymorning": "assets/visual3d/library1100/wegotoschooleverymorning.png",
+    "thebirdsingsabeautifulsong": "assets/visual3d/library1100/thebirdsingsabeautifulsong.png",
+    "iwanttolearnenglishverywell": "assets/visual3d/library1100/iwanttolearnenglishverywell.png",
+    "yesterdayiplayedwithmyfriends": "assets/visual3d/library1100/yesterdayiplayedwithmyfriends.png",
+    "goodbye": "assets/visual3d/library1100/goodbye.png",
+    "catch": "assets/visual3d/library1100/catch.png",
+    "shorts": "assets/visual3d/library1100/shorts.png",
+    "calendar-red": "assets/visual3d/library1100/calendar-red.png",
+    "calendar-blue": "assets/visual3d/library1100/calendar-blue.png",
+    "calendar-green": "assets/visual3d/library1100/calendar-green.png",
+    "calendar-yellow": "assets/visual3d/library1100/calendar-yellow.png",
+    "soccer-scene": "assets/visual3d/library1100/soccer-scene.png"
+  }
+}

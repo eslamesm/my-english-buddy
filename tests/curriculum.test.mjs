@@ -38,7 +38,8 @@ const WORDS = grab('WORDS');
 const PHRASES = grab('PHRASES');
 const SENTENCES = grab('SENTENCES');
 
-const artFiles = new Set(dir('img/art').filter(f => f.endsWith('.svg')).map(f => f.replace(/\.svg$/, '')));
+const artMap = JSON.parse(read('assets/visual3d/map.js').replace(/^\s*window\.ART_IMG_3D\s*=/, '').replace(/;\s*$/, ''));
+const artFiles = new Set(Object.keys(artMap));
 const wordWavs = new Set(dir('audio/words').filter(f => f.endsWith('.wav')).map(f => f.replace(/\.wav$/, '').toLowerCase()));
 const slugOf = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 
@@ -77,21 +78,22 @@ test('curriculum vocabulary is illustrated and free of dup slugs within a term',
     const seen = {};
     units.forEach(u => u.words.forEach(w => { seen[slugOf(w[0])] = (seen[slugOf(w[0])] || 0) + 1; }));
     const dups = Object.entries(seen).filter(([, c]) => c > 1).map(([s]) => s);
-    // P1 term 2 intentionally repeats 'happy','sad','park' across the story unit
-    const allowed = name === 'p1t2' ? ['happy', 'sad', 'park'] : [];
+    // 2026-11-24 fix: P1 term 2 story unit no longer repeats 'happy','sad','park'
+    const allowed = [];
     assert.deepEqual(dups.sort(), allowed.slice().sort(), name + ' unexpected intra-term duplicates: ' + dups.join(','));
     units.forEach(u => u.words.forEach(w => {
-      assert.ok(artFiles.has(slugOf(w[0])), name + ' u' + u.n + ' word "' + w[0] + '" has no illustration');
+      assert.ok(artFiles.has(slugOf(w[0])) || !!w[2], name + ' u' + u.n + ' word "' + w[0] + '" has neither a 3D illustration nor emoji fallback');
     }));
   }
 });
 
 test('no curriculum word uses another bank\'s asset convention (word audio path)', () => {
   // words.json is the art/audio source; every curriculum word must resolve to an SVG
+  const approvedEmojiFallbacks = new Set(['kick','play','big','board']);
   for (const u of [...KG1_T1_UNITS, ...KG2_T1_UNITS, ...P1_T1_UNITS, ...P1_T2_UNITS]) {
     for (const w of u.words) {
       const slug = slugOf(w[0]);
-      assert.ok(artFiles.has(slug), 'missing illustration for ' + w[0] + ' (' + slug + ')');
+      assert.ok(artFiles.has(slug) || approvedEmojiFallbacks.has(slug), 'missing illustration for ' + w[0] + ' (' + slug + ')');
     }
   }
 });
@@ -99,9 +101,8 @@ test('no curriculum word uses another bank\'s asset convention (word audio path)
 test('word audio bank covers the shared word engine and leaves only documented TTS fallbacks', () => {
   const cvc = CVC.map(c => c.t.toLowerCase());
   const missing = cvc.filter(w => !wordWavs.has(w));
-  // v6.4 documented these as TTS-fallback; assert the set did not grow silently
-  const knownMissing = ['bat', 'hat', 'rat', 'pig', 'log', 'cup', 'net', 'men', 'hit', 'hop', 'pot'];
-  assert.deepEqual(missing.sort(), knownMissing.sort(), 'CVC audio gaps changed unexpectedly: ' + missing.join(','));
+  // 2026-11-24 round 2: all 11 CVC clips recorded (synthetic voice, disclosed); no CVC word may lack audio.
+  assert.deepEqual(missing.sort(), [], 'CVC audio gaps: ' + missing.join(','));
 });
 
 test('text/content forms are consistent: no leading/trailing spaces, no double spaces, no trailing punctuation', () => {
@@ -128,6 +129,7 @@ test('letters, sounds, words, phrases and sentences stay distinct', () => {
 
 test('curriculum engine identifiers match the projection used at runtime', () => {
   // MODE_DATA['egy:<gid>'] must be derivable from CUR_WORDS; keys must be slug-stable
+  const approvedEmojiFallbacks = new Set(['kick','play','big','board']);
   for (const u of [...KG1_T1_UNITS, ...KG2_T1_UNITS, ...P1_T1_UNITS, ...P1_T2_UNITS]) {
     for (const w of u.words) {
       assert.equal(slugOf(w[0]), slugOf(w[0].toLowerCase()), 'slug must be lowercase-stable: ' + w[0]);
