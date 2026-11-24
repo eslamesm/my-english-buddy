@@ -821,7 +821,7 @@ test('E10: epoch transitions stay correct when lsSet declines persistence', () =
 /* ================================================================== */
 
 test('static: saveCurrent bumps the profile epoch only on an identity transition', () => {
-  assert.match(html, /function saveCurrent\(\)\{ if\(currentId!==savedCurrentId\)\{ profileEpoch\+\+; savedCurrentId=currentId; \} lsSet\(CKEY, currentId\); \}/);
+  assert.match(html, /function saveCurrent\(\)\{ if\(currentId!==savedCurrentId\)\{ profileEpoch\+\+; savedCurrentId=currentId; try\{if\(typeof window\.cancelSupportCourse==='function'\)window\.cancelSupportCourse\(\);\}catch\(e\)\{\} try\{cancelProgressionActivity\(\);\}catch\(e\)\{\} \} lsSet\(CKEY, currentId\); \}/);
   assert.match(html, /let savedCurrentId = currentId;/);
   assert.doesNotMatch(html, /function saveCurrent\(\)\{ profileEpoch\+\+;/);
 });

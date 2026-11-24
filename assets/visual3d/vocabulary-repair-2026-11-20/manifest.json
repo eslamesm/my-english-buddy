@@ -1,0 +1,323 @@
+{
+  "batch": "vocabulary-repair-2026-11-20",
+  "count": 58,
+  "format": "PNG",
+  "dimensions": [
+    512,
+    512
+  ],
+  "color_mode": "RGBA",
+  "runtime_map": "assets/visual3d/map.js",
+  "assets_directory": "assets/visual3d/vocabulary-repair-2026-11-20",
+  "words": [
+    {
+      "word": "please",
+      "runtime_key": "please",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/please.png"
+    },
+    {
+      "word": "sharpener",
+      "runtime_key": "sharpener",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/sharpener.png"
+    },
+    {
+      "word": "drum",
+      "runtime_key": "drum",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/drum.png"
+    },
+    {
+      "word": "guitar",
+      "runtime_key": "guitar",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/guitar.png"
+    },
+    {
+      "word": "piano",
+      "runtime_key": "piano",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/piano.png"
+    },
+    {
+      "word": "flute",
+      "runtime_key": "flute",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/flute.png"
+    },
+    {
+      "word": "black",
+      "runtime_key": "black",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/black.png"
+    },
+    {
+      "word": "purple",
+      "runtime_key": "purple",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/purple.png"
+    },
+    {
+      "word": "white",
+      "runtime_key": "white",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/white.png"
+    },
+    {
+      "word": "sphinx",
+      "runtime_key": "sphinx",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/sphinx.png"
+    },
+    {
+      "word": "stone",
+      "runtime_key": "stone",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/stone.png"
+    },
+    {
+      "word": "king",
+      "runtime_key": "king",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/king.png"
+    },
+    {
+      "word": "alexandria",
+      "runtime_key": "alexandria",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/alexandria.png"
+    },
+    {
+      "word": "cairo",
+      "runtime_key": "cairo",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/cairo.png"
+    },
+    {
+      "word": "luxor",
+      "runtime_key": "luxor",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/luxor.png"
+    },
+    {
+      "word": "aswan",
+      "runtime_key": "aswan",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/aswan.png"
+    },
+    {
+      "word": "behind",
+      "runtime_key": "behind",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/behind.png"
+    },
+    {
+      "word": "dentist",
+      "runtime_key": "dentist",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/dentist.png"
+    },
+    {
+      "word": "vet",
+      "runtime_key": "vet",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/vet.png"
+    },
+    {
+      "word": "policeofficer",
+      "runtime_key": "policeofficer",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/policeofficer.png"
+    },
+    {
+      "word": "sweater",
+      "runtime_key": "sweater",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/sweater.png"
+    },
+    {
+      "word": "zipper",
+      "runtime_key": "zipper",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/zipper.png"
+    },
+    {
+      "word": "astronaut",
+      "runtime_key": "astronaut",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/astronaut.png"
+    },
+    {
+      "word": "motorbike",
+      "runtime_key": "motorbike",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/motorbike.png"
+    },
+    {
+      "word": "yacht",
+      "runtime_key": "yacht",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/yacht.png"
+    },
+    {
+      "word": "stop",
+      "runtime_key": "stop",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/stop.png"
+    },
+    {
+      "word": "go",
+      "runtime_key": "go",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/go.png"
+    },
+    {
+      "word": "cross",
+      "runtime_key": "cross",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/cross.png"
+    },
+    {
+      "word": "jellyfish",
+      "runtime_key": "jellyfish",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/jellyfish.png"
+    },
+    {
+      "word": "ant",
+      "runtime_key": "ant",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/ant.png"
+    },
+    {
+      "word": "insect",
+      "runtime_key": "insect",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/insect.png"
+    },
+    {
+      "word": "octopus",
+      "runtime_key": "octopus",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/octopus.png"
+    },
+    {
+      "word": "parrot",
+      "runtime_key": "parrot",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/parrot.png"
+    },
+    {
+      "word": "man",
+      "runtime_key": "man",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/man.png"
+    },
+    {
+      "word": "olive",
+      "runtime_key": "olive",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/olive.png"
+    },
+    {
+      "word": "guava",
+      "runtime_key": "guava",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/guava.png"
+    },
+    {
+      "word": "date",
+      "runtime_key": "date",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/date.png"
+    },
+    {
+      "word": "fig",
+      "runtime_key": "fig",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/fig.png"
+    },
+    {
+      "word": "eleven",
+      "runtime_key": "eleven",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/eleven.png"
+    },
+    {
+      "word": "twelve",
+      "runtime_key": "twelve",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/twelve.png"
+    },
+    {
+      "word": "thirteen",
+      "runtime_key": "thirteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/thirteen.png"
+    },
+    {
+      "word": "fourteen",
+      "runtime_key": "fourteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/fourteen.png"
+    },
+    {
+      "word": "fifteen",
+      "runtime_key": "fifteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/fifteen.png"
+    },
+    {
+      "word": "sixteen",
+      "runtime_key": "sixteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/sixteen.png"
+    },
+    {
+      "word": "seventeen",
+      "runtime_key": "seventeen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/seventeen.png"
+    },
+    {
+      "word": "eighteen",
+      "runtime_key": "eighteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/eighteen.png"
+    },
+    {
+      "word": "nineteen",
+      "runtime_key": "nineteen",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/nineteen.png"
+    },
+    {
+      "word": "twenty",
+      "runtime_key": "twenty",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/twenty.png"
+    },
+    {
+      "word": "pound",
+      "runtime_key": "pound",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/pound.png"
+    },
+    {
+      "word": "restaurant",
+      "runtime_key": "restaurant",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/restaurant.png"
+    },
+    {
+      "word": "line",
+      "runtime_key": "line",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/line.png"
+    },
+    {
+      "word": "librarian",
+      "runtime_key": "librarian",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/librarian.png"
+    },
+    {
+      "word": "shout",
+      "runtime_key": "shout",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/shout.png"
+    },
+    {
+      "word": "trash",
+      "runtime_key": "trash",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/trash.png"
+    },
+    {
+      "word": "tourguide",
+      "runtime_key": "tourguide",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/tourguide.png"
+    },
+    {
+      "word": "food",
+      "runtime_key": "food",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/food.png"
+    },
+    {
+      "word": "yummy",
+      "runtime_key": "yummy",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/yummy.png"
+    },
+    {
+      "word": "portsaid",
+      "runtime_key": "portsaid",
+      "path": "assets/visual3d/vocabulary-repair-2026-11-20/portsaid.png"
+    }
+  ],
+  "approved_replacements": {
+    "line": "Replaced with separate 512x512 RGBA image: four boys in a single queue",
+    "vet": "Replaced with boy veterinarian illustration; checkerboard background removed by edge-connected mask",
+    "aswan": "Replaced using the user-supplied Aswan felucca reference image"
+  },
+  "revisions": {
+    "date": "2026-11-21",
+    "replaced_assets": [
+      "cross",
+      "dentist",
+      "librarian",
+      "motorbike",
+      "policeofficer",
+      "sweater",
+      "tourguide",
+      "zipper"
+    ],
+    "note": "Eight approved standalone crops replace the corresponding original PNG assets. Runtime keys and curriculum data are unchanged."
+  }
+}

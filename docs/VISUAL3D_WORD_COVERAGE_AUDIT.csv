@@ -1,0 +1,405 @@
+﻿slug,english,arabic,asset_status,visual_requirement,asset_path
+a,A,تفاحة,3D linked,Letter linked to canonical example object,assets/visual3d/apple.png
+b,B,كرة,3D linked,Letter linked to canonical example object,assets/visual3d/ball.png
+c,C,قطة,3D linked,Letter linked to canonical example object,assets/visual3d/cat.png
+d,D,كلب,3D linked,Letter linked to canonical example object,assets/visual3d/dog.png
+e,E,بيضة,3D linked,Letter linked to canonical example object,assets/visual3d/egg.png
+f,F,سمكة,3D linked,Letter linked to canonical example object,assets/visual3d/fish.png
+g,G,عنزة,3D linked,Letter linked to canonical example object,assets/visual3d/goat.png
+h,H,قبعة,3D linked,Letter linked to canonical example object,assets/visual3d/hat.png
+i,I,ثلج,3D linked,Letter linked to canonical example object,assets/visual3d/ice.png
+j,J,عصير,3D linked,Letter linked to canonical example object,assets/visual3d/juice.png
+k,K,طائرة ورقية,3D linked,Letter linked to canonical example object,assets/visual3d/kite.png
+l,L,أسد,3D linked,Letter linked to canonical example object,assets/visual3d/lion.png
+m,M,قرد,3D linked,Letter linked to canonical example object,assets/visual3d/monkey.png
+n,N,عش,3D linked,Letter linked to canonical example object,assets/visual3d/nest.png
+o,O,برتقالة,3D linked,Letter linked to canonical example object,assets/visual3d/orange.png
+p,P,خنزير,3D linked,Letter linked to canonical example object,assets/visual3d/pig.png
+q,Q,ملكة,3D linked,Letter linked to canonical example object,assets/visual3d/queen.png
+r,R,أرنب,3D linked,Letter linked to canonical example object,assets/visual3d/rabbit.png
+s,S,شمس,3D linked,Letter linked to canonical example object,assets/visual3d/sun.png
+t,T,نمر,3D linked,Letter linked to canonical example object,assets/visual3d/tiger.png
+u,U,مظلة,3D linked,Letter linked to canonical example object,assets/visual3d/umbrella.png
+v,V,شاحنة,3D linked,Letter linked to canonical example object,assets/visual3d/truck.png
+w,W,ماء,3D linked,Letter linked to canonical example object,assets/visual3d/water.png
+x,X,ثعلب,3D linked,Letter linked to canonical example object,assets/visual3d/fox.png
+y,Y,يويو,3D linked,Letter linked to canonical example object,assets/visual3d/yoyo.png
+z,Z,حمار وحشي,3D linked,Letter linked to canonical example object,assets/visual3d/zebra.png
+cat,cat,قطة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cat.png
+bat,bat,خفاش,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/bat.png
+hat,hat,قبعة,3D linked,Object/person/place/nature illustration required,assets/visual3d/hat.png
+mat,mat,حصيرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/mat.png
+rat,rat,جرذ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/rat.png
+bag,bag,حقيبة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/bag.png
+bed,bed,سرير,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/bed.png
+leg,leg,ساق,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/leg.png
+pig,pig,خنزير,3D linked,Object/person/place/nature illustration required,assets/visual3d/pig.png
+dog,dog,كلب,3D linked,Object/person/place/nature illustration required,assets/visual3d/dog.png
+log,log,حطب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/log.png
+sun,sun,شمس,3D linked,Object/person/place/nature illustration required,assets/visual3d/sun.png
+cup,cup,كوب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/cup.png
+nut,nut,جوز,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/nut.png
+net,net,شبكة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/net.png
+men,men,رجال,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/men.png
+hit,hit,يضرب,3D linked,Action illustration required,assets/visual3d/library1800/hit.png
+hop,hop,يقفز,3D linked,Action illustration required,assets/visual3d/library1800/hop.png
+hot,hot,حار,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/sun.png
+pot,pot,قدر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/pot.png
+ball,ball,كرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/ball.png
+fish,fish,سمكة,3D linked,Object/person/place/nature illustration required,assets/visual3d/fish.png
+star,star,نجمة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/star.png
+tree,tree,شجرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/tree.png
+book,book,كتاب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/book.png
+milk,milk,حليب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/milk.png
+cake,cake,كيكة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cake.png
+bird,bird,طائر,3D linked,Object/person/place/nature illustration required,assets/visual3d/bird.png
+moon,moon,قمر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/moon.png
+apple,apple,تفاحة,3D linked,Object/person/place/nature illustration required,assets/visual3d/apple.png
+car,car,سيارة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/car.png
+house,house,منزل,3D linked,Object/person/place/nature illustration required,assets/visual3d/house.png
+flower,flower,زهرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/flower.png
+banana,banana,موز,3D linked,Object/person/place/nature illustration required,assets/visual3d/banana.png
+rabbit,rabbit,أرنب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/rabbit.png
+table,table,طاولة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/table.png
+water,water,ماء,3D linked,Object/person/place/nature illustration required,assets/visual3d/water.png
+goodmorning,Good morning,صباح الخير,3D linked,Phrase/social scene required,assets/visual3d/library800/goodmorning.png
+goodnight,Good night,تصبح على خير,3D linked,Phrase/social scene required,assets/visual3d/library800/goodnight.png
+thankyou,Thank you,شكراً,3D linked,Phrase/social scene required,assets/visual3d/library800/thankyou.png
+youarewelcome,You are welcome,على الرحب والسعة,3D linked,Sentence scene required,assets/visual3d/library800/youarewelcome.png
+howareyou,How are you,كيف حالك,3D linked,Sentence scene required,assets/visual3d/library800/howareyou.png
+iamfine,I am fine,أنا بخير,3D linked,Sentence scene required,assets/visual3d/library800/iamfine.png
+mynameis,My name is,اسمي هو,3D linked,Sentence scene required,assets/visual3d/library800/mynameis.png
+iloveyou,I love you,أحبك,3D linked,Sentence scene required,assets/visual3d/library800/iloveyou.png
+excuseme,Excuse me,من فضلك,3D linked,Phrase/social scene required,assets/visual3d/library800/excuseme.png
+seeyoulater,See you later,أراك لاحقاً,3D linked,Sentence scene required,assets/visual3d/library800/seeyoulater.png
+goodluck,Good luck,حظاً سعيداً,3D linked,Phrase/social scene required,assets/visual3d/library800/goodluck.png
+happybirthday,Happy birthday,عيد ميلاد سعيد,3D linked,Phrase/social scene required,assets/visual3d/library800/happybirthday.png
+iliketoplayfootball,I like to play football,أحب لعب كرة القدم,3D linked,Sentence scene required,assets/visual3d/library800/iliketoplayfootball.png
+myfavoritecolorisblue,My favorite color is blue,لوني المفضل أزرق,3D linked,Sentence scene required,assets/visual3d/library800/myfavoritecolorisblue.png
+thesunisverybrighttoday,The sun is very bright today,الشمس مشرقة جداً اليوم,3D linked,Sentence scene required,assets/visual3d/library1100/thesunisverybrighttoday.png
+ihavealittlecatathome,I have a little cat at home,لدي قطة صغيرة في البيت,3D linked,Sentence scene required,assets/visual3d/library1100/ihavealittlecatathome.png
+canihavesomewaterplease,Can I have some water please,هل يمكنني الحصول على ماء لو سمحت,3D linked,Sentence scene required,assets/visual3d/library1100/canihavesomewaterplease.png
+mymothermakesadeliciouscake,My mother makes a delicious cake,أمي تصنع كيكة لذيذة,3D linked,Sentence scene required,assets/visual3d/library1100/mymothermakesadeliciouscake.png
+wegotoschooleverymorning,We go to school every morning,نذهب إلى المدرسة كل صباح,3D linked,Sentence scene required,assets/visual3d/library1100/wegotoschooleverymorning.png
+thebirdsingsabeautifulsong,The bird sings a beautiful song,الطائر يغني أغنية جميلة,3D linked,Sentence scene required,assets/visual3d/library1100/thebirdsingsabeautifulsong.png
+iwanttolearnenglishverywell,I want to learn English very well,أريد تعلم الإنجليزية جيداً,3D linked,Sentence scene required,assets/visual3d/library1100/iwanttolearnenglishverywell.png
+yesterdayiplayedwithmyfriends,Yesterday I played with my friends,أمس لعبت مع أصدقائي,3D linked,Sentence scene required,assets/visual3d/library1100/yesterdayiplayedwithmyfriends.png
+hello,Hello,مرحباً,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/hello.png
+goodbye,Goodbye,وداعاً,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1100/goodbye.png
+boy,Boy,ولد,3D linked,Object/person/place/nature illustration required,assets/visual3d/son.png
+girl,Girl,بنت,3D linked,Object/person/place/nature illustration required,assets/visual3d/daughter.png
+friends,Friends,أصدقاء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/friends.png
+happy,Happy,سعيد,3D linked,Concept/emotion illustration required,assets/visual3d/library600/happy-face.png
+sad,Sad,حزين,3D linked,Concept/emotion illustration required,assets/visual3d/library600/sad-face.png
+classroom,Classroom,فصل دراسي,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/classroom.png
+teacher,Teacher,معلّم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/teacher-b300.png
+chair,Chair,كرسيّ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/chair.png
+desk,Desk,مكتب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/desk.png
+pencil,Pencil,قلم رصاص,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/pencil.png
+eraser,Eraser,ممحاة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/eraser.png
+crayon,Crayon,قلم تلوين,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/crayon.png
+playground,Playground,ملعب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/playground.png
+swing,Swing,أرجوحة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/swing.png
+slide,Slide,زحليقة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/slide.png
+hair,Hair,شعر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/hair.png
+face,Face,وجه,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/boy-face.png
+eyes,Eyes,عيون,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/eyes.png
+ears,Ears,أذنان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/ears.png
+nose,Nose,أنف,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/nose.png
+mouth,Mouth,فم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/mouth.png
+teeth,Teeth,أسنان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/teeth.png
+arms,Arms,ذراعان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/arms.png
+hands,Hands,يدان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/hands.png
+legs,Legs,ساقان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/legs.png
+feet,Feet,قدمان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/feet.png
+grandfather,Grandfather,جدّ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/grandfather-b300.png
+grandmother,Grandmother,جدّة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/grandmother-b300.png
+mother,Mother,أم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/mother.png
+sister,Sister,أخت,3D linked,Object/person/place/nature illustration required,assets/visual3d/daughter.png
+brother,Brother,أخ,3D linked,Object/person/place/nature illustration required,assets/visual3d/son.png
+garden,Garden,حديقة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library237/garden.png
+mower,Mower,جزّازة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/mower.png
+grass,Grass,عشب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/grass.png
+fruits,Fruits,فواكه,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/fruits.png
+chocolate,Chocolate,شوكولاتة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/chocolate.png
+chips,Chips,رقائق,3D linked,Object/person/place/nature illustration required,assets/visual3d/library700/chips.png
+juice,Juice,عصير,3D linked,Object/person/place/nature illustration required,assets/visual3d/juice.png
+sandwich,Sandwich,شطيرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/sandwich.png
+walk,Walk,يمشي,3D linked,Action illustration required,assets/visual3d/library700/walk.png
+run,Run,يجري,3D linked,Action illustration required,assets/visual3d/library700/run.png
+jump,Jump,يقفز,3D linked,Action illustration required,assets/visual3d/library700/jump.png
+skip,Skip,يقفز بالحبل,3D linked,Action illustration required,assets/visual3d/library700/skip.png
+kick,Kick,يرفس,3D linked,Action illustration required,assets/visual3d/library100/football.png
+play,Play,يلعب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/yoyo.png
+throw,Throw,يقذف,3D linked,Action illustration required,assets/visual3d/library700/throw.png
+catch,Catch,يمسك,3D linked,Action illustration required,assets/visual3d/library1800/catch.png
+tshirt,T-Shirt,تي شيرت,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/tshirt.png
+dress,Dress,فستان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/dress.png
+trousers,Trousers,بنطال,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/trousers.png
+pants,Pants,سروال,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/trousers.png
+skirt,Skirt,جيبة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/skirt.png
+shorts,Shorts,شورت,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1100/shorts.png
+cap,Cap,قبعة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cap.png
+shoes,Shoes,حذاء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/shoes.png
+socks,Socks,جوارب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/socks.png
+sunday,Sunday,الأحد,Legacy SVG fallback,Calendar/time illustration required,img/art/sunday.svg
+monday,Monday,الاثنين,Legacy SVG fallback,Calendar/time illustration required,img/art/monday.svg
+tuesday,Tuesday,الثلاثاء,Legacy SVG fallback,Calendar/time illustration required,img/art/tuesday.svg
+wednesday,Wednesday,الأربعاء,Legacy SVG fallback,Calendar/time illustration required,img/art/wednesday.svg
+thursday,Thursday,الخميس,Legacy SVG fallback,Calendar/time illustration required,img/art/thursday.svg
+friday,Friday,الجمعة,Legacy SVG fallback,Calendar/time illustration required,img/art/friday.svg
+saturday,Saturday,السبت,Legacy SVG fallback,Calendar/time illustration required,img/art/saturday.svg
+today,Today,اليوم,Legacy SVG fallback,Calendar/time illustration required,img/art/today.svg
+tomorrow,Tomorrow,غداً,Legacy SVG fallback,Calendar/time illustration required,img/art/tomorrow.svg
+yesterday,Yesterday,أمس,Legacy SVG fallback,Calendar/time illustration required,img/art/yesterday.svg
+morning,Morning,صباح,3D linked,Calendar/time illustration required,assets/visual3d/library100/sun.png
+noon,Noon,ظهر,Legacy SVG fallback,Calendar/time illustration required,img/art/noon.svg
+night,Night,ليل,3D linked,Calendar/time illustration required,assets/visual3d/library100/moon.png
+breakfast,Breakfast,الفطور,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/egg.png
+lunch,Lunch,الغداء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/sandwich.png
+dinner,Dinner,العشاء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/soup.png
+getup,Get Up,أستيقظ,3D linked,Phrase/social scene required,assets/visual3d/library1800/getup.png
+gotobed,Go to Bed,أنام,3D linked,Sentence scene required,assets/visual3d/library1800/gotobed.png
+gotoschool,Go to School,أذهب إلى المدرسة,3D linked,Sentence scene required,assets/visual3d/library1800/gotoschool.png
+shakehands,Shake Hands,مصافحة,3D linked,Phrase/social scene required,assets/visual3d/library1800/shakehands.png
+board,Board,سبّورة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library200/blackboard-b200.png
+sky,Sky,سماء,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/sky.svg
+butterfly,Butterfly,فراشة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/butterfly-b300.png
+circle,Circle,دائرة,3D mapped — library2000,Object/person/place/nature illustration required,circle
+square,Square,مربّع,3D mapped — library2000,Object/person/place/nature illustration required,square
+triangle,Triangle,مثلّث,3D mapped — library2000,Object/person/place/nature illustration required,triangle
+rectangle,Rectangle,مستطيل,3D mapped — library2000,Object/person/place/nature illustration required,rectangle
+green,Green,أخضر,3D mapped — library2000,Object/person/place/nature illustration required,rectangle
+blue,Blue,أزرق,3D mapped — library2000,Object/person/place/nature illustration required,circle
+red,Red,أحمر,3D mapped — library2000,Object/person/place/nature illustration required,square
+yellow,Yellow,أصفر,3D mapped — library2000,Object/person/place/nature illustration required,triangle
+parents,Parents,الوالدان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/family.png
+father,Father,أب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/father.png
+one,One,واحد,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/one.svg
+two,Two,اثنان,3D mapped — library2000,Object/person/place/nature illustration required,two
+three,Three,ثلاثة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/three.svg
+four,Four,أربعة,3D mapped — library2000,Object/person/place/nature illustration required,four
+five,Five,خمسة,3D mapped — library2000,Object/person/place/nature illustration required,five
+head,Head,رأس,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/boy-face.png
+tongue,Tongue,لسان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/tongue.png
+arm,Arm,ذراع,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/arms.png
+hand,Hand,يد,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/hands.png
+foot,Foot,قدم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/feet.png
+toe,Toe,إصبع قدم,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/toe.svg
+see,See,يرى,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1800/see.png
+hear,Hear,يسمع,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1800/hear.png
+smell,Smell,يشمّ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1800/smell.png
+taste,Taste,يتذوّق,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/taste.png
+touch,Touch,يلمس,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/touch.png
+farm,Farm,مزرعة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cow.png
+cow,Cow,بقرة,3D linked,Object/person/place/nature illustration required,assets/visual3d/cow.png
+horse,Horse,حصان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/horse.png
+duck,Duck,بطة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/duck.png
+chicken,Chicken,دجاجة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/chicken.png
+cheese,Cheese,جبن,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cheese.png
+meat,Meat,لحم,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/meat.svg
+eggs,Eggs,بيض,3D linked,Object/person/place/nature illustration required,assets/visual3d/egg.png
+big,Big,كبير,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/big.svg
+small,Small,صغير,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/small.svg
+six,Six,ستة,3D mapped — library2000,Object/person/place/nature illustration required,six
+seven,Seven,سبعة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/seven.svg
+eight,Eight,ثمانية,3D mapped — library2000,Object/person/place/nature illustration required,eight
+nine,Nine,تسعة,3D mapped — library2000,Object/person/place/nature illustration required,nine
+ten,Ten,عشرة,3D mapped — library2000,Object/person/place/nature illustration required,ten
+pets,Pets,حيوانات أليفة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/pets.svg
+turtle,Turtle,سلحفاة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/turtle.png
+jungle,Jungle,غابة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/jungle.svg
+lion,Lion,أسد,3D linked,Object/person/place/nature illustration required,assets/visual3d/lion.png
+tiger,Tiger,نمر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/tiger.png
+elephant,Elephant,فيل,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/elephant.png
+monkey,Monkey,قرد,3D linked,Object/person/place/nature illustration required,assets/visual3d/monkey.png
+giraffe,Giraffe,زرافة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/giraffe.png
+snake,Snake,ثعبان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/snake-b300.png
+in,In,في,3D mapped — library2000,Object/person/place/nature illustration required,in
+on,On,على,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/on.svg
+under,Under,تحت,3D mapped — library2000,Object/person/place/nature illustration required,under
+week,Week,أسبوع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/week.svg
+before,Before,قبل,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/before.svg
+after,After,بعد,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/after.svg
+angry,Angry,غاضب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/angry-face.png
+tired,Tired,متعب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1200/tired.png
+surprised,Surprised,مندهش,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/surprised-face.png
+scared,Scared,خائف,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1200/scared.png
+spring,Spring,الربيع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/spring.svg
+summer,Summer,الصيف,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/summer.svg
+fall,Fall,الخريف,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/fall.svg
+winter,Winter,الشتاء,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/winter.svg
+warm,Warm,دافئ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/warm.png
+cold,Cold,بارد,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/snow.png
+windy,Windy,عاصف,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/kite.png
+rainy,Rainy,مُمطر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/rain.png
+sunny,Sunny,مُشمس,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/sun.png
+cloudy,Cloudy,غائم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cloud.png
+january,January,يناير,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/january.svg
+february,February,فبراير,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/february.svg
+march,March,مارس,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/march.svg
+april,April,أبريل,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/april.svg
+may,May,مايو,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/may.svg
+june,June,يونيو,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/june.svg
+july,July,يوليو,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/july.svg
+august,August,أغسطس,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/august.svg
+september,September,سبتمبر,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/september.svg
+october,October,أكتوبر,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/october.svg
+november,November,نوفمبر,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/november.svg
+december,December,ديسمبر,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/december.svg
+home,Home,منزل,3D linked,Object/person/place/nature illustration required,assets/visual3d/house.png
+bedroom,Bedroom,غرفة نوم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/bed.png
+livingroom,Living Room,غرفة جلوس,3D linked,Phrase/social scene required,assets/visual3d/library100/couch.png
+kitchen,Kitchen,مطبخ,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/kitchen.svg
+diningroom,Dining Room,غرفة طعام,Legacy SVG fallback,Phrase/social scene required,img/art/diningroom.svg
+bathroom,Bathroom,حمّام,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/bathroom.svg
+closet,Closet,خزانة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/closet.png
+couch,Couch,أريكة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/couch.png
+chairs,Chairs,كراسي,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/chair.png
+tv,TV,تلفاز,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1600/tv.png
+fridge,Fridge,ثلاجة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1600/fridge.png
+oven,Oven,فرن,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1600/oven.png
+sink,Sink,حوض,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1600/sink.png
+toilet,Toilet,مرحاض,3D linked,Object/person/place/nature illustration required,assets/visual3d/library200/toilet-b200.png
+hospital,Hospital,مستشفى,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1200/hospital.png
+shop,Shop,متجر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1500/shop.png
+street,Street,شارع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/street.svg
+school,School,مدرسة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1200/school.png
+building,Building,مبنى,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/building.svg
+park,Park,حديقة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/tree.png
+zoo,Zoo,حديقة حيوان,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/lion.png
+beach,Beach,شاطئ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1200/beach.png
+truck,Truck,شاحنة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/truck.png
+bus,Bus,أتوبيس,3D linked,Object/person/place/nature illustration required,assets/visual3d/bus.png
+swim,Swim,يسبح,3D linked,Action illustration required,assets/visual3d/library1600/swim.png
+dig,Dig,يحفر,3D linked,Action illustration required,assets/visual3d/library1900/dig.png
+animals,Animals,حيوانات,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/animals.svg
+friend,Friend,صديق,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/friend.svg
+share,Share,يشارك,3D linked,Action illustration required,assets/visual3d/library1900/share.png
+evening,Evening,مساء,Legacy SVG fallback,Calendar/time illustration required,img/art/evening.svg
+weather,Weather,الطقس,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/weather.svg
+rain,Rain,مطر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/rain.png
+wind,Wind,رياح,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/kite.png
+bread,Bread,خبز,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/bread.png
+egg,Egg,بيضة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/egg.png
+rice,Rice,أرز,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/rice.png
+orange,Orange,برتقال,3D linked,Object/person/place/nature illustration required,assets/visual3d/orange.png
+grapes,Grapes,عنب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/grapes.png
+watermelon,Watermelon,بطيخ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/watermelon.png
+doctor,Doctor,طبيب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/doctor-b300.png
+farmer,Farmer,فلاح,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/farmer.svg
+baker,Baker,خباز,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/baker.svg
+policeman,Policeman,شرطي,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/police-officer-b300.png
+nurse,Nurse,ممرضة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/nurse.svg
+tomato,Tomato,طماطم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/tomato.png
+potato,Potato,بطاطس,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/potato.png
+carrot,Carrot,جزر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/carrot.png
+onion,Onion,بصل,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/onion.png
+cucumber,Cucumber,خيار,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/cucumber-b300.png
+football,Football,كرة قدم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/football.png
+tennis,Tennis,تنس,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/tennis.svg
+swimming,Swimming,سباحة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/swimming.svg
+basketball,Basketball,سلة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/basketball.png
+pizza,Pizza,بيتزا,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/pizza.png
+tea,Tea,شاي,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/tea.svg
+cartoon,Cartoon,كرتون,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/cartoon.svg
+read,Read,يقرأ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/book.png
+class,Class,فصل,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/class.svg
+subject,Subject,مادة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/subject.svg
+english,English,إنجليزي,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/english.png
+math,Math,حساب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/math.png
+science,Science,علوم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/science.png
+art,Art,فن,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/art.png
+music,Music,موسيقى,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/music.png
+station,Station,قسم شرطة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/station.svg
+mosque,Mosque,مسجد,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1500/mosque.png
+church,Church,كنيسة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/church.svg
+brave,Brave,شجاع,Legacy SVG fallback,Concept/emotion illustration required,img/art/brave.svg
+helpful,Helpful,مساعد,Legacy SVG fallback,Concept/emotion illustration required,img/art/helpful.svg
+beautiful,Beautiful,جميل,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/flower.png
+trip,Trip,رحلة,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/airplane.png
+sea,Sea,بحر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/wave.png
+river,River,نهر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/river.png
+mountain,Mountain,جبل,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/mountain.png
+desert,Desert,صحراء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library1500/desert.png
+camel,Camel,جمل,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/camel.png
+pyramid,Pyramid,هرم,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/pyramid.svg
+museum,Museum,متحف,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/museum.svg
+visit,Visit,يزور,3D linked,Action illustration required,assets/visual3d/library1900/visit.png
+wonderful,Wonderful,رائع,3D linked,Concept/emotion illustration required,assets/visual3d/library-phase1-batch2/wonderful.png
+delicious,Delicious,لذيذ,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/cake.png
+interesting,Interesting,ممتع,Legacy SVG fallback,Concept/emotion illustration required,img/art/interesting.svg
+holiday,Holiday,إجازة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/holiday.svg
+travel,Travel,يسافر,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/airplane.png
+watch,Watch,يشاهد,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/alarmclock.png
+played,Played,لعب,3D linked,Action illustration required,assets/visual3d/library1900/played.png
+health,Health,صحة,3D linked,Concept/emotion illustration required,assets/visual3d/library-phase1-batch2/health.png
+medicine,Medicine,دواء,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch2/medicine.png
+tooth,Tooth,سن,3D linked,Object/person/place/nature illustration required,assets/visual3d/library600/teeth.png
+temperature,Temperature,حرارة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/temperature.svg
+headache,Headache,صداع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/headache.svg
+future,Future,مستقبل,Legacy SVG fallback,Concept/emotion illustration required,img/art/future.svg
+plan,Plan,خطة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/plan.svg
+homework,Homework,واجب,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/homework.svg
+project,Project,مشروع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/project.svg
+group,Group,مجموعة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/group.svg
+important,Important,مهم,Legacy SVG fallback,Concept/emotion illustration required,img/art/important.svg
+easy,Easy,سهل,Legacy SVG fallback,Concept/emotion illustration required,img/art/easy.svg
+difficult,Difficult,صعب,Legacy SVG fallback,Concept/emotion illustration required,img/art/difficult.svg
+famous,Famous,مشهور,Legacy SVG fallback,Concept/emotion illustration required,img/art/famous.svg
+inventor,Inventor,مخترع,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/inventor.svg
+computer,Computer,حاسوب,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/laptop.png
+internet,Internet,إنترنت,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/internet.svg
+email,Email,بريد إلكتروني,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/email.svg
+message,Message,رسالة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/message.svg
+camera,Camera,كاميرا,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/camera.svg
+engineer,Engineer,مهندس,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/engineer.svg
+pilot,Pilot,طيار,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/pilot.svg
+achievement,Achievement,إنجاز,Legacy SVG fallback,Concept/emotion illustration required,img/art/achievement.svg
+challenge,Challenge,تحدٍّ,Legacy SVG fallback,Concept/emotion illustration required,img/art/challenge.svg
+success,Success,نجاح,Legacy SVG fallback,Concept/emotion illustration required,img/art/success.svg
+skill,Skill,مهارة,Legacy SVG fallback,Concept/emotion illustration required,img/art/skill.svg
+knowledge,Knowledge,معرفة,Legacy SVG fallback,Concept/emotion illustration required,img/art/knowledge.svg
+culture,Culture,ثقافة,Legacy SVG fallback,Concept/emotion illustration required,img/art/culture.svg
+tourist,Tourist,سائح,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/tourist.svg
+guide,Guide,مرشد,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/guide.svg
+explain,Explain,يشرح,3D linked,Action illustration required,assets/visual3d/library1900/explain.png
+suggest,Suggest,يقترح,3D linked,Action illustration required,assets/visual3d/library1900/suggest.png
+compare,Compare,يقارن,3D linked,Action illustration required,assets/visual3d/library1900/compare.png
+decision,Decision,قرار,Legacy SVG fallback,Concept/emotion illustration required,img/art/decision.svg
+journey,Journey,رحلة طويلة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/journey.svg
+adventure,Adventure,مغامرة,Legacy SVG fallback,Object/person/place/nature illustration required,img/art/adventure.svg
+explore,Explore,يستكشف,3D linked,Action illustration required,assets/visual3d/library1900/explore.png
+experience,Experience,خبرة,Legacy SVG fallback,Concept/emotion illustration required,img/art/experience.svg
+improve,Improve,يحسّن,3D linked,Action illustration required,assets/visual3d/library1900/improve.png
+practice,Practice,تمرين,3D linked,Action illustration required,assets/visual3d/library1900/practice.png
+performance,Performance,أداء,Legacy SVG fallback,Concept/emotion illustration required,img/art/performance.svg
+confidence,Confidence,ثقة,Legacy SVG fallback,Concept/emotion illustration required,img/art/confidence.svg
+respect,Respect,احترام,Legacy SVG fallback,Concept/emotion illustration required,img/art/respect.svg
+friendly,Friendly,ودود,Legacy SVG fallback,Concept/emotion illustration required,img/art/friendly.svg
+opinion,Opinion,رأي,Legacy SVG fallback,Concept/emotion illustration required,img/art/opinion.svg
+argument,Argument,نقاش,Legacy SVG fallback,Concept/emotion illustration required,img/art/argument.svg
+reason,Reason,سبب,Legacy SVG fallback,Concept/emotion illustration required,img/art/reason.svg
+result,Result,نتيجة,Legacy SVG fallback,Concept/emotion illustration required,img/art/result.svg
+advice,Advice,نصيحة,Legacy SVG fallback,Concept/emotion illustration required,img/art/advice.svg
+responsibility,Responsibility,مسؤولية,Legacy SVG fallback,Concept/emotion illustration required,img/art/responsibility.svg
+environment,Environment,بيئة,Legacy SVG fallback,Concept/emotion illustration required,img/art/environment.svg
+pollution,Pollution,تلوث,Legacy SVG fallback,Concept/emotion illustration required,img/art/pollution.svg
+climate,Climate,مناخ,Legacy SVG fallback,Concept/emotion illustration required,img/art/climate.svg
+technology,Technology,تكنولوجيا,Legacy SVG fallback,Concept/emotion illustration required,img/art/technology.svg
+education,Education,تعليم,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/book.png
+opportunity,Opportunity,فرصة,Legacy SVG fallback,Concept/emotion illustration required,img/art/opportunity.svg
+effort,Effort,جهد,Legacy SVG fallback,Concept/emotion illustration required,img/art/effort.svg
+encourage,Encourage,يشجع,Legacy SVG fallback,Action illustration required,img/art/encourage.svg
+participate,Participate,يشارك,Legacy SVG fallback,Action illustration required,img/art/participate.svg
+organize,Organize,ينظم,Legacy SVG fallback,Action illustration required,img/art/organize.svg
+present,Present,يعرض,Legacy SVG fallback,Action illustration required,img/art/present.svg
+discuss,Discuss,يناقش,Legacy SVG fallback,Action illustration required,img/art/discuss.svg
+ambition,Ambition,طموح,Legacy SVG fallback,Concept/emotion illustration required,img/art/ambition.svg
+research,Research,بحث,3D linked,Object/person/place/nature illustration required,assets/visual3d/library-phase1-batch3/magnify.png
+social,Social,اجتماعي,Legacy SVG fallback,Concept/emotion illustration required,img/art/social.svg
+cooperation,Cooperation,تعاون,3D linked,Concept/emotion illustration required,assets/visual3d/library-phase1-batch3/cooperate.png
+drink,Drink,يشرب,3D linked,Action illustration required,assets/visual3d/library1400/drink.png
+sleep,Sleep,ينام,3D linked,Action illustration required,assets/visual3d/library1400/sleep.png
+frog,Frog,ضفدع,3D linked,Object/person/place/nature illustration required,assets/visual3d/library300/frog-b300.png
+sheep,Sheep,خروف,3D linked,Object/person/place/nature illustration required,assets/visual3d/library100/sheep.png

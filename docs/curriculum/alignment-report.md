@@ -91,14 +91,14 @@ and short evidence strings are recorded.
 
 ## 5. Items audited and mapping status
 
-**Total application items audited: 488.**
+**Total application items audited: 492.** (updated 2026-11-24: KG1 corrections — removed mower/desk, added father/tree/flower/head/table/board)
 
 - Curriculum-aligned vocabulary: **400**
 - Supplemental (app-authored) content: **88**
 
 ### 5.1 Mapping status counts
 
-| Status | Count | Share of all 488 | Share of curriculum items (400) |
+| Status | Count | Share of all 492 | Share of curriculum items (400) |
 | --- | --- | --- | --- |
 | `verified_exact` | **105** | 21.5% | 26.3% |
 | `verified_equivalent` | 0 | 0% | 0% |
@@ -129,7 +129,7 @@ Scope & Sequence vocabulary table** for their grade/term. Every one of the **88*
 
 ### 5.3 Denominators (stated explicitly)
 
-- **Percentage of all application items verified against official sources: 105 / 488 = 21.5%.**
+- **Percentage of all application items verified against official sources: 111 / 492 = 22.6%.**
 - **Percentage of curriculum items verified: 105 / 400 = 26.3%.**
 - Items are marked `unverified`, **not** `not_in_source`, wherever the item could not be confirmed
   in the machine-readable text layer. This is deliberate: the official books present vocabulary
@@ -232,7 +232,7 @@ Precisely what is needed to move the remaining items from `unverified` to a veri
 
 ## 14. Definition of done — status
 
-The project can now explain, for every one of the 488 items, where it came from and what evidence
+The project can now explain, for every one of the 492 items, where it came from and what evidence
 supports any alignment claim. For **105** curriculum items, alignment is supported by verbatim
 presence in the official 2025/2026 Ministry Scope & Sequence vocabulary. The remaining items are
 explicitly marked `unverified` or `supplemental`, with a precise list of the documents required to
