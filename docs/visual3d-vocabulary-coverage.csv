@@ -1,0 +1,405 @@
+﻿en,ar,slug,has_direct_3d,mapped_path,map_key
+A,تفاحة,a,True,assets/visual3d/apple.png,a
+B,كرة,b,True,assets/visual3d/ball.png,b
+C,قطة,c,True,assets/visual3d/cat.png,c
+D,كلب,d,True,assets/visual3d/dog.png,d
+E,بيضة,e,True,assets/visual3d/egg.png,e
+F,سمكة,f,True,assets/visual3d/fish.png,f
+G,عنزة,g,True,assets/visual3d/goat.png,g
+H,قبعة,h,True,assets/visual3d/hat.png,h
+I,ثلج,i,True,assets/visual3d/ice.png,i
+J,عصير,j,True,assets/visual3d/juice.png,j
+K,طائرة ورقية,k,True,assets/visual3d/kite.png,k
+L,أسد,l,True,assets/visual3d/lion.png,l
+M,قرد,m,True,assets/visual3d/monkey.png,m
+N,عش,n,True,assets/visual3d/nest.png,n
+O,برتقالة,o,True,assets/visual3d/orange.png,o
+P,خنزير,p,True,assets/visual3d/pig.png,p
+Q,ملكة,q,True,assets/visual3d/queen.png,q
+R,أرنب,r,True,assets/visual3d/rabbit.png,r
+S,شمس,s,True,assets/visual3d/sun.png,s
+T,نمر,t,True,assets/visual3d/tiger.png,t
+U,مظلة,u,True,assets/visual3d/umbrella.png,u
+V,شاحنة,v,True,assets/visual3d/truck.png,v
+W,ماء,w,True,assets/visual3d/water.png,w
+X,ثعلب,x,True,assets/visual3d/fox.png,x
+Y,يويو,y,True,assets/visual3d/yoyo.png,y
+Z,حمار وحشي,z,True,assets/visual3d/zebra.png,z
+cat,قطة,cat,True,assets/visual3d/library100/cat.png,cat
+bat,خفاش,bat,True,assets/visual3d/library237/bat.png,bat
+hat,قبعة,hat,True,assets/visual3d/library100/hat.png,hat
+mat,حصيرة,mat,True,assets/visual3d/library237/mat.png,mat
+rat,جرذ,rat,True,assets/visual3d/library237/rat.png,rat
+bag,حقيبة,bag,True,assets/visual3d/library1000/backpack.png,bag
+bed,سرير,bed,True,assets/visual3d/library100/bed.png,bed
+leg,ساق,leg,True,assets/visual3d/library1500/leg.png,leg
+pig,خنزير,pig,True,assets/visual3d/pig.png,pig
+dog,كلب,dog,True,assets/visual3d/library100/dog.png,dog
+log,حطب,log,True,assets/visual3d/library237/log.png,log
+sun,شمس,sun,True,assets/visual3d/library100/sun.png,sun
+cup,كوب,cup,True,assets/visual3d/library1200/cup.png,cup
+nut,جوز,nut,True,assets/visual3d/library237/nut.png,nut
+net,شبكة,net,True,assets/visual3d/library237/net.png,net
+men,رجال,men,True,assets/visual3d/library700/men.png,men
+hit,يضرب,hit,True,assets/visual3d/library800/hit.png,hit
+hop,يقفز,hop,True,assets/visual3d/library800/hop.png,hop
+hot,حار,hot,True,assets/visual3d/library100/sun.png,hot
+pot,قدر,pot,True,assets/visual3d/library237/pot.png,pot
+ball,كرة,ball,True,assets/visual3d/ball.png,ball
+fish,سمكة,fish,True,assets/visual3d/library100/fish.png,fish
+star,نجمة,star,True,assets/visual3d/library1400/star.png,star
+tree,شجرة,tree,True,assets/visual3d/library100/tree.png,tree
+book,كتاب,book,True,assets/visual3d/library100/book.png,book
+milk,حليب,milk,True,assets/visual3d/library100/milk.png,milk
+cake,كيكة,cake,True,assets/visual3d/library100/cake.png,cake
+bird,طائر,bird,True,assets/visual3d/library100/bird.png,bird
+moon,قمر,moon,True,assets/visual3d/library100/moon.png,moon
+apple,تفاحة,apple,True,assets/visual3d/library100/apple.png,apple
+car,سيارة,car,True,assets/visual3d/library100/car.png,car
+house,منزل,house,True,assets/visual3d/library100/house.png,house
+flower,زهرة,flower,True,assets/visual3d/library100/flower.png,flower
+banana,موز,banana,True,assets/visual3d/library100/banana.png,banana
+rabbit,أرنب,rabbit,True,assets/visual3d/library100/rabbit.png,rabbit
+table,طاولة,table,True,assets/visual3d/library100/table.png,table
+water,ماء,water,True,assets/visual3d/library1500/water.png,water
+Good morning,صباح الخير,goodmorning,True,assets/visual3d/library800/goodmorning.png,goodmorning
+Good night,تصبح على خير,goodnight,True,assets/visual3d/library800/goodnight.png,goodnight
+Thank you,شكراً,thankyou,True,assets/visual3d/library800/thankyou.png,thankyou
+You are welcome,على الرحب والسعة,youarewelcome,True,assets/visual3d/library800/youarewelcome.png,youarewelcome
+How are you,كيف حالك,howareyou,True,assets/visual3d/library800/howareyou.png,howareyou
+I am fine,أنا بخير,iamfine,True,assets/visual3d/library800/iamfine.png,iamfine
+My name is,اسمي هو,mynameis,True,assets/visual3d/library800/mynameis.png,mynameis
+I love you,أحبك,iloveyou,True,assets/visual3d/library800/iloveyou.png,iloveyou
+Excuse me,من فضلك,excuseme,True,assets/visual3d/library800/excuseme.png,excuseme
+See you later,أراك لاحقاً,seeyoulater,True,assets/visual3d/library800/seeyoulater.png,seeyoulater
+Good luck,حظاً سعيداً,goodluck,True,assets/visual3d/library800/goodluck.png,goodluck
+Happy birthday,عيد ميلاد سعيد,happybirthday,True,assets/visual3d/library800/happybirthday.png,happybirthday
+I like to play football,أحب لعب كرة القدم,iliketoplayfootball,True,assets/visual3d/library800/iliketoplayfootball.png,iliketoplayfootball
+My favorite color is blue,لوني المفضل أزرق,myfavoritecolorisblue,True,assets/visual3d/library800/myfavoritecolorisblue.png,myfavoritecolorisblue
+The sun is very bright today,الشمس مشرقة جداً اليوم,thesunisverybrighttoday,True,assets/visual3d/library1100/thesunisverybrighttoday.png,thesunisverybrighttoday
+I have a little cat at home,لدي قطة صغيرة في البيت,ihavealittlecatathome,True,assets/visual3d/library1100/ihavealittlecatathome.png,ihavealittlecatathome
+Can I have some water please,هل يمكنني الحصول على ماء لو سمحت,canihavesomewaterplease,True,assets/visual3d/library1100/canihavesomewaterplease.png,canihavesomewaterplease
+My mother makes a delicious cake,أمي تصنع كيكة لذيذة,mymothermakesadeliciouscake,True,assets/visual3d/library1100/mymothermakesadeliciouscake.png,mymothermakesadeliciouscake
+We go to school every morning,نذهب إلى المدرسة كل صباح,wegotoschooleverymorning,True,assets/visual3d/library1100/wegotoschooleverymorning.png,wegotoschooleverymorning
+The bird sings a beautiful song,الطائر يغني أغنية جميلة,thebirdsingsabeautifulsong,True,assets/visual3d/library1100/thebirdsingsabeautifulsong.png,thebirdsingsabeautifulsong
+I want to learn English very well,أريد تعلم الإنجليزية جيداً,iwanttolearnenglishverywell,True,assets/visual3d/library1100/iwanttolearnenglishverywell.png,iwanttolearnenglishverywell
+Yesterday I played with my friends,أمس لعبت مع أصدقائي,yesterdayiplayedwithmyfriends,True,assets/visual3d/library1100/yesterdayiplayedwithmyfriends.png,yesterdayiplayedwithmyfriends
+Hello,مرحباً,hello,True,assets/visual3d/library700/hello.png,hello
+Goodbye,وداعاً,goodbye,True,assets/visual3d/library1100/goodbye.png,goodbye
+Boy,ولد,boy,True,assets/visual3d/library1500/boy.png,boy
+Girl,بنت,girl,True,assets/visual3d/library1400/daughter.png,girl
+Friends,أصدقاء,friends,True,assets/visual3d/library700/friends.png,friends
+Happy,سعيد,happy,True,assets/visual3d/library1500/happy.png,happy
+Sad,حزين,sad,True,assets/visual3d/library1500/sad.png,sad
+Classroom,فصل دراسي,classroom,True,assets/visual3d/library1500/classroom.png,classroom
+Teacher,معلّم,teacher,True,assets/visual3d/library1700/teacher.png,teacher
+Chair,كرسيّ,chair,True,assets/visual3d/library100/chair.png,chair
+Desk,مكتب,desk,True,assets/visual3d/library1600/desk.png,desk
+Pencil,قلم رصاص,pencil,True,assets/visual3d/library100/pencil.png,pencil
+Eraser,ممحاة,eraser,True,assets/visual3d/library100/eraser.png,eraser
+Crayon,قلم تلوين,crayon,True,assets/visual3d/library1200/crayon.png,crayon
+Playground,ملعب,playground,True,assets/visual3d/library2100/playground-swing.png,playground
+Swing,أرجوحة,swing,True,assets/visual3d/library237/swing.png,swing
+Slide,زحليقة,slide,True,assets/visual3d/library1300/slide.png,slide
+Hair,شعر,hair,True,assets/visual3d/library700/hair.png,hair
+Face,وجه,face,True,assets/visual3d/library600/boy-face.png,face
+Eyes,عيون,eyes,True,assets/visual3d/library600/eyes.png,eyes
+Ears,أذنان,ears,True,assets/visual3d/library600/ears.png,ears
+Nose,أنف,nose,True,assets/visual3d/library1500/nose.png,nose
+Mouth,فم,mouth,True,assets/visual3d/library1500/mouth.png,mouth
+Teeth,أسنان,teeth,True,assets/visual3d/library1200/teeth.png,teeth
+Arms,ذراعان,arms,True,assets/visual3d/library600/arms.png,arms
+Hands,يدان,hands,True,assets/visual3d/library600/hands.png,hands
+Legs,ساقان,legs,True,assets/visual3d/library600/legs.png,legs
+Feet,قدمان,feet,True,assets/visual3d/library600/feet.png,feet
+Grandfather,جدّ,grandfather,True,assets/visual3d/library1700/grandfather.png,grandfather
+Grandmother,جدّة,grandmother,True,assets/visual3d/library1700/grandmother.png,grandmother
+Mother,أم,mother,True,assets/visual3d/library100/mother.png,mother
+Sister,أخت,sister,True,assets/visual3d/library1200/sister.png,sister
+Brother,أخ,brother,True,assets/visual3d/library1200/brother.png,brother
+Garden,حديقة,garden,True,assets/visual3d/library237/garden.png,garden
+Mower,جزّازة,mower,True,assets/visual3d/library700/mower.png,mower
+Grass,عشب,grass,True,assets/visual3d/library100/grass.png,grass
+Fruits,فواكه,fruits,True,assets/visual3d/library700/fruits.png,fruits
+Chocolate,شوكولاتة,chocolate,True,assets/visual3d/library1700/chocolate.png,chocolate
+Chips,رقائق,chips,True,assets/visual3d/library700/chips.png,chips
+Juice,عصير,juice,True,assets/visual3d/library100/juice.png,juice
+Sandwich,شطيرة,sandwich,True,assets/visual3d/library100/sandwich.png,sandwich
+Walk,يمشي,walk,True,assets/visual3d/library1200/walk.png,walk
+Run,يجري,run,True,assets/visual3d/library1600/run.png,run
+Jump,يقفز,jump,True,assets/visual3d/library1600/jump.png,jump
+Skip,يقفز بالحبل,skip,True,assets/visual3d/library700/skip.png,skip
+Kick,يرفس,kick,True,assets/visual3d/library100/football.png,kick
+Play,يلعب,play,True,assets/visual3d/library800/iliketoplayfootball.png,play
+Throw,يقذف,throw,True,assets/visual3d/library700/throw.png,throw
+Catch,يمسك,catch,True,assets/visual3d/library1100/catch.png,catch
+T-Shirt,تي شيرت,tshirt,True,assets/visual3d/library100/tshirt.png,tshirt
+Dress,فستان,dress,True,assets/visual3d/library100/dress.png,dress
+Trousers,بنطال,trousers,True,assets/visual3d/library100/trousers.png,trousers
+Pants,سروال,pants,True,assets/visual3d/library1300/pants.png,pants
+Skirt,جيبة,skirt,True,assets/visual3d/library100/skirt.png,skirt
+Shorts,شورت,shorts,True,assets/visual3d/library1100/shorts.png,shorts
+Cap,قبعة,cap,True,assets/visual3d/library100/cap.png,cap
+Shoes,حذاء,shoes,True,assets/visual3d/library100/shoes.png,shoes
+Socks,جوارب,socks,True,assets/visual3d/library100/socks.png,socks
+Sunday,الأحد,sunday,True,assets/visual3d/library2100/calendar-clock.png,sunday
+Monday,الاثنين,monday,True,assets/visual3d/library2100/calendar-clock.png,monday
+Tuesday,الثلاثاء,tuesday,True,assets/visual3d/library2100/calendar-clock.png,tuesday
+Wednesday,الأربعاء,wednesday,True,assets/visual3d/library2100/calendar-clock.png,wednesday
+Thursday,الخميس,thursday,True,assets/visual3d/library2100/calendar-clock.png,thursday
+Friday,الجمعة,friday,True,assets/visual3d/library2100/calendar-clock.png,friday
+Saturday,السبت,saturday,True,assets/visual3d/library2100/calendar-clock.png,saturday
+Today,اليوم,today,True,assets/visual3d/library2100/calendar-clock.png,today
+Tomorrow,غداً,tomorrow,True,assets/visual3d/library2100/calendar-clock.png,tomorrow
+Yesterday,أمس,yesterday,True,assets/visual3d/library2100/calendar-clock.png,yesterday
+Morning,صباح,morning,True,assets/visual3d/library2100/morning-landscape.png,morning
+Noon,ظهر,noon,True,assets/visual3d/library2100/sunrise-clock.png,noon
+Night,ليل,night,True,assets/visual3d/library2100/starry-night.png,night
+Breakfast,الفطور,breakfast,True,assets/visual3d/library2100/breakfast-meal.png,breakfast
+Lunch,الغداء,lunch,True,assets/visual3d/library2100/breakfast-meal.png,lunch
+Dinner,العشاء,dinner,True,assets/visual3d/library2100/evening-home.png,dinner
+Get Up,أستيقظ,getup,False,,
+Go to Bed,أنام,gotobed,False,,
+Go to School,أذهب إلى المدرسة,gotoschool,True,assets/visual3d/library2100/school-bus.png,go to school
+Shake Hands,مصافحة,shakehands,False,,
+Board,سبّورة,board,True,assets/visual3d/library200/blackboard-b200.png,board
+Sky,سماء,sky,True,assets/visual3d/library2400/sky.png,sky
+Butterfly,فراشة,butterfly,True,assets/visual3d/library1300/butterfly.png,butterfly
+Circle,دائرة,circle,True,assets/visual3d/library2000/circle.png,circle
+Square,مربّع,square,True,assets/visual3d/library2000/square.png,square
+Triangle,مثلّث,triangle,True,assets/visual3d/library2000/triangle.png,triangle
+Rectangle,مستطيل,rectangle,True,assets/visual3d/library2000/rectangle.png,rectangle
+Green,أخضر,green,True,assets/visual3d/library2000/rectangle.png,green
+Blue,أزرق,blue,True,assets/visual3d/library2000/circle.png,blue
+Red,أحمر,red,True,assets/visual3d/library2000/square.png,red
+Yellow,أصفر,yellow,True,assets/visual3d/library2000/triangle.png,yellow
+Parents,الوالدان,parents,True,assets/visual3d/library100/family.png,parents
+Father,أب,father,True,assets/visual3d/library100/father.png,father
+One,واحد,one,False,,
+Two,اثنان,two,True,assets/visual3d/library2000/two.png,two
+Three,ثلاثة,three,False,,
+Four,أربعة,four,True,assets/visual3d/library2000/four.png,four
+Five,خمسة,five,True,assets/visual3d/library2000/five.png,five
+Head,رأس,head,True,assets/visual3d/library1200/head.png,head
+Tongue,لسان,tongue,True,assets/visual3d/library1200/tongue.png,tongue
+Arm,ذراع,arm,True,assets/visual3d/library1500/arm.png,arm
+Hand,يد,hand,True,assets/visual3d/library1500/hand.png,hand
+Foot,قدم,foot,True,assets/visual3d/library1500/foot.png,foot
+Toe,إصبع قدم,toe,True,assets/visual3d/library2400/toe.png,toe
+See,يرى,see,False,,
+Hear,يسمع,hear,False,,
+Smell,يشمّ,smell,False,,
+Taste,يتذوّق,taste,False,,
+Touch,يلمس,touch,False,,
+Farm,مزرعة,farm,True,assets/visual3d/library100/cow.png,farm
+Cow,بقرة,cow,True,assets/visual3d/library100/cow.png,cow
+Horse,حصان,horse,True,assets/visual3d/library100/horse.png,horse
+Duck,بطة,duck,True,assets/visual3d/library100/duck.png,duck
+Chicken,دجاجة,chicken,True,assets/visual3d/library100/chicken.png,chicken
+Cheese,جبن,cheese,True,assets/visual3d/library100/cheese.png,cheese
+Meat,لحم,meat,True,assets/visual3d/library1000/chicken.png,meat
+Eggs,بيض,eggs,True,assets/visual3d/egg.png,eggs
+Big,كبير,big,True,assets/visual3d/library2300/big-small.png,big
+Small,صغير,small,True,assets/visual3d/library2300/big-small.png,small
+Six,ستة,six,True,assets/visual3d/library2000/six.png,six
+Seven,سبعة,seven,False,,
+Eight,ثمانية,eight,True,assets/visual3d/library2000/eight.png,eight
+Nine,تسعة,nine,True,assets/visual3d/library2000/nine.png,nine
+Ten,عشرة,ten,True,assets/visual3d/library2000/ten.png,ten
+Pets,حيوانات أليفة,pets,True,assets/visual3d/library2400/pets.png,pets
+Turtle,سلحفاة,turtle,True,assets/visual3d/library100/turtle.png,turtle
+Jungle,غابة,jungle,True,assets/visual3d/library2400/jungle.png,jungle
+Lion,أسد,lion,True,assets/visual3d/library100/lion.png,lion
+Tiger,نمر,tiger,True,assets/visual3d/library100/tiger.png,tiger
+Elephant,فيل,elephant,True,assets/visual3d/library100/elephant.png,elephant
+Monkey,قرد,monkey,True,assets/visual3d/library100/monkey.png,monkey
+Giraffe,زرافة,giraffe,True,assets/visual3d/library100/giraffe.png,giraffe
+Snake,ثعبان,snake,True,assets/visual3d/library300/snake-b300.png,snake
+In,في,in,True,assets/visual3d/library2000/in.png,in
+On,على,on,True,assets/visual3d/library2400/on.png,on
+Under,تحت,under,True,assets/visual3d/library2000/under.png,under
+Week,أسبوع,week,True,assets/visual3d/library2100/calendar-clock.png,week
+Before,قبل,before,True,assets/visual3d/library2400/before.png,before
+After,بعد,after,True,assets/visual3d/library2400/after.png,after
+Angry,غاضب,angry,True,assets/visual3d/library1500/angry.png,angry
+Tired,متعب,tired,True,assets/visual3d/library1500/tired.png,tired
+Surprised,مندهش,surprised,True,assets/visual3d/library1500/surprised.png,surprised
+Scared,خائف,scared,True,assets/visual3d/library1500/scared.png,scared
+Spring,الربيع,spring,True,assets/visual3d/library2100/spring-flowers.png,spring
+Summer,الصيف,summer,True,assets/visual3d/library2100/summer-beach.png,summer
+Fall,الخريف,fall,True,assets/visual3d/library2100/autumn-tree.png,fall
+Winter,الشتاء,winter,True,assets/visual3d/library2100/winter-snowman.png,winter
+Warm,دافئ,warm,False,,
+Cold,بارد,cold,True,assets/visual3d/library100/snow.png,cold
+Windy,عاصف,windy,True,assets/visual3d/library100/kite.png,windy
+Rainy,مُمطر,rainy,True,assets/visual3d/library1500/rainy.png,rainy
+Sunny,مُشمس,sunny,True,assets/visual3d/library1500/sunny.png,sunny
+Cloudy,غائم,cloudy,True,assets/visual3d/library1500/cloudy.png,cloudy
+January,يناير,january,True,assets/visual3d/library2100/calendar-clock.png,january
+February,فبراير,february,True,assets/visual3d/library2100/calendar-clock.png,february
+March,مارس,march,True,assets/visual3d/library2100/calendar-clock.png,march
+April,أبريل,april,True,assets/visual3d/library2100/calendar-clock.png,april
+May,مايو,may,True,assets/visual3d/library2100/calendar-clock.png,may
+June,يونيو,june,True,assets/visual3d/library2100/calendar-clock.png,june
+July,يوليو,july,True,assets/visual3d/library2100/calendar-clock.png,july
+August,أغسطس,august,True,assets/visual3d/library2100/calendar-clock.png,august
+September,سبتمبر,september,True,assets/visual3d/library2100/calendar-clock.png,september
+October,أكتوبر,october,True,assets/visual3d/library2100/calendar-clock.png,october
+November,نوفمبر,november,True,assets/visual3d/library2100/calendar-clock.png,november
+December,ديسمبر,december,True,assets/visual3d/library2100/calendar-clock.png,december
+Home,منزل,home,True,assets/visual3d/house.png,home
+Bedroom,غرفة نوم,bedroom,True,assets/visual3d/library100/bed.png,bedroom
+Living Room,غرفة جلوس,livingroom,True,assets/visual3d/library2200/living-room.png,living room
+Kitchen,مطبخ,kitchen,True,assets/visual3d/library2200/kitchen.png,kitchen
+Dining Room,غرفة طعام,diningroom,True,assets/visual3d/library2200/dining-room.png,dining room
+Bathroom,حمّام,bathroom,True,assets/visual3d/library2200/bathroom.png,bathroom
+Closet,خزانة,closet,True,assets/visual3d/library100/closet.png,closet
+Couch,أريكة,couch,True,assets/visual3d/library100/couch.png,couch
+Chairs,كراسي,chairs,True,assets/visual3d/library100/chair.png,chairs
+TV,تلفاز,tv,True,assets/visual3d/library1600/tv.png,tv
+Fridge,ثلاجة,fridge,True,assets/visual3d/library1600/fridge.png,fridge
+Oven,فرن,oven,True,assets/visual3d/library1600/oven.png,oven
+Sink,حوض,sink,True,assets/visual3d/library1600/sink.png,sink
+Toilet,مرحاض,toilet,True,assets/visual3d/library1600/toilet.png,toilet
+Hospital,مستشفى,hospital,True,assets/visual3d/library1500/hospital.png,hospital
+Shop,متجر,shop,True,assets/visual3d/library1500/shop.png,shop
+Street,شارع,street,True,assets/visual3d/library2200/street.png,street
+School,مدرسة,school,True,assets/visual3d/library2100/school-building.png,school
+Building,مبنى,building,True,assets/visual3d/library2400/building.png,building
+Park,حديقة,park,True,assets/visual3d/library1500/park.png,park
+Zoo,حديقة حيوان,zoo,True,assets/visual3d/library1500/zoo.png,zoo
+Beach,شاطئ,beach,True,assets/visual3d/library1500/beach.png,beach
+Truck,شاحنة,truck,True,assets/visual3d/library100/truck.png,truck
+Bus,أتوبيس,bus,True,assets/visual3d/library100/bus.png,bus
+Swim,يسبح,swim,True,assets/visual3d/library1600/swim.png,swim
+Dig,يحفر,dig,True,assets/visual3d/library1900/dig.png,dig
+Animals,حيوانات,animals,True,assets/visual3d/library2400/animals.png,animals
+Friend,صديق,friend,True,assets/visual3d/library2400/friend.png,friend
+Share,يشارك,share,True,assets/visual3d/library1900/share.png,share
+Evening,مساء,evening,True,assets/visual3d/library2100/evening-home.png,evening
+Weather,الطقس,weather,True,assets/visual3d/library2400/weather.png,weather
+Rain,مطر,rain,True,assets/visual3d/library100/rain.png,rain
+Wind,رياح,wind,True,assets/visual3d/library1600/wind.png,wind
+Bread,خبز,bread,True,assets/visual3d/library100/bread.png,bread
+Egg,بيضة,egg,True,assets/visual3d/library100/egg.png,egg
+Rice,أرز,rice,True,assets/visual3d/library100/rice.png,rice
+Orange,برتقال,orange,True,assets/visual3d/library100/orange.png,orange
+Grapes,عنب,grapes,True,assets/visual3d/library100/grapes.png,grapes
+Watermelon,بطيخ,watermelon,True,assets/visual3d/library100/watermelon.png,watermelon
+Doctor,طبيب,doctor,True,assets/visual3d/library300/doctor-b300.png,doctor
+Farmer,فلاح,farmer,True,assets/visual3d/library2200/farmer.png,farmer
+Baker,خباز,baker,True,assets/visual3d/library2200/baker.png,baker
+Policeman,شرطي,policeman,True,assets/visual3d/library300/police-officer-b300.png,policeman
+Nurse,ممرضة,nurse,True,assets/visual3d/library2200/nurse.png,nurse
+Tomato,طماطم,tomato,True,assets/visual3d/library100/tomato.png,tomato
+Potato,بطاطس,potato,True,assets/visual3d/library100/potato.png,potato
+Carrot,جزر,carrot,True,assets/visual3d/library100/carrot.png,carrot
+Onion,بصل,onion,True,assets/visual3d/library100/onion.png,onion
+Cucumber,خيار,cucumber,True,assets/visual3d/library1700/cucumber.png,cucumber
+Football,كرة قدم,football,True,assets/visual3d/library100/football.png,football
+Tennis,تنس,tennis,True,assets/visual3d/library2400/tennis.png,tennis
+Swimming,سباحة,swimming,True,assets/visual3d/library2400/swimming.png,swimming
+Basketball,سلة,basketball,True,assets/visual3d/library100/basketball.png,basketball
+Pizza,بيتزا,pizza,True,assets/visual3d/library100/pizza.png,pizza
+Tea,شاي,tea,True,assets/visual3d/library400/orange-drink-v2-b400.png,tea
+Cartoon,كرتون,cartoon,True,assets/visual3d/library2400/cartoon.png,cartoon
+Read,يقرأ,read,True,assets/visual3d/library1600/read.png,read
+Class,فصل,class,True,assets/visual3d/library2200/class.png,class
+Subject,مادة,subject,False,,
+English,إنجليزي,english,False,,
+Math,حساب,math,False,,
+Science,علوم,science,False,,
+Art,فن,art,False,,
+Music,موسيقى,music,False,,
+Station,قسم شرطة,station,True,assets/visual3d/library2200/station.png,station
+Mosque,مسجد,mosque,True,assets/visual3d/library1500/mosque.png,mosque
+Church,كنيسة,church,True,assets/visual3d/library2200/church.png,church
+Brave,شجاع,brave,False,,
+Helpful,مساعد,helpful,False,,
+Beautiful,جميل,beautiful,True,assets/visual3d/library100/flower.png,beautiful
+Trip,رحلة,trip,True,assets/visual3d/library100/airplane.png,trip
+Sea,بحر,sea,True,assets/visual3d/library100/wave.png,sea
+River,نهر,river,True,assets/visual3d/library100/river.png,river
+Mountain,جبل,mountain,True,assets/visual3d/library100/mountain.png,mountain
+Desert,صحراء,desert,True,assets/visual3d/library1500/desert.png,desert
+Camel,جمل,camel,True,assets/visual3d/library100/camel.png,camel
+Pyramid,هرم,pyramid,True,assets/visual3d/library2200/pyramid.png,pyramid
+Museum,متحف,museum,True,assets/visual3d/library2200/museum.png,museum
+Visit,يزور,visit,True,assets/visual3d/library1900/visit.png,visit
+Wonderful,رائع,wonderful,False,,
+Delicious,لذيذ,delicious,True,assets/visual3d/library100/cake.png,delicious
+Interesting,ممتع,interesting,False,,
+Holiday,إجازة,holiday,False,,
+Travel,يسافر,travel,True,assets/visual3d/library100/airplane.png,travel
+Watch,يشاهد,watch,True,assets/visual3d/library100/alarmclock.png,watch
+Played,لعب,played,True,assets/visual3d/library1900/played.png,played
+Health,صحة,health,False,,
+Medicine,دواء,medicine,False,,
+Tooth,سن,tooth,True,assets/visual3d/library600/teeth.png,tooth
+Temperature,حرارة,temperature,False,,
+Headache,صداع,headache,False,,
+Future,مستقبل,future,False,,
+Plan,خطة,plan,False,,
+Homework,واجب,homework,False,,
+Project,مشروع,project,False,,
+Group,مجموعة,group,False,,
+Important,مهم,important,False,,
+Easy,سهل,easy,False,,
+Difficult,صعب,difficult,False,,
+Famous,مشهور,famous,False,,
+Inventor,مخترع,inventor,False,,
+Computer,حاسوب,computer,True,assets/visual3d/library1600/computer.png,computer
+Internet,إنترنت,internet,False,,
+Email,بريد إلكتروني,email,False,,
+Message,رسالة,message,False,,
+Camera,كاميرا,camera,False,,
+Engineer,مهندس,engineer,True,assets/visual3d/library2200/engineer.png,engineer
+Pilot,طيار,pilot,True,assets/visual3d/library2200/pilot.png,pilot
+Achievement,إنجاز,achievement,False,,
+Challenge,تحدٍّ,challenge,False,,
+Success,نجاح,success,False,,
+Skill,مهارة,skill,False,,
+Knowledge,معرفة,knowledge,False,,
+Culture,ثقافة,culture,False,,
+Tourist,سائح,tourist,True,assets/visual3d/library2200/tourist.png,tourist
+Guide,مرشد,guide,False,,
+Explain,يشرح,explain,True,assets/visual3d/library1900/explain.png,explain
+Suggest,يقترح,suggest,True,assets/visual3d/library1900/suggest.png,suggest
+Compare,يقارن,compare,True,assets/visual3d/library1900/compare.png,compare
+Decision,قرار,decision,False,,
+Journey,رحلة طويلة,journey,False,,
+Adventure,مغامرة,adventure,False,,
+Explore,يستكشف,explore,True,assets/visual3d/library1900/explore.png,explore
+Experience,خبرة,experience,False,,
+Improve,يحسّن,improve,True,assets/visual3d/library1900/improve.png,improve
+Practice,تمرين,practice,True,assets/visual3d/library1900/practice.png,practice
+Performance,أداء,performance,False,,
+Confidence,ثقة,confidence,False,,
+Respect,احترام,respect,False,,
+Friendly,ودود,friendly,False,,
+Opinion,رأي,opinion,False,,
+Argument,نقاش,argument,False,,
+Reason,سبب,reason,False,,
+Result,نتيجة,result,False,,
+Advice,نصيحة,advice,False,,
+Responsibility,مسؤولية,responsibility,False,,
+Environment,بيئة,environment,False,,
+Pollution,تلوث,pollution,False,,
+Climate,مناخ,climate,False,,
+Technology,تكنولوجيا,technology,False,,
+Education,تعليم,education,True,assets/visual3d/library100/book.png,education
+Opportunity,فرصة,opportunity,False,,
+Effort,جهد,effort,False,,
+Encourage,يشجع,encourage,False,,
+Participate,يشارك,participate,False,,
+Organize,ينظم,organize,False,,
+Present,يعرض,present,False,,
+Discuss,يناقش,discuss,False,,
+Ambition,طموح,ambition,False,,
+Research,بحث,research,False,,
+Social,اجتماعي,social,False,,
+Cooperation,تعاون,cooperation,False,,
+Drink,يشرب,drink,True,assets/visual3d/library1600/drink.png,drink
+Sleep,ينام,sleep,True,assets/visual3d/library1600/sleep.png,sleep
+Frog,ضفدع,frog,True,assets/visual3d/library1300/frog.png,frog
+Sheep,خروف,sheep,True,assets/visual3d/library100/sheep.png,sheep

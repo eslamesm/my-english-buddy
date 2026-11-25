@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {createRequire} from 'node:module';
+const req=createRequire(import.meta.url);const V=req('../voice-pack.js');
+const idx=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8'),sw=fs.readFileSync(new URL('../sw.js',import.meta.url),'utf8');
+test('module contract unchanged',()=>{req('./voice-pack.module.test.cjs');});
+test('default keeps device behaviour',()=>{assert.equal(V.activePack({voicePack:'device'},{packs:{}}),'device');assert.equal(V.resolveClip({kind:'word',key:'ball'},{voicePack:'teacher_m'},{packs:{}}),null);});
+test('settings default and validation',()=>{assert.match(idx,/uiLang:'ar', voicePack:'device'/);assert.match(idx,/typeof settings\.voicePack!=='string'/);});
+test('say() tries pack first then falls back to existing wav/TTS',()=>{const i=idx.indexOf('async function say(');const b=idx.slice(i,i+900);assert.ok(b.indexOf('packClipFor')<b.indexOf('playFile(path, rate)'));assert.match(b,/speakTTS\(fallbackText, rate\)/);});
+test('phoneme clips never from a pack',()=>{const i=idx.indexOf('function packClipFor');const b=idx.slice(i,i+1200);assert.match(b,/\(name\|word\)/);assert.ok(!/sound|full/.test(b.match(/letters[^\n]*/)[0]));});
+test('voice-pack is loaded and cached',()=>{assert.match(idx,/<script src="voice-pack\.js">/);assert.ok(sw.includes('./voice-pack.js'));});
+test('rate not double applied: say passes rate once to playFile',()=>{assert.ok(!/effectiveRate/.test(idx));});

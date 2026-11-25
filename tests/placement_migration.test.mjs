@@ -100,7 +100,7 @@ test('index.html declares schema v3 and the v3 backup hook', () => {
 });
 
 test('sw.js precaches placement.js under current CACHE', () => {
-  assert.match(sw, /englishkids-v62/, 'CACHE bumped to v62 (2026-11-24 contextual expansion)');
+  assert.match(sw, /englishkids-v67/, 'CACHE bumped to v62 (2026-11-24 contextual expansion)');
   assert.ok(sw.includes('"./placement.js"'), 'CORE must include ./placement.js');
   assert.ok(sw.includes('"./engine.js"'), 'CORE must keep ./engine.js');
   assert.ok(!/englishkids-v35/.test(sw), 'v35 cache name must be gone');

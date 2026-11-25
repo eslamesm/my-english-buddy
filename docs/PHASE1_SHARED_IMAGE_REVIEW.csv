@@ -1,0 +1,26 @@
+﻿ImagePath,MappedWords,Count,ReviewStatus
+assets/visual3d/ball.png,B; ball,2,Needs semantic review
+assets/visual3d/egg.png,E; Eggs,2,Needs semantic review
+assets/visual3d/pig.png,P; pig,2,Needs semantic review
+assets/visual3d/library100/bed.png,bed; Bedroom,2,Needs semantic review
+assets/visual3d/library100/book.png,book; Education,2,Needs semantic review
+assets/visual3d/library100/cake.png,cake; Delicious,2,Needs semantic review
+assets/visual3d/library100/flower.png,flower; Beautiful,2,Needs semantic review
+assets/visual3d/library100/chair.png,Chair; Chairs,2,Needs semantic review
+assets/visual3d/library1600/playfootball.png,Kick; Play,2,Needs semantic review
+assets/visual3d/library2100/calendar-clock.png,Sunday; Monday; Tuesday; Wednesday; Thursday; Friday; Saturday; Today; Tomorrow; Yesterday; Week; January; February; March; April; May; June; July; August; September; October; November; December,23,Needs semantic review
+assets/visual3d/library2100/breakfast-meal.png,Breakfast; Lunch,2,Needs semantic review
+assets/visual3d/library2100/evening-home.png,Dinner; Evening,2,Needs semantic review
+assets/visual3d/library2200/farmer.png,Farm; Farmer,2,Needs semantic review
+assets/visual3d/library2300/big-small.png,Big; Small,2,Needs semantic review
+assets/visual3d/library100/couch.png,Living Room; Couch,2,Needs semantic review
+assets/visual3d/library-phase1-batch4/knowledge-science.png,Subject; Homework,2,Needs semantic review
+assets/visual3d/library-phase1-batch5/mountain.png,Brave; Adventure,2,Needs semantic review
+assets/visual3d/library100/airplane.png,Trip; Travel,2,Needs semantic review
+assets/visual3d/library-phase1-batch6/microscope.png,Interesting; Inventor; Skill,3,Needs semantic review
+assets/visual3d/library-phase1-batch4/science-project.png,Plan; Project,2,Needs semantic review
+assets/visual3d/library-phase1-batch6/computer.png,Internet; Camera,2,Needs semantic review
+assets/visual3d/library-phase1-batch5/success.png,Achievement; Success; Confidence; Ambition,4,Needs semantic review
+assets/visual3d/library-phase1-batch5/try.png,Challenge; Effort,2,Needs semantic review
+assets/visual3d/library-phase1-batch5/teacher.png,Knowledge; Guide; Present,3,Needs semantic review
+assets/visual3d/library-phase1-batch5/teamwork.png,Friendly; Participate; Discuss; Social,4,Needs semantic review

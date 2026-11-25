@@ -1,0 +1,405 @@
+﻿English,Arabic,NormalizedKey,ImagePath,Width,Height,Mode,Transparent,ReuseStatus
+A,تفاحة,a,assets/visual3d/apple.png,512,512,RGBA,True,unique
+B,كرة,b,assets/visual3d/ball.png,512,512,RGBA,True,unique
+C,قطة,c,assets/visual3d/cat.png,512,512,RGBA,True,unique
+D,كلب,d,assets/visual3d/dog.png,512,512,RGBA,True,unique
+E,بيضة,e,assets/visual3d/egg.png,512,512,RGBA,True,unique
+F,سمكة,f,assets/visual3d/fish.png,512,512,RGBA,True,unique
+G,عنزة,g,assets/visual3d/goat.png,512,512,RGBA,True,unique
+H,قبعة,h,assets/visual3d/hat.png,512,512,RGBA,True,unique
+I,ثلج,i,assets/visual3d/ice.png,512,512,RGBA,True,unique
+J,عصير,j,assets/visual3d/juice.png,512,512,RGBA,True,unique
+K,طائرة ورقية,k,assets/visual3d/kite.png,512,512,RGBA,True,unique
+L,أسد,l,assets/visual3d/lion.png,512,512,RGBA,True,unique
+M,قرد,m,assets/visual3d/monkey.png,512,512,RGBA,True,unique
+N,عش,n,assets/visual3d/nest.png,512,512,RGBA,True,unique
+O,برتقالة,o,assets/visual3d/orange.png,512,512,RGBA,True,unique
+P,خنزير,p,assets/visual3d/pig.png,512,512,RGBA,True,unique
+Q,ملكة,q,assets/visual3d/queen.png,512,512,RGBA,True,unique
+R,أرنب,r,assets/visual3d/rabbit.png,512,512,RGBA,True,unique
+S,شمس,s,assets/visual3d/sun.png,512,512,RGBA,True,unique
+T,نمر,t,assets/visual3d/tiger.png,512,512,RGBA,True,unique
+U,مظلة,u,assets/visual3d/umbrella.png,512,512,RGBA,True,unique
+V,شاحنة,v,assets/visual3d/truck.png,512,512,RGBA,True,unique
+W,ماء,w,assets/visual3d/water.png,512,512,RGBA,True,unique
+X,ثعلب,x,assets/visual3d/fox.png,512,512,RGBA,True,unique
+Y,يويو,y,assets/visual3d/yoyo.png,512,512,RGBA,True,unique
+Z,حمار وحشي,z,assets/visual3d/zebra.png,512,512,RGBA,True,unique
+cat,قطة,cat,assets/visual3d/library100/cat.png,512,512,RGBA,True,unique
+bat,خفاش,bat,assets/visual3d/library237/bat.png,512,512,RGBA,True,unique
+hat,قبعة,hat,assets/visual3d/library100/hat.png,512,512,RGBA,True,unique
+mat,حصيرة,mat,assets/visual3d/library237/mat.png,512,512,RGBA,True,unique
+rat,جرذ,rat,assets/visual3d/library237/rat.png,512,512,RGBA,True,unique
+bag,حقيبة,bag,assets/visual3d/library1000/backpack.png,512,512,RGBA,True,unique
+bed,سرير,bed,assets/visual3d/library100/bed.png,512,512,RGBA,True,unique
+leg,ساق,leg,assets/visual3d/library1500/leg.png,512,512,RGBA,True,unique
+pig,خنزير,pig,assets/visual3d/pig.png,512,512,RGBA,True,shared
+dog,كلب,dog,assets/visual3d/library100/dog.png,512,512,RGBA,True,unique
+log,حطب,log,assets/visual3d/library237/log.png,512,512,RGBA,True,unique
+sun,شمس,sun,assets/visual3d/library100/sun.png,512,512,RGBA,True,unique
+cup,كوب,cup,assets/visual3d/library1200/cup.png,512,512,RGBA,True,unique
+nut,جوز,nut,assets/visual3d/library237/nut.png,512,512,RGBA,True,unique
+net,شبكة,net,assets/visual3d/library237/net.png,512,512,RGBA,True,unique
+men,رجال,men,assets/visual3d/library700/men.png,512,512,RGBA,True,unique
+hit,يضرب,hit,assets/visual3d/library800/hit.png,512,512,RGBA,True,unique
+hop,يقفز,hop,assets/visual3d/library800/hop.png,512,512,RGBA,True,unique
+hot,حار,hot,assets/visual3d/library2300/hot.png,512,512,RGBA,True,unique
+pot,قدر,pot,assets/visual3d/library237/pot.png,512,512,RGBA,True,unique
+ball,كرة,ball,assets/visual3d/ball.png,512,512,RGBA,True,shared
+fish,سمكة,fish,assets/visual3d/library100/fish.png,512,512,RGBA,True,unique
+star,نجمة,star,assets/visual3d/library1400/star.png,512,512,RGBA,True,unique
+tree,شجرة,tree,assets/visual3d/library100/tree.png,512,512,RGBA,True,unique
+book,كتاب,book,assets/visual3d/library100/book.png,512,512,RGBA,True,unique
+milk,حليب,milk,assets/visual3d/library100/milk.png,512,512,RGBA,True,unique
+cake,كيكة,cake,assets/visual3d/library100/cake.png,512,512,RGBA,True,unique
+bird,طائر,bird,assets/visual3d/library100/bird.png,512,512,RGBA,True,unique
+moon,قمر,moon,assets/visual3d/library100/moon.png,512,512,RGBA,True,unique
+apple,تفاحة,apple,assets/visual3d/library100/apple.png,512,512,RGBA,True,unique
+car,سيارة,car,assets/visual3d/library100/car.png,512,512,RGBA,True,unique
+house,منزل,house,assets/visual3d/library100/house.png,512,512,RGBA,True,unique
+flower,زهرة,flower,assets/visual3d/library100/flower.png,512,512,RGBA,True,unique
+banana,موز,banana,assets/visual3d/library100/banana.png,512,512,RGBA,True,unique
+rabbit,أرنب,rabbit,assets/visual3d/library100/rabbit.png,512,512,RGBA,True,unique
+table,طاولة,table,assets/visual3d/library100/table.png,512,512,RGBA,True,unique
+water,ماء,water,assets/visual3d/library1500/water.png,512,512,RGBA,True,unique
+Good morning,صباح الخير,goodmorning,assets/visual3d/library800/goodmorning.png,512,512,RGBA,True,unique
+Good night,تصبح على خير,goodnight,assets/visual3d/library800/goodnight.png,512,512,RGBA,True,unique
+Thank you,شكراً,thankyou,assets/visual3d/library800/thankyou.png,512,512,RGBA,True,unique
+You are welcome,على الرحب والسعة,youarewelcome,assets/visual3d/library800/youarewelcome.png,512,512,RGBA,True,unique
+How are you,كيف حالك,howareyou,assets/visual3d/library800/howareyou.png,512,512,RGBA,True,unique
+I am fine,أنا بخير,iamfine,assets/visual3d/library800/iamfine.png,512,512,RGBA,True,unique
+My name is,اسمي هو,mynameis,assets/visual3d/library800/mynameis.png,512,512,RGBA,True,unique
+I love you,أحبك,iloveyou,assets/visual3d/library800/iloveyou.png,512,512,RGBA,True,unique
+Excuse me,من فضلك,excuseme,assets/visual3d/library800/excuseme.png,512,512,RGBA,True,unique
+See you later,أراك لاحقاً,seeyoulater,assets/visual3d/library800/seeyoulater.png,512,512,RGBA,True,unique
+Good luck,حظاً سعيداً,goodluck,assets/visual3d/library800/goodluck.png,512,512,RGBA,True,unique
+Happy birthday,عيد ميلاد سعيد,happybirthday,assets/visual3d/library800/happybirthday.png,512,512,RGBA,True,unique
+I like to play football,أحب لعب كرة القدم,iliketoplayfootball,assets/visual3d/library800/iliketoplayfootball.png,512,512,RGBA,True,unique
+My favorite color is blue,لوني المفضل أزرق,myfavoritecolorisblue,assets/visual3d/library800/myfavoritecolorisblue.png,512,512,RGBA,True,unique
+The sun is very bright today,الشمس مشرقة جداً اليوم,thesunisverybrighttoday,assets/visual3d/library1100/thesunisverybrighttoday.png,512,512,RGBA,True,unique
+I have a little cat at home,لدي قطة صغيرة في البيت,ihavealittlecatathome,assets/visual3d/library1100/ihavealittlecatathome.png,512,512,RGBA,True,unique
+Can I have some water please,هل يمكنني الحصول على ماء لو سمحت,canihavesomewaterplease,assets/visual3d/library1100/canihavesomewaterplease.png,512,512,RGBA,True,unique
+My mother makes a delicious cake,أمي تصنع كيكة لذيذة,mymothermakesadeliciouscake,assets/visual3d/library1100/mymothermakesadeliciouscake.png,512,512,RGBA,True,unique
+We go to school every morning,نذهب إلى المدرسة كل صباح,wegotoschooleverymorning,assets/visual3d/library1100/wegotoschooleverymorning.png,512,512,RGBA,True,unique
+The bird sings a beautiful song,الطائر يغني أغنية جميلة,thebirdsingsabeautifulsong,assets/visual3d/library1100/thebirdsingsabeautifulsong.png,512,512,RGBA,True,unique
+I want to learn English very well,أريد تعلم الإنجليزية جيداً,iwanttolearnenglishverywell,assets/visual3d/library1100/iwanttolearnenglishverywell.png,512,512,RGBA,True,unique
+Yesterday I played with my friends,أمس لعبت مع أصدقائي,yesterdayiplayedwithmyfriends,assets/visual3d/library1100/yesterdayiplayedwithmyfriends.png,512,512,RGBA,True,unique
+Hello,مرحباً,hello,assets/visual3d/library700/hello.png,512,512,RGBA,True,unique
+Goodbye,وداعاً,goodbye,assets/visual3d/library1100/goodbye.png,512,512,RGBA,True,unique
+Boy,ولد,boy,assets/visual3d/library1500/boy.png,512,512,RGBA,True,unique
+Girl,بنت,girl,assets/visual3d/library1400/daughter.png,512,512,RGBA,True,unique
+Friends,أصدقاء,friends,assets/visual3d/library700/friends.png,512,512,RGBA,True,unique
+Happy,سعيد,happy,assets/visual3d/library1500/happy.png,512,512,RGBA,True,unique
+Sad,حزين,sad,assets/visual3d/library1500/sad.png,512,512,RGBA,True,unique
+Classroom,فصل دراسي,classroom,assets/visual3d/library1500/classroom.png,512,512,RGBA,True,unique
+Teacher,معلّم,teacher,assets/visual3d/library1700/teacher.png,512,512,RGBA,True,unique
+Chair,كرسيّ,chair,assets/visual3d/library100/chair.png,512,512,RGBA,True,unique
+Desk,مكتب,desk,assets/visual3d/library1600/desk.png,512,512,RGBA,True,unique
+Pencil,قلم رصاص,pencil,assets/visual3d/library100/pencil.png,512,512,RGBA,True,unique
+Eraser,ممحاة,eraser,assets/visual3d/library100/eraser.png,512,512,RGBA,True,unique
+Crayon,قلم تلوين,crayon,assets/visual3d/library1200/crayon.png,512,512,RGBA,True,unique
+Playground,ملعب,playground,assets/visual3d/library2100/playground-swing.png,512,512,RGBA,True,unique
+Swing,أرجوحة,swing,assets/visual3d/library237/swing.png,512,512,RGBA,True,unique
+Slide,زحليقة,slide,assets/visual3d/library1300/slide.png,512,512,RGBA,True,unique
+Hair,شعر,hair,assets/visual3d/library700/hair.png,512,512,RGBA,True,unique
+Face,وجه,face,assets/visual3d/library600/boy-face.png,512,512,RGBA,True,unique
+Eyes,عيون,eyes,assets/visual3d/library600/eyes.png,512,512,RGBA,True,unique
+Ears,أذنان,ears,assets/visual3d/library600/ears.png,512,512,RGBA,True,unique
+Nose,أنف,nose,assets/visual3d/library1500/nose.png,512,512,RGBA,True,unique
+Mouth,فم,mouth,assets/visual3d/library1500/mouth.png,512,512,RGBA,True,unique
+Teeth,أسنان,teeth,assets/visual3d/library1200/teeth.png,512,512,RGBA,True,unique
+Arms,ذراعان,arms,assets/visual3d/library600/arms.png,512,512,RGBA,True,unique
+Hands,يدان,hands,assets/visual3d/library600/hands.png,512,512,RGBA,True,unique
+Legs,ساقان,legs,assets/visual3d/library600/legs.png,512,512,RGBA,True,unique
+Feet,قدمان,feet,assets/visual3d/library600/feet.png,512,512,RGBA,True,unique
+Grandfather,جدّ,grandfather,assets/visual3d/library1700/grandfather.png,512,512,RGBA,True,unique
+Grandmother,جدّة,grandmother,assets/visual3d/library1700/grandmother.png,512,512,RGBA,True,unique
+Mother,أم,mother,assets/visual3d/library100/mother.png,512,512,RGBA,True,unique
+Sister,أخت,sister,assets/visual3d/library1200/sister.png,512,512,RGBA,True,unique
+Brother,أخ,brother,assets/visual3d/library1200/brother.png,512,512,RGBA,True,unique
+Garden,حديقة,garden,assets/visual3d/library237/garden.png,512,512,RGBA,True,unique
+Mower,جزّازة,mower,assets/visual3d/library700/mower.png,512,512,RGBA,True,unique
+Grass,عشب,grass,assets/visual3d/library100/grass.png,512,512,RGBA,True,unique
+Fruits,فواكه,fruits,assets/visual3d/library700/fruits.png,512,512,RGBA,True,unique
+Chocolate,شوكولاتة,chocolate,assets/visual3d/library1700/chocolate.png,512,512,RGBA,True,unique
+Chips,رقائق,chips,assets/visual3d/library700/chips.png,512,512,RGBA,True,unique
+Juice,عصير,juice,assets/visual3d/library100/juice.png,512,512,RGBA,True,unique
+Sandwich,شطيرة,sandwich,assets/visual3d/library100/sandwich.png,512,512,RGBA,True,unique
+Walk,يمشي,walk,assets/visual3d/library1200/walk.png,512,512,RGBA,True,unique
+Run,يجري,run,assets/visual3d/library1600/run.png,512,512,RGBA,True,unique
+Jump,يقفز,jump,assets/visual3d/library1600/jump.png,512,512,RGBA,True,unique
+Skip,يقفز بالحبل,skip,assets/visual3d/library700/skip.png,512,512,RGBA,True,unique
+Kick,يرفس,kick,assets/visual3d/library1600/playfootball.png,512,512,RGBA,True,unique
+Play,يلعب,play,assets/visual3d/library1600/playfootball.png,512,512,RGBA,True,shared
+Throw,يقذف,throw,assets/visual3d/library700/throw.png,512,512,RGBA,True,unique
+Catch,يمسك,catch,assets/visual3d/library1100/catch.png,512,512,RGBA,True,unique
+T-Shirt,تي شيرت,tshirt,assets/visual3d/library100/tshirt.png,512,512,RGBA,True,unique
+Dress,فستان,dress,assets/visual3d/library100/dress.png,512,512,RGBA,True,unique
+Trousers,بنطال,trousers,assets/visual3d/library100/trousers.png,512,512,RGBA,True,unique
+Pants,سروال,pants,assets/visual3d/library1300/pants.png,512,512,RGBA,True,unique
+Skirt,جيبة,skirt,assets/visual3d/library100/skirt.png,512,512,RGBA,True,unique
+Shorts,شورت,shorts,assets/visual3d/library1100/shorts.png,512,512,RGBA,True,unique
+Cap,قبعة,cap,assets/visual3d/library100/cap.png,512,512,RGBA,True,unique
+Shoes,حذاء,shoes,assets/visual3d/library100/shoes.png,512,512,RGBA,True,unique
+Socks,جوارب,socks,assets/visual3d/library100/socks.png,512,512,RGBA,True,unique
+Sunday,الأحد,sunday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,unique
+Monday,الاثنين,monday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Tuesday,الثلاثاء,tuesday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Wednesday,الأربعاء,wednesday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Thursday,الخميس,thursday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Friday,الجمعة,friday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Saturday,السبت,saturday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Today,اليوم,today,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Tomorrow,غداً,tomorrow,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Yesterday,أمس,yesterday,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Morning,صباح,morning,assets/visual3d/library2100/morning-landscape.png,512,512,RGBA,True,unique
+Noon,ظهر,noon,assets/visual3d/library2100/sunrise-clock.png,512,512,RGBA,True,unique
+Night,ليل,night,assets/visual3d/library2100/starry-night.png,512,512,RGBA,True,unique
+Breakfast,الفطور,breakfast,assets/visual3d/library2100/breakfast-meal.png,512,512,RGBA,True,unique
+Lunch,الغداء,lunch,assets/visual3d/library2100/breakfast-meal.png,512,512,RGBA,True,shared
+Dinner,العشاء,dinner,assets/visual3d/library2100/evening-home.png,512,512,RGBA,True,unique
+Get Up,أستيقظ,getup,assets/visual3d/library-phase1-batch4/get-up.png,512,512,RGBA,True,unique
+Go to Bed,أنام,gotobed,assets/visual3d/library-phase1-batch4/go-to-bed.png,512,512,RGBA,True,unique
+Go to School,أذهب إلى المدرسة,gotoschool,assets/visual3d/library2100/school-bus.png,512,512,RGBA,True,unique
+Shake Hands,مصافحة,shakehands,assets/visual3d/library-phase1-batch4/shake-hands.png,512,512,RGBA,True,unique
+Board,سبّورة,board,assets/visual3d/library200/blackboard-b200.png,512,512,RGBA,True,unique
+Sky,سماء,sky,assets/visual3d/library2400/sky.png,512,512,RGBA,True,unique
+Butterfly,فراشة,butterfly,assets/visual3d/library1300/butterfly.png,512,512,RGBA,True,unique
+Circle,دائرة,circle,assets/visual3d/library2000/circle.png,512,512,RGBA,True,unique
+Square,مربّع,square,assets/visual3d/library2000/square.png,512,512,RGBA,True,unique
+Triangle,مثلّث,triangle,assets/visual3d/library2000/triangle.png,512,512,RGBA,True,unique
+Rectangle,مستطيل,rectangle,assets/visual3d/library2000/rectangle.png,512,512,RGBA,True,unique
+Green,أخضر,green,assets/visual3d/library-phase1-review/green-color.png,512,512,RGBA,True,unique
+Blue,أزرق,blue,assets/visual3d/library-phase1-review/blue-color.png,512,512,RGBA,True,unique
+Red,أحمر,red,assets/visual3d/library-phase1-review/red-color.png,512,512,RGBA,True,unique
+Yellow,أصفر,yellow,assets/visual3d/library-phase1-review/yellow-color.png,512,512,RGBA,True,unique
+Parents,الوالدان,parents,assets/visual3d/library100/family.png,512,512,RGBA,True,unique
+Father,أب,father,assets/visual3d/library100/father.png,512,512,RGBA,True,unique
+One,واحد,one,assets/visual3d/library-phase1-batch4/apple.png,512,512,RGBA,True,unique
+Two,اثنان,two,assets/visual3d/library2000/two.png,512,512,RGBA,True,unique
+Three,ثلاثة,three,assets/visual3d/library-phase1-batch4/three-blocks.png,512,512,RGBA,True,unique
+Four,أربعة,four,assets/visual3d/library2000/four.png,512,512,RGBA,True,unique
+Five,خمسة,five,assets/visual3d/library2000/five.png,512,512,RGBA,True,unique
+Head,رأس,head,assets/visual3d/library1200/head.png,512,512,RGBA,True,unique
+Tongue,لسان,tongue,assets/visual3d/library1200/tongue.png,512,512,RGBA,True,unique
+Arm,ذراع,arm,assets/visual3d/library1500/arm.png,512,512,RGBA,True,unique
+Hand,يد,hand,assets/visual3d/library1500/hand.png,512,512,RGBA,True,unique
+Foot,قدم,foot,assets/visual3d/library1500/foot.png,512,512,RGBA,True,unique
+Toe,إصبع قدم,toe,assets/visual3d/library2400/toe.png,512,512,RGBA,True,unique
+See,يرى,see,assets/visual3d/library-phase1-batch4/see-binoculars.png,512,512,RGBA,True,unique
+Hear,يسمع,hear,assets/visual3d/library-phase1-batch4/hear-headphones.png,512,512,RGBA,True,unique
+Smell,يشمّ,smell,assets/visual3d/library-phase1-batch4/smell-flower.png,512,512,RGBA,True,unique
+Taste,يتذوّق,taste,assets/visual3d/library-phase1-batch2/taste.png,512,512,RGBA,True,unique
+Touch,يلمس,touch,assets/visual3d/library-phase1-batch2/touch.png,512,512,RGBA,True,unique
+Farm,مزرعة,farm,assets/visual3d/library2200/farmer.png,512,512,RGBA,True,unique
+Cow,بقرة,cow,assets/visual3d/library100/cow.png,512,512,RGBA,True,unique
+Horse,حصان,horse,assets/visual3d/library100/horse.png,512,512,RGBA,True,unique
+Duck,بطة,duck,assets/visual3d/library100/duck.png,512,512,RGBA,True,unique
+Chicken,دجاجة,chicken,assets/visual3d/library100/chicken.png,512,512,RGBA,True,unique
+Cheese,جبن,cheese,assets/visual3d/library100/cheese.png,512,512,RGBA,True,unique
+Meat,لحم,meat,assets/visual3d/library1000/chicken.png,512,512,RGBA,True,unique
+Eggs,بيض,eggs,assets/visual3d/egg.png,512,512,RGBA,True,shared
+Big,كبير,big,assets/visual3d/library2300/big-small.png,512,512,RGBA,True,unique
+Small,صغير,small,assets/visual3d/library2300/big-small.png,512,512,RGBA,True,shared
+Six,ستة,six,assets/visual3d/library2000/six.png,512,512,RGBA,True,unique
+Seven,سبعة,seven,assets/visual3d/phase1-final9/seven.png,512,512,RGBA,True,unique
+Eight,ثمانية,eight,assets/visual3d/library2000/eight.png,512,512,RGBA,True,unique
+Nine,تسعة,nine,assets/visual3d/library2000/nine.png,512,512,RGBA,True,unique
+Ten,عشرة,ten,assets/visual3d/library2000/ten.png,512,512,RGBA,True,unique
+Pets,حيوانات أليفة,pets,assets/visual3d/library2400/pets.png,512,512,RGBA,True,unique
+Turtle,سلحفاة,turtle,assets/visual3d/library100/turtle.png,512,512,RGBA,True,unique
+Jungle,غابة,jungle,assets/visual3d/library2400/jungle.png,512,512,RGBA,True,unique
+Lion,أسد,lion,assets/visual3d/library100/lion.png,512,512,RGBA,True,unique
+Tiger,نمر,tiger,assets/visual3d/library100/tiger.png,512,512,RGBA,True,unique
+Elephant,فيل,elephant,assets/visual3d/library100/elephant.png,512,512,RGBA,True,unique
+Monkey,قرد,monkey,assets/visual3d/library100/monkey.png,512,512,RGBA,True,unique
+Giraffe,زرافة,giraffe,assets/visual3d/library100/giraffe.png,512,512,RGBA,True,unique
+Snake,ثعبان,snake,assets/visual3d/library300/snake-b300.png,512,512,RGBA,True,unique
+In,في,in,assets/visual3d/library2000/in.png,512,512,RGBA,True,unique
+On,على,on,assets/visual3d/library2400/on.png,512,512,RGBA,True,unique
+Under,تحت,under,assets/visual3d/library2000/under.png,512,512,RGBA,True,unique
+Week,أسبوع,week,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Before,قبل,before,assets/visual3d/library2400/before.png,512,512,RGBA,True,unique
+After,بعد,after,assets/visual3d/library2400/after.png,512,512,RGBA,True,unique
+Angry,غاضب,angry,assets/visual3d/library1500/angry.png,512,512,RGBA,True,unique
+Tired,متعب,tired,assets/visual3d/library1500/tired.png,512,512,RGBA,True,unique
+Surprised,مندهش,surprised,assets/visual3d/library1500/surprised.png,512,512,RGBA,True,unique
+Scared,خائف,scared,assets/visual3d/library1500/scared.png,512,512,RGBA,True,unique
+Spring,الربيع,spring,assets/visual3d/library2100/spring-flowers.png,512,512,RGBA,True,unique
+Summer,الصيف,summer,assets/visual3d/library2100/summer-beach.png,512,512,RGBA,True,unique
+Fall,الخريف,fall,assets/visual3d/library2100/autumn-tree.png,512,512,RGBA,True,unique
+Winter,الشتاء,winter,assets/visual3d/library2100/winter-snowman.png,512,512,RGBA,True,unique
+Warm,دافئ,warm,assets/visual3d/library-phase1-batch2/warm.png,512,512,RGBA,True,unique
+Cold,بارد,cold,assets/visual3d/library100/snow.png,512,512,RGBA,True,unique
+Windy,عاصف,windy,assets/visual3d/library100/kite.png,512,512,RGBA,True,unique
+Rainy,مُمطر,rainy,assets/visual3d/library1500/rainy.png,512,512,RGBA,True,unique
+Sunny,مُشمس,sunny,assets/visual3d/library1500/sunny.png,512,512,RGBA,True,unique
+Cloudy,غائم,cloudy,assets/visual3d/library1500/cloudy.png,512,512,RGBA,True,unique
+January,يناير,january,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+February,فبراير,february,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+March,مارس,march,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+April,أبريل,april,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+May,مايو,may,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+June,يونيو,june,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+July,يوليو,july,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+August,أغسطس,august,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+September,سبتمبر,september,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+October,أكتوبر,october,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+November,نوفمبر,november,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+December,ديسمبر,december,assets/visual3d/library2100/calendar-clock.png,512,512,RGBA,True,shared
+Home,منزل,home,assets/visual3d/house.png,512,512,RGBA,True,unique
+Bedroom,غرفة نوم,bedroom,assets/visual3d/library100/bed.png,512,512,RGBA,True,shared
+Living Room,غرفة جلوس,livingroom,assets/visual3d/library100/couch.png,512,512,RGBA,True,unique
+Kitchen,مطبخ,kitchen,assets/visual3d/library2200/kitchen.png,512,512,RGBA,True,unique
+Dining Room,غرفة طعام,diningroom,assets/visual3d/library2200/dining-room.png,512,512,RGBA,True,unique
+Bathroom,حمّام,bathroom,assets/visual3d/library2200/bathroom.png,512,512,RGBA,True,unique
+Closet,خزانة,closet,assets/visual3d/library100/closet.png,512,512,RGBA,True,unique
+Couch,أريكة,couch,assets/visual3d/library100/couch.png,512,512,RGBA,True,shared
+Chairs,كراسي,chairs,assets/visual3d/library100/chair.png,512,512,RGBA,True,shared
+TV,تلفاز,tv,assets/visual3d/library1600/tv.png,512,512,RGBA,True,unique
+Fridge,ثلاجة,fridge,assets/visual3d/library1600/fridge.png,512,512,RGBA,True,unique
+Oven,فرن,oven,assets/visual3d/library1600/oven.png,512,512,RGBA,True,unique
+Sink,حوض,sink,assets/visual3d/library1600/sink.png,512,512,RGBA,True,unique
+Toilet,مرحاض,toilet,assets/visual3d/library1600/toilet.png,512,512,RGBA,True,unique
+Hospital,مستشفى,hospital,assets/visual3d/library1500/hospital.png,512,512,RGBA,True,unique
+Shop,متجر,shop,assets/visual3d/library1500/shop.png,512,512,RGBA,True,unique
+Street,شارع,street,assets/visual3d/library2200/street.png,512,512,RGBA,True,unique
+School,مدرسة,school,assets/visual3d/library2100/school-building.png,512,512,RGBA,True,unique
+Building,مبنى,building,assets/visual3d/library2400/building.png,512,512,RGBA,True,unique
+Park,حديقة,park,assets/visual3d/library1500/park.png,512,512,RGBA,True,unique
+Zoo,حديقة حيوان,zoo,assets/visual3d/library1500/zoo.png,512,512,RGBA,True,unique
+Beach,شاطئ,beach,assets/visual3d/library1500/beach.png,512,512,RGBA,True,unique
+Truck,شاحنة,truck,assets/visual3d/library100/truck.png,512,512,RGBA,True,unique
+Bus,أتوبيس,bus,assets/visual3d/library100/bus.png,512,512,RGBA,True,unique
+Swim,يسبح,swim,assets/visual3d/library1600/swim.png,512,512,RGBA,True,unique
+Dig,يحفر,dig,assets/visual3d/library1900/dig.png,512,512,RGBA,True,unique
+Animals,حيوانات,animals,assets/visual3d/library2400/animals.png,512,512,RGBA,True,unique
+Friend,صديق,friend,assets/visual3d/library2400/friend.png,512,512,RGBA,True,unique
+Share,يشارك,share,assets/visual3d/library1900/share.png,512,512,RGBA,True,unique
+Evening,مساء,evening,assets/visual3d/library2100/evening-home.png,512,512,RGBA,True,shared
+Weather,الطقس,weather,assets/visual3d/library2400/weather.png,512,512,RGBA,True,unique
+Rain,مطر,rain,assets/visual3d/library100/rain.png,512,512,RGBA,True,unique
+Wind,رياح,wind,assets/visual3d/library1600/wind.png,512,512,RGBA,True,unique
+Bread,خبز,bread,assets/visual3d/library100/bread.png,512,512,RGBA,True,unique
+Egg,بيضة,egg,assets/visual3d/library100/egg.png,512,512,RGBA,True,unique
+Rice,أرز,rice,assets/visual3d/library100/rice.png,512,512,RGBA,True,unique
+Orange,برتقال,orange,assets/visual3d/library100/orange.png,512,512,RGBA,True,unique
+Grapes,عنب,grapes,assets/visual3d/library100/grapes.png,512,512,RGBA,True,unique
+Watermelon,بطيخ,watermelon,assets/visual3d/library100/watermelon.png,512,512,RGBA,True,unique
+Doctor,طبيب,doctor,assets/visual3d/library300/doctor-b300.png,512,512,RGBA,True,unique
+Farmer,فلاح,farmer,assets/visual3d/library2200/farmer.png,512,512,RGBA,True,shared
+Baker,خباز,baker,assets/visual3d/library2200/baker.png,512,512,RGBA,True,unique
+Policeman,شرطي,policeman,assets/visual3d/library300/police-officer-b300.png,512,512,RGBA,True,unique
+Nurse,ممرضة,nurse,assets/visual3d/library2200/nurse.png,512,512,RGBA,True,unique
+Tomato,طماطم,tomato,assets/visual3d/library100/tomato.png,512,512,RGBA,True,unique
+Potato,بطاطس,potato,assets/visual3d/library100/potato.png,512,512,RGBA,True,unique
+Carrot,جزر,carrot,assets/visual3d/library100/carrot.png,512,512,RGBA,True,unique
+Onion,بصل,onion,assets/visual3d/library100/onion.png,512,512,RGBA,True,unique
+Cucumber,خيار,cucumber,assets/visual3d/library1700/cucumber.png,512,512,RGBA,True,unique
+Football,كرة قدم,football,assets/visual3d/library100/football.png,512,512,RGBA,True,unique
+Tennis,تنس,tennis,assets/visual3d/library2400/tennis.png,512,512,RGBA,True,unique
+Swimming,سباحة,swimming,assets/visual3d/library2400/swimming.png,512,512,RGBA,True,unique
+Basketball,سلة,basketball,assets/visual3d/library100/basketball.png,512,512,RGBA,True,unique
+Pizza,بيتزا,pizza,assets/visual3d/library100/pizza.png,512,512,RGBA,True,unique
+Tea,شاي,tea,assets/visual3d/library400/orange-drink-v2-b400.png,512,512,RGBA,True,unique
+Cartoon,كرتون,cartoon,assets/visual3d/library2400/cartoon.png,512,512,RGBA,True,unique
+Read,يقرأ,read,assets/visual3d/library1600/read.png,512,512,RGBA,True,unique
+Class,فصل,class,assets/visual3d/library2200/class.png,512,512,RGBA,True,unique
+Subject,مادة,subject,assets/visual3d/library-phase1-batch4/knowledge-science.png,512,512,RGBA,True,unique
+English,إنجليزي,english,assets/visual3d/library-phase1-batch2/english.png,512,512,RGBA,True,unique
+Math,حساب,math,assets/visual3d/library-phase1-batch2/math.png,512,512,RGBA,True,unique
+Science,علوم,science,assets/visual3d/library-phase1-batch2/science.png,512,512,RGBA,True,unique
+Art,فن,art,assets/visual3d/library-phase1-batch2/art.png,512,512,RGBA,True,unique
+Music,موسيقى,music,assets/visual3d/library-phase1-batch2/music.png,512,512,RGBA,True,unique
+Station,قسم شرطة,station,assets/visual3d/library2200/station.png,512,512,RGBA,True,unique
+Mosque,مسجد,mosque,assets/visual3d/library1500/mosque.png,512,512,RGBA,True,unique
+Church,كنيسة,church,assets/visual3d/library2200/church.png,512,512,RGBA,True,unique
+Brave,شجاع,brave,assets/visual3d/library-phase1-batch5/mountain.png,512,512,RGBA,True,unique
+Helpful,مساعد,helpful,assets/visual3d/library-phase1-batch5/help.png,512,512,RGBA,True,unique
+Beautiful,جميل,beautiful,assets/visual3d/library100/flower.png,512,512,RGBA,True,shared
+Trip,رحلة,trip,assets/visual3d/library100/airplane.png,512,512,RGBA,True,unique
+Sea,بحر,sea,assets/visual3d/library100/wave.png,512,512,RGBA,True,unique
+River,نهر,river,assets/visual3d/library100/river.png,512,512,RGBA,True,unique
+Mountain,جبل,mountain,assets/visual3d/library100/mountain.png,512,512,RGBA,True,unique
+Desert,صحراء,desert,assets/visual3d/library1500/desert.png,512,512,RGBA,True,unique
+Camel,جمل,camel,assets/visual3d/library100/camel.png,512,512,RGBA,True,unique
+Pyramid,هرم,pyramid,assets/visual3d/library2200/pyramid.png,512,512,RGBA,True,unique
+Museum,متحف,museum,assets/visual3d/library2200/museum.png,512,512,RGBA,True,unique
+Visit,يزور,visit,assets/visual3d/library1900/visit.png,512,512,RGBA,True,unique
+Wonderful,رائع,wonderful,assets/visual3d/library-phase1-batch2/wonderful.png,512,512,RGBA,True,unique
+Delicious,لذيذ,delicious,assets/visual3d/library100/cake.png,512,512,RGBA,True,shared
+Interesting,ممتع,interesting,assets/visual3d/library-phase1-batch6/microscope.png,512,512,RGBA,True,unique
+Holiday,إجازة,holiday,assets/visual3d/library-phase1-batch6/birthday-cake.png,512,512,RGBA,True,unique
+Travel,يسافر,travel,assets/visual3d/library100/airplane.png,512,512,RGBA,True,shared
+Watch,يشاهد,watch,assets/visual3d/library100/alarmclock.png,512,512,RGBA,True,unique
+Played,لعب,played,assets/visual3d/library1900/played.png,512,512,RGBA,True,unique
+Health,صحة,health,assets/visual3d/library-phase1-batch2/health.png,512,512,RGBA,True,unique
+Medicine,دواء,medicine,assets/visual3d/library-phase1-batch2/medicine.png,512,512,RGBA,True,unique
+Tooth,سن,tooth,assets/visual3d/library600/teeth.png,512,512,RGBA,True,unique
+Temperature,حرارة,temperature,assets/visual3d/library-phase1-batch4/temperature.png,512,512,RGBA,True,unique
+Headache,صداع,headache,assets/visual3d/library-phase1-batch4/headache.png,512,512,RGBA,True,unique
+Future,مستقبل,future,assets/visual3d/library-phase1-batch5/solution.png,512,512,RGBA,True,unique
+Plan,خطة,plan,assets/visual3d/library-phase1-batch4/science-project.png,512,512,RGBA,True,unique
+Homework,واجب,homework,assets/visual3d/library-phase1-batch4/knowledge-science.png,512,512,RGBA,True,shared
+Project,مشروع,project,assets/visual3d/library-phase1-batch4/science-project.png,512,512,RGBA,True,shared
+Group,مجموعة,group,assets/visual3d/library-phase1-batch4/share-books.png,512,512,RGBA,True,unique
+Important,مهم,important,assets/visual3d/phase1-final9/important.png,512,512,RGBA,True,unique
+Easy,سهل,easy,assets/visual3d/phase1-final9/easy.png,512,512,RGBA,True,unique
+Difficult,صعب,difficult,assets/visual3d/phase1-final9/difficult.png,512,512,RGBA,True,unique
+Famous,مشهور,famous,assets/visual3d/library-phase1-batch6/trophy.png,512,512,RGBA,True,unique
+Inventor,مخترع,inventor,assets/visual3d/library-phase1-batch6/microscope.png,512,512,RGBA,True,shared
+Computer,حاسوب,computer,assets/visual3d/library1600/computer.png,512,512,RGBA,True,unique
+Internet,إنترنت,internet,assets/visual3d/library-phase1-batch6/computer.png,512,512,RGBA,True,unique
+Email,بريد إلكتروني,email,assets/visual3d/phase1-final9/email.png,512,512,RGBA,True,unique
+Message,رسالة,message,assets/visual3d/library-phase1-batch6/notebook.png,512,512,RGBA,True,unique
+Camera,كاميرا,camera,assets/visual3d/library-phase1-batch6/computer.png,512,512,RGBA,True,shared
+Engineer,مهندس,engineer,assets/visual3d/library2200/engineer.png,512,512,RGBA,True,unique
+Pilot,طيار,pilot,assets/visual3d/library2200/pilot.png,512,512,RGBA,True,unique
+Achievement,إنجاز,achievement,assets/visual3d/library-phase1-batch5/success.png,512,512,RGBA,True,unique
+Challenge,تحدٍّ,challenge,assets/visual3d/library-phase1-batch5/try.png,512,512,RGBA,True,unique
+Success,نجاح,success,assets/visual3d/library-phase1-batch5/success.png,512,512,RGBA,True,shared
+Skill,مهارة,skill,assets/visual3d/library-phase1-batch6/microscope.png,512,512,RGBA,True,shared
+Knowledge,معرفة,knowledge,assets/visual3d/library-phase1-batch5/teacher.png,512,512,RGBA,True,unique
+Culture,ثقافة,culture,assets/visual3d/library-phase1-batch5/grandfather.png,512,512,RGBA,True,unique
+Tourist,سائح,tourist,assets/visual3d/library2200/tourist.png,512,512,RGBA,True,unique
+Guide,مرشد,guide,assets/visual3d/library-phase1-batch5/teacher.png,512,512,RGBA,True,shared
+Explain,يشرح,explain,assets/visual3d/library1900/explain.png,512,512,RGBA,True,unique
+Suggest,يقترح,suggest,assets/visual3d/library1900/suggest.png,512,512,RGBA,True,unique
+Compare,يقارن,compare,assets/visual3d/library1900/compare.png,512,512,RGBA,True,unique
+Decision,قرار,decision,assets/visual3d/library-phase1-batch5/choose.png,512,512,RGBA,True,unique
+Journey,رحلة طويلة,journey,assets/visual3d/library-phase1-batch5/train.png,512,512,RGBA,True,unique
+Adventure,مغامرة,adventure,assets/visual3d/library-phase1-batch5/mountain.png,512,512,RGBA,True,shared
+Explore,يستكشف,explore,assets/visual3d/library1900/explore.png,512,512,RGBA,True,unique
+Experience,خبرة,experience,assets/visual3d/library-phase1-batch6/airplane.png,512,512,RGBA,True,unique
+Improve,يحسّن,improve,assets/visual3d/library1900/improve.png,512,512,RGBA,True,unique
+Practice,تمرين,practice,assets/visual3d/library1900/practice.png,512,512,RGBA,True,unique
+Performance,أداء,performance,assets/visual3d/phase1-final9/performance.png,512,512,RGBA,True,unique
+Confidence,ثقة,confidence,assets/visual3d/library-phase1-batch5/success.png,512,512,RGBA,True,shared
+Respect,احترام,respect,assets/visual3d/library-phase1-batch5/respect.png,512,512,RGBA,True,unique
+Friendly,ودود,friendly,assets/visual3d/library-phase1-batch5/teamwork.png,512,512,RGBA,True,unique
+Opinion,رأي,opinion,assets/visual3d/library-phase1-batch6/idea.png,512,512,RGBA,True,unique
+Argument,نقاش,argument,assets/visual3d/phase1-final9/argument.png,512,512,RGBA,True,unique
+Reason,سبب,reason,assets/visual3d/library-phase1-batch5/reason.png,512,512,RGBA,True,unique
+Result,نتيجة,result,assets/visual3d/library-phase1-batch5/result.png,512,512,RGBA,True,unique
+Advice,نصيحة,advice,assets/visual3d/phase1-final9/advice.png,512,512,RGBA,True,unique
+Responsibility,مسؤولية,responsibility,assets/visual3d/library-phase1-batch5/check.png,512,512,RGBA,True,unique
+Environment,بيئة,environment,assets/visual3d/library-phase1-batch5/environment.png,512,512,RGBA,True,unique
+Pollution,تلوث,pollution,assets/visual3d/phase1-final9/pollution.png,512,512,RGBA,True,unique
+Climate,مناخ,climate,assets/visual3d/library-phase1-batch6/globe.png,512,512,RGBA,True,unique
+Technology,تكنولوجيا,technology,assets/visual3d/library-phase1-batch5/use.png,512,512,RGBA,True,unique
+Education,تعليم,education,assets/visual3d/library100/book.png,512,512,RGBA,True,shared
+Opportunity,فرصة,opportunity,assets/visual3d/library-phase1-batch6/gift.png,512,512,RGBA,True,unique
+Effort,جهد,effort,assets/visual3d/library-phase1-batch5/try.png,512,512,RGBA,True,shared
+Encourage,يشجع,encourage,assets/visual3d/library-phase1-batch4/help-friend.png,512,512,RGBA,True,unique
+Participate,يشارك,participate,assets/visual3d/library-phase1-batch5/teamwork.png,512,512,RGBA,True,shared
+Organize,ينظم,organize,assets/visual3d/library-phase1-batch5/plan.png,512,512,RGBA,True,unique
+Present,يعرض,present,assets/visual3d/library-phase1-batch5/teacher.png,512,512,RGBA,True,shared
+Discuss,يناقش,discuss,assets/visual3d/library-phase1-batch5/teamwork.png,512,512,RGBA,True,shared
+Ambition,طموح,ambition,assets/visual3d/library-phase1-batch5/success.png,512,512,RGBA,True,shared
+Research,بحث,research,assets/visual3d/library-phase1-batch3/magnify.png,512,512,RGBA,True,unique
+Social,اجتماعي,social,assets/visual3d/library-phase1-batch5/teamwork.png,512,512,RGBA,True,shared
+Cooperation,تعاون,cooperation,assets/visual3d/library-phase1-batch3/cooperate.png,512,512,RGBA,True,unique
+Drink,يشرب,drink,assets/visual3d/library1600/drink.png,512,512,RGBA,True,unique
+Sleep,ينام,sleep,assets/visual3d/library1600/sleep.png,512,512,RGBA,True,unique
+Frog,ضفدع,frog,assets/visual3d/library1300/frog.png,512,512,RGBA,True,unique
+Sheep,خروف,sheep,assets/visual3d/library100/sheep.png,512,512,RGBA,True,unique

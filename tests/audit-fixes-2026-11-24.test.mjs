@@ -71,7 +71,7 @@ test('no byte-identical image is shared across different mapped keys', () => {
   const allowed = new Set([
     'q|queen','beautiful|flower','couch|livingroom','family|parents','book|education','cake|delicious',
     'kite|windy','chair|chairs','bed|bedroom','sea|wave','airplane|plane|travel|trip','farm|farmer',
-    'cold|snow','doctor|doctor-b300','firefighter|firefighter-2-b300','police-officer-b300|policeman',
+    'cold|snow','doctor|doctor-b300','firefighter|firefighter-2-b300','police-officer-b300|policeman|policeofficer',
     'bowl|rice-bowl-b300','snake|snake-b300','b|ball','e|eggs','p|pig','w|water','teeth|tooth',
     'bicycle|bicyclerider|bike|cycle','boat|sailboat|ship','bookshelf|openbook',
     'april|august|december|february|friday|january|july|june|march|may|monday|november|october|saturday|september|sunday|thursday|today|tomorrow|tuesday|wednesday|week|yesterday',
@@ -122,5 +122,5 @@ test('sort game description does not say drag', () => {
 /* --- Runtime: service worker cache bumped for changed bytes --- */
 test('sw.js cache version is v47 (2026-11-24 grammar expansion)', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /englishkids-v62/);
+  assert.match(sw, /englishkids-v67/);
 });

@@ -1873,8 +1873,8 @@
  },
  {
   "en": "Station",
-  "ar": "قسم شرطة",
-  "emoji": "🚓",
+  "ar": "محطة",
+  "emoji": "🚉",
   "slug": "station"
  },
  {
@@ -1975,7 +1975,7 @@
  },
  {
   "en": "Interesting",
-  "ar": "ممتع",
+  "ar": "مثير للاهتمام",
   "emoji": "🤔",
   "slug": "interesting"
  },
@@ -2422,5 +2422,11 @@
   "ar": "خروف",
   "emoji": "🐑",
   "slug": "sheep"
+ },
+ {
+  "en": "Police station",
+  "ar": "قسم شرطة",
+  "emoji": "🚓",
+  "slug": "police station"
  }
 ]

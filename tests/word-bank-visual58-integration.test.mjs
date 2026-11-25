@@ -19,7 +19,7 @@ test('all 58 reviewed words remain in the P1 curriculum and resolve to their rev
   }
 });
 test('Word Bank cards render the mapped 3D image with emoji fallback',()=>{
-  assert.match(html,/const visual=picSrc\(w\.t\)/);
+  assert.match(html,/const visual=.*picSrc\(w\.t\)/);
   assert.match(html,/bank-visual/);
   assert.match(html,/visualHtml/);
 });

@@ -103,7 +103,7 @@ test('wiring: new-word pool uses the active grade/term mode only', () => {
 });
 
 test('wiring: Rush pool uses active curriculum words; index keeps all allowed words', () => {
-  assert.match(html, /pool: adaptiveWords\(uniqByWord\(\[\.\.\.wordBank\(\), \.\.\.activeCurriculumWords\(currentProfile\(\)\)\]\), 24, 'words'\)/);
+  assert.match(html, /pool: adaptiveWords\(pictureAssessmentWords\(uniqByWord\(\[\.\.\.wordBank\(\), \.\.\.activeCurriculumWords\(currentProfile\(\)\)\]\)\), 24, 'words'\)/);
   assert.match(html, /function curriculumWords\(\).*allowedCurricula\(p\)/);
 });
 
@@ -139,7 +139,7 @@ test('policy select labels describe the real behavior (no stale approval wording
 
 test('runtime: sw.js cache bumped to v47 for the grammar expansion bytes', () => {
   const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-  assert.match(sw, /englishkids-v62/);
+  assert.match(sw, /englishkids-v67/);
 });
 
 

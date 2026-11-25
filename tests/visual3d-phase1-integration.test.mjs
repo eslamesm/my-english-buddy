@@ -14,8 +14,8 @@ const map = context.window.ART_IMG_3D;
 const normalize = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const emojiFallbackKeys = new Set(); // 2026-11-24 round 2: board/kick/big/play now have standalone illustrations
 
-test('all 404 curriculum entries resolve through the exact picSrc normalization', () => {
-  assert.equal(words.length, 404);
+test('all 405 catalog entries resolve through the exact picSrc normalization', () => {
+  assert.equal(words.length, 405);
   for (const word of words) {
     const key = normalize(word.slug || word.en);
     if (emojiFallbackKeys.has(key)) {
@@ -49,7 +49,7 @@ test('learning engine, placement engine, and service worker remain present and u
   }
 });
 
-test('all 404 normalized curriculum keys are also present in the visual manifest', () => {
+test('all 405 normalized catalog keys are also present in the visual manifest', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'assets/visual3d/manifest.json'), 'utf8'));
   for (const word of words) {
     const key = normalize(word.slug || word.en);

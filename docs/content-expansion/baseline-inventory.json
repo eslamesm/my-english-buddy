@@ -1,0 +1,141 @@
+{
+  "baseline": "exam-gate delivered 2026-11-24 10:15, cache v44",
+  "grades": [
+    {
+      "id": "kg1",
+      "grade": "حضانة (KG1)",
+      "ages": "4-5 سنوات",
+      "emoji": "🧸",
+      "entries": 47,
+      "distinct": 47,
+      "units": 4,
+      "terms": [
+        "1"
+      ],
+      "structure": "vocabulary grouped by unit"
+    },
+    {
+      "id": "kg2",
+      "grade": "تمهيدي (KG2)",
+      "ages": "5-6 سنوات",
+      "emoji": "🎈",
+      "entries": 36,
+      "distinct": 36,
+      "units": 4,
+      "terms": [
+        "1"
+      ],
+      "structure": "vocabulary grouped by unit"
+    },
+    {
+      "id": "p1",
+      "grade": "الصف الأول الابتدائي",
+      "ages": "6-7 سنوات",
+      "emoji": "📗",
+      "entries": 164,
+      "distinct": 164,
+      "units": 12,
+      "terms": [
+        "1",
+        "2"
+      ],
+      "structure": "vocabulary grouped by unit"
+    },
+    {
+      "id": "p2",
+      "grade": "الصف الثاني الابتدائي",
+      "ages": "7-8 سنوات",
+      "emoji": "📘",
+      "entries": 24,
+      "distinct": 24,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "p3",
+      "grade": "الصف الثالث الابتدائي",
+      "ages": "8-9 سنوات",
+      "emoji": "📙",
+      "entries": 22,
+      "distinct": 22,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "p4",
+      "grade": "الصف الرابع الابتدائي",
+      "ages": "9-10 سنوات",
+      "emoji": "📕",
+      "entries": 22,
+      "distinct": 22,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "p5",
+      "grade": "الصف الخامس الابتدائي",
+      "ages": "10-11 سنة",
+      "emoji": "📓",
+      "entries": 20,
+      "distinct": 20,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "p6",
+      "grade": "الصف السادس الابتدائي",
+      "ages": "11-12 سنة",
+      "emoji": "📔",
+      "entries": 22,
+      "distinct": 22,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "prep1",
+      "grade": "الأول الإعدادي",
+      "ages": "12-13 سنة",
+      "emoji": "🎓",
+      "entries": 22,
+      "distinct": 22,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    },
+    {
+      "id": "prep2",
+      "grade": "الثاني الإعدادي",
+      "ages": "13-14 سنة",
+      "emoji": "🎖️",
+      "entries": 22,
+      "distinct": 22,
+      "units": 0,
+      "terms": [],
+      "structure": "flat supporting vocabulary"
+    }
+  ],
+  "genericBanks": {
+    "LETTERS": 26,
+    "CVC": 20,
+    "WORDS": 20,
+    "PHRASES": 12,
+    "SENTENCES": 10,
+    "STORIES": 5
+  },
+  "grammar": {
+    "dedicatedLessons": 0,
+    "hasIncidentalSentenceExamples": true,
+    "recognitionGrammarIsNotGrammarTeaching": true
+  },
+  "evidence": {
+    "dataLines": "index.html:1599-2146",
+    "recognizerAndScoring": "index.html:2279,3380-3500",
+    "engineSkills": "engine.js:37",
+    "placementKinds": "placement.js:26-31"
+  }
+}

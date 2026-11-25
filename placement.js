@@ -296,8 +296,11 @@
     return { key: it.key, word: it.word, emoji: it.emoji, ar: it.ar };
   }
 
+  const TEMPORAL_KEYS=new Set('sunday monday tuesday wednesday thursday friday saturday january february march april may june july august september october november december yesterday today tomorrow'.split(' '));
+  function pictureAmbiguous(item){return TEMPORAL_KEYS.has(item.key)||'brave interesting delicious wonderful travel holiday played important project famous difficult easy'.split(' ').includes(item.key);}
   function buildForKind(kind, target, pool, rnd) {
-    const others = pool.filter(function (x) { return x.key !== target.key; });
+    if(kind!=='wordWord'&&pictureAmbiguous(target))return null;
+    const others = pool.filter(function (x) { return x.key !== target.key && (kind==='wordWord'||!pictureAmbiguous(x)); });
     if (others.length < OPTION_COUNT - 1) return null;
 
     if (kind === 'letter') {
@@ -346,13 +349,14 @@
     const grade = state.grade;
     const used = (state.answers || []).map(function (a) { return a && a.word; }).filter(Boolean);
     const rnd = rngFor(state.seed, index, tier);
-    const pool = poolFor(curriculum, grade, tier, used);
+    const available = poolFor(curriculum, grade, tier, used);
+    const pool = isReadingFree(grade)?available.filter(function(it){return !pictureAmbiguous(it);}):available;
     if (pool.length < OPTION_COUNT) return null;
 
     const target = pickWith(pool, rnd);
     const allowed = questionKinds(grade);
     const wanted = allowed[(index + tier) % allowed.length];
-    const order = [wanted].concat(allowed.filter(function (k) { return k !== wanted; }));
+    const order = pictureAmbiguous(target)?['wordWord']:[wanted].concat(allowed.filter(function (k) { return k !== wanted; }));
 
     let built = null;
     for (let i = 0; i < order.length; i++) {

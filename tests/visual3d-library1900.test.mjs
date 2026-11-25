@@ -9,8 +9,8 @@ const keys=['dig','share','visit','played','explain','suggest','compare','explor
 test('library1900 has ten standalone transparent 512px action scenes with matching runtime and manifest entries',()=>{
   for(const key of keys){
     const rel=`assets/visual3d/library1900/${key}.png`;
-    assert.equal(manifest.objects[key],rel,`${key} manifest mapping`);
-    assert.equal(map[key],rel,`${key} runtime mapping`);
+    assert.equal(manifest.objects[key],key==='played'?'assets/visual3d/meaning-repair/played.webp':rel,`${key} manifest mapping`);
+    assert.equal(map[key],key==='played'?'assets/visual3d/meaning-repair/played.webp':rel,`${key} runtime mapping`);
     const file=path.join(root,rel);
     assert.ok(fs.existsSync(file),`${key} file missing`);
     const b=fs.readFileSync(file);

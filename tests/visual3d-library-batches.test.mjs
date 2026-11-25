@@ -15,7 +15,8 @@ for (const batch of ['library200','library300','library400']) {
       const b=fs.readFileSync(path.join(ROOT,item.path));
       assert.equal(b.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
       assert.equal(b[25],6);
-      assert.equal(map[item.key],item.path);
+      const corrected={'doctor-b300':'assets/visual3d/occupations-repair/doctor.png','firefighter-2-b300':'assets/visual3d/occupations-repair/firefighter.png','police-officer-b300':'assets/visual3d/vocabulary-repair-2026-11-20/policeofficer.png'};
+      assert.equal(map[item.key],corrected[item.key]||item.path);
     }
   });
 }
